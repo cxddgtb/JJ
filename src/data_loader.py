@@ -3,13 +3,16 @@ import pandas as pd
 import os
 import argparse
 import sys
+import datetime
 
 def load_fund_data(fund_code, start_date):
     """
     获取基金历史数据
-    fund_code: 基金代码 (如 '000311.SZ' 或 '000311.SS')
+    fund_code: 基金代码 (如 '000311.SZ')
     start_date: '2020-01-01'
     """
+    print(f"尝试加载基金数据: {fund_code} 从 {start_date}")
+    
     try:
         # 尝试直接下载
         data = yf.download(fund_code, start=start_date)
@@ -17,7 +20,7 @@ def load_fund_data(fund_code, start_date):
         # 如果数据为空，尝试添加交易所后缀
         if data.empty:
             print(f"尝试添加交易所后缀...")
-            for exchange in ['.SZ', '.SS']:
+            for exchange in ['.SZ', '.SS', '.HK']:
                 full_code = fund_code.split('.')[0] + exchange
                 print(f"尝试代码: {full_code}")
                 data = yf.download(full_code, start=start_date)
@@ -30,18 +33,23 @@ def load_fund_data(fund_code, start_date):
             print(f"警告: 未找到基金 {fund_code} 从 {start_date} 的数据")
             return pd.DataFrame()
             
+        print(f"成功获取 {fund_code} 的数据")
         return data[['Open', 'High', 'Low', 'Close', 'Volume']]
     except Exception as e:
-        print(f"数据下载错误: {e}")
+        print(f"数据下载错误: {str(e)}")
         return pd.DataFrame()
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Load fund data')
-    parser.add_argument('--fund', required=True, help='Fund code')
-    parser.add_argument('--start_date', required=True, help='Start date in YYYY-MM-DD format')
-    parser.add_argument('--output', required=True, help='Output CSV file path')
+    parser = argparse.ArgumentParser(description='加载基金数据')
+    parser.add_argument('--fund', required=True, help='基金代码')
+    parser.add_argument('--start_date', required=True, help='开始日期 (YYYY-MM-DD格式)')
+    parser.add_argument('--output', required=True, help='输出CSV文件路径')
     
     args = parser.parse_args()
+    
+    print("="*50)
+    print(f"接收参数: --fund={args.fund} --start_date={args.start_date} --output={args.output}")
+    print("="*50)
     
     # 确保目录存在
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
@@ -54,3 +62,5 @@ if __name__ == "__main__":
     else:
         df.to_csv(args.output)
         print(f"成功保存数据到 {args.output}")
+        print(f"数据大小: {len(df)} 行")
+        sys.exit(0)  # 成功退出
