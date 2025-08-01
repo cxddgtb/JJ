@@ -58,11 +58,11 @@ jobs:
         START_DATE=$(date -d "2 years ago" +%Y-%m-%d)
         echo "开始日期: $START_DATE"
         
-        # 使用正确的基金代码
+        # 执行数据加载脚本 - 使用正确的参数格式
         python src/data_loader.py \
-          --fund 510300.SS \  # 修正为正确的沪深300ETF基金代码
-          --start_date "$START_DATE" \
-          --output data/raw/latest.csv
+          --fund=510300.SS \
+          --start_date="$START_DATE" \
+          --output=data/raw/latest.csv
           
     - name: Check data file
       run: |
@@ -76,8 +76,8 @@ jobs:
     - name: Preprocess data
       run: |
         python src/preprocess.py \
-          --input data/raw/latest.csv \
-          --output data/processed/training_data.parquet
+          --input=data/raw/latest.csv \
+          --output=data/processed/training_data.parquet
           
     - name: Verify preprocessed data
       run: |
@@ -90,17 +90,17 @@ jobs:
     - name: Train model
       run: |
         python src/train_model.py \
-          --data data/processed/training_data.parquet \
-          --output models/latest_model.pt \
-          --epochs 50 \
-          --seq_len 30
+          --data=data/processed/training_data.parquet \
+          --output=models/latest_model.pt \
+          --epochs=50 \
+          --seq_len=30
           
     - name: Run backtest
       run: |
         python src/backtest.py \
-          --model models/latest_model.pt \
-          --data data/processed/training_data.parquet \
-          --output results/backtest_report.html
+          --model=models/latest_model.pt \
+          --data=data/processed/training_data.parquet \
+          --output=results/backtest_report.html
           
     - name: Upload results
       uses: actions/upload-artifact@v4
