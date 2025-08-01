@@ -54,17 +54,22 @@ jobs:
         
     - name: Fetch new data
       run: |
-        # 使用正确的基金代码格式
+        # 计算开始日期
+        START_DATE=$(date -d "2 years ago" +%Y-%m-%d)
+        echo "开始日期: $START_DATE"
+        
+        # 执行数据加载脚本
         python src/data_loader.py \
-          --fund 000311.SZ \  # 修正为正确的基金代码格式
-          --start_date $(date -d "2 years ago" +%Y-%m-%d) \
+          --fund 000311.SZ \
+          --start_date "$START_DATE" \
           --output data/raw/latest.csv
           
     - name: Check data file
       run: |
         # 检查文件是否非空
         if [ ! -s "data/raw/latest.csv" ]; then
-          echo "Error: Data file is empty or missing!"
+          echo "错误: 数据文件为空或不存在!"
+          ls -la data/raw
           exit 1
         fi
           
@@ -77,7 +82,8 @@ jobs:
     - name: Verify preprocessed data
       run: |
         if [ ! -f "data/processed/training_data.parquet" ]; then
-          echo "Error: Preprocessed data file not found!"
+          echo "错误: 预处理后的数据文件未找到!"
+          ls -la data/processed
           exit 1
         fi
         
