@@ -21,10 +21,7 @@ jobs:
         
     - name: Install system dependencies
       run: |
-        # 更新系统包列表
         sudo apt-get update -y
-        
-        # 安装编译工具
         sudo apt-get install -y \
           build-essential \
           wget \
@@ -34,7 +31,6 @@ jobs:
           libopenblas-dev \
           liblapack-dev
         
-        # 下载并编译安装 TA-Lib
         wget https://downloads.sourceforge.net/project/ta-lib/ta-lib/0.4.0/ta-lib-0.4.0-src.tar.gz
         tar -xzf ta-lib-0.4.0-src.tar.gz
         cd ta-lib
@@ -58,19 +54,22 @@ jobs:
         
     - name: Fetch new data
       run: |
+        # 使用正确的基金代码格式
         python src/data_loader.py \
-          --fund 000311.OF \
+          --fund 000311.SZ \  # 修正为正确的基金代码格式
           --start_date $(date -d "2 years ago" +%Y-%m-%d) \
           --output data/raw/latest.csv
           
-    - name: Preprocess data
+    - name: Check data file
       run: |
-        # 确保文件存在
-        if [ ! -f "data/raw/latest.csv" ]; then
-          echo "Error: data/raw/latest.csv does not exist!"
+        # 检查文件是否非空
+        if [ ! -s "data/raw/latest.csv" ]; then
+          echo "Error: Data file is empty or missing!"
           exit 1
         fi
-        
+          
+    - name: Preprocess data
+      run: |
         python src/preprocess.py \
           --input data/raw/latest.csv \
           --output data/processed/training_data.parquet
@@ -79,7 +78,6 @@ jobs:
       run: |
         if [ ! -f "data/processed/training_data.parquet" ]; then
           echo "Error: Preprocessed data file not found!"
-          ls -la data/processed
           exit 1
         fi
         
