@@ -1,9 +1,18 @@
+# src/train_model.py
 import torch
 import pandas as pd
+import argparse
+import os
+import sys
 from model import FundTradingModel
 from torch.utils.data import DataLoader, TensorDataset
 
-def train():
+def train(args):
+    # 确保文件存在
+    if not os.path.exists(args.data):
+        print(f"Error: Data file {args.data} does not exist!")
+        sys.exit(1)
+    
     # 加载预处理数据
     data = pd.read_parquet(args.data)
     features = data.drop(columns=['signal']).values
@@ -44,11 +53,14 @@ def train():
             loss.backward()
             optimizer.step()
     
+    # 确保模型目录存在
+    os.makedirs(os.path.dirname(args.output), exist_ok=True)
+    
     # 保存模型
     torch.save(model.state_dict(), args.output)
+    print(f"Model saved to {args.output}")
     
 if __name__ == "__main__":
-    import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--data', required=True)
     parser.add_argument('--output', required=True)
@@ -56,4 +68,4 @@ if __name__ == "__main__":
     parser.add_argument('--seq_len', type=int, default=30)
     args = parser.parse_args()
     
-    train()
+    train(args)
