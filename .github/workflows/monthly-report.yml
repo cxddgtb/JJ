@@ -1,0 +1,35 @@
+name: Monthly Performance Report
+
+on:
+  schedule:
+    - cron: '0 22 1 * *'  # 每月1号UTC 22:00运行
+  workflow_dispatch:
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    needs: train-model
+    
+    steps:
+    - name: Download model
+      uses: actions/download-artifact@v3
+      with:
+        name: training-results
+        path: models/
+        
+    - name: Generate report
+      run: |
+        python src/report_generator.py \
+          --model models/latest_model.pt \
+          --data data/processed/training_data.parquet \
+          --output reports/monthly_report.ipynb
+          
+        jupyter nbconvert --to html reports/monthly_report.ipynb
+        
+    - name: Commit and push report
+      run: |
+        git config --local user.email "github-actions@example.com"
+        git config --local user.name "GitHub Actions"
+        git add reports/monthly_report.html
+        git commit -m "Auto: Update monthly report"
+        git push
