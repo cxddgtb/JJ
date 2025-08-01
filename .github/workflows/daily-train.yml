@@ -49,6 +49,13 @@ jobs:
         pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
         pip install -r requirements.txt
         
+    - name: Create directories
+      run: |
+        mkdir -p data/raw
+        mkdir -p data/processed
+        mkdir -p models
+        mkdir -p results
+        
     - name: Fetch new data
       run: |
         python src/data_loader.py \
@@ -58,10 +65,24 @@ jobs:
           
     - name: Preprocess data
       run: |
+        # 确保文件存在
+        if [ ! -f "data/raw/latest.csv" ]; then
+          echo "Error: data/raw/latest.csv does not exist!"
+          exit 1
+        fi
+        
         python src/preprocess.py \
           --input data/raw/latest.csv \
           --output data/processed/training_data.parquet
           
+    - name: Verify preprocessed data
+      run: |
+        if [ ! -f "data/processed/training_data.parquet" ]; then
+          echo "Error: Preprocessed data file not found!"
+          ls -la data/processed
+          exit 1
+        fi
+        
     - name: Train model
       run: |
         python src/train_model.py \
