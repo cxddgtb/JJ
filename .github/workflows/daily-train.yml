@@ -58,9 +58,9 @@ jobs:
         START_DATE=$(date -d "2 years ago" +%Y-%m-%d)
         echo "开始日期: $START_DATE"
         
-        # 执行数据加载脚本
+        # 使用正确的基金代码
         python src/data_loader.py \
-          --fund 000311.SZ \
+          --fund 510300.SS \  # 修正为正确的沪深300ETF基金代码
           --start_date "$START_DATE" \
           --output data/raw/latest.csv
           
