@@ -2,7 +2,7 @@ name: Daily Model Training
 
 on:
   schedule:
-    - cron: '0 22 * * *'  # 每天UTC 22:00运行（北京时间次日6:00）
+    - cron: '0 22 * * *'  # 每天UTC 22:00运行
   workflow_dispatch:       # 允许手动触发
 
 jobs:
@@ -21,20 +21,31 @@ jobs:
         
     - name: Install system dependencies
       run: |
-        # 添加TA-Lib的官方仓库
-        sudo add-apt-repository ppa:taurus/taurus -y
-        sudo apt-get update -qq
+        # 更新系统包列表
+        sudo apt-get update -y
         
-        # 安装必要的开发库
+        # 安装编译工具
         sudo apt-get install -y \
-          libta-lib-dev \
           build-essential \
-          python3-dev
+          wget \
+          libatlas-base-dev \
+          python3-dev \
+          gfortran \
+          libopenblas-dev \
+          liblapack-dev
+        
+        # 下载并编译安装 TA-Lib
+        wget https://downloads.sourceforge.net/project/ta-lib/ta-lib/0.4.0/ta-lib-0.4.0-src.tar.gz
+        tar -xzf ta-lib-0.4.0-src.tar.gz
+        cd ta-lib
+        ./configure --prefix=/usr
+        make
+        sudo make install
+        cd ..
         
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install wheel  # 确保有wheel包
         pip install -r requirements.txt
         
     - name: Fetch new data
