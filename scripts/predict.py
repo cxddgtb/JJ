@@ -6,9 +6,10 @@ import requests
 from datetime import datetime
 
 # 配置
-MODEL_DIR = '../models'
-DATA_DIR = '../data'
-PREDICTION_DIR = '../data/predictions'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_DIR = os.path.join(BASE_DIR, 'models')
+DATA_DIR = os.path.join(BASE_DIR, 'data')
+PREDICTION_DIR = os.path.join(BASE_DIR, 'data', 'predictions')
 FUND_CODES = ['000001', '110011', '161725']  # 示例基金代码
 # 腾讯财经API不需要API密钥
 API_URL = 'http://fund.10jqka.com.cn/interface/fundcode_query.php'

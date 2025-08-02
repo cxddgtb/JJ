@@ -6,10 +6,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
 # 配置
-PROCESSED_DIR = '../data/processed'
-MODELS_DIR = '../models'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROCESSED_DIR = os.path.join(BASE_DIR, 'data', 'processed')
+MODELS_DIR = os.path.join(BASE_DIR, 'models')
 
-# 确保模型目录存在
+# 确保数据处理目录和模型目录存在
+os.makedirs(PROCESSED_DIR, exist_ok=True)
 os.makedirs(MODELS_DIR, exist_ok=True)
 
 # 训练模型的函数
