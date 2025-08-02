@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: 检出代码
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - name: 设置Python环境
         uses: actions/setup-python@v4
@@ -46,6 +48,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add data/predictions/
           git commit -m 'Update predictions'
           git push
