@@ -29,7 +29,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 获取基金数据
+      - name: 批量爬取全网基金数据
+        run: python scripts/fetch_all_funds.py
+
+      - name: 获取基金详细数据
         env:
           FUND_API_KEY: ${{ secrets.FUND_API_KEY }}
         run: python scripts/fetch_data.py
