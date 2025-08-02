@@ -45,12 +45,10 @@ jobs:
           path: data/predictions/
 
       - name: 提交预测结果到仓库
-        run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git add data/predictions/
-          git commit -m 'Update predictions'
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Update predictions'
+          file_pattern: 'data/predictions/*'
+          commit_user_name: 'github-actions'
+          commit_user_email: 'github-actions@github.com'
+          commit_author: 'github-actions <github-actions@github.com>'
