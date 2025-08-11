@@ -29,7 +29,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y build-essential libxml2-dev libxslt-dev libffi-dev libssl-dev
         sudo apt-get install -y libfreetype6-dev fontconfig
-        # 安装中文字体
         sudo apt-get install -y fonts-wqy-microhei
         
     - name: Install Python dependencies
@@ -55,6 +54,15 @@ jobs:
         name: trading-report
         path: output/*
         
+    - name: Upload debug artifacts
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: debug-files
+        path: |
+          output/logs/*.log
+          *.html
+          
     - name: Commit and push results
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
