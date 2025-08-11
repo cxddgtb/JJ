@@ -1,3 +1,4 @@
+# config/settings.py
 import os
 from dotenv import load_dotenv
 
@@ -5,6 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
+    # 确保 OUTPUT_DIR 定义存在
+    OUTPUT_DIR = "output"
+    
     # 通达信配置
     TDX_USER = os.getenv('TDX_USER', 'default_user')
     TDX_PASS = os.getenv('TDX_PASS', 'default_pass')
@@ -21,8 +25,7 @@ class Config:
     EMAIL_PASS = os.getenv('EMAIL_PASS', 'your_email_password')
     EMAIL_RECEIVER = os.getenv('EMAIL_RECEIVER', 'receiver@example.com')
     
-    # 数据存储
-    OUTPUT_DIR = "output"
+    # 报告格式
     REPORT_FORMAT = "pdf"  # 可选 pdf 或 html
     
     # 分析参数
@@ -42,3 +45,6 @@ class Config:
         "000300",  # 沪深300
         "000016",  # 上证50
     ]
+
+# 创建配置实例
+settings = Config()
