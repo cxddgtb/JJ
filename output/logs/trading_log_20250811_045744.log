@@ -1,0 +1,49 @@
+2025-08-11 04:57:44,775 - matplotlib.font_manager - INFO - Failed to extract font properties from /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf: In FT2Font: Can not load face (unknown file format; error code 0x2)
+2025-08-11 04:57:45,714 - matplotlib.font_manager - INFO - generated new fontManager
+2025-08-11 04:57:46,280 - scripts.utils - INFO - ==================================================
+2025-08-11 04:57:46,280 - scripts.utils - INFO - 开始执行交易信号分析任务
+2025-08-11 04:57:46,280 - scripts.utils - INFO - ==================================================
+2025-08-11 04:57:46,280 - scripts.utils - INFO - 处理股票: 上证指数(sh000001)
+2025-08-11 04:57:51,204 - scripts.utils - INFO - 处理股票: 深证成指(sz399001)
+2025-08-11 04:57:53,732 - scripts.utils - INFO - 处理股票: 创业板指(sz399006)
+2025-08-11 04:57:55,624 - scripts.utils - INFO - 处理股票: 沪深300(sh000300)
+2025-08-11 04:57:57,232 - scripts.utils - INFO - 处理股票: 上证50(sh000016)
+2025-08-11 04:57:59,719 - scripts.utils - INFO - 完成股票信号分析，共处理 5 只股票
+2025-08-11 04:57:59,719 - scripts.utils - INFO - 开始爬取基金数据
+2025-08-11 04:58:01,843 - scripts.utils - WARNING - 无法识别的基金列表格式，尝试 1/3
+2025-08-11 04:58:07,737 - scripts.utils - WARNING - 无法识别的基金列表格式，尝试 2/3
+2025-08-11 04:58:13,185 - scripts.utils - WARNING - 无法识别的基金列表格式，尝试 3/3
+2025-08-11 04:58:15,187 - scripts.utils - ERROR - 获取基金列表失败，已尝试 3 次
+2025-08-11 04:58:15,188 - scripts.utils - ERROR - 无法获取基金列表数据，使用备用基金列表
+2025-08-11 04:58:15,188 - scripts.utils - INFO - 处理基金: 华夏成长(000001)
+2025-08-11 04:58:15,532 - scripts.utils - WARNING - 获取基金详情失败: 000001, HTTP 404
+2025-08-11 04:58:15,532 - scripts.utils - INFO - 基金 华夏成长(000001) 无数据，跳过分析
+2025-08-11 04:58:17,349 - scripts.utils - INFO - 处理基金: 中海可转债A(000003)
+2025-08-11 04:58:17,657 - scripts.utils - WARNING - 获取基金详情失败: 000003, HTTP 404
+2025-08-11 04:58:17,658 - scripts.utils - INFO - 基金 中海可转债A(000003) 无数据，跳过分析
+2025-08-11 04:58:19,720 - scripts.utils - INFO - 处理基金: 华夏大盘精选(000011)
+2025-08-11 04:58:20,091 - scripts.utils - WARNING - 获取基金详情失败: 000011, HTTP 404
+2025-08-11 04:58:20,092 - scripts.utils - INFO - 基金 华夏大盘精选(000011) 无数据，跳过分析
+2025-08-11 04:58:21,440 - scripts.utils - INFO - 处理基金: 华夏优势增长(000021)
+2025-08-11 04:58:22,089 - scripts.utils - WARNING - 获取基金详情失败: 000021, HTTP 404
+2025-08-11 04:58:22,089 - scripts.utils - INFO - 基金 华夏优势增长(000021) 无数据，跳过分析
+2025-08-11 04:58:25,001 - scripts.utils - INFO - 处理基金: 华夏复兴(000031)
+2025-08-11 04:58:25,387 - scripts.utils - WARNING - 获取基金详情失败: 000031, HTTP 404
+2025-08-11 04:58:25,388 - scripts.utils - INFO - 基金 华夏复兴(000031) 无数据，跳过分析
+2025-08-11 04:58:28,013 - scripts.utils - INFO - 处理基金: 华夏全球精选(000041)
+2025-08-11 04:58:28,290 - scripts.utils - WARNING - 获取基金详情失败: 000041, HTTP 404
+2025-08-11 04:58:28,291 - scripts.utils - INFO - 基金 华夏全球精选(000041) 无数据，跳过分析
+2025-08-11 04:58:30,595 - scripts.utils - INFO - 处理基金: 华夏沪深300ETF联接A(000051)
+2025-08-11 04:58:31,079 - scripts.utils - WARNING - 获取基金详情失败: 000051, HTTP 404
+2025-08-11 04:58:31,079 - scripts.utils - INFO - 基金 华夏沪深300ETF联接A(000051) 无数据，跳过分析
+2025-08-11 04:58:32,858 - scripts.utils - INFO - 处理基金: 华夏盛世精选(000061)
+2025-08-11 04:58:33,243 - scripts.utils - WARNING - 获取基金详情失败: 000061, HTTP 404
+2025-08-11 04:58:33,244 - scripts.utils - INFO - 基金 华夏盛世精选(000061) 无数据，跳过分析
+2025-08-11 04:58:34,444 - scripts.utils - INFO - 处理基金: 华夏恒生ETF联接A(000071)
+2025-08-11 04:58:34,821 - scripts.utils - WARNING - 获取基金详情失败: 000071, HTTP 404
+2025-08-11 04:58:34,821 - scripts.utils - INFO - 基金 华夏恒生ETF联接A(000071) 无数据，跳过分析
+2025-08-11 04:58:36,840 - scripts.utils - INFO - 处理基金: 农银行业成长(000127)
+2025-08-11 04:58:37,453 - scripts.utils - WARNING - 获取基金详情失败: 000127, HTTP 404
+2025-08-11 04:58:37,453 - scripts.utils - INFO - 基金 农银行业成长(000127) 无数据，跳过分析
+2025-08-11 04:58:39,813 - scripts.utils - INFO - 完成基金信号分析，共处理 0 只基金
+2025-08-11 04:58:39,813 - scripts.utils - ERROR - 基金数据爬取失败，终止任务
