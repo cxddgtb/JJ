@@ -91,6 +91,10 @@ class TradingSignalAnalyzer:
     def visualize_market_data(self, market_trend):
         """生成市场数据可视化"""
         try:
+            # 设置中文字体
+            plt.rcParams['font.family'] = 'WenQuanYi Micro Hei'
+            plt.rcParams['axes.unicode_minus'] = False
+            
             # 股票市场信号分布
             plt.figure(figsize=(10, 6))
             plt.subplot(1, 2, 1)
