@@ -1,8 +1,9 @@
-from .tdx_scraper import TDXDataScraper
-from .fund_scraper import FundDataScraper
-from .data_analyzer import TradingSignalAnalyzer
-from .report_generator import TradingReportGenerator
-from .utils import setup_logging
+# 使用绝对导入替代相对导入
+from scripts.tdx_scraper import TDXDataScraper
+from scripts.fund_scraper import FundDataScraper
+from scripts.data_analyzer import TradingSignalAnalyzer
+from scripts.report_generator import TradingReportGenerator
+from scripts.utils import setup_logging
 
 logger = setup_logging()
 
