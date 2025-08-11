@@ -1,14 +1,14 @@
-name: Trading Signal Analysis
+name: Fund Signals Tracker
 
 on:
   schedule:
-    - cron: '30 7 * * 1-5'  # UTC时间7:30（北京时间15:30）
+    - cron: '30 7 * * 1-5'  # 每个交易日UTC时间7:30（北京时间15:30）运行
   workflow_dispatch:
 
 jobs:
-  collect-and-analyze:
+  track-fund-signals:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     permissions:
       contents: write
     
@@ -27,63 +27,32 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libxml2-dev libxslt-dev libffi-dev libssl-dev
+        sudo apt-get install -y build-essential libxml2-dev libxslt-dev
+        sudo apt-get install -y libffi-dev libssl-dev
         sudo apt-get install -y libfreetype6-dev fontconfig
-        sudo apt-get install -y fonts-wqy-microhei
-        # 安装调试工具
-        sudo apt-get install -y jq
         
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install pandas requests beautifulsoup4 lxml html5lib
         
-        # 安装 TA-Lib
-        wget https://downloads.sourceforge.net/project/ta-lib/ta-lib/0.4.0/ta-lib-0.4.0-src.tar.gz
-        tar -xzf ta-lib-0.4.0-src.tar.gz
-        cd ta-lib && ./configure --prefix=/usr && make && sudo make install
-        cd ..
-        pip install TA-Lib
-        
-    - name: Run data collection and analysis
+    - name: Run fund signals tracking
       run: |
         export PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE
-        # 启用详细日志
-        export LOG_LEVEL=DEBUG
         python -m scripts.main
         
     - name: Upload report artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: trading-report
-        path: output/*
+        name: fund-signals-report
+        path: output/fund_signals_report.html
         
-    - name: Save debug data
-      if: always()
-      run: |
-        mkdir debug
-        # 保存网络请求日志
-        cp -r $HOME/.cache/http_debug debug/ || true
-        # 保存系统信息
-        lscpu > debug/cpuinfo.txt
-        free -m > debug/meminfo.txt
-        df -h > debug/diskinfo.txt
-        
-    - name: Upload debug artifacts
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: debug-data
-        path: |
-          debug/*
-          output/logs/*.log
-          
     - name: Commit and push results
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
         git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Action"
+        git config --global user.name "Fund Tracker"
         git add output/
-        git commit -m "Update trading report ${{ github.run_id }}"
+        git commit -m "更新基金信号报告 ${{ github.run_id }}"
         git push https://x-access-token:$REPO_ACCESS_TOKEN@github.com/${{ github.repository }}.git
