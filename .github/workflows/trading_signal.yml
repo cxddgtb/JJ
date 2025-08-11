@@ -1,0 +1,61 @@
+name: Trading Signal Analysis
+
+on:
+  schedule:
+    # 每个交易日北京时间下午3:30（收盘后）运行
+    - cron: '30 7 * * 1-5'  # UTC时间7:30（北京时间15:30）
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  collect-and-analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45  # 设置超时时间
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libxml2-dev libxslt-dev libffi-dev libssl-dev
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+        # 安装 TA-Lib
+        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+        tar -xzf ta-lib-0.4.0-src.tar.gz
+        cd ta-lib && ./configure --prefix=/usr && make && sudo make install
+        cd ..
+        pip install TA-Lib
+        
+    - name: Run data collection and analysis
+      env:
+        TDX_USER: ${{ secrets.TDX_USER }}
+        TDX_PASS: ${{ secrets.TDX_PASS }}
+        FUND_API_KEY: ${{ secrets.FUND_API_KEY }}
+        EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
+      run: |
+        python -m scripts.main
+        
+    - name: Upload report artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: trading-report
+        path: output/*
+        
+    - name: Commit and push results
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "Trading Bot"
+        git add output/
+        git commit -m "Update trading report ${{ github.run_id }}"
+        git push
