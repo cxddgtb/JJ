@@ -1,0 +1,41 @@
+name: Scrape and Analyze Funds
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # 每天 01:00 UTC 运行（可按需修改）
+  workflow_dispatch: {}
+
+jobs:
+  scrape_analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run scraping
+        env:
+          TARGET_SOURCES: ${{ secrets.TARGET_SOURCES }} # 在仓库 Secrets 里设置为逗号分隔的抓取目标（示例格式在 README）
+          RATE_LIMIT_SECONDS: '2'
+        run: |
+          python scripts/scrape_funds.py --out data/funds.json
+
+      - name: Run analysis
+        run: |
+          python scripts/analyze_signals.py --in data/funds.json --out data/signals.json
+
+      - name: Commit results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/commit_results.py data/funds.json data/signals.json
