@@ -2,14 +2,13 @@ name: Trading Signal Analysis
 
 on:
   schedule:
-    # 每个交易日北京时间下午3:30（收盘后）运行
     - cron: '30 7 * * 1-5'  # UTC时间7:30（北京时间15:30）
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   collect-and-analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 45  # 设置超时时间
+    timeout-minutes: 45
     
     steps:
     - name: Checkout repository
@@ -31,7 +30,7 @@ jobs:
         pip install -r requirements.txt
         
         # 安装 TA-Lib
-        wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz
+        wget https://downloads.sourceforge.net/project/ta-lib/ta-lib/0.4.0/ta-lib-0.4.0-src.tar.gz
         tar -xzf ta-lib-0.4.0-src.tar.gz
         cd ta-lib && ./configure --prefix=/usr && make && sudo make install
         cd ..
@@ -47,7 +46,7 @@ jobs:
         python -m scripts.main
         
     - name: Upload report artifacts
-      uses: actions/upload-artifact@v4  # 更新到v4版本
+      uses: actions/upload-artifact@v4
       with:
         name: trading-report
         path: output/*
