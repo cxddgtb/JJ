@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from datetime import datetime
 from config import settings
-from .utils import save_data, setup_logging
+from scripts.utils import save_data, get_trading_date, setup_logging
 
 logger = setup_logging()
 
