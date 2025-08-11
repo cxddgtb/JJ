@@ -1,3 +1,4 @@
+# .github/workflows/trading_signal.yml
 name: Trading Signal Analysis
 
 on:
@@ -43,6 +44,8 @@ jobs:
         FUND_API_KEY: ${{ secrets.FUND_API_KEY }}
         EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
       run: |
+        # 添加当前目录到PYTHONPATH
+        export PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE
         python -m scripts.main
         
     - name: Upload report artifacts
