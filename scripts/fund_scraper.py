@@ -16,7 +16,9 @@ class FundDataScraper:
         self.session = requests.Session()
         self.session.headers.update({
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
-            'Referer': settings.FUND_BASE_URL
+            'Referer': settings.FUND_BASE_URL,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
         })
         
     def fetch_fund_list(self, page=1, page_size=100):
@@ -40,23 +42,26 @@ class FundDataScraper:
         try:
             response = self.session.get(settings.FUND_RANK_URL, params=params)
             if response.status_code != 200:
-                logger.error(f"获取基金列表失败: {response.status_code}")
+                logger.error(f"获取基金列表失败: HTTP {response.status_code}")
                 return None
                 
-            # 解析特殊格式
+            # 直接处理返回的JSONP格式
             content = response.text
-            match = re.search(r'var rankData = (.*);', content)
-            if not match:
-                logger.error("基金列表数据格式异常")
+            if not content.startswith('var rankData = '):
+                logger.error(f"基金列表数据格式异常: {content[:100]}...")
                 return None
                 
-            json_str = match.group(1)
-            data = json.loads(json_str)
-            
-            return {
-                'datas': data['datas'],
-                'allCount': data['allCount']
-            }
+            # 提取JSON部分
+            json_str = content.replace('var rankData = ', '', 1).rstrip(';')
+            try:
+                data = json.loads(json_str)
+                return {
+                    'datas': data['datas'],
+                    'allCount': data['allCount']
+                }
+            except json.JSONDecodeError as e:
+                logger.error(f"解析基金列表JSON失败: {e}")
+                return None
         except Exception as e:
             logger.exception("获取基金列表异常")
             return None
@@ -76,15 +81,15 @@ class FundDataScraper:
         try:
             response = self.session.get(url, params=params)
             if response.status_code != 200:
-                logger.error(f"获取基金详情失败: {fund_code}, {response.status_code}")
+                logger.error(f"获取基金详情失败: {fund_code}, HTTP {response.status_code}")
                 return None
                 
             # 解析HTML表格
             soup = BeautifulSoup(response.text, 'html.parser')
             table = soup.find('table', {'class': 'w782 comm lsjz'})
             if not table:
-                logger.error(f"基金详情表格未找到: {fund_code}")
-                return None
+                logger.warning(f"基金详情表格未找到: {fund_code}")
+                return pd.DataFrame()  # 返回空DataFrame而不是None
                 
             # 解析表头
             headers = [th.get_text().strip() for th in table.find('thead').find_all('th')]
@@ -95,25 +100,42 @@ class FundDataScraper:
                 row = [td.get_text().strip() for td in tr.find_all('td')]
                 rows.append(row)
                 
-            df = pd.DataFrame(rows, columns=headers)
-            return df
+            return pd.DataFrame(rows, columns=headers)
         except Exception as e:
             logger.exception(f"获取基金详情异常: {fund_code}")
-            return None
+            return pd.DataFrame()  # 返回空DataFrame而不是None
             
     def analyze_fund_signals(self, fund_code, fund_name, df):
         """分析基金买卖信号"""
         signals = []
         
-        if df is None or df.empty:
+        if df.empty:
+            logger.warning(f"基金 {fund_name}({fund_code}) 无数据")
             return signals
             
         try:
             # 转换数据类型
             df['净值日期'] = pd.to_datetime(df['净值日期'])
-            df['单位净值'] = pd.to_numeric(df['单位净值'], errors='coerce')
-            df['日增长率'] = pd.to_numeric(df['日增长率'].str.rstrip('%'), errors='coerce')
             
+            # 处理单位净值（可能包含非数字字符）
+            df['单位净值'] = pd.to_numeric(
+                df['单位净值'].str.replace('[^0-9.]', '', regex=True), 
+                errors='coerce'
+            )
+            
+            # 处理日增长率（可能包含百分号和非数字字符）
+            df['日增长率'] = pd.to_numeric(
+                df['日增长率'].str.replace('%', '').str.replace('--', '0'), 
+                errors='coerce'
+            )
+            
+            # 过滤无效数据
+            df = df.dropna(subset=['单位净值', '日增长率'])
+            
+            if df.empty:
+                logger.warning(f"基金 {fund_name}({fund_code}) 无有效数据")
+                return signals
+                
             # 排序
             df.sort_values('净值日期', ascending=False, inplace=True)
             
@@ -130,8 +152,6 @@ class FundDataScraper:
                 'date': latest['净值日期'].strftime('%Y-%m-%d'),
                 'net_value': latest['单位净值'],
                 'daily_return': latest['日增长率'],
-                'short_ma': latest['short_ma'],
-                'long_ma': latest['long_ma'],
                 'signal': 0,  # 0: 观望, 1: 买入, -1: 卖出
                 'signal_reason': []
             }
@@ -145,15 +165,16 @@ class FundDataScraper:
                 signal['signal'] = -1
                 signal['signal_reason'].append(f"单日跌幅{abs(signal['daily_return']):.2f}%")
                 
-            # 基于均线的信号
-            if signal['signal'] == 0:
-                if signal['short_ma'] > signal['long_ma'] and df.iloc[1]['short_ma'] <= df.iloc[1]['long_ma']:
-                    signal['signal'] = 1
-                    signal['signal_reason'].append("短期均线上穿长期均线")
-                    
-                elif signal['short_ma'] < signal['long_ma'] and df.iloc[1]['short_ma'] >= df.iloc[1]['long_ma']:
-                    signal['signal'] = -1
-                    signal['signal_reason'].append("短期均线下穿长期均线")
+            # 基于均线的信号（确保有足够数据）
+            if len(df) > 1 and signal['signal'] == 0:
+                prev = df.iloc[1]
+                if 'short_ma' in latest and 'long_ma' in latest and 'short_ma' in prev and 'long_ma' in prev:
+                    if latest['short_ma'] > latest['long_ma'] and prev['short_ma'] <= prev['long_ma']:
+                        signal['signal'] = 1
+                        signal['signal_reason'].append("短期均线上穿长期均线")
+                    elif latest['short_ma'] < latest['long_ma'] and prev['short_ma'] >= prev['long_ma']:
+                        signal['signal'] = -1
+                        signal['signal_reason'].append("短期均线下穿长期均线")
                     
             signals.append(signal)
             return signals
@@ -165,8 +186,9 @@ class FundDataScraper:
         """执行基金数据爬取和分析"""
         logger.info("开始爬取基金数据")
         fund_list = self.fetch_fund_list(page_size=max_funds)
-        if not fund_list:
-            return None
+        if not fund_list or 'datas' not in fund_list:
+            logger.error("无法获取基金列表数据")
+            return []
             
         all_signals = []
         trading_date = get_trading_date()
@@ -182,15 +204,14 @@ class FundDataScraper:
             
             # 获取基金详情
             df = self.fetch_fund_detail(fund_code)
-            if df is None:
-                continue
-                
+            
             # 分析买卖信号
             signals = self.analyze_fund_signals(fund_code, fund_name, df)
             all_signals.extend(signals)
             
             # 保存原始数据
-            save_data(df, f"{fund_code}_data.csv", "fund_data")
+            if not df.empty:
+                save_data(df, f"{fund_code}_data.csv", "fund_data")
             
             time.sleep(random.uniform(0.5, 2))  # 随机延迟避免被封
             
