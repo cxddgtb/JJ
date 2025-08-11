@@ -9,7 +9,6 @@ jobs:
   collect-and-analyze:
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    # 添加写权限
     permissions:
       contents: write
     
@@ -17,9 +16,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        # 添加 fetch-depth 和 token 配置
         fetch-depth: 0
-        token: ${{ secrets.REPO_ACCESS_TOKEN }}  # 使用您的自定义 token
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
       
     - name: Set up Python 3.10
       uses: actions/setup-python@v4
@@ -30,6 +28,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential libxml2-dev libxslt-dev libffi-dev libssl-dev
+        sudo apt-get install -y libfreetype6-dev fontconfig
         
     - name: Install Python dependencies
       run: |
@@ -44,13 +43,7 @@ jobs:
         pip install TA-Lib
         
     - name: Run data collection and analysis
-      env:
-        TDX_USER: ${{ secrets.TDX_USER }}
-        TDX_PASS: ${{ secrets.TDX_PASS }}
-        FUND_API_KEY: ${{ secrets.FUND_API_KEY }}
-        EMAIL_RECEIVER: ${{ secrets.EMAIL_RECEIVER }}
       run: |
-        # 添加当前目录到PYTHONPATH
         export PYTHONPATH=$PYTHONPATH:$GITHUB_WORKSPACE
         python -m scripts.main
         
@@ -62,12 +55,10 @@ jobs:
         
     - name: Commit and push results
       env:
-        # 使用您的自定义 token
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Action"
         git add output/
         git commit -m "Update trading report ${{ github.run_id }}"
-        # 使用自定义 token 进行推送
         git push https://x-access-token:$REPO_ACCESS_TOKEN@github.com/${{ github.repository }}.git
