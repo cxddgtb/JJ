@@ -1,5 +1,4 @@
-# 使用绝对导入替代相对导入
-from scripts.tdx_scraper import TDXDataScraper
+from scripts.stock_scraper import StockDataScraper  # 使用新的股票爬取类
 from scripts.fund_scraper import FundDataScraper
 from scripts.data_analyzer import TradingSignalAnalyzer
 from scripts.report_generator import TradingReportGenerator
@@ -12,11 +11,11 @@ def main():
     logger.info("开始执行交易信号分析任务")
     logger.info("=" * 50)
     
-    # 步骤1: 爬取通达信数据
-    tdx_scraper = TDXDataScraper()
-    stock_signals = tdx_scraper.run()
+    # 步骤1: 爬取股票数据（使用新的StockDataScraper）
+    stock_scraper = StockDataScraper()
+    stock_signals = stock_scraper.run()
     if not stock_signals:
-        logger.error("通达信数据爬取失败，终止任务")
+        logger.error("股票数据爬取失败，终止任务")
         return
         
     # 步骤2: 爬取基金数据
@@ -33,12 +32,12 @@ def main():
         logger.error("数据分析失败，终止任务")
         return
         
-    # 步骤4: 生成并发送报告
+    # 步骤4: 生成报告
     report_generator = TradingReportGenerator(combined_signals)
     if report_generator.run():
         logger.info("交易报告处理完成")
     else:
-        logger.error("报告生成或发送失败")
+        logger.error("报告生成失败")
         
     logger.info("=" * 50)
     logger.info("交易信号分析任务完成")
