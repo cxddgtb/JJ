@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime, timedelta
-import talib
+# 移除talib依赖，使用pandas和numpy实现技术指标
 import logging
 from typing import Dict, List, Tuple, Any
 import json
@@ -25,6 +25,64 @@ class FundAnalyzer:
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        
+    def calculate_sma(self, prices, period):
+        """计算简单移动平均线"""
+        try:
+            return pd.Series(prices).rolling(window=period).mean().values
+        except:
+            return np.full_like(prices, np.nan)
+    
+    def calculate_macd(self, prices, fast=12, slow=26, signal=9):
+        """计算MACD指标"""
+        try:
+            prices_series = pd.Series(prices)
+            ema_fast = prices_series.ewm(span=fast).mean()
+            ema_slow = prices_series.ewm(span=slow).mean()
+            macd = ema_fast - ema_slow
+            macd_signal = macd.ewm(span=signal).mean()
+            macd_hist = macd - macd_signal
+            return macd.values, macd_signal.values, macd_hist.values
+        except:
+            return np.full_like(prices, np.nan), np.full_like(prices, np.nan), np.full_like(prices, np.nan)
+    
+    def calculate_rsi(self, prices, period=14):
+        """计算RSI指标"""
+        try:
+            prices_series = pd.Series(prices)
+            delta = prices_series.diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+            rs = gain / loss
+            rsi = 100 - (100 / (1 + rs))
+            return rsi.values
+        except:
+            return np.full_like(prices, np.nan)
+    
+    def calculate_kdj(self, prices, k_period=9, d_period=3):
+        """计算KDJ指标"""
+        try:
+            prices_series = pd.Series(prices)
+            low_min = prices_series.rolling(window=k_period).min()
+            high_max = prices_series.rolling(window=k_period).max()
+            rsv = (prices_series - low_min) / (high_max - low_min) * 100
+            k = rsv.ewm(com=d_period-1).mean()
+            d = k.ewm(com=d_period-1).mean()
+            return k.values, d.values
+        except:
+            return np.full_like(prices, np.nan), np.full_like(prices, np.nan)
+    
+    def calculate_bollinger_bands(self, prices, period=20, std_dev=2):
+        """计算布林带"""
+        try:
+            prices_series = pd.Series(prices)
+            middle = prices_series.rolling(window=period).mean()
+            std = prices_series.rolling(window=period).std()
+            upper = middle + (std * std_dev)
+            lower = middle - (std * std_dev)
+            return upper.values, middle.values, lower.values
+        except:
+            return np.full_like(prices, np.nan), np.full_like(prices, np.nan), np.full_like(prices, np.nan)
         
     def analyze_single_fund(self, fund_data: Dict) -> Dict:
         """分析单个基金"""
@@ -79,23 +137,23 @@ class FundAnalyzer:
             close_prices = nav_data['累计净值'].values
             
             # 移动平均线
-            ma5 = talib.SMA(close_prices, timeperiod=5)
-            ma10 = talib.SMA(close_prices, timeperiod=10)
-            ma20 = talib.SMA(close_prices, timeperiod=20)
-            ma60 = talib.SMA(close_prices, timeperiod=60)
+            ma5 = self.calculate_sma(close_prices, 5)
+            ma10 = self.calculate_sma(close_prices, 10)
+            ma20 = self.calculate_sma(close_prices, 20)
+            ma60 = self.calculate_sma(close_prices, 60)
             
             # MACD
-            macd, macd_signal, macd_hist = talib.MACD(close_prices)
+            macd, macd_signal, macd_hist = self.calculate_macd(close_prices)
             
             # RSI
-            rsi = talib.RSI(close_prices, timeperiod=14)
+            rsi = self.calculate_rsi(close_prices, 14)
             
             # KDJ
-            k, d = talib.STOCH(close_prices, close_prices, close_prices)
+            k, d = self.calculate_kdj(close_prices)
             j = 3 * k - 2 * d
             
             # 布林带
-            upper, middle, lower = talib.BBANDS(close_prices)
+            upper, middle, lower = self.calculate_bollinger_bands(close_prices)
             
             # 计算趋势强度
             trend_strength = self.calculate_trend_strength(close_prices)
