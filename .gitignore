@@ -116,11 +116,14 @@ ehthumbs.db
 Thumbs.db
 
 # Project specific
-output/
+output/*
+!output/.gitkeep
 logs/
 data/
-reports/
-charts/
+reports/*
+!reports/.gitkeep
+charts/*
+!charts/.gitkeep
 config/config.json
 *.xlsx
 *.csv
