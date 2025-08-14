@@ -3,8 +3,60 @@
 """
 import pandas as pd
 import numpy as np
-import talib
 from typing import Dict, List, Tuple, Optional
+
+# 尝试导入talib，如果失败则使用替代方案
+try:
+    import talib
+    HAS_TALIB = True
+except ImportError:
+    HAS_TALIB = False
+    # 创建一个模拟的talib模块
+    class MockTalib:
+        def SMA(self, close, timeperiod):
+            return pd.Series(close).rolling(window=timeperiod).mean().values
+        
+        def EMA(self, close, timeperiod):
+            return pd.Series(close).ewm(span=timeperiod).mean().values
+        
+        def RSI(self, close, timeperiod=14):
+            delta = pd.Series(close).diff()
+            gain = (delta.where(delta > 0, 0)).rolling(window=timeperiod).mean()
+            loss = (-delta.where(delta < 0, 0)).rolling(window=timeperiod).mean()
+            rs = gain / loss
+            return (100 - (100 / (1 + rs))).values
+        
+        def MACD(self, close, fastperiod=12, slowperiod=26, signalperiod=9):
+            exp1 = pd.Series(close).ewm(span=fastperiod).mean()
+            exp2 = pd.Series(close).ewm(span=slowperiod).mean()
+            macd = exp1 - exp2
+            signal = macd.ewm(span=signalperiod).mean()
+            histogram = macd - signal
+            return macd.values, signal.values, histogram.values
+        
+        def BBANDS(self, close, timeperiod=20, nbdevup=2, nbdevdn=2):
+            sma = pd.Series(close).rolling(window=timeperiod).mean()
+            std = pd.Series(close).rolling(window=timeperiod).std()
+            upper = sma + (std * nbdevup)
+            lower = sma - (std * nbdevdn)
+            return upper.values, sma.values, lower.values
+        
+        def STOCH(self, high, low, close, fastk_period=14, slowk_period=3, slowd_period=3):
+            lowest_low = pd.Series(low).rolling(window=fastk_period).min()
+            highest_high = pd.Series(high).rolling(window=fastk_period).max()
+            k_percent = 100 * ((pd.Series(close) - lowest_low) / (highest_high - lowest_low))
+            k_percent = k_percent.rolling(window=slowk_period).mean()
+            d_percent = k_percent.rolling(window=slowd_period).mean()
+            return k_percent.values, d_percent.values
+        
+        def ATR(self, high, low, close, timeperiod=14):
+            high_low = pd.Series(high) - pd.Series(low)
+            high_close = abs(pd.Series(high) - pd.Series(close).shift())
+            low_close = abs(pd.Series(low) - pd.Series(close).shift())
+            true_range = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+            return true_range.rolling(window=timeperiod).mean().values
+    
+    talib = MockTalib()
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 import warnings
