@@ -35,31 +35,31 @@ jobs:
         mkdir -p output
 
     - name: 爬取基金新闻
-      run: python src/crawlers/news_crawler.py
+      run: python -m src.crawlers.news_crawler
 
     - name: 爬取基金数据
-      run: python src/crawlers/fund_crawler.py
+      run: python -m src.crawlers.fund_crawler
 
     - name: 计算长期指标
-      run: python src/indicators/long_term_indicators.py
+      run: python -m src.indicators.long_term_indicators
 
     - name: 计算中期指标
-      run: python src/indicators/mid_term_indicators.py
+      run: python -m src.indicators.mid_term_indicators
 
     - name: 计算短期指标
-      run: python src/indicators/short_term_indicators.py
+      run: python -m src.indicators.short_term_indicators
 
     - name: 分析买卖点
-      run: python src/analysis/buy_sell_analysis.py
+      run: python -m src.analysis.buy_sell_analysis
 
     - name: AI分析
-      run: python src/analysis/ai_analysis.py
+      run: python -m src.analysis.ai_analysis
 
     - name: 生成买卖点表格
-      run: python src/report/generate_table.py
+      run: python -m src.report.generate_table
 
     - name: 生成操作文章
-      run: python src/report/generate_article.py
+      run: python -m src.report.generate_article
 
     - name: 提交更改
       run: |
