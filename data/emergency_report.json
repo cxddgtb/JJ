@@ -1,0 +1,7 @@
+{
+  "report_type": "emergency",
+  "timestamp": "2025-08-14 22:39:27",
+  "status": "system_maintenance",
+  "message": "系统维护中，使用紧急报告",
+  "next_update": "系统恢复后自动更新"
+}
