@@ -143,10 +143,8 @@ class AIFundAnalysisSystem:
 
         # 添加基金分析结果
         if analysis_results:
-            report += "| 基金代码 | 基金名称 | AI评级 | 推荐度 | 风险等级 |
-"
-            report += "|---------|---------|--------|--------|----------|
-"
+            report += "| 基金代码 | 基金名称 | AI评级 | 推荐度 | 风险等级 |\n"
+            report += "|---------|---------|--------|--------|----------|\n"
 
             for result in analysis_results[:10]:  # 显示前10只基金
                 fund_info = result.get('fund_info', {})
