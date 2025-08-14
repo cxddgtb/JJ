@@ -80,15 +80,18 @@ jobs:
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        echo "=== 🚀 启动AI驱动基金分析系统 ==="
-        python src/ai_main.py || {
-          echo "⚠️ AI主程序运行失败，尝试备用方案"
-          python src/main.py || {
-            echo "❌ 所有程序都失败，但继续执行后续步骤"
-            exit 0
+        echo "=== 🚀 启动超稳定基金分析系统 ==="
+        python src/robust_main.py || {
+          echo "⚠️ 超稳定程序运行失败，尝试AI备用方案"
+          python src/ai_main.py || {
+            echo "⚠️ AI程序失败，尝试传统备用方案"
+            python src/main.py || {
+              echo "❌ 所有程序都失败，但继续执行后续步骤"
+              exit 0
+            }
           }
         }
-        echo "✅ AI基金分析系统运行完成"
+        echo "✅ 基金分析系统运行完成"
 
     - name: 提交分析结果
       env:
