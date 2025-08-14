@@ -231,62 +231,35 @@ class GenerateTable:
 
         # 生成汇总表格
         if self.table_format == 'markdown':
-            summary = "## 基金买卖点分析汇总
-
-"
-            summary += "| 统计项 | 数量 | 占比 |
-"
-            summary += "|-------|------|------|
-"
-            summary += f"| 买入建议 | {buy_count} | {buy_count/len(self.buy_sell_points)*100:.1f}% |
-"
-            summary += f"| 卖出建议 | {sell_count} | {sell_count/len(self.buy_sell_points)*100:.1f}% |
-"
-            summary += f"| 观望建议 | {hold_count} | {hold_count/len(self.buy_sell_points)*100:.1f}% |
-"
-            summary += f"| 看涨预测 | {bullish_count} | {bullish_count/len(self.buy_sell_points)*100:.1f}% |
-"
-            summary += f"| 看跌预测 | {bearish_count} | {bearish_count/len(self.buy_sell_points)*100:.1f}% |
-"
-            summary += f"| 中性预测 | {neutral_count} | {neutral_count/len(self.buy_sell_points)*100:.1f}% |
-"
+            summary = "## 基金买卖点分析汇总\n\n"
+            summary += "| 统计项 | 数量 | 占比 |\n"
+            summary += "|-------|------|------|\n"
+            summary += f"| 买入建议 | {buy_count} | {buy_count/len(self.buy_sell_points)*100:.1f}% |\n"
+            summary += f"| 卖出建议 | {sell_count} | {sell_count/len(self.buy_sell_points)*100:.1f}% |\n"
+            summary += f"| 观望建议 | {hold_count} | {hold_count/len(self.buy_sell_points)*100:.1f}% |\n"
+            summary += f"| 看涨预测 | {bullish_count} | {bullish_count/len(self.buy_sell_points)*100:.1f}% |\n"
+            summary += f"| 看跌预测 | {bearish_count} | {bearish_count/len(self.buy_sell_points)*100:.1f}% |\n"
+            summary += f"| 中性预测 | {neutral_count} | {neutral_count/len(self.buy_sell_points)*100:.1f}% |\n"
 
             return summary
         elif self.table_format == 'html':
-            summary = "<h2>基金买卖点分析汇总</h2>
-"
-            summary += "<table border="1">
-"
-            summary += "<thead>
-"
-            summary += "<tr>
-"
-            summary += "<th>统计项</th>
-"
-            summary += "<th>数量</th>
-"
-            summary += "<th>占比</th>
-"
-            summary += "</tr>
-"
-            summary += "</thead>
-"
-            summary += "<tbody>
-"
-            summary += f"<tr><td>买入建议</td><td>{buy_count}</td><td>{buy_count/len(self.buy_sell_points)*100:.1f}%</td></tr>
-"
-            summary += f"<tr><td>卖出建议</td><td>{sell_count}</td><td>{sell_count/len(self.buy_sell_points)*100:.1f}%</td></tr>
-"
-            summary += f"<tr><td>观望建议</td><td>{hold_count}</td><td>{hold_count/len(self.buy_sell_points)*100:.1f}%</td></tr>
-"
-            summary += f"<tr><td>看涨预测</td><td>{bullish_count}</td><td>{bullish_count/len(self.buy_sell_points)*100:.1f}%</td></tr>
-"
-            summary += f"<tr><td>看跌预测</td><td>{bearish_count}</td><td>{bearish_count/len(self.buy_sell_points)*100:.1f}%</td></tr>
-"
-            summary += f"<tr><td>中性预测</td><td>{neutral_count}</td><td>{neutral_count/len(self.buy_sell_points)*100:.1f}%</td></tr>
-"
-            summary += "</tbody>
-"
+            summary = "<h2>基金买卖点分析汇总</h2>\n"
+            summary += "<table border=\"1\">\n"
+            summary += "<thead>\n"
+            summary += "<tr>\n"
+            summary += "<th>统计项</th>\n"
+            summary += "<th>数量</th>\n"
+            summary += "<th>占比</th>\n"
+            summary += "</tr>\n"
+            summary += "</thead>\n"
+            summary += "<tbody>\n"
+            summary += f"<tr><td>买入建议</td><td>{buy_count}</td><td>{buy_count/len(self.buy_sell_points)*100:.1f}%</td></tr>\n"
+            summary += f"<tr><td>卖出建议</td><td>{sell_count}</td><td>{sell_count/len(self.buy_sell_points)*100:.1f}%</td></tr>\n"
+            summary += f"<tr><td>观望建议</td><td>{hold_count}</td><td>{hold_count/len(self.buy_sell_points)*100:.1f}%</td></tr>\n"
+            summary += f"<tr><td>看涨预测</td><td>{bullish_count}</td><td>{bullish_count/len(self.buy_sell_points)*100:.1f}%</td></tr>\n"
+            summary += f"<tr><td>看跌预测</td><td>{bearish_count}</td><td>{bearish_count/len(self.buy_sell_points)*100:.1f}%</td></tr>\n"
+            summary += f"<tr><td>中性预测</td><td>{neutral_count}</td><td>{neutral_count/len(self.buy_sell_points)*100:.1f}%</td></tr>\n"
+            summary += "</tbody>\n"
             summary += "</table>"
 
             return summary
@@ -309,13 +282,9 @@ class GenerateTable:
             filename = os.path.join(self.output_dir, f'buy_sell_table_{today}.md')
 
             with open(filename, 'w', encoding='utf-8') as f:
-                f.write("# 基金买卖点分析表
-
-")
+                f.write("# 基金买卖点分析表\n\n")
                 f.write(table_content)
-                f.write("
-
-")
+                f.write("\n\n")
                 f.write(self._generate_summary_table())
 
             logger.info(f"Markdown表格已保存到 {filename}")
@@ -324,44 +293,26 @@ class GenerateTable:
             filename = os.path.join(self.output_dir, f'buy_sell_table_{today}.html')
 
             with open(filename, 'w', encoding='utf-8') as f:
-                f.write("<!DOCTYPE html>
-")
-                f.write("<html>
-")
-                f.write("<head>
-")
-                f.write("<meta charset="UTF-8">
-")
-                f.write("<title>基金买卖点分析表</title>
-")
-                f.write("<style>
-")
-                f.write("body { font-family: Arial, sans-serif; margin: 20px; }
-")
-                f.write("h1, h2 { color: #333; }
-")
-                f.write("table { border-collapse: collapse; width: 100%; }
-")
-                f.write("th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-")
-                f.write("th { background-color: #f2f2f2; }
-")
-                f.write("tr:nth-child(even) { background-color: #f9f9f9; }
-")
-                f.write("tr:hover { background-color: #f1f1f1; }
-")
-                f.write("</style>
-")
-                f.write("</head>
-")
-                f.write("<body>
-")
-                f.write("<h1>基金买卖点分析表</h1>
-")
+                f.write("<!DOCTYPE html>\n")
+                f.write("<html>\n")
+                f.write("<head>\n")
+                f.write("<meta charset=\"UTF-8\">\n")
+                f.write("<title>基金买卖点分析表</title>\n")
+                f.write("<style>\n")
+                f.write("body { font-family: Arial, sans-serif; margin: 20px; }\n")
+                f.write("h1, h2 { color: #333; }\n")
+                f.write("table { border-collapse: collapse; width: 100%; }\n")
+                f.write("th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }\n")
+                f.write("th { background-color: #f2f2f2; }\n")
+                f.write("tr:nth-child(even) { background-color: #f9f9f9; }\n")
+                f.write("tr:hover { background-color: #f1f1f1; }\n")
+                f.write("</style>\n")
+                f.write("</head>\n")
+                f.write("<body>\n")
+                f.write("<h1>基金买卖点分析表</h1>\n")
                 f.write(table_content)
                 f.write(self._generate_summary_table())
-                f.write("</body>
-")
+                f.write("</body>\n")
                 f.write("</html>")
 
             logger.info(f"HTML表格已保存到 {filename}")
