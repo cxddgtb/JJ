@@ -6,6 +6,15 @@ on:
   workflow_dispatch:  # 手动触发
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'reports/**'
+      - 'data/**'
+      - 'cache/**'
+      - 'logs/**'
+      - 'backup/**'
+      - '*.md'
+      - '*.json'
+      - '*.log'
 
 jobs:
   fund-analysis:
@@ -77,7 +86,7 @@ jobs:
         if git diff --staged --quiet; then
           echo "没有新的变化"
         else
-          git commit -m "自动更新基金分析报告 $(date '+%Y-%m-%d %H:%M:%S')"
+          git commit -m "[skip ci] 自动更新基金分析报告 $(date '+%Y-%m-%d %H:%M:%S')"
           git push https://x-access-token:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
         fi
 
