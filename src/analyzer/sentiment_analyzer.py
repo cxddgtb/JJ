@@ -10,7 +10,13 @@ from collections import Counter
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
 import json
-from wordcloud import WordCloud
+# 尝试导入wordcloud，如果失败则使用替代方案
+try:
+    from wordcloud import WordCloud
+    HAS_WORDCLOUD = True
+except ImportError:
+    HAS_WORDCLOUD = False
+    WordCloud = None
 import matplotlib.pyplot as plt
 from dataclasses import dataclass
 
