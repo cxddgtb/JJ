@@ -1,0 +1,6476 @@
+{
+  "fund_list_1000": {
+    "create_time": 1755168685.1465418,
+    "access_time": 1755168685.1465418,
+    "expire_time": 1755190285.1465418,
+    "expire_hours": 6
+  },
+  "fund_detail_000181": {
+    "create_time": 1755168685.9871924,
+    "access_time": 1755168685.9871924,
+    "expire_time": 1755175885.9871924,
+    "expire_hours": 2
+  },
+  "fund_detail_000277": {
+    "create_time": 1755168687.0648282,
+    "access_time": 1755168687.0648282,
+    "expire_time": 1755175887.0648282,
+    "expire_hours": 2
+  },
+  "fund_detail_000381": {
+    "create_time": 1755168688.1257498,
+    "access_time": 1755168688.1257498,
+    "expire_time": 1755175888.1257498,
+    "expire_hours": 2
+  },
+  "fund_detail_000513": {
+    "create_time": 1755168688.5482807,
+    "access_time": 1755168688.5482807,
+    "expire_time": 1755175888.5482807,
+    "expire_hours": 2
+  },
+  "fund_history_000513_365": {
+    "create_time": 1755168688.5622005,
+    "access_time": 1755168688.5622005,
+    "expire_time": 1755172288.5622005,
+    "expire_hours": 1
+  },
+  "fund_detail_000593": {
+    "create_time": 1755168689.032849,
+    "access_time": 1755168689.032849,
+    "expire_time": 1755175889.032849,
+    "expire_hours": 2
+  },
+  "fund_history_000593_365": {
+    "create_time": 1755168689.0440397,
+    "access_time": 1755168689.0440397,
+    "expire_time": 1755172289.0440397,
+    "expire_hours": 1
+  },
+  "fund_detail_000684": {
+    "create_time": 1755168690.1504211,
+    "access_time": 1755168690.1504211,
+    "expire_time": 1755175890.1504211,
+    "expire_hours": 2
+  },
+  "fund_detail_000764": {
+    "create_time": 1755168691.2119315,
+    "access_time": 1755168691.2119315,
+    "expire_time": 1755175891.2119315,
+    "expire_hours": 2
+  },
+  "fund_detail_000855": {
+    "create_time": 1755168691.8943355,
+    "access_time": 1755168691.8943355,
+    "expire_time": 1755175891.8943355,
+    "expire_hours": 2
+  },
+  "fund_detail_000943": {
+    "create_time": 1755168692.6640947,
+    "access_time": 1755168692.6640947,
+    "expire_time": 1755175892.6640947,
+    "expire_hours": 2
+  },
+  "fund_detail_001036": {
+    "create_time": 1755168693.7446506,
+    "access_time": 1755168693.7446506,
+    "expire_time": 1755175893.7446506,
+    "expire_hours": 2
+  },
+  "fund_detail_000182": {
+    "create_time": 1755168694.4793086,
+    "access_time": 1755168694.4793086,
+    "expire_time": 1755175894.4793086,
+    "expire_hours": 2
+  },
+  "fund_detail_000279": {
+    "create_time": 1755168695.5214057,
+    "access_time": 1755168695.5214057,
+    "expire_time": 1755175895.5214057,
+    "expire_hours": 2
+  },
+  "fund_detail_000385": {
+    "create_time": 1755168696.6729379,
+    "access_time": 1755168696.6729379,
+    "expire_time": 1755175896.6729379,
+    "expire_hours": 2
+  },
+  "fund_detail_000514": {
+    "create_time": 1755168697.0831983,
+    "access_time": 1755168697.0831983,
+    "expire_time": 1755175897.0831983,
+    "expire_hours": 2
+  },
+  "fund_history_000514_365": {
+    "create_time": 1755168697.0969532,
+    "access_time": 1755168697.0969532,
+    "expire_time": 1755172297.0969532,
+    "expire_hours": 1
+  },
+  "fund_detail_000594": {
+    "create_time": 1755168697.7822344,
+    "access_time": 1755168697.7822344,
+    "expire_time": 1755175897.7822344,
+    "expire_hours": 2
+  },
+  "fund_detail_000686": {
+    "create_time": 1755168698.2129056,
+    "access_time": 1755168698.2129056,
+    "expire_time": 1755175898.2129056,
+    "expire_hours": 2
+  },
+  "fund_history_000686_365": {
+    "create_time": 1755168698.2268822,
+    "access_time": 1755168698.2268822,
+    "expire_time": 1755172298.2268822,
+    "expire_hours": 1
+  },
+  "fund_detail_000767": {
+    "create_time": 1755168699.6712277,
+    "access_time": 1755168699.6712277,
+    "expire_time": 1755175899.6712277,
+    "expire_hours": 2
+  },
+  "fund_history_000767_365": {
+    "create_time": 1755168699.682273,
+    "access_time": 1755168699.682273,
+    "expire_time": 1755172299.682273,
+    "expire_hours": 1
+  },
+  "fund_detail_000856": {
+    "create_time": 1755168700.1568117,
+    "access_time": 1755168700.1568117,
+    "expire_time": 1755175900.1568117,
+    "expire_hours": 2
+  },
+  "fund_history_000856_365": {
+    "create_time": 1755168700.1683328,
+    "access_time": 1755168700.1683328,
+    "expire_time": 1755172300.1683328,
+    "expire_hours": 1
+  },
+  "fund_detail_000944": {
+    "create_time": 1755168700.9684331,
+    "access_time": 1755168700.9684331,
+    "expire_time": 1755175900.9684331,
+    "expire_hours": 2
+  },
+  "fund_detail_001037": {
+    "create_time": 1755168702.0371592,
+    "access_time": 1755168702.0371592,
+    "expire_time": 1755175902.0371592,
+    "expire_hours": 2
+  },
+  "fund_detail_000183": {
+    "create_time": 1755168702.7438357,
+    "access_time": 1755168702.7438357,
+    "expire_time": 1755175902.7438357,
+    "expire_hours": 2
+  },
+  "fund_detail_000286": {
+    "create_time": 1755168704.8052554,
+    "access_time": 1755168704.8052554,
+    "expire_time": 1755175904.8052554,
+    "expire_hours": 2
+  },
+  "fund_detail_000386": {
+    "create_time": 1755168705.8804522,
+    "access_time": 1755168705.8804522,
+    "expire_time": 1755175905.8804522,
+    "expire_hours": 2
+  },
+  "fund_detail_000516": {
+    "create_time": 1755168707.3350425,
+    "access_time": 1755168707.3350425,
+    "expire_time": 1755175907.3350425,
+    "expire_hours": 2
+  },
+  "fund_history_000516_365": {
+    "create_time": 1755168707.3472924,
+    "access_time": 1755168707.3472924,
+    "expire_time": 1755172307.3472924,
+    "expire_hours": 1
+  },
+  "fund_detail_000595": {
+    "create_time": 1755168707.9541209,
+    "access_time": 1755168707.9541209,
+    "expire_time": 1755175907.9541209,
+    "expire_hours": 2
+  },
+  "fund_history_000595_365": {
+    "create_time": 1755168707.9656148,
+    "access_time": 1755168707.9656148,
+    "expire_time": 1755172307.9656148,
+    "expire_hours": 1
+  },
+  "fund_detail_000687": {
+    "create_time": 1755168709.7385397,
+    "access_time": 1755168709.7385397,
+    "expire_time": 1755175909.7385397,
+    "expire_hours": 2
+  },
+  "fund_detail_000771": {
+    "create_time": 1755168711.8508081,
+    "access_time": 1755168711.8508081,
+    "expire_time": 1755175911.8508081,
+    "expire_hours": 2
+  },
+  "fund_detail_000857": {
+    "create_time": 1755168712.5736952,
+    "access_time": 1755168712.5736952,
+    "expire_time": 1755175912.5736952,
+    "expire_hours": 2
+  },
+  "fund_detail_000945": {
+    "create_time": 1755168713.2738614,
+    "access_time": 1755168713.2738614,
+    "expire_time": 1755175913.2738614,
+    "expire_hours": 2
+  },
+  "fund_detail_001039": {
+    "create_time": 1755168715.3869314,
+    "access_time": 1755168715.3869314,
+    "expire_time": 1755175915.3869314,
+    "expire_hours": 2
+  },
+  "fund_detail_001279": {
+    "create_time": 1755168716.5793328,
+    "access_time": 1755168716.5793328,
+    "expire_time": 1755175916.5793328,
+    "expire_hours": 2
+  },
+  "fund_history_001279_365": {
+    "create_time": 1755168716.592951,
+    "access_time": 1755168716.592951,
+    "expire_time": 1755172316.592951,
+    "expire_hours": 1
+  },
+  "fund_detail_000184": {
+    "create_time": 1755168717.343958,
+    "access_time": 1755168717.343958,
+    "expire_time": 1755175917.343958,
+    "expire_hours": 2
+  },
+  "fund_detail_000289": {
+    "create_time": 1755168719.5061345,
+    "access_time": 1755168719.5061345,
+    "expire_time": 1755175919.5061345,
+    "expire_hours": 2
+  },
+  "fund_detail_000389": {
+    "create_time": 1755168722.573107,
+    "access_time": 1755168722.573107,
+    "expire_time": 1755175922.573107,
+    "expire_hours": 2
+  },
+  "fund_detail_000517": {
+    "create_time": 1755168724.041218,
+    "access_time": 1755168724.041218,
+    "expire_time": 1755175924.041218,
+    "expire_hours": 2
+  },
+  "fund_history_000517_365": {
+    "create_time": 1755168724.0554376,
+    "access_time": 1755168724.0554376,
+    "expire_time": 1755172324.0554376,
+    "expire_hours": 1
+  },
+  "fund_detail_000596": {
+    "create_time": 1755168725.6049044,
+    "access_time": 1755168725.6049044,
+    "expire_time": 1755175925.6049044,
+    "expire_hours": 2
+  },
+  "fund_history_000596_365": {
+    "create_time": 1755168725.6193137,
+    "access_time": 1755168725.6193137,
+    "expire_time": 1755172325.6193137,
+    "expire_hours": 1
+  },
+  "fund_detail_000688": {
+    "create_time": 1755168726.088254,
+    "access_time": 1755168726.088254,
+    "expire_time": 1755175926.088254,
+    "expire_hours": 2
+  },
+  "fund_history_000688_365": {
+    "create_time": 1755168726.1006548,
+    "access_time": 1755168726.1006548,
+    "expire_time": 1755172326.1006548,
+    "expire_hours": 1
+  },
+  "fund_detail_000772": {
+    "create_time": 1755168727.2259583,
+    "access_time": 1755168727.2259583,
+    "expire_time": 1755175927.2259583,
+    "expire_hours": 2
+  },
+  "fund_detail_000860": {
+    "create_time": 1755168727.6431878,
+    "access_time": 1755168727.6431878,
+    "expire_time": 1755175927.6431878,
+    "expire_hours": 2
+  },
+  "fund_history_000860_365": {
+    "create_time": 1755168727.6573734,
+    "access_time": 1755168727.6573734,
+    "expire_time": 1755172327.6573734,
+    "expire_hours": 1
+  },
+  "fund_detail_000946": {
+    "create_time": 1755168729.3958726,
+    "access_time": 1755168729.3958726,
+    "expire_time": 1755175929.3958726,
+    "expire_hours": 2
+  },
+  "fund_detail_001040": {
+    "create_time": 1755168730.3936746,
+    "access_time": 1755168730.3936746,
+    "expire_time": 1755175930.3936746,
+    "expire_hours": 2
+  },
+  "fund_detail_001243": {
+    "create_time": 1755168731.4779797,
+    "access_time": 1755168731.4779797,
+    "expire_time": 1755175931.4779797,
+    "expire_hours": 2
+  },
+  "fund_detail_000185": {
+    "create_time": 1755168732.991775,
+    "access_time": 1755168732.991775,
+    "expire_time": 1755175932.991775,
+    "expire_hours": 2
+  },
+  "fund_detail_000290": {
+    "create_time": 1755168735.7572956,
+    "access_time": 1755168735.7572956,
+    "expire_time": 1755175935.7572956,
+    "expire_hours": 2
+  },
+  "fund_detail_000390": {
+    "create_time": 1755168736.8481348,
+    "access_time": 1755168736.8481348,
+    "expire_time": 1755175936.8481348,
+    "expire_hours": 2
+  },
+  "fund_detail_000520": {
+    "create_time": 1755168737.2719812,
+    "access_time": 1755168737.2719812,
+    "expire_time": 1755175937.2719812,
+    "expire_hours": 2
+  },
+  "fund_history_000520_365": {
+    "create_time": 1755168737.2848806,
+    "access_time": 1755168737.2848806,
+    "expire_time": 1755172337.2848806,
+    "expire_hours": 1
+  },
+  "fund_detail_000597": {
+    "create_time": 1755168738.782037,
+    "access_time": 1755168738.782037,
+    "expire_time": 1755175938.782037,
+    "expire_hours": 2
+  },
+  "fund_history_000597_365": {
+    "create_time": 1755168738.796777,
+    "access_time": 1755168738.796777,
+    "expire_time": 1755172338.796777,
+    "expire_hours": 1
+  },
+  "fund_detail_000689": {
+    "create_time": 1755168740.4906926,
+    "access_time": 1755168740.4906926,
+    "expire_time": 1755175940.4906926,
+    "expire_hours": 2
+  },
+  "fund_detail_000773": {
+    "create_time": 1755168741.6659827,
+    "access_time": 1755168741.6659827,
+    "expire_time": 1755175941.6659827,
+    "expire_hours": 2
+  },
+  "fund_detail_000861": {
+    "create_time": 1755168744.1793687,
+    "access_time": 1755168744.1793687,
+    "expire_time": 1755175944.1793687,
+    "expire_hours": 2
+  },
+  "fund_detail_000948": {
+    "create_time": 1755168744.5822275,
+    "access_time": 1755168744.5822275,
+    "expire_time": 1755175944.5822275,
+    "expire_hours": 2
+  },
+  "fund_history_000948_365": {
+    "create_time": 1755168744.5967937,
+    "access_time": 1755168744.5967937,
+    "expire_time": 1755172344.5967937,
+    "expire_hours": 1
+  },
+  "fund_detail_001042": {
+    "create_time": 1755168746.8633747,
+    "access_time": 1755168746.8633747,
+    "expire_time": 1755175946.8633747,
+    "expire_hours": 2
+  },
+  "fund_detail_001332": {
+    "create_time": 1755168748.3349469,
+    "access_time": 1755168748.3349469,
+    "expire_time": 1755175948.3349469,
+    "expire_hours": 2
+  },
+  "fund_history_001332_365": {
+    "create_time": 1755168748.349565,
+    "access_time": 1755168748.349565,
+    "expire_time": 1755172348.349565,
+    "expire_hours": 1
+  },
+  "fund_detail_000186": {
+    "create_time": 1755168749.1152158,
+    "access_time": 1755168749.1152158,
+    "expire_time": 1755175949.1152158,
+    "expire_hours": 2
+  },
+  "fund_detail_000294": {
+    "create_time": 1755168750.1805046,
+    "access_time": 1755168750.1805046,
+    "expire_time": 1755175950.1805046,
+    "expire_hours": 2
+  },
+  "fund_detail_000394": {
+    "create_time": 1755168751.2310603,
+    "access_time": 1755168751.2310603,
+    "expire_time": 1755175951.2310603,
+    "expire_hours": 2
+  },
+  "fund_detail_000521": {
+    "create_time": 1755168751.7654562,
+    "access_time": 1755168751.7654562,
+    "expire_time": 1755175951.7654562,
+    "expire_hours": 2
+  },
+  "fund_history_000521_365": {
+    "create_time": 1755168751.7800877,
+    "access_time": 1755168751.7800877,
+    "expire_time": 1755172351.7800877,
+    "expire_hours": 1
+  },
+  "fund_detail_000598": {
+    "create_time": 1755168752.2278008,
+    "access_time": 1755168752.2278008,
+    "expire_time": 1755175952.2278008,
+    "expire_hours": 2
+  },
+  "fund_history_000598_365": {
+    "create_time": 1755168752.242131,
+    "access_time": 1755168752.242131,
+    "expire_time": 1755172352.242131,
+    "expire_hours": 1
+  },
+  "fund_detail_000690": {
+    "create_time": 1755168752.713016,
+    "access_time": 1755168752.713016,
+    "expire_time": 1755175952.713016,
+    "expire_hours": 2
+  },
+  "fund_history_000690_365": {
+    "create_time": 1755168752.7276711,
+    "access_time": 1755168752.7276711,
+    "expire_time": 1755172352.7276711,
+    "expire_hours": 1
+  },
+  "fund_detail_000778": {
+    "create_time": 1755168754.2365053,
+    "access_time": 1755168754.2365053,
+    "expire_time": 1755175954.2365053,
+    "expire_hours": 2
+  },
+  "fund_history_000778_365": {
+    "create_time": 1755168754.2513647,
+    "access_time": 1755168754.2513647,
+    "expire_time": 1755172354.2513647,
+    "expire_hours": 1
+  },
+  "fund_detail_000862": {
+    "create_time": 1755168755.7290275,
+    "access_time": 1755168755.7290275,
+    "expire_time": 1755175955.7290275,
+    "expire_hours": 2
+  },
+  "fund_history_000862_365": {
+    "create_time": 1755168755.7415082,
+    "access_time": 1755168755.7415082,
+    "expire_time": 1755172355.7415082,
+    "expire_hours": 1
+  },
+  "fund_detail_000950": {
+    "create_time": 1755168756.1943345,
+    "access_time": 1755168756.1943345,
+    "expire_time": 1755175956.1943345,
+    "expire_hours": 2
+  },
+  "fund_history_000950_365": {
+    "create_time": 1755168756.2085805,
+    "access_time": 1755168756.2085805,
+    "expire_time": 1755172356.2085805,
+    "expire_hours": 1
+  },
+  "fund_detail_001043": {
+    "create_time": 1755168757.8255417,
+    "access_time": 1755168757.8255417,
+    "expire_time": 1755175957.8255417,
+    "expire_hours": 2
+  },
+  "fund_detail_001302": {
+    "create_time": 1755168758.8099663,
+    "access_time": 1755168758.8099663,
+    "expire_time": 1755175958.8099663,
+    "expire_hours": 2
+  },
+  "fund_detail_000187": {
+    "create_time": 1755168760.53668,
+    "access_time": 1755168760.53668,
+    "expire_time": 1755175960.53668,
+    "expire_hours": 2
+  },
+  "fund_detail_000295": {
+    "create_time": 1755168761.5610747,
+    "access_time": 1755168761.5610747,
+    "expire_time": 1755175961.5610747,
+    "expire_hours": 2
+  },
+  "fund_detail_000395": {
+    "create_time": 1755168763.7083154,
+    "access_time": 1755168763.7083154,
+    "expire_time": 1755175963.7083154,
+    "expire_hours": 2
+  },
+  "fund_detail_000522": {
+    "create_time": 1755168765.2123904,
+    "access_time": 1755168765.2123904,
+    "expire_time": 1755175965.2123904,
+    "expire_hours": 2
+  },
+  "fund_detail_000599": {
+    "create_time": 1755168765.6322885,
+    "access_time": 1755168765.6322885,
+    "expire_time": 1755175965.6322885,
+    "expire_hours": 2
+  },
+  "fund_history_000599_365": {
+    "create_time": 1755168765.645506,
+    "access_time": 1755168765.645506,
+    "expire_time": 1755172365.645506,
+    "expire_hours": 1
+  },
+  "fund_detail_000692": {
+    "create_time": 1755168768.2109187,
+    "access_time": 1755168768.2109187,
+    "expire_time": 1755175968.2109187,
+    "expire_hours": 2
+  },
+  "fund_history_000692_365": {
+    "create_time": 1755168768.22418,
+    "access_time": 1755168768.22418,
+    "expire_time": 1755172368.22418,
+    "expire_hours": 1
+  },
+  "fund_detail_000779": {
+    "create_time": 1755168768.788706,
+    "access_time": 1755168768.788706,
+    "expire_time": 1755175968.788706,
+    "expire_hours": 2
+  },
+  "fund_history_000779_365": {
+    "create_time": 1755168768.804067,
+    "access_time": 1755168768.804067,
+    "expire_time": 1755172368.804067,
+    "expire_hours": 1
+  },
+  "fund_detail_000863": {
+    "create_time": 1755168770.319941,
+    "access_time": 1755168770.319941,
+    "expire_time": 1755175970.319941,
+    "expire_hours": 2
+  },
+  "fund_history_000863_365": {
+    "create_time": 1755168770.3327065,
+    "access_time": 1755168770.3327065,
+    "expire_time": 1755172370.3327065,
+    "expire_hours": 1
+  },
+  "fund_detail_000955": {
+    "create_time": 1755168770.846196,
+    "access_time": 1755168770.846196,
+    "expire_time": 1755175970.846196,
+    "expire_hours": 2
+  },
+  "fund_history_000955_365": {
+    "create_time": 1755168770.8589373,
+    "access_time": 1755168770.8589373,
+    "expire_time": 1755172370.8589373,
+    "expire_hours": 1
+  },
+  "fund_detail_001044": {
+    "create_time": 1755168773.1264496,
+    "access_time": 1755168773.1264496,
+    "expire_time": 1755175973.1264496,
+    "expire_hours": 2
+  },
+  "fund_detail_000188": {
+    "create_time": 1755168773.829329,
+    "access_time": 1755168773.829329,
+    "expire_time": 1755175973.829329,
+    "expire_hours": 2
+  },
+  "fund_detail_000296": {
+    "create_time": 1755168775.966714,
+    "access_time": 1755168775.966714,
+    "expire_time": 1755175975.966714,
+    "expire_hours": 2
+  },
+  "fund_detail_000396": {
+    "create_time": 1755168777.0636187,
+    "access_time": 1755168777.0636187,
+    "expire_time": 1755175977.0636187,
+    "expire_hours": 2
+  },
+  "fund_detail_000523": {
+    "create_time": 1755168778.4644976,
+    "access_time": 1755168778.4644976,
+    "expire_time": 1755175978.4644976,
+    "expire_hours": 2
+  },
+  "fund_history_000523_365": {
+    "create_time": 1755168778.4778306,
+    "access_time": 1755168778.4778306,
+    "expire_time": 1755172378.4778306,
+    "expire_hours": 1
+  },
+  "fund_detail_000600": {
+    "create_time": 1755168778.9674518,
+    "access_time": 1755168778.9674518,
+    "expire_time": 1755175978.9674518,
+    "expire_hours": 2
+  },
+  "fund_history_000600_365": {
+    "create_time": 1755168778.9827013,
+    "access_time": 1755168778.9827013,
+    "expire_time": 1755172378.9827013,
+    "expire_hours": 1
+  },
+  "fund_detail_000693": {
+    "create_time": 1755168781.6881497,
+    "access_time": 1755168781.6881497,
+    "expire_time": 1755175981.6881497,
+    "expire_hours": 2
+  },
+  "fund_detail_000780": {
+    "create_time": 1755168783.2950737,
+    "access_time": 1755168783.2950737,
+    "expire_time": 1755175983.2950737,
+    "expire_hours": 2
+  },
+  "fund_detail_000866": {
+    "create_time": 1755168783.7623005,
+    "access_time": 1755168783.7623005,
+    "expire_time": 1755175983.7623005,
+    "expire_hours": 2
+  },
+  "fund_detail_000960": {
+    "create_time": 1755168784.2312963,
+    "access_time": 1755168784.2312963,
+    "expire_time": 1755175984.2312963,
+    "expire_hours": 2
+  },
+  "fund_history_000960_365": {
+    "create_time": 1755168784.2466319,
+    "access_time": 1755168784.2466319,
+    "expire_time": 1755172384.2466319,
+    "expire_hours": 1
+  },
+  "fund_detail_001045": {
+    "create_time": 1755168786.3951705,
+    "access_time": 1755168786.3951705,
+    "expire_time": 1755175986.3951705,
+    "expire_hours": 2
+  },
+  "fund_detail_001280": {
+    "create_time": 1755168788.4094336,
+    "access_time": 1755168788.4094336,
+    "expire_time": 1755175988.4094336,
+    "expire_hours": 2
+  },
+  "fund_detail_000189": {
+    "create_time": 1755168789.2334073,
+    "access_time": 1755168789.2334073,
+    "expire_time": 1755175989.2334073,
+    "expire_hours": 2
+  },
+  "fund_detail_000297": {
+    "create_time": 1755168791.276977,
+    "access_time": 1755168791.276977,
+    "expire_time": 1755175991.276977,
+    "expire_hours": 2
+  },
+  "fund_detail_000397": {
+    "create_time": 1755168792.3014216,
+    "access_time": 1755168792.3014216,
+    "expire_time": 1755175992.3014216,
+    "expire_hours": 2
+  },
+  "fund_detail_000524": {
+    "create_time": 1755168794.7763011,
+    "access_time": 1755168794.7763011,
+    "expire_time": 1755175994.7763011,
+    "expire_hours": 2
+  },
+  "fund_history_000524_365": {
+    "create_time": 1755168794.7921154,
+    "access_time": 1755168794.7921154,
+    "expire_time": 1755172394.7921154,
+    "expire_hours": 1
+  },
+  "fund_detail_000601": {
+    "create_time": 1755168795.257312,
+    "access_time": 1755168795.257312,
+    "expire_time": 1755175995.257312,
+    "expire_hours": 2
+  },
+  "fund_history_000601_365": {
+    "create_time": 1755168795.27351,
+    "access_time": 1755168795.27351,
+    "expire_time": 1755172395.27351,
+    "expire_hours": 1
+  },
+  "fund_detail_000694": {
+    "create_time": 1755168796.3488932,
+    "access_time": 1755168796.3488932,
+    "expire_time": 1755175996.3488932,
+    "expire_hours": 2
+  },
+  "fund_detail_000783": {
+    "create_time": 1755168796.8952518,
+    "access_time": 1755168796.8952518,
+    "expire_time": 1755175996.8952518,
+    "expire_hours": 2
+  },
+  "fund_history_000783_365": {
+    "create_time": 1755168796.9114606,
+    "access_time": 1755168796.9114606,
+    "expire_time": 1755172396.9114606,
+    "expire_hours": 1
+  },
+  "fund_detail_000867": {
+    "create_time": 1755168798.9293835,
+    "access_time": 1755168798.9293835,
+    "expire_time": 1755175998.9293835,
+    "expire_hours": 2
+  },
+  "fund_detail_000961": {
+    "create_time": 1755168799.4387255,
+    "access_time": 1755168799.4387255,
+    "expire_time": 1755175999.4387255,
+    "expire_hours": 2
+  },
+  "fund_detail_001046": {
+    "create_time": 1755168800.5320294,
+    "access_time": 1755168800.5320294,
+    "expire_time": 1755176000.5320294,
+    "expire_hours": 2
+  },
+  "fund_detail_001244": {
+    "create_time": 1755168801.5891001,
+    "access_time": 1755168801.5891001,
+    "expire_time": 1755176001.5891001,
+    "expire_hours": 2
+  },
+  "fund_detail_000190": {
+    "create_time": 1755168803.3098176,
+    "access_time": 1755168803.3098176,
+    "expire_time": 1755176003.3098176,
+    "expire_hours": 2
+  },
+  "fund_detail_000298": {
+    "create_time": 1755168804.5001333,
+    "access_time": 1755168804.5001333,
+    "expire_time": 1755176004.5001333,
+    "expire_hours": 2
+  },
+  "fund_detail_000398": {
+    "create_time": 1755168805.650514,
+    "access_time": 1755168805.650514,
+    "expire_time": 1755176005.650514,
+    "expire_hours": 2
+  },
+  "fund_detail_000526": {
+    "create_time": 1755168807.158046,
+    "access_time": 1755168807.158046,
+    "expire_time": 1755176007.158046,
+    "expire_hours": 2
+  },
+  "fund_history_000526_365": {
+    "create_time": 1755168807.1719732,
+    "access_time": 1755168807.1719732,
+    "expire_time": 1755172407.1719732,
+    "expire_hours": 1
+  },
+  "fund_detail_000602": {
+    "create_time": 1755168807.6923347,
+    "access_time": 1755168807.6923347,
+    "expire_time": 1755176007.6923347,
+    "expire_hours": 2
+  },
+  "fund_detail_000696": {
+    "create_time": 1755168808.8669853,
+    "access_time": 1755168808.8669853,
+    "expire_time": 1755176008.8669853,
+    "expire_hours": 2
+  },
+  "fund_detail_000784": {
+    "create_time": 1755168810.8969464,
+    "access_time": 1755168810.8969464,
+    "expire_time": 1755176010.8969464,
+    "expire_hours": 2
+  },
+  "fund_detail_000868": {
+    "create_time": 1755168811.3223808,
+    "access_time": 1755168811.3223808,
+    "expire_time": 1755176011.3223808,
+    "expire_hours": 2
+  },
+  "fund_history_000868_365": {
+    "create_time": 1755168811.3360746,
+    "access_time": 1755168811.3360746,
+    "expire_time": 1755172411.3360746,
+    "expire_hours": 1
+  },
+  "fund_detail_000962": {
+    "create_time": 1755168811.8107002,
+    "access_time": 1755168811.8107002,
+    "expire_time": 1755176011.8107002,
+    "expire_hours": 2
+  },
+  "fund_history_000962_365": {
+    "create_time": 1755168811.8247588,
+    "access_time": 1755168811.8247588,
+    "expire_time": 1755172411.8247588,
+    "expire_hours": 1
+  },
+  "fund_detail_001047": {
+    "create_time": 1755168812.962437,
+    "access_time": 1755168812.962437,
+    "expire_time": 1755176012.962437,
+    "expire_hours": 2
+  },
+  "fund_detail_001334": {
+    "create_time": 1755168814.050539,
+    "access_time": 1755168814.050539,
+    "expire_time": 1755176014.050539,
+    "expire_hours": 2
+  },
+  "fund_detail_000191": {
+    "create_time": 1755168815.7896018,
+    "access_time": 1755168815.7896018,
+    "expire_time": 1755176015.7896018,
+    "expire_hours": 2
+  },
+  "fund_detail_000299": {
+    "create_time": 1755168816.8478048,
+    "access_time": 1755168816.8478048,
+    "expire_time": 1755176016.8478048,
+    "expire_hours": 2
+  },
+  "fund_detail_000402": {
+    "create_time": 1755168818.295902,
+    "access_time": 1755168818.295902,
+    "expire_time": 1755176018.295902,
+    "expire_hours": 2
+  },
+  "fund_history_000402_365": {
+    "create_time": 1755168818.3093042,
+    "access_time": 1755168818.3093042,
+    "expire_time": 1755172418.3093042,
+    "expire_hours": 1
+  },
+  "fund_detail_000527": {
+    "create_time": 1755168818.8625877,
+    "access_time": 1755168818.8625877,
+    "expire_time": 1755176018.8625877,
+    "expire_hours": 2
+  },
+  "fund_detail_000603": {
+    "create_time": 1755168820.3141913,
+    "access_time": 1755168820.3141913,
+    "expire_time": 1755176020.3141913,
+    "expire_hours": 2
+  },
+  "fund_history_000603_365": {
+    "create_time": 1755168820.329653,
+    "access_time": 1755168820.329653,
+    "expire_time": 1755172420.329653,
+    "expire_hours": 1
+  },
+  "fund_detail_000697": {
+    "create_time": 1755168820.8274274,
+    "access_time": 1755168820.8274274,
+    "expire_time": 1755176020.8274274,
+    "expire_hours": 2
+  },
+  "fund_history_000697_365": {
+    "create_time": 1755168820.841794,
+    "access_time": 1755168820.841794,
+    "expire_time": 1755172420.841794,
+    "expire_hours": 1
+  },
+  "fund_detail_000785": {
+    "create_time": 1755168822.3427644,
+    "access_time": 1755168822.3427644,
+    "expire_time": 1755176022.3427644,
+    "expire_hours": 2
+  },
+  "fund_history_000785_365": {
+    "create_time": 1755168822.3567383,
+    "access_time": 1755168822.3567383,
+    "expire_time": 1755172422.3567383,
+    "expire_hours": 1
+  },
+  "fund_detail_000869": {
+    "create_time": 1755168822.9066048,
+    "access_time": 1755168822.9066048,
+    "expire_time": 1755176022.9066048,
+    "expire_hours": 2
+  },
+  "fund_history_000869_365": {
+    "create_time": 1755168822.9226434,
+    "access_time": 1755168822.9226434,
+    "expire_time": 1755172422.9226434,
+    "expire_hours": 1
+  },
+  "fund_detail_000963": {
+    "create_time": 1755168823.3787107,
+    "access_time": 1755168823.3787107,
+    "expire_time": 1755176023.3787107,
+    "expire_hours": 2
+  },
+  "fund_history_000963_365": {
+    "create_time": 1755168823.393955,
+    "access_time": 1755168823.393955,
+    "expire_time": 1755172423.393955,
+    "expire_hours": 1
+  },
+  "fund_detail_001048": {
+    "create_time": 1755168824.793815,
+    "access_time": 1755168824.793815,
+    "expire_time": 1755176024.793815,
+    "expire_hours": 2
+  },
+  "fund_detail_001303": {
+    "create_time": 1755168826.1583166,
+    "access_time": 1755168826.1583166,
+    "expire_time": 1755176026.1583166,
+    "expire_hours": 2
+  },
+  "fund_detail_000192": {
+    "create_time": 1755168827.8631437,
+    "access_time": 1755168827.8631437,
+    "expire_time": 1755176027.8631437,
+    "expire_hours": 2
+  },
+  "fund_detail_000300": {
+    "create_time": 1755168829.5484123,
+    "access_time": 1755168829.5484123,
+    "expire_time": 1755176029.5484123,
+    "expire_hours": 2
+  },
+  "fund_history_000300_365": {
+    "create_time": 1755168829.5635402,
+    "access_time": 1755168829.5635402,
+    "expire_time": 1755172429.5635402,
+    "expire_hours": 1
+  },
+  "fund_detail_000403": {
+    "create_time": 1755168830.0607047,
+    "access_time": 1755168830.0607047,
+    "expire_time": 1755176030.0607047,
+    "expire_hours": 2
+  },
+  "fund_history_000403_365": {
+    "create_time": 1755168830.0789778,
+    "access_time": 1755168830.0789778,
+    "expire_time": 1755172430.0789778,
+    "expire_hours": 1
+  },
+  "fund_detail_000528": {
+    "create_time": 1755168831.5279992,
+    "access_time": 1755168831.5279992,
+    "expire_time": 1755176031.5279992,
+    "expire_hours": 2
+  },
+  "fund_history_000528_365": {
+    "create_time": 1755168831.5447056,
+    "access_time": 1755168831.5447056,
+    "expire_time": 1755172431.5447056,
+    "expire_hours": 1
+  },
+  "fund_detail_000604": {
+    "create_time": 1755168833.6847847,
+    "access_time": 1755168833.6847847,
+    "expire_time": 1755176033.6847847,
+    "expire_hours": 2
+  },
+  "fund_detail_000698": {
+    "create_time": 1755168834.1048615,
+    "access_time": 1755168834.1048615,
+    "expire_time": 1755176034.1048615,
+    "expire_hours": 2
+  },
+  "fund_history_000698_365": {
+    "create_time": 1755168834.1190937,
+    "access_time": 1755168834.1190937,
+    "expire_time": 1755172434.1190937,
+    "expire_hours": 1
+  },
+  "fund_detail_000786": {
+    "create_time": 1755168834.6169586,
+    "access_time": 1755168834.6169586,
+    "expire_time": 1755176034.6169586,
+    "expire_hours": 2
+  },
+  "fund_history_000786_365": {
+    "create_time": 1755168834.6328535,
+    "access_time": 1755168834.6328535,
+    "expire_time": 1755172434.6328535,
+    "expire_hours": 1
+  },
+  "fund_detail_000870": {
+    "create_time": 1755168836.389245,
+    "access_time": 1755168836.389245,
+    "expire_time": 1755176036.389245,
+    "expire_hours": 2
+  },
+  "fund_detail_000965": {
+    "create_time": 1755168836.7904315,
+    "access_time": 1755168836.7904315,
+    "expire_time": 1755176036.7904315,
+    "expire_hours": 2
+  },
+  "fund_history_000965_365": {
+    "create_time": 1755168836.8067865,
+    "access_time": 1755168836.8067865,
+    "expire_time": 1755172436.8067865,
+    "expire_hours": 1
+  },
+  "fund_detail_001049": {
+    "create_time": 1755168837.9506102,
+    "access_time": 1755168837.9506102,
+    "expire_time": 1755176037.9506102,
+    "expire_hours": 2
+  },
+  "fund_detail_000194": {
+    "create_time": 1755168841.1788733,
+    "access_time": 1755168841.1788733,
+    "expire_time": 1755176041.1788733,
+    "expire_hours": 2
+  },
+  "fund_detail_000301": {
+    "create_time": 1755168841.6360936,
+    "access_time": 1755168841.6360936,
+    "expire_time": 1755176041.6360936,
+    "expire_hours": 2
+  },
+  "fund_history_000301_365": {
+    "create_time": 1755168841.649042,
+    "access_time": 1755168841.649042,
+    "expire_time": 1755172441.649042,
+    "expire_hours": 1
+  },
+  "fund_detail_000404": {
+    "create_time": 1755168842.1319234,
+    "access_time": 1755168842.1319234,
+    "expire_time": 1755176042.1319234,
+    "expire_hours": 2
+  },
+  "fund_history_000404_365": {
+    "create_time": 1755168842.1481278,
+    "access_time": 1755168842.1481278,
+    "expire_time": 1755172442.1481278,
+    "expire_hours": 1
+  },
+  "fund_detail_000529": {
+    "create_time": 1755168843.6464756,
+    "access_time": 1755168843.6464756,
+    "expire_time": 1755176043.6464756,
+    "expire_hours": 2
+  },
+  "fund_history_000529_365": {
+    "create_time": 1755168843.6613023,
+    "access_time": 1755168843.6613023,
+    "expire_time": 1755172443.6613023,
+    "expire_hours": 1
+  },
+  "fund_detail_000605": {
+    "create_time": 1755168844.9644947,
+    "access_time": 1755168844.9644947,
+    "expire_time": 1755176044.9644947,
+    "expire_hours": 2
+  },
+  "fund_history_000605_365": {
+    "create_time": 1755168844.979651,
+    "access_time": 1755168844.979651,
+    "expire_time": 1755172444.979651,
+    "expire_hours": 1
+  },
+  "fund_detail_000699": {
+    "create_time": 1755168845.447929,
+    "access_time": 1755168845.447929,
+    "expire_time": 1755176045.447929,
+    "expire_hours": 2
+  },
+  "fund_detail_000787": {
+    "create_time": 1755168846.9163907,
+    "access_time": 1755168846.9163907,
+    "expire_time": 1755176046.9163907,
+    "expire_hours": 2
+  },
+  "fund_detail_000871": {
+    "create_time": 1755168848.4709218,
+    "access_time": 1755168848.4709218,
+    "expire_time": 1755176048.4709218,
+    "expire_hours": 2
+  },
+  "fund_detail_000966": {
+    "create_time": 1755168848.9428663,
+    "access_time": 1755168848.9428663,
+    "expire_time": 1755176048.9428663,
+    "expire_hours": 2
+  },
+  "fund_history_000966_365": {
+    "create_time": 1755168848.957974,
+    "access_time": 1755168848.957974,
+    "expire_time": 1755172448.957974,
+    "expire_hours": 1
+  },
+  "fund_detail_001050": {
+    "create_time": 1755168851.0172908,
+    "access_time": 1755168851.0172908,
+    "expire_time": 1755176051.0172908,
+    "expire_hours": 2
+  },
+  "fund_detail_001281": {
+    "create_time": 1755168852.1199703,
+    "access_time": 1755168852.1199703,
+    "expire_time": 1755176052.1199703,
+    "expire_hours": 2
+  },
+  "fund_detail_000195": {
+    "create_time": 1755168852.7784665,
+    "access_time": 1755168852.7784665,
+    "expire_time": 1755176052.7784665,
+    "expire_hours": 2
+  },
+  "fund_detail_000305": {
+    "create_time": 1755168853.8414993,
+    "access_time": 1755168853.8414993,
+    "expire_time": 1755176053.8414993,
+    "expire_hours": 2
+  },
+  "fund_detail_000406": {
+    "create_time": 1755168855.3217316,
+    "access_time": 1755168855.3217316,
+    "expire_time": 1755176055.3217316,
+    "expire_hours": 2
+  },
+  "fund_detail_000530": {
+    "create_time": 1755168855.7548695,
+    "access_time": 1755168855.7548695,
+    "expire_time": 1755176055.7548695,
+    "expire_hours": 2
+  },
+  "fund_history_000530_365": {
+    "create_time": 1755168855.7698557,
+    "access_time": 1755168855.7698557,
+    "expire_time": 1755172455.7698557,
+    "expire_hours": 1
+  },
+  "fund_detail_000606": {
+    "create_time": 1755168857.2799175,
+    "access_time": 1755168857.2799175,
+    "expire_time": 1755176057.2799175,
+    "expire_hours": 2
+  },
+  "fund_detail_000700": {
+    "create_time": 1755168857.716255,
+    "access_time": 1755168857.716255,
+    "expire_time": 1755176057.716255,
+    "expire_hours": 2
+  },
+  "fund_history_000700_365": {
+    "create_time": 1755168857.7323406,
+    "access_time": 1755168857.7323406,
+    "expire_time": 1755172457.7323406,
+    "expire_hours": 1
+  },
+  "fund_detail_000788": {
+    "create_time": 1755168859.2600117,
+    "access_time": 1755168859.2600117,
+    "expire_time": 1755176059.2600117,
+    "expire_hours": 2
+  },
+  "fund_history_000788_365": {
+    "create_time": 1755168859.27511,
+    "access_time": 1755168859.27511,
+    "expire_time": 1755172459.27511,
+    "expire_hours": 1
+  },
+  "fund_detail_000872": {
+    "create_time": 1755168860.030605,
+    "access_time": 1755168860.030605,
+    "expire_time": 1755176060.030605,
+    "expire_hours": 2
+  },
+  "fund_detail_000967": {
+    "create_time": 1755168860.5025177,
+    "access_time": 1755168860.5025177,
+    "expire_time": 1755176060.5025177,
+    "expire_hours": 2
+  },
+  "fund_history_000967_365": {
+    "create_time": 1755168860.5175636,
+    "access_time": 1755168860.5175636,
+    "expire_time": 1755172460.5175636,
+    "expire_hours": 1
+  },
+  "fund_detail_001051": {
+    "create_time": 1755168861.6107464,
+    "access_time": 1755168861.6107464,
+    "expire_time": 1755176061.6107464,
+    "expire_hours": 2
+  },
+  "fund_detail_001245": {
+    "create_time": 1755168863.6838489,
+    "access_time": 1755168863.6838489,
+    "expire_time": 1755176063.6838489,
+    "expire_hours": 2
+  },
+  "fund_detail_001216": {
+    "create_time": 1755168864.093244,
+    "access_time": 1755168864.093244,
+    "expire_time": 1755176064.093244,
+    "expire_hours": 2
+  },
+  "fund_history_001216_365": {
+    "create_time": 1755168864.1093192,
+    "access_time": 1755168864.1093192,
+    "expire_time": 1755172464.1093192,
+    "expire_hours": 1
+  },
+  "fund_detail_000196": {
+    "create_time": 1755168864.931031,
+    "access_time": 1755168864.931031,
+    "expire_time": 1755176064.931031,
+    "expire_hours": 2
+  },
+  "fund_detail_000306": {
+    "create_time": 1755168867.0092497,
+    "access_time": 1755168867.0092497,
+    "expire_time": 1755176067.0092497,
+    "expire_hours": 2
+  },
+  "fund_detail_000407": {
+    "create_time": 1755168867.4784088,
+    "access_time": 1755168867.4784088,
+    "expire_time": 1755176067.4784088,
+    "expire_hours": 2
+  },
+  "fund_history_000407_365": {
+    "create_time": 1755168867.493808,
+    "access_time": 1755168867.493808,
+    "expire_time": 1755172467.493808,
+    "expire_hours": 1
+  },
+  "fund_detail_000531": {
+    "create_time": 1755168868.000669,
+    "access_time": 1755168868.000669,
+    "expire_time": 1755176068.000669,
+    "expire_hours": 2
+  },
+  "fund_history_000531_365": {
+    "create_time": 1755168868.0161173,
+    "access_time": 1755168868.0161173,
+    "expire_time": 1755172468.0161173,
+    "expire_hours": 1
+  },
+  "fund_detail_000607": {
+    "create_time": 1755168868.4908342,
+    "access_time": 1755168868.4908342,
+    "expire_time": 1755176068.4908342,
+    "expire_hours": 2
+  },
+  "fund_history_000607_365": {
+    "create_time": 1755168868.5052557,
+    "access_time": 1755168868.5052557,
+    "expire_time": 1755172468.5052557,
+    "expire_hours": 1
+  },
+  "fund_detail_000701": {
+    "create_time": 1755168870.0966558,
+    "access_time": 1755168870.0966558,
+    "expire_time": 1755176070.0966558,
+    "expire_hours": 2
+  },
+  "fund_history_000701_365": {
+    "create_time": 1755168870.1114502,
+    "access_time": 1755168870.1114502,
+    "expire_time": 1755172470.1114502,
+    "expire_hours": 1
+  },
+  "fund_detail_000789": {
+    "create_time": 1755168871.607729,
+    "access_time": 1755168871.607729,
+    "expire_time": 1755176071.607729,
+    "expire_hours": 2
+  },
+  "fund_history_000789_365": {
+    "create_time": 1755168871.6238003,
+    "access_time": 1755168871.6238003,
+    "expire_time": 1755172471.6238003,
+    "expire_hours": 1
+  },
+  "fund_detail_000873": {
+    "create_time": 1755168872.3916137,
+    "access_time": 1755168872.3916137,
+    "expire_time": 1755176072.3916137,
+    "expire_hours": 2
+  },
+  "fund_detail_000968": {
+    "create_time": 1755168873.8326845,
+    "access_time": 1755168873.8326845,
+    "expire_time": 1755176073.8326845,
+    "expire_hours": 2
+  },
+  "fund_history_000968_365": {
+    "create_time": 1755168873.849082,
+    "access_time": 1755168873.849082,
+    "expire_time": 1755172473.849082,
+    "expire_hours": 1
+  },
+  "fund_detail_001052": {
+    "create_time": 1755168875.753845,
+    "access_time": 1755168875.753845,
+    "expire_time": 1755176075.753845,
+    "expire_hours": 2
+  },
+  "fund_detail_001335": {
+    "create_time": 1755168876.2046897,
+    "access_time": 1755168876.2046897,
+    "expire_time": 1755176076.2046897,
+    "expire_hours": 2
+  },
+  "fund_history_001335_365": {
+    "create_time": 1755168876.2202892,
+    "access_time": 1755168876.2202892,
+    "expire_time": 1755172476.2202892,
+    "expire_hours": 1
+  },
+  "fund_detail_000197": {
+    "create_time": 1755168876.9912746,
+    "access_time": 1755168876.9912746,
+    "expire_time": 1755176076.9912746,
+    "expire_hours": 2
+  },
+  "fund_detail_000307": {
+    "create_time": 1755168879.1858528,
+    "access_time": 1755168879.1858528,
+    "expire_time": 1755176079.1858528,
+    "expire_hours": 2
+  },
+  "fund_detail_000408": {
+    "create_time": 1755168879.6068425,
+    "access_time": 1755168879.6068425,
+    "expire_time": 1755176079.6068425,
+    "expire_hours": 2
+  },
+  "fund_history_000408_365": {
+    "create_time": 1755168879.6234934,
+    "access_time": 1755168879.6234934,
+    "expire_time": 1755172479.6234934,
+    "expire_hours": 1
+  },
+  "fund_detail_000532": {
+    "create_time": 1755168881.178655,
+    "access_time": 1755168881.178655,
+    "expire_time": 1755176081.178655,
+    "expire_hours": 2
+  },
+  "fund_history_000532_365": {
+    "create_time": 1755168881.19588,
+    "access_time": 1755168881.19588,
+    "expire_time": 1755172481.19588,
+    "expire_hours": 1
+  },
+  "fund_detail_000609": {
+    "create_time": 1755168882.7222703,
+    "access_time": 1755168882.7222703,
+    "expire_time": 1755176082.7222703,
+    "expire_hours": 2
+  },
+  "fund_history_000609_365": {
+    "create_time": 1755168882.737447,
+    "access_time": 1755168882.737447,
+    "expire_time": 1755172482.737447,
+    "expire_hours": 1
+  },
+  "fund_detail_000704": {
+    "create_time": 1755168884.3686745,
+    "access_time": 1755168884.3686745,
+    "expire_time": 1755176084.3686745,
+    "expire_hours": 2
+  },
+  "fund_detail_000790": {
+    "create_time": 1755168884.798091,
+    "access_time": 1755168884.798091,
+    "expire_time": 1755176084.798091,
+    "expire_hours": 2
+  },
+  "fund_history_000790_365": {
+    "create_time": 1755168884.8130546,
+    "access_time": 1755168884.8130546,
+    "expire_time": 1755172484.8130546,
+    "expire_hours": 1
+  },
+  "fund_detail_000874": {
+    "create_time": 1755168886.539962,
+    "access_time": 1755168886.539962,
+    "expire_time": 1755176086.539962,
+    "expire_hours": 2
+  },
+  "fund_detail_000969": {
+    "create_time": 1755168886.8593645,
+    "access_time": 1755168886.8593645,
+    "expire_time": 1755176086.8593645,
+    "expire_hours": 2
+  },
+  "fund_history_000969_365": {
+    "create_time": 1755168886.8760872,
+    "access_time": 1755168886.8760872,
+    "expire_time": 1755172486.8760872,
+    "expire_hours": 1
+  },
+  "fund_detail_001053": {
+    "create_time": 1755168889.2701025,
+    "access_time": 1755168889.2701025,
+    "expire_time": 1755176089.2701025,
+    "expire_hours": 2
+  },
+  "fund_detail_001304": {
+    "create_time": 1755168891.3238318,
+    "access_time": 1755168891.3238318,
+    "expire_time": 1755176091.3238318,
+    "expire_hours": 2
+  },
+  "fund_detail_000198": {
+    "create_time": 1755168892.3092222,
+    "access_time": 1755168892.3092222,
+    "expire_time": 1755176092.3092222,
+    "expire_hours": 2
+  },
+  "fund_detail_000308": {
+    "create_time": 1755168894.3005116,
+    "access_time": 1755168894.3005116,
+    "expire_time": 1755176094.3005116,
+    "expire_hours": 2
+  },
+  "fund_detail_000409": {
+    "create_time": 1755168895.5303524,
+    "access_time": 1755168895.5303524,
+    "expire_time": 1755176095.5303524,
+    "expire_hours": 2
+  },
+  "fund_history_000409_365": {
+    "create_time": 1755168895.5455222,
+    "access_time": 1755168895.5455222,
+    "expire_time": 1755172495.5455222,
+    "expire_hours": 1
+  },
+  "fund_detail_000533": {
+    "create_time": 1755168896.986694,
+    "access_time": 1755168896.986694,
+    "expire_time": 1755176096.986694,
+    "expire_hours": 2
+  },
+  "fund_history_000533_365": {
+    "create_time": 1755168897.0026014,
+    "access_time": 1755168897.0026014,
+    "expire_time": 1755172497.0026014,
+    "expire_hours": 1
+  },
+  "fund_detail_000612": {
+    "create_time": 1755168898.3409474,
+    "access_time": 1755168898.3409474,
+    "expire_time": 1755176098.3409474,
+    "expire_hours": 2
+  },
+  "fund_history_000612_365": {
+    "create_time": 1755168898.3569636,
+    "access_time": 1755168898.3569636,
+    "expire_time": 1755172498.3569636,
+    "expire_hours": 1
+  },
+  "fund_detail_000705": {
+    "create_time": 1755168898.8298504,
+    "access_time": 1755168898.8298504,
+    "expire_time": 1755176098.8298504,
+    "expire_hours": 2
+  },
+  "fund_history_000705_365": {
+    "create_time": 1755168898.846382,
+    "access_time": 1755168898.846382,
+    "expire_time": 1755172498.846382,
+    "expire_hours": 1
+  },
+  "fund_detail_000791": {
+    "create_time": 1755168899.3037896,
+    "access_time": 1755168899.3037896,
+    "expire_time": 1755176099.3037896,
+    "expire_hours": 2
+  },
+  "fund_history_000791_365": {
+    "create_time": 1755168899.3212097,
+    "access_time": 1755168899.3212097,
+    "expire_time": 1755172499.3212097,
+    "expire_hours": 1
+  },
+  "fund_detail_000875": {
+    "create_time": 1755168900.8641503,
+    "access_time": 1755168900.8641503,
+    "expire_time": 1755176100.8641503,
+    "expire_hours": 2
+  },
+  "fund_history_000875_365": {
+    "create_time": 1755168900.8818977,
+    "access_time": 1755168900.8818977,
+    "expire_time": 1755172500.8818977,
+    "expire_hours": 1
+  },
+  "fund_detail_000970": {
+    "create_time": 1755168901.3585901,
+    "access_time": 1755168901.3585901,
+    "expire_time": 1755176101.3585901,
+    "expire_hours": 2
+  },
+  "fund_history_000970_365": {
+    "create_time": 1755168901.3762321,
+    "access_time": 1755168901.3762321,
+    "expire_time": 1755172501.3762321,
+    "expire_hours": 1
+  },
+  "fund_detail_001054": {
+    "create_time": 1755168903.1340601,
+    "access_time": 1755168903.1340601,
+    "expire_time": 1755176103.1340601,
+    "expire_hours": 2
+  },
+  "fund_detail_001344": {
+    "create_time": 1755168904.2564764,
+    "access_time": 1755168904.2564764,
+    "expire_time": 1755176104.2564764,
+    "expire_hours": 2
+  },
+  "fund_detail_000199": {
+    "create_time": 1755168905.4732156,
+    "access_time": 1755168905.4732156,
+    "expire_time": 1755176105.4732156,
+    "expire_hours": 2
+  },
+  "fund_detail_000309": {
+    "create_time": 1755168905.593449,
+    "access_time": 1755168905.593449,
+    "expire_time": 1755176105.593449,
+    "expire_hours": 2
+  },
+  "fund_detail_000410": {
+    "create_time": 1755168905.728464,
+    "access_time": 1755168905.728464,
+    "expire_time": 1755176105.728464,
+    "expire_hours": 2
+  },
+  "fund_detail_000534": {
+    "create_time": 1755168905.8676713,
+    "access_time": 1755168905.8676713,
+    "expire_time": 1755176105.8676713,
+    "expire_hours": 2
+  },
+  "fund_detail_000613": {
+    "create_time": 1755168905.9897885,
+    "access_time": 1755168905.9897885,
+    "expire_time": 1755176105.9897885,
+    "expire_hours": 2
+  },
+  "fund_detail_000706": {
+    "create_time": 1755168906.1261022,
+    "access_time": 1755168906.1261022,
+    "expire_time": 1755176106.1261022,
+    "expire_hours": 2
+  },
+  "fund_detail_000792": {
+    "create_time": 1755168907.330009,
+    "access_time": 1755168907.330009,
+    "expire_time": 1755176107.330009,
+    "expire_hours": 2
+  },
+  "fund_detail_000876": {
+    "create_time": 1755168907.4701033,
+    "access_time": 1755168907.4701033,
+    "expire_time": 1755176107.4701033,
+    "expire_hours": 2
+  },
+  "fund_detail_000971": {
+    "create_time": 1755168907.6159127,
+    "access_time": 1755168907.6159127,
+    "expire_time": 1755176107.6159127,
+    "expire_hours": 2
+  },
+  "fund_detail_001056": {
+    "create_time": 1755168907.7510638,
+    "access_time": 1755168907.7510638,
+    "expire_time": 1755176107.7510638,
+    "expire_hours": 2
+  },
+  "fund_detail_001282": {
+    "create_time": 1755168907.8802967,
+    "access_time": 1755168907.8802967,
+    "expire_time": 1755176107.8802967,
+    "expire_hours": 2
+  },
+  "fund_detail_000200": {
+    "create_time": 1755168908.0206892,
+    "access_time": 1755168908.0206892,
+    "expire_time": 1755176108.0206892,
+    "expire_hours": 2
+  },
+  "fund_detail_000310": {
+    "create_time": 1755168908.1481953,
+    "access_time": 1755168908.1481953,
+    "expire_time": 1755176108.1481953,
+    "expire_hours": 2
+  },
+  "fund_detail_000411": {
+    "create_time": 1755168909.305059,
+    "access_time": 1755168909.305059,
+    "expire_time": 1755176109.305059,
+    "expire_hours": 2
+  },
+  "fund_detail_000535": {
+    "create_time": 1755168909.4422188,
+    "access_time": 1755168909.4422188,
+    "expire_time": 1755176109.4422188,
+    "expire_hours": 2
+  },
+  "fund_detail_000614": {
+    "create_time": 1755168909.59131,
+    "access_time": 1755168909.59131,
+    "expire_time": 1755176109.59131,
+    "expire_hours": 2
+  },
+  "fund_detail_000707": {
+    "create_time": 1755168909.733661,
+    "access_time": 1755168909.733661,
+    "expire_time": 1755176109.733661,
+    "expire_hours": 2
+  },
+  "fund_detail_000793": {
+    "create_time": 1755168910.9040763,
+    "access_time": 1755168910.9040763,
+    "expire_time": 1755176110.9040763,
+    "expire_hours": 2
+  },
+  "fund_detail_000877": {
+    "create_time": 1755168911.0275986,
+    "access_time": 1755168911.0275986,
+    "expire_time": 1755176111.0275986,
+    "expire_hours": 2
+  },
+  "fund_detail_000973": {
+    "create_time": 1755168912.2083178,
+    "access_time": 1755168912.2083178,
+    "expire_time": 1755176112.2083178,
+    "expire_hours": 2
+  },
+  "fund_detail_001057": {
+    "create_time": 1755168912.338062,
+    "access_time": 1755168912.338062,
+    "expire_time": 1755176112.338062,
+    "expire_hours": 2
+  },
+  "fund_detail_001246": {
+    "create_time": 1755168912.4752586,
+    "access_time": 1755168912.4752586,
+    "expire_time": 1755176112.4752586,
+    "expire_hours": 2
+  },
+  "fund_detail_001217": {
+    "create_time": 1755168912.6450148,
+    "access_time": 1755168912.6450148,
+    "expire_time": 1755176112.6450148,
+    "expire_hours": 2
+  },
+  "fund_detail_000201": {
+    "create_time": 1755168912.7733033,
+    "access_time": 1755168912.7733033,
+    "expire_time": 1755176112.7733033,
+    "expire_hours": 2
+  },
+  "fund_detail_000311": {
+    "create_time": 1755168912.917585,
+    "access_time": 1755168912.917585,
+    "expire_time": 1755176112.917585,
+    "expire_hours": 2
+  },
+  "fund_detail_000414": {
+    "create_time": 1755168914.0498736,
+    "access_time": 1755168914.0498736,
+    "expire_time": 1755176114.0498736,
+    "expire_hours": 2
+  },
+  "fund_detail_000536": {
+    "create_time": 1755168914.2895067,
+    "access_time": 1755168914.2895067,
+    "expire_time": 1755176114.2895067,
+    "expire_hours": 2
+  },
+  "fund_detail_000615": {
+    "create_time": 1755168914.4202578,
+    "access_time": 1755168914.4202578,
+    "expire_time": 1755176114.4202578,
+    "expire_hours": 2
+  },
+  "fund_detail_000709": {
+    "create_time": 1755168914.56225,
+    "access_time": 1755168914.56225,
+    "expire_time": 1755176114.56225,
+    "expire_hours": 2
+  },
+  "fund_detail_000794": {
+    "create_time": 1755168914.7003345,
+    "access_time": 1755168914.7003345,
+    "expire_time": 1755176114.7003345,
+    "expire_hours": 2
+  },
+  "fund_detail_000878": {
+    "create_time": 1755168914.8341575,
+    "access_time": 1755168914.8341575,
+    "expire_time": 1755176114.8341575,
+    "expire_hours": 2
+  },
+  "fund_detail_000974": {
+    "create_time": 1755168914.9789944,
+    "access_time": 1755168914.9789944,
+    "expire_time": 1755176114.9789944,
+    "expire_hours": 2
+  },
+  "fund_detail_001058": {
+    "create_time": 1755168916.1678154,
+    "access_time": 1755168916.1678154,
+    "expire_time": 1755176116.1678154,
+    "expire_hours": 2
+  },
+  "fund_detail_001336": {
+    "create_time": 1755168916.313055,
+    "access_time": 1755168916.313055,
+    "expire_time": 1755176116.313055,
+    "expire_hours": 2
+  },
+  "fund_detail_000203": {
+    "create_time": 1755168916.4656723,
+    "access_time": 1755168916.4656723,
+    "expire_time": 1755176116.4656723,
+    "expire_hours": 2
+  },
+  "fund_detail_000312": {
+    "create_time": 1755168916.5916595,
+    "access_time": 1755168916.5916595,
+    "expire_time": 1755176116.5916595,
+    "expire_hours": 2
+  },
+  "fund_detail_000415": {
+    "create_time": 1755168917.7761664,
+    "access_time": 1755168917.7761664,
+    "expire_time": 1755176117.7761664,
+    "expire_hours": 2
+  },
+  "fund_detail_000538": {
+    "create_time": 1755168918.926848,
+    "access_time": 1755168918.926848,
+    "expire_time": 1755176118.926848,
+    "expire_hours": 2
+  },
+  "fund_detail_000618": {
+    "create_time": 1755168919.0648017,
+    "access_time": 1755168919.0648017,
+    "expire_time": 1755176119.0648017,
+    "expire_hours": 2
+  },
+  "fund_detail_000710": {
+    "create_time": 1755168919.2050202,
+    "access_time": 1755168919.2050202,
+    "expire_time": 1755176119.2050202,
+    "expire_hours": 2
+  },
+  "fund_detail_000795": {
+    "create_time": 1755168919.2164257,
+    "access_time": 1755168919.2164257,
+    "expire_time": 1755176119.2164257,
+    "expire_hours": 2
+  },
+  "fund_detail_000879": {
+    "create_time": 1755168919.226747,
+    "access_time": 1755168919.226747,
+    "expire_time": 1755176119.226747,
+    "expire_hours": 2
+  },
+  "fund_detail_000975": {
+    "create_time": 1755168919.2370367,
+    "access_time": 1755168919.2370367,
+    "expire_time": 1755176119.2370367,
+    "expire_hours": 2
+  },
+  "fund_detail_001060": {
+    "create_time": 1755168919.2472477,
+    "access_time": 1755168919.2472477,
+    "expire_time": 1755176119.2472477,
+    "expire_hours": 2
+  },
+  "fund_detail_001305": {
+    "create_time": 1755168919.257338,
+    "access_time": 1755168919.257338,
+    "expire_time": 1755176119.257338,
+    "expire_hours": 2
+  },
+  "fund_detail_001124": {
+    "create_time": 1755168919.2673407,
+    "access_time": 1755168919.2673407,
+    "expire_time": 1755176119.2673407,
+    "expire_hours": 2
+  },
+  "fund_detail_000204": {
+    "create_time": 1755168919.2772958,
+    "access_time": 1755168919.2772958,
+    "expire_time": 1755176119.2772958,
+    "expire_hours": 2
+  },
+  "fund_detail_000313": {
+    "create_time": 1755168919.2871878,
+    "access_time": 1755168919.2871878,
+    "expire_time": 1755176119.2871878,
+    "expire_hours": 2
+  },
+  "fund_detail_000416": {
+    "create_time": 1755168919.2973595,
+    "access_time": 1755168919.2973595,
+    "expire_time": 1755176119.2973595,
+    "expire_hours": 2
+  },
+  "fund_detail_000539": {
+    "create_time": 1755168919.307376,
+    "access_time": 1755168919.307376,
+    "expire_time": 1755176119.307376,
+    "expire_hours": 2
+  },
+  "fund_detail_000619": {
+    "create_time": 1755168919.3173027,
+    "access_time": 1755168919.3173027,
+    "expire_time": 1755176119.3173027,
+    "expire_hours": 2
+  },
+  "fund_detail_000711": {
+    "create_time": 1755168919.3272066,
+    "access_time": 1755168919.3272066,
+    "expire_time": 1755176119.3272066,
+    "expire_hours": 2
+  },
+  "fund_detail_000796": {
+    "create_time": 1755168919.3373866,
+    "access_time": 1755168919.3373866,
+    "expire_time": 1755176119.3373866,
+    "expire_hours": 2
+  },
+  "fund_detail_000880": {
+    "create_time": 1755168919.3474305,
+    "access_time": 1755168919.3474305,
+    "expire_time": 1755176119.3474305,
+    "expire_hours": 2
+  },
+  "fund_detail_000976": {
+    "create_time": 1755168919.3579907,
+    "access_time": 1755168919.3579907,
+    "expire_time": 1755176119.3579907,
+    "expire_hours": 2
+  },
+  "fund_detail_001061": {
+    "create_time": 1755168919.3685038,
+    "access_time": 1755168919.3685038,
+    "expire_time": 1755176119.3685038,
+    "expire_hours": 2
+  },
+  "fund_detail_000205": {
+    "create_time": 1755168919.3789742,
+    "access_time": 1755168919.3789742,
+    "expire_time": 1755176119.3789742,
+    "expire_hours": 2
+  },
+  "fund_detail_000314": {
+    "create_time": 1755168919.3894825,
+    "access_time": 1755168919.3894825,
+    "expire_time": 1755176119.3894825,
+    "expire_hours": 2
+  },
+  "fund_detail_000417": {
+    "create_time": 1755168919.4000475,
+    "access_time": 1755168919.4000475,
+    "expire_time": 1755176119.4000475,
+    "expire_hours": 2
+  },
+  "fund_detail_000540": {
+    "create_time": 1755168919.4105144,
+    "access_time": 1755168919.4105144,
+    "expire_time": 1755176119.4105144,
+    "expire_hours": 2
+  },
+  "fund_detail_000620": {
+    "create_time": 1755168919.4210649,
+    "access_time": 1755168919.4210649,
+    "expire_time": 1755176119.4210649,
+    "expire_hours": 2
+  },
+  "fund_detail_000712": {
+    "create_time": 1755168919.4315262,
+    "access_time": 1755168919.4315262,
+    "expire_time": 1755176119.4315262,
+    "expire_hours": 2
+  },
+  "fund_detail_000797": {
+    "create_time": 1755168919.4420571,
+    "access_time": 1755168919.4420571,
+    "expire_time": 1755176119.4420571,
+    "expire_hours": 2
+  },
+  "fund_detail_000882": {
+    "create_time": 1755168919.4527092,
+    "access_time": 1755168919.4527092,
+    "expire_time": 1755176119.4527092,
+    "expire_hours": 2
+  },
+  "fund_detail_000977": {
+    "create_time": 1755168919.4636798,
+    "access_time": 1755168919.4636798,
+    "expire_time": 1755176119.4636798,
+    "expire_hours": 2
+  },
+  "fund_detail_001063": {
+    "create_time": 1755168919.4742694,
+    "access_time": 1755168919.4742694,
+    "expire_time": 1755176119.4742694,
+    "expire_hours": 2
+  },
+  "fund_detail_001285": {
+    "create_time": 1755168919.4849672,
+    "access_time": 1755168919.4849672,
+    "expire_time": 1755176119.4849672,
+    "expire_hours": 2
+  },
+  "fund_detail_000206": {
+    "create_time": 1755168919.4973376,
+    "access_time": 1755168919.4973376,
+    "expire_time": 1755176119.4973376,
+    "expire_hours": 2
+  },
+  "fund_detail_000319": {
+    "create_time": 1755168919.5081239,
+    "access_time": 1755168919.5081239,
+    "expire_time": 1755176119.5081239,
+    "expire_hours": 2
+  },
+  "fund_detail_000418": {
+    "create_time": 1755168919.519501,
+    "access_time": 1755168919.519501,
+    "expire_time": 1755176119.519501,
+    "expire_hours": 2
+  },
+  "fund_detail_000541": {
+    "create_time": 1755168919.5309527,
+    "access_time": 1755168919.5309527,
+    "expire_time": 1755176119.5309527,
+    "expire_hours": 2
+  },
+  "fund_detail_000621": {
+    "create_time": 1755168919.5415845,
+    "access_time": 1755168919.5415845,
+    "expire_time": 1755176119.5415845,
+    "expire_hours": 2
+  },
+  "fund_detail_000713": {
+    "create_time": 1755168919.5525367,
+    "access_time": 1755168919.5525367,
+    "expire_time": 1755176119.5525367,
+    "expire_hours": 2
+  },
+  "fund_detail_000799": {
+    "create_time": 1755168919.5632887,
+    "access_time": 1755168919.5632887,
+    "expire_time": 1755176119.5632887,
+    "expire_hours": 2
+  },
+  "fund_detail_000883": {
+    "create_time": 1755168919.5741987,
+    "access_time": 1755168919.5741987,
+    "expire_time": 1755176119.5741987,
+    "expire_hours": 2
+  },
+  "fund_detail_000978": {
+    "create_time": 1755168919.5857239,
+    "access_time": 1755168919.5857239,
+    "expire_time": 1755176119.5857239,
+    "expire_hours": 2
+  },
+  "fund_detail_001064": {
+    "create_time": 1755168919.59675,
+    "access_time": 1755168919.59675,
+    "expire_time": 1755176119.59675,
+    "expire_hours": 2
+  },
+  "fund_detail_001218": {
+    "create_time": 1755168919.6077693,
+    "access_time": 1755168919.6077693,
+    "expire_time": 1755176119.6077693,
+    "expire_hours": 2
+  },
+  "fund_detail_001247": {
+    "create_time": 1755168919.6192927,
+    "access_time": 1755168919.6192927,
+    "expire_time": 1755176119.6192927,
+    "expire_hours": 2
+  },
+  "fund_detail_000207": {
+    "create_time": 1755168919.6305044,
+    "access_time": 1755168919.6305044,
+    "expire_time": 1755176119.6305044,
+    "expire_hours": 2
+  },
+  "fund_detail_000320": {
+    "create_time": 1755168919.6417775,
+    "access_time": 1755168919.6417775,
+    "expire_time": 1755176119.6417775,
+    "expire_hours": 2
+  },
+  "fund_detail_000419": {
+    "create_time": 1755168919.6528485,
+    "access_time": 1755168919.6528485,
+    "expire_time": 1755176119.6528485,
+    "expire_hours": 2
+  },
+  "fund_detail_000542": {
+    "create_time": 1755168919.66425,
+    "access_time": 1755168919.66425,
+    "expire_time": 1755176119.66425,
+    "expire_hours": 2
+  },
+  "fund_detail_000625": {
+    "create_time": 1755168919.6763961,
+    "access_time": 1755168919.6763961,
+    "expire_time": 1755176119.6763961,
+    "expire_hours": 2
+  },
+  "fund_detail_000714": {
+    "create_time": 1755168919.688034,
+    "access_time": 1755168919.688034,
+    "expire_time": 1755176119.688034,
+    "expire_hours": 2
+  },
+  "fund_detail_000800": {
+    "create_time": 1755168919.6999347,
+    "access_time": 1755168919.6999347,
+    "expire_time": 1755176119.6999347,
+    "expire_hours": 2
+  },
+  "fund_detail_000884": {
+    "create_time": 1755168919.7131047,
+    "access_time": 1755168919.7131047,
+    "expire_time": 1755176119.7131047,
+    "expire_hours": 2
+  },
+  "fund_detail_000979": {
+    "create_time": 1755168919.7263906,
+    "access_time": 1755168919.7263906,
+    "expire_time": 1755176119.7263906,
+    "expire_hours": 2
+  },
+  "fund_detail_001065": {
+    "create_time": 1755168919.7388844,
+    "access_time": 1755168919.7388844,
+    "expire_time": 1755176119.7388844,
+    "expire_hours": 2
+  },
+  "fund_detail_001337": {
+    "create_time": 1755168920.0314054,
+    "access_time": 1755168920.0314054,
+    "expire_time": 1755176120.0314054,
+    "expire_hours": 2
+  },
+  "fund_detail_000208": {
+    "create_time": 1755168920.4151897,
+    "access_time": 1755168920.4151897,
+    "expire_time": 1755176120.4151897,
+    "expire_hours": 2
+  },
+  "fund_detail_000322": {
+    "create_time": 1755168920.8753026,
+    "access_time": 1755168920.8753026,
+    "expire_time": 1755176120.8753026,
+    "expire_hours": 2
+  },
+  "fund_detail_000420": {
+    "create_time": 1755168921.3231049,
+    "access_time": 1755168921.3231049,
+    "expire_time": 1755176121.3231049,
+    "expire_hours": 2
+  },
+  "fund_detail_000543": {
+    "create_time": 1755168921.7788181,
+    "access_time": 1755168921.7788181,
+    "expire_time": 1755176121.7788181,
+    "expire_hours": 2
+  },
+  "fund_detail_000626": {
+    "create_time": 1755168922.3634007,
+    "access_time": 1755168922.3634007,
+    "expire_time": 1755176122.3634007,
+    "expire_hours": 2
+  },
+  "fund_detail_000715": {
+    "create_time": 1755168922.8458297,
+    "access_time": 1755168922.8458297,
+    "expire_time": 1755176122.8458297,
+    "expire_hours": 2
+  },
+  "fund_detail_000801": {
+    "create_time": 1755168923.274654,
+    "access_time": 1755168923.274654,
+    "expire_time": 1755176123.274654,
+    "expire_hours": 2
+  },
+  "fund_detail_000891": {
+    "create_time": 1755168923.7741,
+    "access_time": 1755168923.7741,
+    "expire_time": 1755176123.7741,
+    "expire_hours": 2
+  },
+  "fund_detail_000980": {
+    "create_time": 1755168924.264565,
+    "access_time": 1755168924.264565,
+    "expire_time": 1755176124.264565,
+    "expire_hours": 2
+  },
+  "fund_detail_001066": {
+    "create_time": 1755168924.5219827,
+    "access_time": 1755168924.5219827,
+    "expire_time": 1755176124.5219827,
+    "expire_hours": 2
+  },
+  "fund_detail_001306": {
+    "create_time": 1755168924.8398473,
+    "access_time": 1755168924.8398473,
+    "expire_time": 1755176124.8398473,
+    "expire_hours": 2
+  },
+  "fund_detail_000209": {
+    "create_time": 1755168924.8513098,
+    "access_time": 1755168924.8513098,
+    "expire_time": 1755176124.8513098,
+    "expire_hours": 2
+  },
+  "fund_detail_000324": {
+    "create_time": 1755168924.8626854,
+    "access_time": 1755168924.8626854,
+    "expire_time": 1755176124.8626854,
+    "expire_hours": 2
+  },
+  "fund_detail_000423": {
+    "create_time": 1755168924.8740065,
+    "access_time": 1755168924.8740065,
+    "expire_time": 1755176124.8740065,
+    "expire_hours": 2
+  },
+  "fund_detail_000545": {
+    "create_time": 1755168924.8854456,
+    "access_time": 1755168924.8854456,
+    "expire_time": 1755176124.8854456,
+    "expire_hours": 2
+  },
+  "fund_detail_000627": {
+    "create_time": 1755168924.8967528,
+    "access_time": 1755168924.8967528,
+    "expire_time": 1755176124.8967528,
+    "expire_hours": 2
+  },
+  "fund_detail_000716": {
+    "create_time": 1755168924.9079328,
+    "access_time": 1755168924.9079328,
+    "expire_time": 1755176124.9079328,
+    "expire_hours": 2
+  },
+  "fund_detail_000802": {
+    "create_time": 1755168924.9191716,
+    "access_time": 1755168924.9191716,
+    "expire_time": 1755176124.9191716,
+    "expire_hours": 2
+  },
+  "fund_detail_000892": {
+    "create_time": 1755168924.9304178,
+    "access_time": 1755168924.9304178,
+    "expire_time": 1755176124.9304178,
+    "expire_hours": 2
+  },
+  "fund_detail_000981": {
+    "create_time": 1755168924.9419754,
+    "access_time": 1755168924.9419754,
+    "expire_time": 1755176124.9419754,
+    "expire_hours": 2
+  },
+  "fund_detail_001067": {
+    "create_time": 1755168924.9533672,
+    "access_time": 1755168924.9533672,
+    "expire_time": 1755176124.9533672,
+    "expire_hours": 2
+  },
+  "fund_detail_000210": {
+    "create_time": 1755168924.9647057,
+    "access_time": 1755168924.9647057,
+    "expire_time": 1755176124.9647057,
+    "expire_hours": 2
+  },
+  "fund_detail_000325": {
+    "create_time": 1755168924.9761279,
+    "access_time": 1755168924.9761279,
+    "expire_time": 1755176124.9761279,
+    "expire_hours": 2
+  },
+  "fund_detail_000424": {
+    "create_time": 1755168924.9873974,
+    "access_time": 1755168924.9873974,
+    "expire_time": 1755176124.9873974,
+    "expire_hours": 2
+  },
+  "fund_detail_000546": {
+    "create_time": 1755168924.9987285,
+    "access_time": 1755168924.9987285,
+    "expire_time": 1755176124.9987285,
+    "expire_hours": 2
+  },
+  "fund_detail_000560": {
+    "create_time": 1755168925.0101638,
+    "access_time": 1755168925.0101638,
+    "expire_time": 1755176125.0101638,
+    "expire_hours": 2
+  },
+  "fund_detail_000628": {
+    "create_time": 1755168925.0216553,
+    "access_time": 1755168925.0216553,
+    "expire_time": 1755176125.0216553,
+    "expire_hours": 2
+  },
+  "fund_detail_000717": {
+    "create_time": 1755168925.0330558,
+    "access_time": 1755168925.0330558,
+    "expire_time": 1755176125.0330558,
+    "expire_hours": 2
+  },
+  "fund_detail_000803": {
+    "create_time": 1755168925.0443583,
+    "access_time": 1755168925.0443583,
+    "expire_time": 1755176125.0443583,
+    "expire_hours": 2
+  },
+  "fund_detail_000893": {
+    "create_time": 1755168925.0559242,
+    "access_time": 1755168925.0559242,
+    "expire_time": 1755176125.0559242,
+    "expire_hours": 2
+  },
+  "fund_detail_000982": {
+    "create_time": 1755168925.0675285,
+    "access_time": 1755168925.0675285,
+    "expire_time": 1755176125.0675285,
+    "expire_hours": 2
+  },
+  "fund_detail_001286": {
+    "create_time": 1755168925.0791142,
+    "access_time": 1755168925.0791142,
+    "expire_time": 1755176125.0791142,
+    "expire_hours": 2
+  },
+  "fund_detail_000211": {
+    "create_time": 1755168925.0906298,
+    "access_time": 1755168925.0906298,
+    "expire_time": 1755176125.0906298,
+    "expire_hours": 2
+  },
+  "fund_detail_000326": {
+    "create_time": 1755168925.101933,
+    "access_time": 1755168925.101933,
+    "expire_time": 1755176125.101933,
+    "expire_hours": 2
+  },
+  "fund_detail_000425": {
+    "create_time": 1755168925.1133091,
+    "access_time": 1755168925.1133091,
+    "expire_time": 1755176125.1133091,
+    "expire_hours": 2
+  },
+  "fund_detail_000547": {
+    "create_time": 1755168925.1247737,
+    "access_time": 1755168925.1247737,
+    "expire_time": 1755176125.1247737,
+    "expire_hours": 2
+  },
+  "fund_detail_000634": {
+    "create_time": 1755168925.1362736,
+    "access_time": 1755168925.1362736,
+    "expire_time": 1755176125.1362736,
+    "expire_hours": 2
+  },
+  "fund_detail_000718": {
+    "create_time": 1755168925.1477633,
+    "access_time": 1755168925.1477633,
+    "expire_time": 1755176125.1477633,
+    "expire_hours": 2
+  },
+  "fund_detail_000804": {
+    "create_time": 1755168925.1594238,
+    "access_time": 1755168925.1594238,
+    "expire_time": 1755176125.1594238,
+    "expire_hours": 2
+  },
+  "fund_detail_000894": {
+    "create_time": 1755168925.170968,
+    "access_time": 1755168925.170968,
+    "expire_time": 1755176125.170968,
+    "expire_hours": 2
+  },
+  "fund_detail_000985": {
+    "create_time": 1755168925.1829076,
+    "access_time": 1755168925.1829076,
+    "expire_time": 1755176125.1829076,
+    "expire_hours": 2
+  },
+  "fund_detail_001069": {
+    "create_time": 1755168925.1944976,
+    "access_time": 1755168925.1944976,
+    "expire_time": 1755176125.1944976,
+    "expire_hours": 2
+  },
+  "fund_detail_001249": {
+    "create_time": 1755168925.2063527,
+    "access_time": 1755168925.2063527,
+    "expire_time": 1755176125.2063527,
+    "expire_hours": 2
+  },
+  "fund_detail_000212": {
+    "create_time": 1755168925.2179382,
+    "access_time": 1755168925.2179382,
+    "expire_time": 1755176125.2179382,
+    "expire_hours": 2
+  },
+  "fund_detail_000327": {
+    "create_time": 1755168925.2295673,
+    "access_time": 1755168925.2295673,
+    "expire_time": 1755176125.2295673,
+    "expire_hours": 2
+  },
+  "fund_detail_000431": {
+    "create_time": 1755168925.2410564,
+    "access_time": 1755168925.2410564,
+    "expire_time": 1755176125.2410564,
+    "expire_hours": 2
+  },
+  "fund_detail_000548": {
+    "create_time": 1755168925.25279,
+    "access_time": 1755168925.25279,
+    "expire_time": 1755176125.25279,
+    "expire_hours": 2
+  },
+  "fund_detail_000635": {
+    "create_time": 1755168925.2647243,
+    "access_time": 1755168925.2647243,
+    "expire_time": 1755176125.2647243,
+    "expire_hours": 2
+  },
+  "fund_detail_000719": {
+    "create_time": 1755168925.2766185,
+    "access_time": 1755168925.2766185,
+    "expire_time": 1755176125.2766185,
+    "expire_hours": 2
+  },
+  "fund_detail_000805": {
+    "create_time": 1755168925.288224,
+    "access_time": 1755168925.288224,
+    "expire_time": 1755176125.288224,
+    "expire_hours": 2
+  },
+  "fund_detail_000895": {
+    "create_time": 1755168925.3028781,
+    "access_time": 1755168925.3028781,
+    "expire_time": 1755176125.3028781,
+    "expire_hours": 2
+  },
+  "fund_detail_000986": {
+    "create_time": 1755168925.314704,
+    "access_time": 1755168925.314704,
+    "expire_time": 1755176125.314704,
+    "expire_hours": 2
+  },
+  "fund_detail_001070": {
+    "create_time": 1755168925.3264458,
+    "access_time": 1755168925.3264458,
+    "expire_time": 1755176125.3264458,
+    "expire_hours": 2
+  },
+  "fund_detail_001338": {
+    "create_time": 1755168925.3381402,
+    "access_time": 1755168925.3381402,
+    "expire_time": 1755176125.3381402,
+    "expire_hours": 2
+  },
+  "fund_detail_000213": {
+    "create_time": 1755168925.3498762,
+    "access_time": 1755168925.3498762,
+    "expire_time": 1755176125.3498762,
+    "expire_hours": 2
+  },
+  "fund_detail_000328": {
+    "create_time": 1755168925.3621433,
+    "access_time": 1755168925.3621433,
+    "expire_time": 1755176125.3621433,
+    "expire_hours": 2
+  },
+  "fund_detail_000432": {
+    "create_time": 1755168925.373446,
+    "access_time": 1755168925.373446,
+    "expire_time": 1755176125.373446,
+    "expire_hours": 2
+  },
+  "fund_detail_000549": {
+    "create_time": 1755168925.3849351,
+    "access_time": 1755168925.3849351,
+    "expire_time": 1755176125.3849351,
+    "expire_hours": 2
+  },
+  "fund_detail_000638": {
+    "create_time": 1755168925.3964307,
+    "access_time": 1755168925.3964307,
+    "expire_time": 1755176125.3964307,
+    "expire_hours": 2
+  },
+  "fund_detail_000720": {
+    "create_time": 1755168925.4081943,
+    "access_time": 1755168925.4081943,
+    "expire_time": 1755176125.4081943,
+    "expire_hours": 2
+  },
+  "fund_detail_000808": {
+    "create_time": 1755168925.4199393,
+    "access_time": 1755168925.4199393,
+    "expire_time": 1755176125.4199393,
+    "expire_hours": 2
+  },
+  "fund_detail_000896": {
+    "create_time": 1755168925.4317195,
+    "access_time": 1755168925.4317195,
+    "expire_time": 1755176125.4317195,
+    "expire_hours": 2
+  },
+  "fund_detail_000988": {
+    "create_time": 1755168925.4435935,
+    "access_time": 1755168925.4435935,
+    "expire_time": 1755176125.4435935,
+    "expire_hours": 2
+  },
+  "fund_detail_001071": {
+    "create_time": 1755168925.4552848,
+    "access_time": 1755168925.4552848,
+    "expire_time": 1755176125.4552848,
+    "expire_hours": 2
+  },
+  "fund_detail_001307": {
+    "create_time": 1755168925.467377,
+    "access_time": 1755168925.467377,
+    "expire_time": 1755176125.467377,
+    "expire_hours": 2
+  },
+  "fund_detail_000214": {
+    "create_time": 1755168925.4793625,
+    "access_time": 1755168925.4793625,
+    "expire_time": 1755176125.4793625,
+    "expire_hours": 2
+  },
+  "fund_detail_000329": {
+    "create_time": 1755168925.4910302,
+    "access_time": 1755168925.4910302,
+    "expire_time": 1755176125.4910302,
+    "expire_hours": 2
+  },
+  "fund_detail_000433": {
+    "create_time": 1755168925.5025163,
+    "access_time": 1755168925.5025163,
+    "expire_time": 1755176125.5025163,
+    "expire_hours": 2
+  },
+  "fund_detail_000550": {
+    "create_time": 1755168925.5141613,
+    "access_time": 1755168925.5141613,
+    "expire_time": 1755176125.5141613,
+    "expire_hours": 2
+  },
+  "fund_detail_000639": {
+    "create_time": 1755168925.526342,
+    "access_time": 1755168925.526342,
+    "expire_time": 1755176125.526342,
+    "expire_hours": 2
+  },
+  "fund_detail_000721": {
+    "create_time": 1755168925.5385406,
+    "access_time": 1755168925.5385406,
+    "expire_time": 1755176125.5385406,
+    "expire_hours": 2
+  },
+  "fund_detail_000809": {
+    "create_time": 1755168925.5507994,
+    "access_time": 1755168925.5507994,
+    "expire_time": 1755176125.5507994,
+    "expire_hours": 2
+  },
+  "fund_detail_000897": {
+    "create_time": 1755168925.5629444,
+    "access_time": 1755168925.5629444,
+    "expire_time": 1755176125.5629444,
+    "expire_hours": 2
+  },
+  "fund_detail_000989": {
+    "create_time": 1755168925.5751495,
+    "access_time": 1755168925.5751495,
+    "expire_time": 1755176125.5751495,
+    "expire_hours": 2
+  },
+  "fund_detail_001072": {
+    "create_time": 1755168925.5873451,
+    "access_time": 1755168925.5873451,
+    "expire_time": 1755176125.5873451,
+    "expire_hours": 2
+  },
+  "fund_detail_000215": {
+    "create_time": 1755168925.599409,
+    "access_time": 1755168925.599409,
+    "expire_time": 1755176125.599409,
+    "expire_hours": 2
+  },
+  "fund_detail_000330": {
+    "create_time": 1755168925.6115978,
+    "access_time": 1755168925.6115978,
+    "expire_time": 1755176125.6115978,
+    "expire_hours": 2
+  },
+  "fund_detail_000434": {
+    "create_time": 1755168925.6237967,
+    "access_time": 1755168925.6237967,
+    "expire_time": 1755176125.6237967,
+    "expire_hours": 2
+  },
+  "fund_detail_000551": {
+    "create_time": 1755168925.635975,
+    "access_time": 1755168925.635975,
+    "expire_time": 1755176125.635975,
+    "expire_hours": 2
+  },
+  "fund_detail_000640": {
+    "create_time": 1755168925.6480844,
+    "access_time": 1755168925.6480844,
+    "expire_time": 1755176125.6480844,
+    "expire_hours": 2
+  },
+  "fund_detail_000722": {
+    "create_time": 1755168925.6604123,
+    "access_time": 1755168925.6604123,
+    "expire_time": 1755176125.6604123,
+    "expire_hours": 2
+  },
+  "fund_detail_000810": {
+    "create_time": 1755168925.6729503,
+    "access_time": 1755168925.6729503,
+    "expire_time": 1755176125.6729503,
+    "expire_hours": 2
+  },
+  "fund_detail_000898": {
+    "create_time": 1755168925.6853461,
+    "access_time": 1755168925.6853461,
+    "expire_time": 1755176125.6853461,
+    "expire_hours": 2
+  },
+  "fund_detail_000990": {
+    "create_time": 1755168925.6975088,
+    "access_time": 1755168925.6975088,
+    "expire_time": 1755176125.6975088,
+    "expire_hours": 2
+  },
+  "fund_detail_001073": {
+    "create_time": 1755168925.709915,
+    "access_time": 1755168925.709915,
+    "expire_time": 1755176125.709915,
+    "expire_hours": 2
+  },
+  "fund_detail_001287": {
+    "create_time": 1755168925.7222166,
+    "access_time": 1755168925.7222166,
+    "expire_time": 1755176125.7222166,
+    "expire_hours": 2
+  },
+  "fund_detail_000216": {
+    "create_time": 1755168925.7346058,
+    "access_time": 1755168925.7346058,
+    "expire_time": 1755176125.7346058,
+    "expire_hours": 2
+  },
+  "fund_detail_000331": {
+    "create_time": 1755168925.7470074,
+    "access_time": 1755168925.7470074,
+    "expire_time": 1755176125.7470074,
+    "expire_hours": 2
+  },
+  "fund_detail_000436": {
+    "create_time": 1755168925.759458,
+    "access_time": 1755168925.759458,
+    "expire_time": 1755176125.759458,
+    "expire_hours": 2
+  },
+  "fund_detail_000552": {
+    "create_time": 1755168925.7718742,
+    "access_time": 1755168925.7718742,
+    "expire_time": 1755176125.7718742,
+    "expire_hours": 2
+  },
+  "fund_detail_000641": {
+    "create_time": 1755168925.784301,
+    "access_time": 1755168925.784301,
+    "expire_time": 1755176125.784301,
+    "expire_hours": 2
+  },
+  "fund_detail_000724": {
+    "create_time": 1755168925.7967374,
+    "access_time": 1755168925.7967374,
+    "expire_time": 1755176125.7967374,
+    "expire_hours": 2
+  },
+  "fund_detail_000812": {
+    "create_time": 1755168925.8113308,
+    "access_time": 1755168925.8113308,
+    "expire_time": 1755176125.8113308,
+    "expire_hours": 2
+  },
+  "fund_detail_000899": {
+    "create_time": 1755168925.823953,
+    "access_time": 1755168925.823953,
+    "expire_time": 1755176125.823953,
+    "expire_hours": 2
+  },
+  "fund_detail_000991": {
+    "create_time": 1755168925.8362844,
+    "access_time": 1755168925.8362844,
+    "expire_time": 1755176125.8362844,
+    "expire_hours": 2
+  },
+  "fund_detail_001074": {
+    "create_time": 1755168925.848782,
+    "access_time": 1755168925.848782,
+    "expire_time": 1755176125.848782,
+    "expire_hours": 2
+  },
+  "fund_detail_001250": {
+    "create_time": 1755168925.8610506,
+    "access_time": 1755168925.8610506,
+    "expire_time": 1755176125.8610506,
+    "expire_hours": 2
+  },
+  "fund_detail_000217": {
+    "create_time": 1755168925.8737464,
+    "access_time": 1755168925.8737464,
+    "expire_time": 1755176125.8737464,
+    "expire_hours": 2
+  },
+  "fund_detail_000332": {
+    "create_time": 1755168925.8866367,
+    "access_time": 1755168925.8866367,
+    "expire_time": 1755176125.8866367,
+    "expire_hours": 2
+  },
+  "fund_detail_000452": {
+    "create_time": 1755168925.899126,
+    "access_time": 1755168925.899126,
+    "expire_time": 1755176125.899126,
+    "expire_hours": 2
+  },
+  "fund_detail_000553": {
+    "create_time": 1755168925.9118073,
+    "access_time": 1755168925.9118073,
+    "expire_time": 1755176125.9118073,
+    "expire_hours": 2
+  },
+  "fund_detail_000642": {
+    "create_time": 1755168925.924395,
+    "access_time": 1755168925.924395,
+    "expire_time": 1755176125.924395,
+    "expire_hours": 2
+  },
+  "fund_detail_000725": {
+    "create_time": 1755168925.9369433,
+    "access_time": 1755168925.9369433,
+    "expire_time": 1755176125.9369433,
+    "expire_hours": 2
+  },
+  "fund_detail_000814": {
+    "create_time": 1755168925.9495728,
+    "access_time": 1755168925.9495728,
+    "expire_time": 1755176125.9495728,
+    "expire_hours": 2
+  },
+  "fund_detail_000903": {
+    "create_time": 1755168925.9619884,
+    "access_time": 1755168925.9619884,
+    "expire_time": 1755176125.9619884,
+    "expire_hours": 2
+  },
+  "fund_detail_000992": {
+    "create_time": 1755168925.9744828,
+    "access_time": 1755168925.9744828,
+    "expire_time": 1755176125.9744828,
+    "expire_hours": 2
+  },
+  "fund_detail_001075": {
+    "create_time": 1755168925.9864337,
+    "access_time": 1755168925.9864337,
+    "expire_time": 1755176125.9864337,
+    "expire_hours": 2
+  },
+  "fund_detail_001220": {
+    "create_time": 1755168925.9988556,
+    "access_time": 1755168925.9988556,
+    "expire_time": 1755176125.9988556,
+    "expire_hours": 2
+  },
+  "fund_detail_001339": {
+    "create_time": 1755168926.0115025,
+    "access_time": 1755168926.0115025,
+    "expire_time": 1755176126.0115025,
+    "expire_hours": 2
+  },
+  "fund_detail_000218": {
+    "create_time": 1755168926.0240848,
+    "access_time": 1755168926.0240848,
+    "expire_time": 1755176126.0240848,
+    "expire_hours": 2
+  },
+  "fund_detail_000333": {
+    "create_time": 1755168926.0364194,
+    "access_time": 1755168926.0364194,
+    "expire_time": 1755176126.0364194,
+    "expire_hours": 2
+  },
+  "fund_detail_000457": {
+    "create_time": 1755168926.0483193,
+    "access_time": 1755168926.0483193,
+    "expire_time": 1755176126.0483193,
+    "expire_hours": 2
+  },
+  "fund_detail_000554": {
+    "create_time": 1755168926.060878,
+    "access_time": 1755168926.060878,
+    "expire_time": 1755176126.060878,
+    "expire_hours": 2
+  },
+  "fund_detail_000644": {
+    "create_time": 1755168926.0737386,
+    "access_time": 1755168926.0737386,
+    "expire_time": 1755176126.0737386,
+    "expire_hours": 2
+  },
+  "fund_detail_000726": {
+    "create_time": 1755168926.0864296,
+    "access_time": 1755168926.0864296,
+    "expire_time": 1755176126.0864296,
+    "expire_hours": 2
+  },
+  "fund_detail_000815": {
+    "create_time": 1755168926.0992854,
+    "access_time": 1755168926.0992854,
+    "expire_time": 1755176126.0992854,
+    "expire_hours": 2
+  },
+  "fund_detail_000904": {
+    "create_time": 1755168926.1122818,
+    "access_time": 1755168926.1122818,
+    "expire_time": 1755176126.1122818,
+    "expire_hours": 2
+  },
+  "fund_detail_000993": {
+    "create_time": 1755168926.1250167,
+    "access_time": 1755168926.1250167,
+    "expire_time": 1755176126.1250167,
+    "expire_hours": 2
+  },
+  "fund_detail_001076": {
+    "create_time": 1755168926.1377692,
+    "access_time": 1755168926.1377692,
+    "expire_time": 1755176126.1377692,
+    "expire_hours": 2
+  },
+  "fund_detail_001308": {
+    "create_time": 1755168926.1506052,
+    "access_time": 1755168926.1506052,
+    "expire_time": 1755176126.1506052,
+    "expire_hours": 2
+  },
+  "fund_detail_000219": {
+    "create_time": 1755168926.1633534,
+    "access_time": 1755168926.1633534,
+    "expire_time": 1755176126.1633534,
+    "expire_hours": 2
+  },
+  "fund_detail_000334": {
+    "create_time": 1755168926.176293,
+    "access_time": 1755168926.176293,
+    "expire_time": 1755176126.176293,
+    "expire_hours": 2
+  },
+  "fund_detail_000458": {
+    "create_time": 1755168926.1893327,
+    "access_time": 1755168926.1893327,
+    "expire_time": 1755176126.1893327,
+    "expire_hours": 2
+  },
+  "fund_detail_000556": {
+    "create_time": 1755168926.2022874,
+    "access_time": 1755168926.2022874,
+    "expire_time": 1755176126.2022874,
+    "expire_hours": 2
+  },
+  "fund_detail_000645": {
+    "create_time": 1755168926.2153273,
+    "access_time": 1755168926.2153273,
+    "expire_time": 1755176126.2153273,
+    "expire_hours": 2
+  },
+  "fund_detail_000727": {
+    "create_time": 1755168926.2283823,
+    "access_time": 1755168926.2283823,
+    "expire_time": 1755176126.2283823,
+    "expire_hours": 2
+  },
+  "fund_detail_000816": {
+    "create_time": 1755168926.2414007,
+    "access_time": 1755168926.2414007,
+    "expire_time": 1755176126.2414007,
+    "expire_hours": 2
+  },
+  "fund_detail_000905": {
+    "create_time": 1755168926.2542791,
+    "access_time": 1755168926.2542791,
+    "expire_time": 1755176126.2542791,
+    "expire_hours": 2
+  },
+  "fund_detail_000994": {
+    "create_time": 1755168926.2672238,
+    "access_time": 1755168926.2672238,
+    "expire_time": 1755176126.2672238,
+    "expire_hours": 2
+  },
+  "fund_detail_001077": {
+    "create_time": 1755168926.2801971,
+    "access_time": 1755168926.2801971,
+    "expire_time": 1755176126.2801971,
+    "expire_hours": 2
+  },
+  "fund_detail_001125": {
+    "create_time": 1755168926.2934406,
+    "access_time": 1755168926.2934406,
+    "expire_time": 1755176126.2934406,
+    "expire_hours": 2
+  },
+  "fund_detail_000220": {
+    "create_time": 1755168926.306436,
+    "access_time": 1755168926.306436,
+    "expire_time": 1755176126.306436,
+    "expire_hours": 2
+  },
+  "fund_detail_000335": {
+    "create_time": 1755168926.3195827,
+    "access_time": 1755168926.3195827,
+    "expire_time": 1755176126.3195827,
+    "expire_hours": 2
+  },
+  "fund_detail_000459": {
+    "create_time": 1755168926.3325167,
+    "access_time": 1755168926.3325167,
+    "expire_time": 1755176126.3325167,
+    "expire_hours": 2
+  },
+  "fund_detail_000557": {
+    "create_time": 1755168926.3457167,
+    "access_time": 1755168926.3457167,
+    "expire_time": 1755176126.3457167,
+    "expire_hours": 2
+  },
+  "fund_detail_000646": {
+    "create_time": 1755168926.3587458,
+    "access_time": 1755168926.3587458,
+    "expire_time": 1755176126.3587458,
+    "expire_hours": 2
+  },
+  "fund_detail_000728": {
+    "create_time": 1755168926.3718185,
+    "access_time": 1755168926.3718185,
+    "expire_time": 1755176126.3718185,
+    "expire_hours": 2
+  },
+  "fund_detail_000817": {
+    "create_time": 1755168926.384813,
+    "access_time": 1755168926.384813,
+    "expire_time": 1755176126.384813,
+    "expire_hours": 2
+  },
+  "fund_detail_000906": {
+    "create_time": 1755168926.3981926,
+    "access_time": 1755168926.3981926,
+    "expire_time": 1755176126.3981926,
+    "expire_hours": 2
+  },
+  "fund_detail_000995": {
+    "create_time": 1755168926.4117713,
+    "access_time": 1755168926.4117713,
+    "expire_time": 1755176126.4117713,
+    "expire_hours": 2
+  },
+  "fund_detail_001078": {
+    "create_time": 1755168926.425035,
+    "access_time": 1755168926.425035,
+    "expire_time": 1755176126.425035,
+    "expire_hours": 2
+  },
+  "fund_detail_001289": {
+    "create_time": 1755168926.438167,
+    "access_time": 1755168926.438167,
+    "expire_time": 1755176126.438167,
+    "expire_hours": 2
+  },
+  "fund_detail_000221": {
+    "create_time": 1755168926.4513395,
+    "access_time": 1755168926.4513395,
+    "expire_time": 1755176126.4513395,
+    "expire_hours": 2
+  },
+  "fund_detail_000336": {
+    "create_time": 1755168926.464444,
+    "access_time": 1755168926.464444,
+    "expire_time": 1755176126.464444,
+    "expire_hours": 2
+  },
+  "fund_detail_000462": {
+    "create_time": 1755168926.4774618,
+    "access_time": 1755168926.4774618,
+    "expire_time": 1755176126.4774618,
+    "expire_hours": 2
+  },
+  "fund_detail_000559": {
+    "create_time": 1755168926.490782,
+    "access_time": 1755168926.490782,
+    "expire_time": 1755176126.490782,
+    "expire_hours": 2
+  },
+  "fund_detail_000647": {
+    "create_time": 1755168926.5040011,
+    "access_time": 1755168926.5040011,
+    "expire_time": 1755176126.5040011,
+    "expire_hours": 2
+  },
+  "fund_detail_000729": {
+    "create_time": 1755168926.5168483,
+    "access_time": 1755168926.5168483,
+    "expire_time": 1755176126.5168483,
+    "expire_hours": 2
+  },
+  "fund_detail_000818": {
+    "create_time": 1755168926.530074,
+    "access_time": 1755168926.530074,
+    "expire_time": 1755176126.530074,
+    "expire_hours": 2
+  },
+  "fund_detail_000907": {
+    "create_time": 1755168926.5433571,
+    "access_time": 1755168926.5433571,
+    "expire_time": 1755176126.5433571,
+    "expire_hours": 2
+  },
+  "fund_detail_000996": {
+    "create_time": 1755168926.5568218,
+    "access_time": 1755168926.5568218,
+    "expire_time": 1755176126.5568218,
+    "expire_hours": 2
+  },
+  "fund_detail_001086": {
+    "create_time": 1755168926.5701308,
+    "access_time": 1755168926.5701308,
+    "expire_time": 1755176126.5701308,
+    "expire_hours": 2
+  },
+  "fund_detail_001251": {
+    "create_time": 1755168926.5834126,
+    "access_time": 1755168926.5834126,
+    "expire_time": 1755176126.5834126,
+    "expire_hours": 2
+  },
+  "fund_detail_000222": {
+    "create_time": 1755168926.5968294,
+    "access_time": 1755168926.5968294,
+    "expire_time": 1755176126.5968294,
+    "expire_hours": 2
+  },
+  "fund_detail_000338": {
+    "create_time": 1755168926.610108,
+    "access_time": 1755168926.610108,
+    "expire_time": 1755176126.610108,
+    "expire_hours": 2
+  },
+  "fund_detail_000464": {
+    "create_time": 1755168926.6234496,
+    "access_time": 1755168926.6234496,
+    "expire_time": 1755176126.6234496,
+    "expire_hours": 2
+  },
+  "fund_detail_000561": {
+    "create_time": 1755168926.6365216,
+    "access_time": 1755168926.6365216,
+    "expire_time": 1755176126.6365216,
+    "expire_hours": 2
+  },
+  "fund_detail_000648": {
+    "create_time": 1755168926.6494067,
+    "access_time": 1755168926.6494067,
+    "expire_time": 1755176126.6494067,
+    "expire_hours": 2
+  },
+  "fund_detail_000730": {
+    "create_time": 1755168926.6621163,
+    "access_time": 1755168926.6621163,
+    "expire_time": 1755176126.6621163,
+    "expire_hours": 2
+  },
+  "fund_detail_000822": {
+    "create_time": 1755168926.6750612,
+    "access_time": 1755168926.6750612,
+    "expire_time": 1755176126.6750612,
+    "expire_hours": 2
+  },
+  "fund_detail_000908": {
+    "create_time": 1755168926.6883285,
+    "access_time": 1755168926.6883285,
+    "expire_time": 1755176126.6883285,
+    "expire_hours": 2
+  },
+  "fund_detail_000997": {
+    "create_time": 1755168926.70092,
+    "access_time": 1755168926.70092,
+    "expire_time": 1755176126.70092,
+    "expire_hours": 2
+  },
+  "fund_detail_001087": {
+    "create_time": 1755168926.7144022,
+    "access_time": 1755168926.7144022,
+    "expire_time": 1755176126.7144022,
+    "expire_hours": 2
+  },
+  "fund_detail_001222": {
+    "create_time": 1755168926.7279797,
+    "access_time": 1755168926.7279797,
+    "expire_time": 1755176126.7279797,
+    "expire_hours": 2
+  },
+  "fund_detail_001342": {
+    "create_time": 1755168926.7414243,
+    "access_time": 1755168926.7414243,
+    "expire_time": 1755176126.7414243,
+    "expire_hours": 2
+  },
+  "fund_detail_000227": {
+    "create_time": 1755168926.755051,
+    "access_time": 1755168926.755051,
+    "expire_time": 1755176126.755051,
+    "expire_hours": 2
+  },
+  "fund_detail_000339": {
+    "create_time": 1755168926.7687805,
+    "access_time": 1755168926.7687805,
+    "expire_time": 1755176126.7687805,
+    "expire_hours": 2
+  },
+  "fund_detail_000465": {
+    "create_time": 1755168926.782379,
+    "access_time": 1755168926.782379,
+    "expire_time": 1755176126.782379,
+    "expire_hours": 2
+  },
+  "fund_detail_000562": {
+    "create_time": 1755168926.795607,
+    "access_time": 1755168926.795607,
+    "expire_time": 1755176126.795607,
+    "expire_hours": 2
+  },
+  "fund_detail_000649": {
+    "create_time": 1755168926.8088555,
+    "access_time": 1755168926.8088555,
+    "expire_time": 1755176126.8088555,
+    "expire_hours": 2
+  },
+  "fund_detail_000731": {
+    "create_time": 1755168926.821797,
+    "access_time": 1755168926.821797,
+    "expire_time": 1755176126.821797,
+    "expire_hours": 2
+  },
+  "fund_detail_000823": {
+    "create_time": 1755168926.8348572,
+    "access_time": 1755168926.8348572,
+    "expire_time": 1755176126.8348572,
+    "expire_hours": 2
+  },
+  "fund_detail_000910": {
+    "create_time": 1755168926.8479893,
+    "access_time": 1755168926.8479893,
+    "expire_time": 1755176126.8479893,
+    "expire_hours": 2
+  },
+  "fund_detail_000998": {
+    "create_time": 1755168926.861684,
+    "access_time": 1755168926.861684,
+    "expire_time": 1755176126.861684,
+    "expire_hours": 2
+  },
+  "fund_detail_001088": {
+    "create_time": 1755168926.8753161,
+    "access_time": 1755168926.8753161,
+    "expire_time": 1755176126.8753161,
+    "expire_hours": 2
+  },
+  "fund_detail_001309": {
+    "create_time": 1755168926.8897736,
+    "access_time": 1755168926.8897736,
+    "expire_time": 1755176126.8897736,
+    "expire_hours": 2
+  },
+  "fund_detail_000235": {
+    "create_time": 1755168926.9035678,
+    "access_time": 1755168926.9035678,
+    "expire_time": 1755176126.9035678,
+    "expire_hours": 2
+  },
+  "fund_detail_000341": {
+    "create_time": 1755168926.9173026,
+    "access_time": 1755168926.9173026,
+    "expire_time": 1755176126.9173026,
+    "expire_hours": 2
+  },
+  "fund_detail_000469": {
+    "create_time": 1755168926.9310465,
+    "access_time": 1755168926.9310465,
+    "expire_time": 1755176126.9310465,
+    "expire_hours": 2
+  },
+  "fund_detail_000563": {
+    "create_time": 1755168926.9447095,
+    "access_time": 1755168926.9447095,
+    "expire_time": 1755176126.9447095,
+    "expire_hours": 2
+  },
+  "fund_detail_000650": {
+    "create_time": 1755168926.9584243,
+    "access_time": 1755168926.9584243,
+    "expire_time": 1755176126.9584243,
+    "expire_hours": 2
+  },
+  "fund_detail_000734": {
+    "create_time": 1755168926.9724727,
+    "access_time": 1755168926.9724727,
+    "expire_time": 1755176126.9724727,
+    "expire_hours": 2
+  },
+  "fund_detail_000824": {
+    "create_time": 1755168926.986424,
+    "access_time": 1755168926.986424,
+    "expire_time": 1755176126.986424,
+    "expire_hours": 2
+  },
+  "fund_detail_000911": {
+    "create_time": 1755168927.0003307,
+    "access_time": 1755168927.0003307,
+    "expire_time": 1755176127.0003307,
+    "expire_hours": 2
+  },
+  "fund_detail_001000": {
+    "create_time": 1755168927.014094,
+    "access_time": 1755168927.014094,
+    "expire_time": 1755176127.014094,
+    "expire_hours": 2
+  },
+  "fund_detail_001092": {
+    "create_time": 1755168927.028048,
+    "access_time": 1755168927.028048,
+    "expire_time": 1755176127.028048,
+    "expire_hours": 2
+  },
+  "fund_detail_001345": {
+    "create_time": 1755168927.0418997,
+    "access_time": 1755168927.0418997,
+    "expire_time": 1755176127.0418997,
+    "expire_hours": 2
+  },
+  "fund_detail_000236": {
+    "create_time": 1755168927.0558388,
+    "access_time": 1755168927.0558388,
+    "expire_time": 1755176127.0558388,
+    "expire_hours": 2
+  },
+  "fund_detail_000342": {
+    "create_time": 1755168927.069774,
+    "access_time": 1755168927.069774,
+    "expire_time": 1755176127.069774,
+    "expire_hours": 2
+  },
+  "fund_detail_000470": {
+    "create_time": 1755168927.0834465,
+    "access_time": 1755168927.0834465,
+    "expire_time": 1755176127.0834465,
+    "expire_hours": 2
+  },
+  "fund_detail_000564": {
+    "create_time": 1755168927.097611,
+    "access_time": 1755168927.097611,
+    "expire_time": 1755176127.097611,
+    "expire_hours": 2
+  },
+  "fund_detail_000651": {
+    "create_time": 1755168927.1115186,
+    "access_time": 1755168927.1115186,
+    "expire_time": 1755176127.1115186,
+    "expire_hours": 2
+  },
+  "fund_detail_000735": {
+    "create_time": 1755168927.1254938,
+    "access_time": 1755168927.1254938,
+    "expire_time": 1755176127.1254938,
+    "expire_hours": 2
+  },
+  "fund_detail_000825": {
+    "create_time": 1755168927.1394117,
+    "access_time": 1755168927.1394117,
+    "expire_time": 1755176127.1394117,
+    "expire_hours": 2
+  },
+  "fund_detail_000912": {
+    "create_time": 1755168927.1530704,
+    "access_time": 1755168927.1530704,
+    "expire_time": 1755176127.1530704,
+    "expire_hours": 2
+  },
+  "fund_detail_001001": {
+    "create_time": 1755168927.1669624,
+    "access_time": 1755168927.1669624,
+    "expire_time": 1755176127.1669624,
+    "expire_hours": 2
+  },
+  "fund_detail_001093": {
+    "create_time": 1755168927.180965,
+    "access_time": 1755168927.180965,
+    "expire_time": 1755176127.180965,
+    "expire_hours": 2
+  },
+  "fund_detail_001291": {
+    "create_time": 1755168927.1950219,
+    "access_time": 1755168927.1950219,
+    "expire_time": 1755176127.1950219,
+    "expire_hours": 2
+  },
+  "fund_detail_000239": {
+    "create_time": 1755168927.2090213,
+    "access_time": 1755168927.2090213,
+    "expire_time": 1755176127.2090213,
+    "expire_hours": 2
+  },
+  "fund_detail_000343": {
+    "create_time": 1755168927.2230153,
+    "access_time": 1755168927.2230153,
+    "expire_time": 1755176127.2230153,
+    "expire_hours": 2
+  },
+  "fund_detail_000471": {
+    "create_time": 1755168927.2369277,
+    "access_time": 1755168927.2369277,
+    "expire_time": 1755176127.2369277,
+    "expire_hours": 2
+  },
+  "fund_detail_000565": {
+    "create_time": 1755168927.2508109,
+    "access_time": 1755168927.2508109,
+    "expire_time": 1755176127.2508109,
+    "expire_hours": 2
+  },
+  "fund_detail_000652": {
+    "create_time": 1755168927.2648537,
+    "access_time": 1755168927.2648537,
+    "expire_time": 1755176127.2648537,
+    "expire_hours": 2
+  },
+  "fund_detail_000736": {
+    "create_time": 1755168927.278871,
+    "access_time": 1755168927.278871,
+    "expire_time": 1755176127.278871,
+    "expire_hours": 2
+  },
+  "fund_detail_000826": {
+    "create_time": 1755168927.2929552,
+    "access_time": 1755168927.2929552,
+    "expire_time": 1755176127.2929552,
+    "expire_hours": 2
+  },
+  "fund_detail_000913": {
+    "create_time": 1755168927.3069866,
+    "access_time": 1755168927.3069866,
+    "expire_time": 1755176127.3069866,
+    "expire_hours": 2
+  },
+  "fund_detail_001002": {
+    "create_time": 1755168927.3213162,
+    "access_time": 1755168927.3213162,
+    "expire_time": 1755176127.3213162,
+    "expire_hours": 2
+  },
+  "fund_detail_001094": {
+    "create_time": 1755168927.3353076,
+    "access_time": 1755168927.3353076,
+    "expire_time": 1755176127.3353076,
+    "expire_hours": 2
+  },
+  "fund_detail_001252": {
+    "create_time": 1755168927.3495226,
+    "access_time": 1755168927.3495226,
+    "expire_time": 1755176127.3495226,
+    "expire_hours": 2
+  },
+  "fund_detail_000240": {
+    "create_time": 1755168927.3636947,
+    "access_time": 1755168927.3636947,
+    "expire_time": 1755176127.3636947,
+    "expire_hours": 2
+  },
+  "fund_detail_000345": {
+    "create_time": 1755168927.3777974,
+    "access_time": 1755168927.3777974,
+    "expire_time": 1755176127.3777974,
+    "expire_hours": 2
+  },
+  "fund_detail_000472": {
+    "create_time": 1755168927.3921762,
+    "access_time": 1755168927.3921762,
+    "expire_time": 1755176127.3921762,
+    "expire_hours": 2
+  },
+  "fund_detail_000566": {
+    "create_time": 1755168927.4056208,
+    "access_time": 1755168927.4056208,
+    "expire_time": 1755176127.4056208,
+    "expire_hours": 2
+  },
+  "fund_detail_000654": {
+    "create_time": 1755168927.4189517,
+    "access_time": 1755168927.4189517,
+    "expire_time": 1755176127.4189517,
+    "expire_hours": 2
+  },
+  "fund_detail_000737": {
+    "create_time": 1755168927.432537,
+    "access_time": 1755168927.432537,
+    "expire_time": 1755176127.432537,
+    "expire_hours": 2
+  },
+  "fund_detail_000827": {
+    "create_time": 1755168927.446084,
+    "access_time": 1755168927.446084,
+    "expire_time": 1755176127.446084,
+    "expire_hours": 2
+  },
+  "fund_detail_000914": {
+    "create_time": 1755168927.459819,
+    "access_time": 1755168927.459819,
+    "expire_time": 1755176127.459819,
+    "expire_hours": 2
+  },
+  "fund_detail_001003": {
+    "create_time": 1755168927.4738367,
+    "access_time": 1755168927.4738367,
+    "expire_time": 1755176127.4738367,
+    "expire_hours": 2
+  },
+  "fund_detail_001095": {
+    "create_time": 1755168927.487623,
+    "access_time": 1755168927.487623,
+    "expire_time": 1755176127.487623,
+    "expire_hours": 2
+  },
+  "fund_detail_001223": {
+    "create_time": 1755168927.5009365,
+    "access_time": 1755168927.5009365,
+    "expire_time": 1755176127.5009365,
+    "expire_hours": 2
+  },
+  "fund_detail_001343": {
+    "create_time": 1755168927.5152526,
+    "access_time": 1755168927.5152526,
+    "expire_time": 1755176127.5152526,
+    "expire_hours": 2
+  },
+  "fund_detail_000241": {
+    "create_time": 1755168927.5297964,
+    "access_time": 1755168927.5297964,
+    "expire_time": 1755176127.5297964,
+    "expire_hours": 2
+  },
+  "fund_detail_000346": {
+    "create_time": 1755168927.5447223,
+    "access_time": 1755168927.5447223,
+    "expire_time": 1755176127.5447223,
+    "expire_hours": 2
+  },
+  "fund_detail_000475": {
+    "create_time": 1755168927.5592506,
+    "access_time": 1755168927.5592506,
+    "expire_time": 1755176127.5592506,
+    "expire_hours": 2
+  },
+  "fund_detail_000567": {
+    "create_time": 1755168927.573739,
+    "access_time": 1755168927.573739,
+    "expire_time": 1755176127.573739,
+    "expire_hours": 2
+  },
+  "fund_detail_000655": {
+    "create_time": 1755168927.5878892,
+    "access_time": 1755168927.5878892,
+    "expire_time": 1755176127.5878892,
+    "expire_hours": 2
+  },
+  "fund_detail_000739": {
+    "create_time": 1755168927.6016524,
+    "access_time": 1755168927.6016524,
+    "expire_time": 1755176127.6016524,
+    "expire_hours": 2
+  },
+  "fund_detail_000828": {
+    "create_time": 1755168927.6158051,
+    "access_time": 1755168927.6158051,
+    "expire_time": 1755176127.6158051,
+    "expire_hours": 2
+  },
+  "fund_detail_000916": {
+    "create_time": 1755168927.6294363,
+    "access_time": 1755168927.6294363,
+    "expire_time": 1755176127.6294363,
+    "expire_hours": 2
+  },
+  "fund_detail_001004": {
+    "create_time": 1755168927.6434023,
+    "access_time": 1755168927.6434023,
+    "expire_time": 1755176127.6434023,
+    "expire_hours": 2
+  },
+  "fund_detail_001096": {
+    "create_time": 1755168927.6571872,
+    "access_time": 1755168927.6571872,
+    "expire_time": 1755176127.6571872,
+    "expire_hours": 2
+  },
+  "fund_detail_001311": {
+    "create_time": 1755168927.6711183,
+    "access_time": 1755168927.6711183,
+    "expire_time": 1755176127.6711183,
+    "expire_hours": 2
+  },
+  "fund_detail_000242": {
+    "create_time": 1755168927.685407,
+    "access_time": 1755168927.685407,
+    "expire_time": 1755176127.685407,
+    "expire_hours": 2
+  },
+  "fund_detail_000347": {
+    "create_time": 1755168927.6991532,
+    "access_time": 1755168927.6991532,
+    "expire_time": 1755176127.6991532,
+    "expire_hours": 2
+  },
+  "fund_detail_000476": {
+    "create_time": 1755168927.7126656,
+    "access_time": 1755168927.7126656,
+    "expire_time": 1755176127.7126656,
+    "expire_hours": 2
+  },
+  "fund_detail_000569": {
+    "create_time": 1755168927.7266448,
+    "access_time": 1755168927.7266448,
+    "expire_time": 1755176127.7266448,
+    "expire_hours": 2
+  },
+  "fund_detail_000656": {
+    "create_time": 1755168927.740334,
+    "access_time": 1755168927.740334,
+    "expire_time": 1755176127.740334,
+    "expire_hours": 2
+  },
+  "fund_detail_000740": {
+    "create_time": 1755168927.7548478,
+    "access_time": 1755168927.7548478,
+    "expire_time": 1755176127.7548478,
+    "expire_hours": 2
+  },
+  "fund_detail_000829": {
+    "create_time": 1755168927.7694342,
+    "access_time": 1755168927.7694342,
+    "expire_time": 1755176127.7694342,
+    "expire_hours": 2
+  },
+  "fund_detail_000917": {
+    "create_time": 1755168927.7835822,
+    "access_time": 1755168927.7835822,
+    "expire_time": 1755176127.7835822,
+    "expire_hours": 2
+  },
+  "fund_detail_001006": {
+    "create_time": 1755168927.7974682,
+    "access_time": 1755168927.7974682,
+    "expire_time": 1755176127.7974682,
+    "expire_hours": 2
+  },
+  "fund_detail_001097": {
+    "create_time": 1755168927.8110936,
+    "access_time": 1755168927.8110936,
+    "expire_time": 1755176127.8110936,
+    "expire_hours": 2
+  },
+  "fund_detail_000244": {
+    "create_time": 1755168927.8252957,
+    "access_time": 1755168927.8252957,
+    "expire_time": 1755176127.8252957,
+    "expire_hours": 2
+  },
+  "fund_detail_000351": {
+    "create_time": 1755168927.8396583,
+    "access_time": 1755168927.8396583,
+    "expire_time": 1755176127.8396583,
+    "expire_hours": 2
+  },
+  "fund_detail_000477": {
+    "create_time": 1755168927.8539357,
+    "access_time": 1755168927.8539357,
+    "expire_time": 1755176127.8539357,
+    "expire_hours": 2
+  },
+  "fund_detail_000572": {
+    "create_time": 1755168927.8684175,
+    "access_time": 1755168927.8684175,
+    "expire_time": 1755176127.8684175,
+    "expire_hours": 2
+  },
+  "fund_detail_000657": {
+    "create_time": 1755168927.883199,
+    "access_time": 1755168927.883199,
+    "expire_time": 1755176127.883199,
+    "expire_hours": 2
+  },
+  "fund_detail_000741": {
+    "create_time": 1755168927.898181,
+    "access_time": 1755168927.898181,
+    "expire_time": 1755176127.898181,
+    "expire_hours": 2
+  },
+  "fund_detail_000830": {
+    "create_time": 1755168927.9127917,
+    "access_time": 1755168927.9127917,
+    "expire_time": 1755176127.9127917,
+    "expire_hours": 2
+  },
+  "fund_detail_000920": {
+    "create_time": 1755168927.9275358,
+    "access_time": 1755168927.9275358,
+    "expire_time": 1755176127.9275358,
+    "expire_hours": 2
+  },
+  "fund_detail_001007": {
+    "create_time": 1755168927.942378,
+    "access_time": 1755168927.942378,
+    "expire_time": 1755176127.942378,
+    "expire_hours": 2
+  },
+  "fund_detail_001101": {
+    "create_time": 1755168927.9572139,
+    "access_time": 1755168927.9572139,
+    "expire_time": 1755176127.9572139,
+    "expire_hours": 2
+  },
+  "fund_detail_001294": {
+    "create_time": 1755168927.9720395,
+    "access_time": 1755168927.9720395,
+    "expire_time": 1755176127.9720395,
+    "expire_hours": 2
+  },
+  "fund_detail_000245": {
+    "create_time": 1755168927.9868832,
+    "access_time": 1755168927.9868832,
+    "expire_time": 1755176127.9868832,
+    "expire_hours": 2
+  },
+  "fund_detail_000352": {
+    "create_time": 1755168928.0016809,
+    "access_time": 1755168928.0016809,
+    "expire_time": 1755176128.0016809,
+    "expire_hours": 2
+  },
+  "fund_detail_000478": {
+    "create_time": 1755168928.0166335,
+    "access_time": 1755168928.0166335,
+    "expire_time": 1755176128.0166335,
+    "expire_hours": 2
+  },
+  "fund_detail_000573": {
+    "create_time": 1755168928.0312815,
+    "access_time": 1755168928.0312815,
+    "expire_time": 1755176128.0312815,
+    "expire_hours": 2
+  },
+  "fund_detail_000658": {
+    "create_time": 1755168928.0453303,
+    "access_time": 1755168928.0453303,
+    "expire_time": 1755176128.0453303,
+    "expire_hours": 2
+  },
+  "fund_detail_000742": {
+    "create_time": 1755168928.0595968,
+    "access_time": 1755168928.0595968,
+    "expire_time": 1755176128.0595968,
+    "expire_hours": 2
+  },
+  "fund_detail_000831": {
+    "create_time": 1755168928.0740302,
+    "access_time": 1755168928.0740302,
+    "expire_time": 1755176128.0740302,
+    "expire_hours": 2
+  },
+  "fund_detail_000921": {
+    "create_time": 1755168928.0889213,
+    "access_time": 1755168928.0889213,
+    "expire_time": 1755176128.0889213,
+    "expire_hours": 2
+  },
+  "fund_detail_001008": {
+    "create_time": 1755168928.1037023,
+    "access_time": 1755168928.1037023,
+    "expire_time": 1755176128.1037023,
+    "expire_hours": 2
+  },
+  "fund_detail_001102": {
+    "create_time": 1755168928.1187441,
+    "access_time": 1755168928.1187441,
+    "expire_time": 1755176128.1187441,
+    "expire_hours": 2
+  },
+  "fund_detail_001219": {
+    "create_time": 1755168928.1337745,
+    "access_time": 1755168928.1337745,
+    "expire_time": 1755176128.1337745,
+    "expire_hours": 2
+  },
+  "fund_detail_001254": {
+    "create_time": 1755168928.1486385,
+    "access_time": 1755168928.1486385,
+    "expire_time": 1755176128.1486385,
+    "expire_hours": 2
+  },
+  "fund_detail_000248": {
+    "create_time": 1755168928.1637678,
+    "access_time": 1755168928.1637678,
+    "expire_time": 1755176128.1637678,
+    "expire_hours": 2
+  },
+  "fund_detail_000354": {
+    "create_time": 1755168928.1789458,
+    "access_time": 1755168928.1789458,
+    "expire_time": 1755176128.1789458,
+    "expire_hours": 2
+  },
+  "fund_detail_000480": {
+    "create_time": 1755168928.1939895,
+    "access_time": 1755168928.1939895,
+    "expire_time": 1755176128.1939895,
+    "expire_hours": 2
+  },
+  "fund_detail_000574": {
+    "create_time": 1755168928.2092147,
+    "access_time": 1755168928.2092147,
+    "expire_time": 1755176128.2092147,
+    "expire_hours": 2
+  },
+  "fund_detail_000659": {
+    "create_time": 1755168928.2243516,
+    "access_time": 1755168928.2243516,
+    "expire_time": 1755176128.2243516,
+    "expire_hours": 2
+  },
+  "fund_detail_000743": {
+    "create_time": 1755168928.23943,
+    "access_time": 1755168928.23943,
+    "expire_time": 1755176128.23943,
+    "expire_hours": 2
+  },
+  "fund_detail_000832": {
+    "create_time": 1755168928.2548065,
+    "access_time": 1755168928.2548065,
+    "expire_time": 1755176128.2548065,
+    "expire_hours": 2
+  },
+  "fund_detail_000922": {
+    "create_time": 1755168928.2699108,
+    "access_time": 1755168928.2699108,
+    "expire_time": 1755176128.2699108,
+    "expire_hours": 2
+  },
+  "fund_detail_001009": {
+    "create_time": 1755168928.2850425,
+    "access_time": 1755168928.2850425,
+    "expire_time": 1755176128.2850425,
+    "expire_hours": 2
+  },
+  "fund_detail_001103": {
+    "create_time": 1755168928.3002946,
+    "access_time": 1755168928.3002946,
+    "expire_time": 1755176128.3002946,
+    "expire_hours": 2
+  },
+  "fund_detail_001224": {
+    "create_time": 1755168928.3159685,
+    "access_time": 1755168928.3159685,
+    "expire_time": 1755176128.3159685,
+    "expire_hours": 2
+  },
+  "fund_detail_000251": {
+    "create_time": 1755168928.3335948,
+    "access_time": 1755168928.3335948,
+    "expire_time": 1755176128.3335948,
+    "expire_hours": 2
+  },
+  "fund_detail_000355": {
+    "create_time": 1755168928.3488905,
+    "access_time": 1755168928.3488905,
+    "expire_time": 1755176128.3488905,
+    "expire_hours": 2
+  },
+  "fund_detail_000483": {
+    "create_time": 1755168928.3641317,
+    "access_time": 1755168928.3641317,
+    "expire_time": 1755176128.3641317,
+    "expire_hours": 2
+  },
+  "fund_detail_000575": {
+    "create_time": 1755168928.3793213,
+    "access_time": 1755168928.3793213,
+    "expire_time": 1755176128.3793213,
+    "expire_hours": 2
+  },
+  "fund_detail_000660": {
+    "create_time": 1755168928.3941507,
+    "access_time": 1755168928.3941507,
+    "expire_time": 1755176128.3941507,
+    "expire_hours": 2
+  },
+  "fund_detail_000744": {
+    "create_time": 1755168928.4088578,
+    "access_time": 1755168928.4088578,
+    "expire_time": 1755176128.4088578,
+    "expire_hours": 2
+  },
+  "fund_detail_000833": {
+    "create_time": 1755168928.4233785,
+    "access_time": 1755168928.4233785,
+    "expire_time": 1755176128.4233785,
+    "expire_hours": 2
+  },
+  "fund_detail_000923": {
+    "create_time": 1755168928.4386737,
+    "access_time": 1755168928.4386737,
+    "expire_time": 1755176128.4386737,
+    "expire_hours": 2
+  },
+  "fund_detail_001010": {
+    "create_time": 1755168928.4541092,
+    "access_time": 1755168928.4541092,
+    "expire_time": 1755176128.4541092,
+    "expire_hours": 2
+  },
+  "fund_detail_001104": {
+    "create_time": 1755168928.4695096,
+    "access_time": 1755168928.4695096,
+    "expire_time": 1755176128.4695096,
+    "expire_hours": 2
+  },
+  "fund_detail_001312": {
+    "create_time": 1755168928.4839382,
+    "access_time": 1755168928.4839382,
+    "expire_time": 1755176128.4839382,
+    "expire_hours": 2
+  },
+  "fund_detail_000252": {
+    "create_time": 1755168928.4988139,
+    "access_time": 1755168928.4988139,
+    "expire_time": 1755176128.4988139,
+    "expire_hours": 2
+  },
+  "fund_detail_000356": {
+    "create_time": 1755168928.5141044,
+    "access_time": 1755168928.5141044,
+    "expire_time": 1755176128.5141044,
+    "expire_hours": 2
+  },
+  "fund_detail_000484": {
+    "create_time": 1755168928.5302212,
+    "access_time": 1755168928.5302212,
+    "expire_time": 1755176128.5302212,
+    "expire_hours": 2
+  },
+  "fund_detail_000576": {
+    "create_time": 1755168928.545633,
+    "access_time": 1755168928.545633,
+    "expire_time": 1755176128.545633,
+    "expire_hours": 2
+  },
+  "fund_detail_000661": {
+    "create_time": 1755168928.5610683,
+    "access_time": 1755168928.5610683,
+    "expire_time": 1755176128.5610683,
+    "expire_hours": 2
+  },
+  "fund_detail_000745": {
+    "create_time": 1755168928.5766916,
+    "access_time": 1755168928.5766916,
+    "expire_time": 1755176128.5766916,
+    "expire_hours": 2
+  },
+  "fund_detail_000834": {
+    "create_time": 1755168928.592134,
+    "access_time": 1755168928.592134,
+    "expire_time": 1755176128.592134,
+    "expire_hours": 2
+  },
+  "fund_detail_000924": {
+    "create_time": 1755168928.6075277,
+    "access_time": 1755168928.6075277,
+    "expire_time": 1755176128.6075277,
+    "expire_hours": 2
+  },
+  "fund_detail_001011": {
+    "create_time": 1755168928.6230488,
+    "access_time": 1755168928.6230488,
+    "expire_time": 1755176128.6230488,
+    "expire_hours": 2
+  },
+  "fund_detail_001105": {
+    "create_time": 1755168928.6386075,
+    "access_time": 1755168928.6386075,
+    "expire_time": 1755176128.6386075,
+    "expire_hours": 2
+  },
+  "fund_detail_000253": {
+    "create_time": 1755168928.6540895,
+    "access_time": 1755168928.6540895,
+    "expire_time": 1755176128.6540895,
+    "expire_hours": 2
+  },
+  "fund_detail_000359": {
+    "create_time": 1755168928.6694503,
+    "access_time": 1755168928.6694503,
+    "expire_time": 1755176128.6694503,
+    "expire_hours": 2
+  },
+  "fund_detail_000487": {
+    "create_time": 1755168928.6844192,
+    "access_time": 1755168928.6844192,
+    "expire_time": 1755176128.6844192,
+    "expire_hours": 2
+  },
+  "fund_detail_000577": {
+    "create_time": 1755168928.699456,
+    "access_time": 1755168928.699456,
+    "expire_time": 1755176128.699456,
+    "expire_hours": 2
+  },
+  "fund_detail_000662": {
+    "create_time": 1755168928.7142658,
+    "access_time": 1755168928.7142658,
+    "expire_time": 1755176128.7142658,
+    "expire_hours": 2
+  },
+  "fund_detail_000746": {
+    "create_time": 1755168928.72937,
+    "access_time": 1755168928.72937,
+    "expire_time": 1755176128.72937,
+    "expire_hours": 2
+  },
+  "fund_detail_000835": {
+    "create_time": 1755168928.7446797,
+    "access_time": 1755168928.7446797,
+    "expire_time": 1755176128.7446797,
+    "expire_hours": 2
+  },
+  "fund_detail_000925": {
+    "create_time": 1755168928.7596726,
+    "access_time": 1755168928.7596726,
+    "expire_time": 1755176128.7596726,
+    "expire_hours": 2
+  },
+  "fund_detail_001013": {
+    "create_time": 1755168928.774925,
+    "access_time": 1755168928.774925,
+    "expire_time": 1755176128.774925,
+    "expire_hours": 2
+  },
+  "fund_detail_001106": {
+    "create_time": 1755168928.7905986,
+    "access_time": 1755168928.7905986,
+    "expire_time": 1755176128.7905986,
+    "expire_hours": 2
+  },
+  "fund_detail_001296": {
+    "create_time": 1755168928.806393,
+    "access_time": 1755168928.806393,
+    "expire_time": 1755176128.806393,
+    "expire_hours": 2
+  },
+  "fund_detail_000254": {
+    "create_time": 1755168928.8220131,
+    "access_time": 1755168928.8220131,
+    "expire_time": 1755176128.8220131,
+    "expire_hours": 2
+  },
+  "fund_detail_000362": {
+    "create_time": 1755168928.8376784,
+    "access_time": 1755168928.8376784,
+    "expire_time": 1755176128.8376784,
+    "expire_hours": 2
+  },
+  "fund_detail_000488": {
+    "create_time": 1755168928.8527327,
+    "access_time": 1755168928.8527327,
+    "expire_time": 1755176128.8527327,
+    "expire_hours": 2
+  },
+  "fund_detail_000578": {
+    "create_time": 1755168928.8678963,
+    "access_time": 1755168928.8678963,
+    "expire_time": 1755176128.8678963,
+    "expire_hours": 2
+  },
+  "fund_detail_000663": {
+    "create_time": 1755168928.8830209,
+    "access_time": 1755168928.8830209,
+    "expire_time": 1755176128.8830209,
+    "expire_hours": 2
+  },
+  "fund_detail_000747": {
+    "create_time": 1755168928.898635,
+    "access_time": 1755168928.898635,
+    "expire_time": 1755176128.898635,
+    "expire_hours": 2
+  },
+  "fund_detail_000836": {
+    "create_time": 1755168928.9136734,
+    "access_time": 1755168928.9136734,
+    "expire_time": 1755176128.9136734,
+    "expire_hours": 2
+  },
+  "fund_detail_000926": {
+    "create_time": 1755168928.9287148,
+    "access_time": 1755168928.9287148,
+    "expire_time": 1755176128.9287148,
+    "expire_hours": 2
+  },
+  "fund_detail_001015": {
+    "create_time": 1755168928.9440727,
+    "access_time": 1755168928.9440727,
+    "expire_time": 1755176128.9440727,
+    "expire_hours": 2
+  },
+  "fund_detail_001110": {
+    "create_time": 1755168928.9590507,
+    "access_time": 1755168928.9590507,
+    "expire_time": 1755176128.9590507,
+    "expire_hours": 2
+  },
+  "fund_detail_001255": {
+    "create_time": 1755168928.9741364,
+    "access_time": 1755168928.9741364,
+    "expire_time": 1755176128.9741364,
+    "expire_hours": 2
+  },
+  "fund_detail_000255": {
+    "create_time": 1755168928.9891317,
+    "access_time": 1755168928.9891317,
+    "expire_time": 1755176128.9891317,
+    "expire_hours": 2
+  },
+  "fund_detail_000363": {
+    "create_time": 1755168929.0042372,
+    "access_time": 1755168929.0042372,
+    "expire_time": 1755176129.0042372,
+    "expire_hours": 2
+  },
+  "fund_detail_000493": {
+    "create_time": 1755168929.019576,
+    "access_time": 1755168929.019576,
+    "expire_time": 1755176129.019576,
+    "expire_hours": 2
+  },
+  "fund_detail_000579": {
+    "create_time": 1755168929.035606,
+    "access_time": 1755168929.035606,
+    "expire_time": 1755176129.035606,
+    "expire_hours": 2
+  },
+  "fund_detail_000664": {
+    "create_time": 1755168929.0514884,
+    "access_time": 1755168929.0514884,
+    "expire_time": 1755176129.0514884,
+    "expire_hours": 2
+  },
+  "fund_detail_000748": {
+    "create_time": 1755168929.0669985,
+    "access_time": 1755168929.0669985,
+    "expire_time": 1755176129.0669985,
+    "expire_hours": 2
+  },
+  "fund_detail_000837": {
+    "create_time": 1755168929.0831552,
+    "access_time": 1755168929.0831552,
+    "expire_time": 1755176129.0831552,
+    "expire_hours": 2
+  },
+  "fund_detail_000927": {
+    "create_time": 1755168929.099109,
+    "access_time": 1755168929.099109,
+    "expire_time": 1755176129.099109,
+    "expire_hours": 2
+  },
+  "fund_detail_001016": {
+    "create_time": 1755168929.1149707,
+    "access_time": 1755168929.1149707,
+    "expire_time": 1755176129.1149707,
+    "expire_hours": 2
+  },
+  "fund_detail_001111": {
+    "create_time": 1755168929.1308813,
+    "access_time": 1755168929.1308813,
+    "expire_time": 1755176129.1308813,
+    "expire_hours": 2
+  },
+  "fund_detail_001225": {
+    "create_time": 1755168929.146852,
+    "access_time": 1755168929.146852,
+    "expire_time": 1755176129.146852,
+    "expire_hours": 2
+  },
+  "fund_detail_000259": {
+    "create_time": 1755168929.1629446,
+    "access_time": 1755168929.1629446,
+    "expire_time": 1755176129.1629446,
+    "expire_hours": 2
+  },
+  "fund_detail_000366": {
+    "create_time": 1755168929.1788764,
+    "access_time": 1755168929.1788764,
+    "expire_time": 1755176129.1788764,
+    "expire_hours": 2
+  },
+  "fund_detail_000494": {
+    "create_time": 1755168929.1949258,
+    "access_time": 1755168929.1949258,
+    "expire_time": 1755176129.1949258,
+    "expire_hours": 2
+  },
+  "fund_detail_000580": {
+    "create_time": 1755168929.211062,
+    "access_time": 1755168929.211062,
+    "expire_time": 1755176129.211062,
+    "expire_hours": 2
+  },
+  "fund_detail_000665": {
+    "create_time": 1755168929.2270226,
+    "access_time": 1755168929.2270226,
+    "expire_time": 1755176129.2270226,
+    "expire_hours": 2
+  },
+  "fund_detail_000750": {
+    "create_time": 1755168929.2430973,
+    "access_time": 1755168929.2430973,
+    "expire_time": 1755176129.2430973,
+    "expire_hours": 2
+  },
+  "fund_detail_000839": {
+    "create_time": 1755168929.2592313,
+    "access_time": 1755168929.2592313,
+    "expire_time": 1755176129.2592313,
+    "expire_hours": 2
+  },
+  "fund_detail_000928": {
+    "create_time": 1755168929.2751317,
+    "access_time": 1755168929.2751317,
+    "expire_time": 1755176129.2751317,
+    "expire_hours": 2
+  },
+  "fund_detail_001017": {
+    "create_time": 1755168929.2910175,
+    "access_time": 1755168929.2910175,
+    "expire_time": 1755176129.2910175,
+    "expire_hours": 2
+  },
+  "fund_detail_001112": {
+    "create_time": 1755168929.3073275,
+    "access_time": 1755168929.3073275,
+    "expire_time": 1755176129.3073275,
+    "expire_hours": 2
+  },
+  "fund_detail_001313": {
+    "create_time": 1755168929.3235092,
+    "access_time": 1755168929.3235092,
+    "expire_time": 1755176129.3235092,
+    "expire_hours": 2
+  },
+  "fund_detail_000263": {
+    "create_time": 1755168929.339572,
+    "access_time": 1755168929.339572,
+    "expire_time": 1755176129.339572,
+    "expire_hours": 2
+  },
+  "fund_detail_000367": {
+    "create_time": 1755168929.3555965,
+    "access_time": 1755168929.3555965,
+    "expire_time": 1755176129.3555965,
+    "expire_hours": 2
+  },
+  "fund_detail_000495": {
+    "create_time": 1755168929.3717418,
+    "access_time": 1755168929.3717418,
+    "expire_time": 1755176129.3717418,
+    "expire_hours": 2
+  },
+  "fund_detail_000581": {
+    "create_time": 1755168929.3877058,
+    "access_time": 1755168929.3877058,
+    "expire_time": 1755176129.3877058,
+    "expire_hours": 2
+  },
+  "fund_detail_000667": {
+    "create_time": 1755168929.4039462,
+    "access_time": 1755168929.4039462,
+    "expire_time": 1755176129.4039462,
+    "expire_hours": 2
+  },
+  "fund_detail_000751": {
+    "create_time": 1755168929.4204183,
+    "access_time": 1755168929.4204183,
+    "expire_time": 1755176129.4204183,
+    "expire_hours": 2
+  },
+  "fund_detail_000840": {
+    "create_time": 1755168929.4369802,
+    "access_time": 1755168929.4369802,
+    "expire_time": 1755176129.4369802,
+    "expire_hours": 2
+  },
+  "fund_detail_000929": {
+    "create_time": 1755168929.453228,
+    "access_time": 1755168929.453228,
+    "expire_time": 1755176129.453228,
+    "expire_hours": 2
+  },
+  "fund_detail_001018": {
+    "create_time": 1755168929.4693372,
+    "access_time": 1755168929.4693372,
+    "expire_time": 1755176129.4693372,
+    "expire_hours": 2
+  },
+  "fund_detail_001113": {
+    "create_time": 1755168929.485903,
+    "access_time": 1755168929.485903,
+    "expire_time": 1755176129.485903,
+    "expire_hours": 2
+  },
+  "fund_detail_000264": {
+    "create_time": 1755168929.502246,
+    "access_time": 1755168929.502246,
+    "expire_time": 1755176129.502246,
+    "expire_hours": 2
+  },
+  "fund_detail_000368": {
+    "create_time": 1755168929.5181797,
+    "access_time": 1755168929.5181797,
+    "expire_time": 1755176129.5181797,
+    "expire_hours": 2
+  },
+  "fund_detail_000496": {
+    "create_time": 1755168929.5348537,
+    "access_time": 1755168929.5348537,
+    "expire_time": 1755176129.5348537,
+    "expire_hours": 2
+  },
+  "fund_detail_000582": {
+    "create_time": 1755168929.5512857,
+    "access_time": 1755168929.5512857,
+    "expire_time": 1755176129.5512857,
+    "expire_hours": 2
+  },
+  "fund_detail_000668": {
+    "create_time": 1755168929.567325,
+    "access_time": 1755168929.567325,
+    "expire_time": 1755176129.567325,
+    "expire_hours": 2
+  },
+  "fund_detail_000753": {
+    "create_time": 1755168929.5832295,
+    "access_time": 1755168929.5832295,
+    "expire_time": 1755176129.5832295,
+    "expire_hours": 2
+  },
+  "fund_detail_000841": {
+    "create_time": 1755168929.5991504,
+    "access_time": 1755168929.5991504,
+    "expire_time": 1755176129.5991504,
+    "expire_hours": 2
+  },
+  "fund_detail_000930": {
+    "create_time": 1755168929.6146564,
+    "access_time": 1755168929.6146564,
+    "expire_time": 1755176129.6146564,
+    "expire_hours": 2
+  },
+  "fund_detail_001019": {
+    "create_time": 1755168929.630118,
+    "access_time": 1755168929.630118,
+    "expire_time": 1755176129.630118,
+    "expire_hours": 2
+  },
+  "fund_detail_001115": {
+    "create_time": 1755168929.6456382,
+    "access_time": 1755168929.6456382,
+    "expire_time": 1755176129.6456382,
+    "expire_hours": 2
+  },
+  "fund_detail_001297": {
+    "create_time": 1755168929.6614087,
+    "access_time": 1755168929.6614087,
+    "expire_time": 1755176129.6614087,
+    "expire_hours": 2
+  },
+  "fund_detail_000265": {
+    "create_time": 1755168929.677168,
+    "access_time": 1755168929.677168,
+    "expire_time": 1755176129.677168,
+    "expire_hours": 2
+  },
+  "fund_detail_000369": {
+    "create_time": 1755168929.6933434,
+    "access_time": 1755168929.6933434,
+    "expire_time": 1755176129.6933434,
+    "expire_hours": 2
+  },
+  "fund_detail_000497": {
+    "create_time": 1755168929.7090676,
+    "access_time": 1755168929.7090676,
+    "expire_time": 1755176129.7090676,
+    "expire_hours": 2
+  },
+  "fund_detail_000583": {
+    "create_time": 1755168929.724667,
+    "access_time": 1755168929.724667,
+    "expire_time": 1755176129.724667,
+    "expire_hours": 2
+  },
+  "fund_detail_000669": {
+    "create_time": 1755168929.7404008,
+    "access_time": 1755168929.7404008,
+    "expire_time": 1755176129.7404008,
+    "expire_hours": 2
+  },
+  "fund_detail_000754": {
+    "create_time": 1755168929.7561421,
+    "access_time": 1755168929.7561421,
+    "expire_time": 1755176129.7561421,
+    "expire_hours": 2
+  },
+  "fund_detail_000842": {
+    "create_time": 1755168929.7718916,
+    "access_time": 1755168929.7718916,
+    "expire_time": 1755176129.7718916,
+    "expire_hours": 2
+  },
+  "fund_detail_000931": {
+    "create_time": 1755168929.788357,
+    "access_time": 1755168929.788357,
+    "expire_time": 1755176129.788357,
+    "expire_hours": 2
+  },
+  "fund_detail_001021": {
+    "create_time": 1755168929.8049424,
+    "access_time": 1755168929.8049424,
+    "expire_time": 1755176129.8049424,
+    "expire_hours": 2
+  },
+  "fund_detail_001116": {
+    "create_time": 1755168929.821635,
+    "access_time": 1755168929.821635,
+    "expire_time": 1755176129.821635,
+    "expire_hours": 2
+  },
+  "fund_detail_001256": {
+    "create_time": 1755168929.8381736,
+    "access_time": 1755168929.8381736,
+    "expire_time": 1755176129.8381736,
+    "expire_hours": 2
+  },
+  "fund_detail_000266": {
+    "create_time": 1755168929.8547697,
+    "access_time": 1755168929.8547697,
+    "expire_time": 1755176129.8547697,
+    "expire_hours": 2
+  },
+  "fund_detail_000370": {
+    "create_time": 1755168929.871097,
+    "access_time": 1755168929.871097,
+    "expire_time": 1755176129.871097,
+    "expire_hours": 2
+  },
+  "fund_detail_000503": {
+    "create_time": 1755168929.8880732,
+    "access_time": 1755168929.8880732,
+    "expire_time": 1755176129.8880732,
+    "expire_hours": 2
+  },
+  "fund_detail_000584": {
+    "create_time": 1755168929.9045763,
+    "access_time": 1755168929.9045763,
+    "expire_time": 1755176129.9045763,
+    "expire_hours": 2
+  },
+  "fund_detail_000672": {
+    "create_time": 1755168929.920824,
+    "access_time": 1755168929.920824,
+    "expire_time": 1755176129.920824,
+    "expire_hours": 2
+  },
+  "fund_detail_000755": {
+    "create_time": 1755168929.9374967,
+    "access_time": 1755168929.9374967,
+    "expire_time": 1755176129.9374967,
+    "expire_hours": 2
+  },
+  "fund_detail_000843": {
+    "create_time": 1755168929.9542058,
+    "access_time": 1755168929.9542058,
+    "expire_time": 1755176129.9542058,
+    "expire_hours": 2
+  },
+  "fund_detail_000932": {
+    "create_time": 1755168929.971127,
+    "access_time": 1755168929.971127,
+    "expire_time": 1755176129.971127,
+    "expire_hours": 2
+  },
+  "fund_detail_001023": {
+    "create_time": 1755168929.988043,
+    "access_time": 1755168929.988043,
+    "expire_time": 1755176129.988043,
+    "expire_hours": 2
+  },
+  "fund_detail_001117": {
+    "create_time": 1755168930.0050151,
+    "access_time": 1755168930.0050151,
+    "expire_time": 1755176130.0050151,
+    "expire_hours": 2
+  },
+  "fund_detail_001226": {
+    "create_time": 1755168930.02167,
+    "access_time": 1755168930.02167,
+    "expire_time": 1755176130.02167,
+    "expire_hours": 2
+  },
+  "fund_detail_000267": {
+    "create_time": 1755168930.0386798,
+    "access_time": 1755168930.0386798,
+    "expire_time": 1755176130.0386798,
+    "expire_hours": 2
+  },
+  "fund_detail_000371": {
+    "create_time": 1755168930.055645,
+    "access_time": 1755168930.055645,
+    "expire_time": 1755176130.055645,
+    "expire_hours": 2
+  },
+  "fund_detail_000504": {
+    "create_time": 1755168930.0725224,
+    "access_time": 1755168930.0725224,
+    "expire_time": 1755176130.0725224,
+    "expire_hours": 2
+  },
+  "fund_detail_000585": {
+    "create_time": 1755168930.089425,
+    "access_time": 1755168930.089425,
+    "expire_time": 1755176130.089425,
+    "expire_hours": 2
+  },
+  "fund_detail_000673": {
+    "create_time": 1755168930.1064384,
+    "access_time": 1755168930.1064384,
+    "expire_time": 1755176130.1064384,
+    "expire_hours": 2
+  },
+  "fund_detail_000756": {
+    "create_time": 1755168930.1233306,
+    "access_time": 1755168930.1233306,
+    "expire_time": 1755176130.1233306,
+    "expire_hours": 2
+  },
+  "fund_detail_000844": {
+    "create_time": 1755168930.1403308,
+    "access_time": 1755168930.1403308,
+    "expire_time": 1755176130.1403308,
+    "expire_hours": 2
+  },
+  "fund_detail_000933": {
+    "create_time": 1755168930.157231,
+    "access_time": 1755168930.157231,
+    "expire_time": 1755176130.157231,
+    "expire_hours": 2
+  },
+  "fund_detail_001025": {
+    "create_time": 1755168930.1742125,
+    "access_time": 1755168930.1742125,
+    "expire_time": 1755176130.1742125,
+    "expire_hours": 2
+  },
+  "fund_detail_001118": {
+    "create_time": 1755168930.1912153,
+    "access_time": 1755168930.1912153,
+    "expire_time": 1755176130.1912153,
+    "expire_hours": 2
+  },
+  "fund_detail_001314": {
+    "create_time": 1755168930.208424,
+    "access_time": 1755168930.208424,
+    "expire_time": 1755176130.208424,
+    "expire_hours": 2
+  },
+  "fund_detail_000268": {
+    "create_time": 1755168930.225513,
+    "access_time": 1755168930.225513,
+    "expire_time": 1755176130.225513,
+    "expire_hours": 2
+  },
+  "fund_detail_000372": {
+    "create_time": 1755168930.2424176,
+    "access_time": 1755168930.2424176,
+    "expire_time": 1755176130.2424176,
+    "expire_hours": 2
+  },
+  "fund_detail_000505": {
+    "create_time": 1755168930.2595105,
+    "access_time": 1755168930.2595105,
+    "expire_time": 1755176130.2595105,
+    "expire_hours": 2
+  },
+  "fund_detail_000586": {
+    "create_time": 1755168930.2764556,
+    "access_time": 1755168930.2764556,
+    "expire_time": 1755176130.2764556,
+    "expire_hours": 2
+  },
+  "fund_detail_000674": {
+    "create_time": 1755168930.2935238,
+    "access_time": 1755168930.2935238,
+    "expire_time": 1755176130.2935238,
+    "expire_hours": 2
+  },
+  "fund_detail_000757": {
+    "create_time": 1755168930.3104827,
+    "access_time": 1755168930.3104827,
+    "expire_time": 1755176130.3104827,
+    "expire_hours": 2
+  },
+  "fund_detail_000845": {
+    "create_time": 1755168930.327362,
+    "access_time": 1755168930.327362,
+    "expire_time": 1755176130.327362,
+    "expire_hours": 2
+  },
+  "fund_detail_000934": {
+    "create_time": 1755168930.3444777,
+    "access_time": 1755168930.3444777,
+    "expire_time": 1755176130.3444777,
+    "expire_hours": 2
+  },
+  "fund_detail_001026": {
+    "create_time": 1755168930.3616946,
+    "access_time": 1755168930.3616946,
+    "expire_time": 1755176130.3616946,
+    "expire_hours": 2
+  },
+  "fund_detail_001120": {
+    "create_time": 1755168930.3786473,
+    "access_time": 1755168930.3786473,
+    "expire_time": 1755176130.3786473,
+    "expire_hours": 2
+  },
+  "fund_detail_000270": {
+    "create_time": 1755168930.3955805,
+    "access_time": 1755168930.3955805,
+    "expire_time": 1755176130.3955805,
+    "expire_hours": 2
+  },
+  "fund_detail_000373": {
+    "create_time": 1755168930.4127562,
+    "access_time": 1755168930.4127562,
+    "expire_time": 1755176130.4127562,
+    "expire_hours": 2
+  },
+  "fund_detail_000506": {
+    "create_time": 1755168930.4299326,
+    "access_time": 1755168930.4299326,
+    "expire_time": 1755176130.4299326,
+    "expire_hours": 2
+  },
+  "fund_detail_000587": {
+    "create_time": 1755168930.446972,
+    "access_time": 1755168930.446972,
+    "expire_time": 1755176130.446972,
+    "expire_hours": 2
+  },
+  "fund_detail_000677": {
+    "create_time": 1755168930.4641438,
+    "access_time": 1755168930.4641438,
+    "expire_time": 1755176130.4641438,
+    "expire_hours": 2
+  },
+  "fund_detail_000758": {
+    "create_time": 1755168930.4813159,
+    "access_time": 1755168930.4813159,
+    "expire_time": 1755176130.4813159,
+    "expire_hours": 2
+  },
+  "fund_detail_000846": {
+    "create_time": 1755168930.4986563,
+    "access_time": 1755168930.4986563,
+    "expire_time": 1755176130.4986563,
+    "expire_hours": 2
+  },
+  "fund_detail_000935": {
+    "create_time": 1755168930.515261,
+    "access_time": 1755168930.515261,
+    "expire_time": 1755176130.515261,
+    "expire_hours": 2
+  },
+  "fund_detail_001027": {
+    "create_time": 1755168930.5323358,
+    "access_time": 1755168930.5323358,
+    "expire_time": 1755176130.5323358,
+    "expire_hours": 2
+  },
+  "fund_detail_001121": {
+    "create_time": 1755168930.5495744,
+    "access_time": 1755168930.5495744,
+    "expire_time": 1755176130.5495744,
+    "expire_hours": 2
+  },
+  "fund_detail_001298": {
+    "create_time": 1755168930.5669715,
+    "access_time": 1755168930.5669715,
+    "expire_time": 1755176130.5669715,
+    "expire_hours": 2
+  },
+  "fund_detail_000271": {
+    "create_time": 1755168930.5842636,
+    "access_time": 1755168930.5842636,
+    "expire_time": 1755176130.5842636,
+    "expire_hours": 2
+  },
+  "fund_detail_000376": {
+    "create_time": 1755168930.601657,
+    "access_time": 1755168930.601657,
+    "expire_time": 1755176130.601657,
+    "expire_hours": 2
+  },
+  "fund_detail_000507": {
+    "create_time": 1755168930.6189072,
+    "access_time": 1755168930.6189072,
+    "expire_time": 1755176130.6189072,
+    "expire_hours": 2
+  },
+  "fund_detail_000588": {
+    "create_time": 1755168930.6362622,
+    "access_time": 1755168930.6362622,
+    "expire_time": 1755176130.6362622,
+    "expire_hours": 2
+  },
+  "fund_detail_000678": {
+    "create_time": 1755168930.6537974,
+    "access_time": 1755168930.6537974,
+    "expire_time": 1755176130.6537974,
+    "expire_hours": 2
+  },
+  "fund_detail_000759": {
+    "create_time": 1755168930.671233,
+    "access_time": 1755168930.671233,
+    "expire_time": 1755176130.671233,
+    "expire_hours": 2
+  },
+  "fund_detail_000847": {
+    "create_time": 1755168930.6882863,
+    "access_time": 1755168930.6882863,
+    "expire_time": 1755176130.6882863,
+    "expire_hours": 2
+  },
+  "fund_detail_000936": {
+    "create_time": 1755168930.705522,
+    "access_time": 1755168930.705522,
+    "expire_time": 1755176130.705522,
+    "expire_hours": 2
+  },
+  "fund_detail_001028": {
+    "create_time": 1755168930.72247,
+    "access_time": 1755168930.72247,
+    "expire_time": 1755176130.72247,
+    "expire_hours": 2
+  },
+  "fund_detail_001122": {
+    "create_time": 1755168930.739809,
+    "access_time": 1755168930.739809,
+    "expire_time": 1755176130.739809,
+    "expire_hours": 2
+  },
+  "fund_detail_001257": {
+    "create_time": 1755168930.7571566,
+    "access_time": 1755168930.7571566,
+    "expire_time": 1755176130.7571566,
+    "expire_hours": 2
+  },
+  "fund_detail_000272": {
+    "create_time": 1755168930.7743168,
+    "access_time": 1755168930.7743168,
+    "expire_time": 1755176130.7743168,
+    "expire_hours": 2
+  },
+  "fund_detail_000377": {
+    "create_time": 1755168930.7917516,
+    "access_time": 1755168930.7917516,
+    "expire_time": 1755176130.7917516,
+    "expire_hours": 2
+  },
+  "fund_detail_000508": {
+    "create_time": 1755168930.8091748,
+    "access_time": 1755168930.8091748,
+    "expire_time": 1755176130.8091748,
+    "expire_hours": 2
+  },
+  "fund_detail_000589": {
+    "create_time": 1755168930.8266916,
+    "access_time": 1755168930.8266916,
+    "expire_time": 1755176130.8266916,
+    "expire_hours": 2
+  },
+  "fund_detail_000679": {
+    "create_time": 1755168930.8444283,
+    "access_time": 1755168930.8444283,
+    "expire_time": 1755176130.8444283,
+    "expire_hours": 2
+  },
+  "fund_detail_000760": {
+    "create_time": 1755168930.8619273,
+    "access_time": 1755168930.8619273,
+    "expire_time": 1755176130.8619273,
+    "expire_hours": 2
+  },
+  "fund_detail_000848": {
+    "create_time": 1755168930.879413,
+    "access_time": 1755168930.879413,
+    "expire_time": 1755176130.879413,
+    "expire_hours": 2
+  },
+  "fund_detail_000939": {
+    "create_time": 1755168930.897287,
+    "access_time": 1755168930.897287,
+    "expire_time": 1755176130.897287,
+    "expire_hours": 2
+  },
+  "fund_detail_001030": {
+    "create_time": 1755168930.9149332,
+    "access_time": 1755168930.9149332,
+    "expire_time": 1755176130.9149332,
+    "expire_hours": 2
+  },
+  "fund_detail_001123": {
+    "create_time": 1755168930.9326274,
+    "access_time": 1755168930.9326274,
+    "expire_time": 1755176130.9326274,
+    "expire_hours": 2
+  },
+  "fund_detail_001227": {
+    "create_time": 1755168930.9502356,
+    "access_time": 1755168930.9502356,
+    "expire_time": 1755176130.9502356,
+    "expire_hours": 2
+  },
+  "fund_detail_000056": {
+    "create_time": 1755168930.9678533,
+    "access_time": 1755168930.9678533,
+    "expire_time": 1755176130.9678533,
+    "expire_hours": 2
+  },
+  "fund_detail_000273": {
+    "create_time": 1755168930.985811,
+    "access_time": 1755168930.985811,
+    "expire_time": 1755176130.985811,
+    "expire_hours": 2
+  },
+  "fund_detail_000378": {
+    "create_time": 1755168931.0033612,
+    "access_time": 1755168931.0033612,
+    "expire_time": 1755176131.0033612,
+    "expire_hours": 2
+  },
+  "fund_detail_000509": {
+    "create_time": 1755168931.0211954,
+    "access_time": 1755168931.0211954,
+    "expire_time": 1755176131.0211954,
+    "expire_hours": 2
+  },
+  "fund_detail_000590": {
+    "create_time": 1755168931.0390828,
+    "access_time": 1755168931.0390828,
+    "expire_time": 1755176131.0390828,
+    "expire_hours": 2
+  },
+  "fund_detail_000681": {
+    "create_time": 1755168931.056102,
+    "access_time": 1755168931.056102,
+    "expire_time": 1755176131.056102,
+    "expire_hours": 2
+  },
+  "fund_detail_000761": {
+    "create_time": 1755168931.0734882,
+    "access_time": 1755168931.0734882,
+    "expire_time": 1755176131.0734882,
+    "expire_hours": 2
+  },
+  "fund_detail_000849": {
+    "create_time": 1755168931.0914578,
+    "access_time": 1755168931.0914578,
+    "expire_time": 1755176131.0914578,
+    "expire_hours": 2
+  },
+  "fund_detail_000940": {
+    "create_time": 1755168931.1091638,
+    "access_time": 1755168931.1091638,
+    "expire_time": 1755176131.1091638,
+    "expire_hours": 2
+  },
+  "fund_detail_001031": {
+    "create_time": 1755168931.1271236,
+    "access_time": 1755168931.1271236,
+    "expire_time": 1755176131.1271236,
+    "expire_hours": 2
+  },
+  "fund_detail_001349": {
+    "create_time": 1755168931.1450138,
+    "access_time": 1755168931.1450138,
+    "expire_time": 1755176131.1450138,
+    "expire_hours": 2
+  },
+  "fund_detail_001315": {
+    "create_time": 1755168931.1628652,
+    "access_time": 1755168931.1628652,
+    "expire_time": 1755176131.1628652,
+    "expire_hours": 2
+  },
+  "fund_detail_000055": {
+    "create_time": 1755168931.1807833,
+    "access_time": 1755168931.1807833,
+    "expire_time": 1755176131.1807833,
+    "expire_hours": 2
+  },
+  "fund_detail_000274": {
+    "create_time": 1755168931.1986125,
+    "access_time": 1755168931.1986125,
+    "expire_time": 1755176131.1986125,
+    "expire_hours": 2
+  },
+  "fund_detail_000379": {
+    "create_time": 1755168931.2165446,
+    "access_time": 1755168931.2165446,
+    "expire_time": 1755176131.2165446,
+    "expire_hours": 2
+  },
+  "fund_detail_000511": {
+    "create_time": 1755168931.234727,
+    "access_time": 1755168931.234727,
+    "expire_time": 1755176131.234727,
+    "expire_hours": 2
+  },
+  "fund_detail_000591": {
+    "create_time": 1755168931.2527015,
+    "access_time": 1755168931.2527015,
+    "expire_time": 1755176131.2527015,
+    "expire_hours": 2
+  },
+  "fund_detail_000682": {
+    "create_time": 1755168931.2706783,
+    "access_time": 1755168931.2706783,
+    "expire_time": 1755176131.2706783,
+    "expire_hours": 2
+  },
+  "fund_detail_000762": {
+    "create_time": 1755168931.288707,
+    "access_time": 1755168931.288707,
+    "expire_time": 1755176131.288707,
+    "expire_hours": 2
+  },
+  "fund_detail_000850": {
+    "create_time": 1755168931.3068283,
+    "access_time": 1755168931.3068283,
+    "expire_time": 1755176131.3068283,
+    "expire_hours": 2
+  },
+  "fund_detail_000941": {
+    "create_time": 1755168931.324885,
+    "access_time": 1755168931.324885,
+    "expire_time": 1755176131.324885,
+    "expire_hours": 2
+  },
+  "fund_detail_001033": {
+    "create_time": 1755168931.342807,
+    "access_time": 1755168931.342807,
+    "expire_time": 1755176131.342807,
+    "expire_hours": 2
+  },
+  "fund_detail_001347": {
+    "create_time": 1755168931.3608084,
+    "access_time": 1755168931.3608084,
+    "expire_time": 1755176131.3608084,
+    "expire_hours": 2
+  },
+  "fund_detail_000380": {
+    "create_time": 1755168931.3786764,
+    "access_time": 1755168931.3786764,
+    "expire_time": 1755176131.3786764,
+    "expire_hours": 2
+  },
+  "fund_detail_000275": {
+    "create_time": 1755168931.3967495,
+    "access_time": 1755168931.3967495,
+    "expire_time": 1755176131.3967495,
+    "expire_hours": 2
+  },
+  "fund_detail_000512": {
+    "create_time": 1755168931.4148204,
+    "access_time": 1755168931.4148204,
+    "expire_time": 1755176131.4148204,
+    "expire_hours": 2
+  },
+  "fund_detail_000592": {
+    "create_time": 1755168931.4329495,
+    "access_time": 1755168931.4329495,
+    "expire_time": 1755176131.4329495,
+    "expire_hours": 2
+  },
+  "fund_detail_000683": {
+    "create_time": 1755168931.4509926,
+    "access_time": 1755168931.4509926,
+    "expire_time": 1755176131.4509926,
+    "expire_hours": 2
+  },
+  "fund_detail_000763": {
+    "create_time": 1755168931.4689996,
+    "access_time": 1755168931.4689996,
+    "expire_time": 1755176131.4689996,
+    "expire_hours": 2
+  },
+  "fund_detail_000854": {
+    "create_time": 1755168931.4870634,
+    "access_time": 1755168931.4870634,
+    "expire_time": 1755176131.4870634,
+    "expire_hours": 2
+  },
+  "fund_detail_000942": {
+    "create_time": 1755168931.5051475,
+    "access_time": 1755168931.5051475,
+    "expire_time": 1755176131.5051475,
+    "expire_hours": 2
+  },
+  "fund_detail_001035": {
+    "create_time": 1755168931.5262618,
+    "access_time": 1755168931.5262618,
+    "expire_time": 1755176131.5262618,
+    "expire_hours": 2
+  },
+  "fund_detail_001126": {
+    "create_time": 1755168931.545458,
+    "access_time": 1755168931.545458,
+    "expire_time": 1755176131.545458,
+    "expire_hours": 2
+  },
+  "fund_detail_001299": {
+    "create_time": 1755168931.5635424,
+    "access_time": 1755168931.5635424,
+    "expire_time": 1755176131.5635424,
+    "expire_hours": 2
+  },
+  "fund_detail_000083": {
+    "create_time": 1755168931.5817149,
+    "access_time": 1755168931.5817149,
+    "expire_time": 1755176131.5817149,
+    "expire_hours": 2
+  },
+  "fund_detail_001127": {
+    "create_time": 1755168931.6000264,
+    "access_time": 1755168931.6000264,
+    "expire_time": 1755176131.6000264,
+    "expire_hours": 2
+  },
+  "fund_detail_001258": {
+    "create_time": 1755168931.6183121,
+    "access_time": 1755168931.6183121,
+    "expire_time": 1755176131.6183121,
+    "expire_hours": 2
+  },
+  "fund_detail_000084": {
+    "create_time": 1755168931.6366,
+    "access_time": 1755168931.6366,
+    "expire_time": 1755176131.6366,
+    "expire_hours": 2
+  },
+  "fund_detail_001128": {
+    "create_time": 1755168931.6550887,
+    "access_time": 1755168931.6550887,
+    "expire_time": 1755176131.6550887,
+    "expire_hours": 2
+  },
+  "fund_detail_001228": {
+    "create_time": 1755168931.673348,
+    "access_time": 1755168931.673348,
+    "expire_time": 1755176131.673348,
+    "expire_hours": 2
+  },
+  "fund_detail_001351": {
+    "create_time": 1755168931.6917722,
+    "access_time": 1755168931.6917722,
+    "expire_time": 1755176131.6917722,
+    "expire_hours": 2
+  },
+  "fund_detail_000085": {
+    "create_time": 1755168931.7099934,
+    "access_time": 1755168931.7099934,
+    "expire_time": 1755176131.7099934,
+    "expire_hours": 2
+  },
+  "fund_detail_001133": {
+    "create_time": 1755168931.727962,
+    "access_time": 1755168931.727962,
+    "expire_time": 1755176131.727962,
+    "expire_hours": 2
+  },
+  "fund_detail_001316": {
+    "create_time": 1755168931.7461672,
+    "access_time": 1755168931.7461672,
+    "expire_time": 1755176131.7461672,
+    "expire_hours": 2
+  },
+  "fund_detail_000086": {
+    "create_time": 1755168931.7644117,
+    "access_time": 1755168931.7644117,
+    "expire_time": 1755176131.7644117,
+    "expire_hours": 2
+  },
+  "fund_detail_001134": {
+    "create_time": 1755168931.7826636,
+    "access_time": 1755168931.7826636,
+    "expire_time": 1755176131.7826636,
+    "expire_hours": 2
+  },
+  "fund_detail_000089": {
+    "create_time": 1755168931.8010604,
+    "access_time": 1755168931.8010604,
+    "expire_time": 1755176131.8010604,
+    "expire_hours": 2
+  },
+  "fund_detail_001135": {
+    "create_time": 1755168931.8194113,
+    "access_time": 1755168931.8194113,
+    "expire_time": 1755176131.8194113,
+    "expire_hours": 2
+  },
+  "fund_detail_001300": {
+    "create_time": 1755168931.836372,
+    "access_time": 1755168931.836372,
+    "expire_time": 1755176131.836372,
+    "expire_hours": 2
+  },
+  "fund_detail_000090": {
+    "create_time": 1755168931.8537989,
+    "access_time": 1755168931.8537989,
+    "expire_time": 1755176131.8537989,
+    "expire_hours": 2
+  },
+  "fund_detail_001136": {
+    "create_time": 1755168931.871467,
+    "access_time": 1755168931.871467,
+    "expire_time": 1755176131.871467,
+    "expire_hours": 2
+  },
+  "fund_detail_001261": {
+    "create_time": 1755168931.8898478,
+    "access_time": 1755168931.8898478,
+    "expire_time": 1755176131.8898478,
+    "expire_hours": 2
+  },
+  "fund_detail_000103": {
+    "create_time": 1755168931.908327,
+    "access_time": 1755168931.908327,
+    "expire_time": 1755176131.908327,
+    "expire_hours": 2
+  },
+  "fund_detail_001139": {
+    "create_time": 1755168931.9265084,
+    "access_time": 1755168931.9265084,
+    "expire_time": 1755176131.9265084,
+    "expire_hours": 2
+  },
+  "fund_detail_001229": {
+    "create_time": 1755168931.945009,
+    "access_time": 1755168931.945009,
+    "expire_time": 1755176131.945009,
+    "expire_hours": 2
+  },
+  "fund_detail_001352": {
+    "create_time": 1755168931.963611,
+    "access_time": 1755168931.963611,
+    "expire_time": 1755176131.963611,
+    "expire_hours": 2
+  },
+  "fund_detail_000104": {
+    "create_time": 1755168931.9822876,
+    "access_time": 1755168931.9822876,
+    "expire_time": 1755176131.9822876,
+    "expire_hours": 2
+  },
+  "fund_detail_001140": {
+    "create_time": 1755168932.0008016,
+    "access_time": 1755168932.0008016,
+    "expire_time": 1755176132.0008016,
+    "expire_hours": 2
+  },
+  "fund_detail_001318": {
+    "create_time": 1755168932.0192266,
+    "access_time": 1755168932.0192266,
+    "expire_time": 1755176132.0192266,
+    "expire_hours": 2
+  },
+  "fund_detail_000105": {
+    "create_time": 1755168932.0379326,
+    "access_time": 1755168932.0379326,
+    "expire_time": 1755176132.0379326,
+    "expire_hours": 2
+  },
+  "fund_detail_001143": {
+    "create_time": 1755168932.0563204,
+    "access_time": 1755168932.0563204,
+    "expire_time": 1755176132.0563204,
+    "expire_hours": 2
+  },
+  "fund_detail_000106": {
+    "create_time": 1755168932.074973,
+    "access_time": 1755168932.074973,
+    "expire_time": 1755176132.074973,
+    "expire_hours": 2
+  },
+  "fund_detail_001144": {
+    "create_time": 1755168932.0936275,
+    "access_time": 1755168932.0936275,
+    "expire_time": 1755176132.0936275,
+    "expire_hours": 2
+  },
+  "fund_detail_001301": {
+    "create_time": 1755168932.1121664,
+    "access_time": 1755168932.1121664,
+    "expire_time": 1755176132.1121664,
+    "expire_hours": 2
+  },
+  "fund_detail_000107": {
+    "create_time": 1755168932.1306736,
+    "access_time": 1755168932.1306736,
+    "expire_time": 1755176132.1306736,
+    "expire_hours": 2
+  },
+  "fund_detail_001146": {
+    "create_time": 1755168932.1493704,
+    "access_time": 1755168932.1493704,
+    "expire_time": 1755176132.1493704,
+    "expire_hours": 2
+  },
+  "fund_detail_001265": {
+    "create_time": 1755168932.1679761,
+    "access_time": 1755168932.1679761,
+    "expire_time": 1755176132.1679761,
+    "expire_hours": 2
+  },
+  "fund_detail_000108": {
+    "create_time": 1755168932.186585,
+    "access_time": 1755168932.186585,
+    "expire_time": 1755176132.186585,
+    "expire_hours": 2
+  },
+  "fund_detail_001147": {
+    "create_time": 1755168932.2053413,
+    "access_time": 1755168932.2053413,
+    "expire_time": 1755176132.2053413,
+    "expire_hours": 2
+  },
+  "fund_detail_001230": {
+    "create_time": 1755168932.2242322,
+    "access_time": 1755168932.2242322,
+    "expire_time": 1755176132.2242322,
+    "expire_hours": 2
+  },
+  "fund_detail_001355": {
+    "create_time": 1755168932.2428286,
+    "access_time": 1755168932.2428286,
+    "expire_time": 1755176132.2428286,
+    "expire_hours": 2
+  },
+  "fund_detail_000109": {
+    "create_time": 1755168932.2613664,
+    "access_time": 1755168932.2613664,
+    "expire_time": 1755176132.2613664,
+    "expire_hours": 2
+  },
+  "fund_detail_001148": {
+    "create_time": 1755168932.280018,
+    "access_time": 1755168932.280018,
+    "expire_time": 1755176132.280018,
+    "expire_hours": 2
+  },
+  "fund_detail_001319": {
+    "create_time": 1755168932.2980914,
+    "access_time": 1755168932.2980914,
+    "expire_time": 1755176132.2980914,
+    "expire_hours": 2
+  },
+  "fund_detail_000110": {
+    "create_time": 1755168932.3161757,
+    "access_time": 1755168932.3161757,
+    "expire_time": 1755176132.3161757,
+    "expire_hours": 2
+  },
+  "fund_detail_001149": {
+    "create_time": 1755168932.3345718,
+    "access_time": 1755168932.3345718,
+    "expire_time": 1755176132.3345718,
+    "expire_hours": 2
+  },
+  "fund_detail_000111": {
+    "create_time": 1755168932.3533187,
+    "access_time": 1755168932.3533187,
+    "expire_time": 1755176132.3533187,
+    "expire_hours": 2
+  },
+  "fund_detail_001150": {
+    "create_time": 1755168932.372141,
+    "access_time": 1755168932.372141,
+    "expire_time": 1755176132.372141,
+    "expire_hours": 2
+  },
+  "fund_detail_000112": {
+    "create_time": 1755168932.3903878,
+    "access_time": 1755168932.3903878,
+    "expire_time": 1755176132.3903878,
+    "expire_hours": 2
+  },
+  "fund_detail_001151": {
+    "create_time": 1755168932.408366,
+    "access_time": 1755168932.408366,
+    "expire_time": 1755176132.408366,
+    "expire_hours": 2
+  },
+  "fund_detail_001266": {
+    "create_time": 1755168932.427288,
+    "access_time": 1755168932.427288,
+    "expire_time": 1755176132.427288,
+    "expire_hours": 2
+  },
+  "fund_detail_000116": {
+    "create_time": 1755168932.4461772,
+    "access_time": 1755168932.4461772,
+    "expire_time": 1755176132.4461772,
+    "expire_hours": 2
+  },
+  "fund_detail_001152": {
+    "create_time": 1755168932.4648752,
+    "access_time": 1755168932.4648752,
+    "expire_time": 1755176132.4648752,
+    "expire_hours": 2
+  },
+  "fund_detail_001231": {
+    "create_time": 1755168932.4837956,
+    "access_time": 1755168932.4837956,
+    "expire_time": 1755176132.4837956,
+    "expire_hours": 2
+  },
+  "fund_detail_001356": {
+    "create_time": 1755168932.502842,
+    "access_time": 1755168932.502842,
+    "expire_time": 1755176132.502842,
+    "expire_hours": 2
+  },
+  "fund_detail_000117": {
+    "create_time": 1755168932.5218878,
+    "access_time": 1755168932.5218878,
+    "expire_time": 1755176132.5218878,
+    "expire_hours": 2
+  },
+  "fund_detail_001153": {
+    "create_time": 1755168932.542303,
+    "access_time": 1755168932.542303,
+    "expire_time": 1755176132.542303,
+    "expire_hours": 2
+  },
+  "fund_detail_001320": {
+    "create_time": 1755168932.5615082,
+    "access_time": 1755168932.5615082,
+    "expire_time": 1755176132.5615082,
+    "expire_hours": 2
+  },
+  "fund_detail_000118": {
+    "create_time": 1755168932.580398,
+    "access_time": 1755168932.580398,
+    "expire_time": 1755176132.580398,
+    "expire_hours": 2
+  },
+  "fund_detail_001154": {
+    "create_time": 1755168932.5985396,
+    "access_time": 1755168932.5985396,
+    "expire_time": 1755176132.5985396,
+    "expire_hours": 2
+  },
+  "fund_detail_000119": {
+    "create_time": 1755168932.6177385,
+    "access_time": 1755168932.6177385,
+    "expire_time": 1755176132.6177385,
+    "expire_hours": 2
+  },
+  "fund_detail_001156": {
+    "create_time": 1755168932.6360054,
+    "access_time": 1755168932.6360054,
+    "expire_time": 1755176132.6360054,
+    "expire_hours": 2
+  },
+  "fund_detail_000120": {
+    "create_time": 1755168932.653892,
+    "access_time": 1755168932.653892,
+    "expire_time": 1755176132.653892,
+    "expire_hours": 2
+  },
+  "fund_detail_001157": {
+    "create_time": 1755168932.6717339,
+    "access_time": 1755168932.6717339,
+    "expire_time": 1755176132.6717339,
+    "expire_hours": 2
+  },
+  "fund_detail_001267": {
+    "create_time": 1755168932.6896129,
+    "access_time": 1755168932.6896129,
+    "expire_time": 1755176132.6896129,
+    "expire_hours": 2
+  },
+  "fund_detail_000121": {
+    "create_time": 1755168932.70746,
+    "access_time": 1755168932.70746,
+    "expire_time": 1755176132.70746,
+    "expire_hours": 2
+  },
+  "fund_detail_001158": {
+    "create_time": 1755168932.7262344,
+    "access_time": 1755168932.7262344,
+    "expire_time": 1755176132.7262344,
+    "expire_hours": 2
+  },
+  "fund_detail_001232": {
+    "create_time": 1755168932.7457592,
+    "access_time": 1755168932.7457592,
+    "expire_time": 1755176132.7457592,
+    "expire_hours": 2
+  },
+  "fund_detail_001357": {
+    "create_time": 1755168932.7646134,
+    "access_time": 1755168932.7646134,
+    "expire_time": 1755176132.7646134,
+    "expire_hours": 2
+  },
+  "fund_detail_000122": {
+    "create_time": 1755168932.7831275,
+    "access_time": 1755168932.7831275,
+    "expire_time": 1755176132.7831275,
+    "expire_hours": 2
+  },
+  "fund_detail_001162": {
+    "create_time": 1755168932.801177,
+    "access_time": 1755168932.801177,
+    "expire_time": 1755176132.801177,
+    "expire_hours": 2
+  },
+  "fund_detail_001322": {
+    "create_time": 1755168932.8203938,
+    "access_time": 1755168932.8203938,
+    "expire_time": 1755176132.8203938,
+    "expire_hours": 2
+  },
+  "fund_detail_000123": {
+    "create_time": 1755168932.839689,
+    "access_time": 1755168932.839689,
+    "expire_time": 1755176132.839689,
+    "expire_hours": 2
+  },
+  "fund_detail_001163": {
+    "create_time": 1755168932.8590043,
+    "access_time": 1755168932.8590043,
+    "expire_time": 1755176132.8590043,
+    "expire_hours": 2
+  },
+  "fund_detail_000124": {
+    "create_time": 1755168932.8772233,
+    "access_time": 1755168932.8772233,
+    "expire_time": 1755176132.8772233,
+    "expire_hours": 2
+  },
+  "fund_detail_001164": {
+    "create_time": 1755168932.896017,
+    "access_time": 1755168932.896017,
+    "expire_time": 1755176132.896017,
+    "expire_hours": 2
+  },
+  "fund_detail_000126": {
+    "create_time": 1755168932.9145262,
+    "access_time": 1755168932.9145262,
+    "expire_time": 1755176132.9145262,
+    "expire_hours": 2
+  },
+  "fund_detail_001165": {
+    "create_time": 1755168932.9330466,
+    "access_time": 1755168932.9330466,
+    "expire_time": 1755176132.9330466,
+    "expire_hours": 2
+  },
+  "fund_detail_001268": {
+    "create_time": 1755168932.9521883,
+    "access_time": 1755168932.9521883,
+    "expire_time": 1755176132.9521883,
+    "expire_hours": 2
+  },
+  "fund_detail_000127": {
+    "create_time": 1755168932.9714675,
+    "access_time": 1755168932.9714675,
+    "expire_time": 1755176132.9714675,
+    "expire_hours": 2
+  },
+  "fund_detail_001166": {
+    "create_time": 1755168932.99096,
+    "access_time": 1755168932.99096,
+    "expire_time": 1755176132.99096,
+    "expire_hours": 2
+  },
+  "fund_detail_001233": {
+    "create_time": 1755168933.0102599,
+    "access_time": 1755168933.0102599,
+    "expire_time": 1755176133.0102599,
+    "expire_hours": 2
+  },
+  "fund_detail_000128": {
+    "create_time": 1755168933.0296924,
+    "access_time": 1755168933.0296924,
+    "expire_time": 1755176133.0296924,
+    "expire_hours": 2
+  },
+  "fund_detail_001167": {
+    "create_time": 1755168933.049133,
+    "access_time": 1755168933.049133,
+    "expire_time": 1755176133.049133,
+    "expire_hours": 2
+  },
+  "fund_detail_001358": {
+    "create_time": 1755168933.0683002,
+    "access_time": 1755168933.0683002,
+    "expire_time": 1755176133.0683002,
+    "expire_hours": 2
+  },
+  "fund_detail_001323": {
+    "create_time": 1755168933.0877573,
+    "access_time": 1755168933.0877573,
+    "expire_time": 1755176133.0877573,
+    "expire_hours": 2
+  },
+  "fund_detail_000129": {
+    "create_time": 1755168933.1071954,
+    "access_time": 1755168933.1071954,
+    "expire_time": 1755176133.1071954,
+    "expire_hours": 2
+  },
+  "fund_detail_001170": {
+    "create_time": 1755168933.1267157,
+    "access_time": 1755168933.1267157,
+    "expire_time": 1755176133.1267157,
+    "expire_hours": 2
+  },
+  "fund_detail_000004": {
+    "create_time": 1755168933.146247,
+    "access_time": 1755168933.146247,
+    "expire_time": 1755176133.146247,
+    "expire_hours": 2
+  },
+  "fund_detail_000071": {
+    "create_time": 1755168933.1657631,
+    "access_time": 1755168933.1657631,
+    "expire_time": 1755176133.1657631,
+    "expire_hours": 2
+  },
+  "fund_detail_000130": {
+    "create_time": 1755168933.18464,
+    "access_time": 1755168933.18464,
+    "expire_time": 1755176133.18464,
+    "expire_hours": 2
+  },
+  "fund_detail_001171": {
+    "create_time": 1755168933.204044,
+    "access_time": 1755168933.204044,
+    "expire_time": 1755176133.204044,
+    "expire_hours": 2
+  },
+  "fund_detail_000046": {
+    "create_time": 1755168933.2234983,
+    "access_time": 1755168933.2234983,
+    "expire_time": 1755176133.2234983,
+    "expire_hours": 2
+  },
+  "fund_detail_000061": {
+    "create_time": 1755168933.2424195,
+    "access_time": 1755168933.2424195,
+    "expire_time": 1755176133.2424195,
+    "expire_hours": 2
+  },
+  "fund_detail_000131": {
+    "create_time": 1755168933.2654376,
+    "access_time": 1755168933.2654376,
+    "expire_time": 1755176133.2654376,
+    "expire_hours": 2
+  },
+  "fund_detail_001172": {
+    "create_time": 1755168933.2851932,
+    "access_time": 1755168933.2851932,
+    "expire_time": 1755176133.2851932,
+    "expire_hours": 2
+  },
+  "fund_detail_001269": {
+    "create_time": 1755168933.3046446,
+    "access_time": 1755168933.3046446,
+    "expire_time": 1755176133.3046446,
+    "expire_hours": 2
+  },
+  "fund_detail_000033": {
+    "create_time": 1755168933.3242314,
+    "access_time": 1755168933.3242314,
+    "expire_time": 1755176133.3242314,
+    "expire_hours": 2
+  },
+  "fund_detail_000058": {
+    "create_time": 1755168933.344227,
+    "access_time": 1755168933.344227,
+    "expire_time": 1755176133.344227,
+    "expire_hours": 2
+  },
+  "fund_detail_000134": {
+    "create_time": 1755168933.3636923,
+    "access_time": 1755168933.3636923,
+    "expire_time": 1755176133.3636923,
+    "expire_hours": 2
+  },
+  "fund_detail_001173": {
+    "create_time": 1755168933.3832633,
+    "access_time": 1755168933.3832633,
+    "expire_time": 1755176133.3832633,
+    "expire_hours": 2
+  },
+  "fund_detail_001234": {
+    "create_time": 1755168933.4030967,
+    "access_time": 1755168933.4030967,
+    "expire_time": 1755176133.4030967,
+    "expire_hours": 2
+  },
+  "fund_detail_000016": {
+    "create_time": 1755168933.4224834,
+    "access_time": 1755168933.4224834,
+    "expire_time": 1755176133.4224834,
+    "expire_hours": 2
+  },
+  "fund_detail_000079": {
+    "create_time": 1755168933.4421406,
+    "access_time": 1755168933.4421406,
+    "expire_time": 1755176133.4421406,
+    "expire_hours": 2
+  },
+  "fund_detail_000135": {
+    "create_time": 1755168933.461655,
+    "access_time": 1755168933.461655,
+    "expire_time": 1755176133.461655,
+    "expire_hours": 2
+  },
+  "fund_detail_001174": {
+    "create_time": 1755168933.481016,
+    "access_time": 1755168933.481016,
+    "expire_time": 1755176133.481016,
+    "expire_hours": 2
+  },
+  "fund_detail_001359": {
+    "create_time": 1755168933.4997947,
+    "access_time": 1755168933.4997947,
+    "expire_time": 1755176133.4997947,
+    "expire_hours": 2
+  },
+  "fund_detail_001324": {
+    "create_time": 1755168933.5187626,
+    "access_time": 1755168933.5187626,
+    "expire_time": 1755176133.5187626,
+    "expire_hours": 2
+  },
+  "fund_detail_000001": {
+    "create_time": 1755168933.538141,
+    "access_time": 1755168933.538141,
+    "expire_time": 1755176133.538141,
+    "expire_hours": 2
+  },
+  "fund_detail_000014": {
+    "create_time": 1755168933.558116,
+    "access_time": 1755168933.558116,
+    "expire_time": 1755176133.558116,
+    "expire_hours": 2
+  },
+  "fund_detail_000073": {
+    "create_time": 1755168933.57786,
+    "access_time": 1755168933.57786,
+    "expire_time": 1755176133.57786,
+    "expire_hours": 2
+  },
+  "fund_detail_000136": {
+    "create_time": 1755168933.5964522,
+    "access_time": 1755168933.5964522,
+    "expire_time": 1755176133.5964522,
+    "expire_hours": 2
+  },
+  "fund_detail_001175": {
+    "create_time": 1755168933.6160245,
+    "access_time": 1755168933.6160245,
+    "expire_time": 1755176133.6160245,
+    "expire_hours": 2
+  },
+  "fund_detail_000010": {
+    "create_time": 1755168933.63586,
+    "access_time": 1755168933.63586,
+    "expire_time": 1755176133.63586,
+    "expire_hours": 2
+  },
+  "fund_detail_000137": {
+    "create_time": 1755168933.6556804,
+    "access_time": 1755168933.6556804,
+    "expire_time": 1755176133.6556804,
+    "expire_hours": 2
+  },
+  "fund_detail_001176": {
+    "create_time": 1755168933.675049,
+    "access_time": 1755168933.675049,
+    "expire_time": 1755176133.675049,
+    "expire_hours": 2
+  },
+  "fund_detail_001068": {
+    "create_time": 1755168933.6951232,
+    "access_time": 1755168933.6951232,
+    "expire_time": 1755176133.6951232,
+    "expire_hours": 2
+  },
+  "fund_detail_000054": {
+    "create_time": 1755168933.7152073,
+    "access_time": 1755168933.7152073,
+    "expire_time": 1755176133.7152073,
+    "expire_hours": 2
+  },
+  "fund_detail_000138": {
+    "create_time": 1755168933.7350833,
+    "access_time": 1755168933.7350833,
+    "expire_time": 1755176133.7350833,
+    "expire_hours": 2
+  },
+  "fund_detail_001177": {
+    "create_time": 1755168933.75508,
+    "access_time": 1755168933.75508,
+    "expire_time": 1755176133.75508,
+    "expire_hours": 2
+  },
+  "fund_detail_001270": {
+    "create_time": 1755168933.7751224,
+    "access_time": 1755168933.7751224,
+    "expire_time": 1755176133.7751224,
+    "expire_hours": 2
+  },
+  "fund_detail_000139": {
+    "create_time": 1755168933.7951176,
+    "access_time": 1755168933.7951176,
+    "expire_time": 1755176133.7951176,
+    "expire_hours": 2
+  },
+  "fund_detail_001178": {
+    "create_time": 1755168933.8141232,
+    "access_time": 1755168933.8141232,
+    "expire_time": 1755176133.8141232,
+    "expire_hours": 2
+  },
+  "fund_detail_001235": {
+    "create_time": 1755168933.8336587,
+    "access_time": 1755168933.8336587,
+    "expire_time": 1755176133.8336587,
+    "expire_hours": 2
+  },
+  "fund_detail_000044": {
+    "create_time": 1755168933.8536568,
+    "access_time": 1755168933.8536568,
+    "expire_time": 1755176133.8536568,
+    "expire_hours": 2
+  },
+  "fund_detail_000140": {
+    "create_time": 1755168933.8737278,
+    "access_time": 1755168933.8737278,
+    "expire_time": 1755176133.8737278,
+    "expire_hours": 2
+  },
+  "fund_detail_001179": {
+    "create_time": 1755168933.894065,
+    "access_time": 1755168933.894065,
+    "expire_time": 1755176133.894065,
+    "expire_hours": 2
+  },
+  "fund_detail_001361": {
+    "create_time": 1755168933.9138122,
+    "access_time": 1755168933.9138122,
+    "expire_time": 1755176133.9138122,
+    "expire_hours": 2
+  },
+  "fund_detail_001325": {
+    "create_time": 1755168933.9330153,
+    "access_time": 1755168933.9330153,
+    "expire_time": 1755176133.9330153,
+    "expire_hours": 2
+  },
+  "fund_detail_000039": {
+    "create_time": 1755168933.9520268,
+    "access_time": 1755168933.9520268,
+    "expire_time": 1755176133.9520268,
+    "expire_hours": 2
+  },
+  "fund_detail_000141": {
+    "create_time": 1755168933.9717982,
+    "access_time": 1755168933.9717982,
+    "expire_time": 1755176133.9717982,
+    "expire_hours": 2
+  },
+  "fund_detail_001180": {
+    "create_time": 1755168933.9920974,
+    "access_time": 1755168933.9920974,
+    "expire_time": 1755176133.9920974,
+    "expire_hours": 2
+  },
+  "fund_detail_000029": {
+    "create_time": 1755168934.0122516,
+    "access_time": 1755168934.0122516,
+    "expire_time": 1755176134.0122516,
+    "expire_hours": 2
+  },
+  "fund_detail_000072": {
+    "create_time": 1755168934.0323367,
+    "access_time": 1755168934.0323367,
+    "expire_time": 1755176134.0323367,
+    "expire_hours": 2
+  },
+  "fund_detail_000142": {
+    "create_time": 1755168934.05265,
+    "access_time": 1755168934.05265,
+    "expire_time": 1755176134.05265,
+    "expire_hours": 2
+  },
+  "fund_detail_001181": {
+    "create_time": 1755168934.0728426,
+    "access_time": 1755168934.0728426,
+    "expire_time": 1755176134.0728426,
+    "expire_hours": 2
+  },
+  "fund_detail_000024": {
+    "create_time": 1755168934.0927885,
+    "access_time": 1755168934.0927885,
+    "expire_time": 1755176134.0927885,
+    "expire_hours": 2
+  },
+  "fund_detail_000066": {
+    "create_time": 1755168934.1129856,
+    "access_time": 1755168934.1129856,
+    "expire_time": 1755176134.1129856,
+    "expire_hours": 2
+  },
+  "fund_detail_000143": {
+    "create_time": 1755168934.1332002,
+    "access_time": 1755168934.1332002,
+    "expire_time": 1755176134.1332002,
+    "expire_hours": 2
+  },
+  "fund_detail_001182": {
+    "create_time": 1755168934.1533895,
+    "access_time": 1755168934.1533895,
+    "expire_time": 1755176134.1533895,
+    "expire_hours": 2
+  },
+  "fund_detail_001271": {
+    "create_time": 1755168934.1735365,
+    "access_time": 1755168934.1735365,
+    "expire_time": 1755176134.1735365,
+    "expire_hours": 2
+  },
+  "fund_detail_000020": {
+    "create_time": 1755168934.1938822,
+    "access_time": 1755168934.1938822,
+    "expire_time": 1755176134.1938822,
+    "expire_hours": 2
+  },
+  "fund_detail_000067": {
+    "create_time": 1755168934.2142851,
+    "access_time": 1755168934.2142851,
+    "expire_time": 1755176134.2142851,
+    "expire_hours": 2
+  },
+  "fund_detail_000147": {
+    "create_time": 1755168934.234785,
+    "access_time": 1755168934.234785,
+    "expire_time": 1755176134.234785,
+    "expire_hours": 2
+  },
+  "fund_detail_001183": {
+    "create_time": 1755168934.2550237,
+    "access_time": 1755168934.2550237,
+    "expire_time": 1755176134.2550237,
+    "expire_hours": 2
+  },
+  "fund_detail_001236": {
+    "create_time": 1755168934.275403,
+    "access_time": 1755168934.275403,
+    "expire_time": 1755176134.275403,
+    "expire_hours": 2
+  },
+  "fund_detail_000051": {
+    "create_time": 1755168934.2957397,
+    "access_time": 1755168934.2957397,
+    "expire_time": 1755176134.2957397,
+    "expire_hours": 2
+  },
+  "fund_detail_000148": {
+    "create_time": 1755168934.3162072,
+    "access_time": 1755168934.3162072,
+    "expire_time": 1755176134.3162072,
+    "expire_hours": 2
+  },
+  "fund_detail_001184": {
+    "create_time": 1755168934.336701,
+    "access_time": 1755168934.336701,
+    "expire_time": 1755176134.336701,
+    "expire_hours": 2
+  },
+  "fund_detail_001362": {
+    "create_time": 1755168934.3569794,
+    "access_time": 1755168934.3569794,
+    "expire_time": 1755176134.3569794,
+    "expire_hours": 2
+  },
+  "fund_detail_001326": {
+    "create_time": 1755168934.3773162,
+    "access_time": 1755168934.3773162,
+    "expire_time": 1755176134.3773162,
+    "expire_hours": 2
+  },
+  "fund_detail_000041": {
+    "create_time": 1755168934.3977275,
+    "access_time": 1755168934.3977275,
+    "expire_time": 1755176134.3977275,
+    "expire_hours": 2
+  },
+  "fund_detail_000149": {
+    "create_time": 1755168934.4183185,
+    "access_time": 1755168934.4183185,
+    "expire_time": 1755176134.4183185,
+    "expire_hours": 2
+  },
+  "fund_detail_001186": {
+    "create_time": 1755168934.4385867,
+    "access_time": 1755168934.4385867,
+    "expire_time": 1755176134.4385867,
+    "expire_hours": 2
+  },
+  "fund_detail_000006": {
+    "create_time": 1755168934.4589674,
+    "access_time": 1755168934.4589674,
+    "expire_time": 1755176134.4589674,
+    "expire_hours": 2
+  },
+  "fund_detail_000150": {
+    "create_time": 1755168934.4794767,
+    "access_time": 1755168934.4794767,
+    "expire_time": 1755176134.4794767,
+    "expire_hours": 2
+  },
+  "fund_detail_001187": {
+    "create_time": 1755168934.500143,
+    "access_time": 1755168934.500143,
+    "expire_time": 1755176134.500143,
+    "expire_hours": 2
+  },
+  "fund_detail_000011": {
+    "create_time": 1755168934.520511,
+    "access_time": 1755168934.520511,
+    "expire_time": 1755176134.520511,
+    "expire_hours": 2
+  },
+  "fund_detail_000081": {
+    "create_time": 1755168934.5398948,
+    "access_time": 1755168934.5398948,
+    "expire_time": 1755176134.5398948,
+    "expire_hours": 2
+  },
+  "fund_detail_000152": {
+    "create_time": 1755168934.5602522,
+    "access_time": 1755168934.5602522,
+    "expire_time": 1755176134.5602522,
+    "expire_hours": 2
+  },
+  "fund_detail_001188": {
+    "create_time": 1755168934.5809038,
+    "access_time": 1755168934.5809038,
+    "expire_time": 1755176134.5809038,
+    "expire_hours": 2
+  },
+  "fund_detail_001272": {
+    "create_time": 1755168934.6015317,
+    "access_time": 1755168934.6015317,
+    "expire_time": 1755176134.6015317,
+    "expire_hours": 2
+  },
+  "fund_detail_000030": {
+    "create_time": 1755168934.6218004,
+    "access_time": 1755168934.6218004,
+    "expire_time": 1755176134.6218004,
+    "expire_hours": 2
+  },
+  "fund_detail_000069": {
+    "create_time": 1755168934.6425126,
+    "access_time": 1755168934.6425126,
+    "expire_time": 1755176134.6425126,
+    "expire_hours": 2
+  },
+  "fund_detail_000153": {
+    "create_time": 1755168934.6629546,
+    "access_time": 1755168934.6629546,
+    "expire_time": 1755176134.6629546,
+    "expire_hours": 2
+  },
+  "fund_detail_001189": {
+    "create_time": 1755168934.6832259,
+    "access_time": 1755168934.6832259,
+    "expire_time": 1755176134.6832259,
+    "expire_hours": 2
+  },
+  "fund_detail_001237": {
+    "create_time": 1755168934.7030945,
+    "access_time": 1755168934.7030945,
+    "expire_time": 1755176134.7030945,
+    "expire_hours": 2
+  },
+  "fund_detail_000015": {
+    "create_time": 1755168934.7237196,
+    "access_time": 1755168934.7237196,
+    "expire_time": 1755176134.7237196,
+    "expire_hours": 2
+  },
+  "fund_detail_000068": {
+    "create_time": 1755168934.744308,
+    "access_time": 1755168934.744308,
+    "expire_time": 1755176134.744308,
+    "expire_hours": 2
+  },
+  "fund_detail_000154": {
+    "create_time": 1755168934.7650144,
+    "access_time": 1755168934.7650144,
+    "expire_time": 1755176134.7650144,
+    "expire_hours": 2
+  },
+  "fund_detail_001190": {
+    "create_time": 1755168934.785768,
+    "access_time": 1755168934.785768,
+    "expire_time": 1755176134.785768,
+    "expire_hours": 2
+  },
+  "fund_detail_001363": {
+    "create_time": 1755168934.806723,
+    "access_time": 1755168934.806723,
+    "expire_time": 1755176134.806723,
+    "expire_hours": 2
+  },
+  "fund_detail_001327": {
+    "create_time": 1755168934.8274343,
+    "access_time": 1755168934.8274343,
+    "expire_time": 1755176134.8274343,
+    "expire_hours": 2
+  },
+  "fund_detail_000080": {
+    "create_time": 1755168934.848121,
+    "access_time": 1755168934.848121,
+    "expire_time": 1755176134.848121,
+    "expire_hours": 2
+  },
+  "fund_detail_000003": {
+    "create_time": 1755168934.8689437,
+    "access_time": 1755168934.8689437,
+    "expire_time": 1755176134.8689437,
+    "expire_hours": 2
+  },
+  "fund_detail_000032": {
+    "create_time": 1755168934.889753,
+    "access_time": 1755168934.889753,
+    "expire_time": 1755176134.889753,
+    "expire_hours": 2
+  },
+  "fund_detail_000155": {
+    "create_time": 1755168934.910586,
+    "access_time": 1755168934.910586,
+    "expire_time": 1755176134.910586,
+    "expire_hours": 2
+  },
+  "fund_detail_001191": {
+    "create_time": 1755168934.9311602,
+    "access_time": 1755168934.9311602,
+    "expire_time": 1755176134.9311602,
+    "expire_hours": 2
+  },
+  "fund_detail_000008": {
+    "create_time": 1755168934.95197,
+    "access_time": 1755168934.95197,
+    "expire_time": 1755176134.95197,
+    "expire_hours": 2
+  },
+  "fund_detail_000074": {
+    "create_time": 1755168934.972989,
+    "access_time": 1755168934.972989,
+    "expire_time": 1755176134.972989,
+    "expire_hours": 2
+  },
+  "fund_detail_000157": {
+    "create_time": 1755168934.9939628,
+    "access_time": 1755168934.9939628,
+    "expire_time": 1755176134.9939628,
+    "expire_hours": 2
+  },
+  "fund_detail_001192": {
+    "create_time": 1755168935.0147476,
+    "access_time": 1755168935.0147476,
+    "expire_time": 1755176135.0147476,
+    "expire_hours": 2
+  },
+  "fund_detail_000009": {
+    "create_time": 1755168935.0359583,
+    "access_time": 1755168935.0359583,
+    "expire_time": 1755176135.0359583,
+    "expire_hours": 2
+  },
+  "fund_detail_000057": {
+    "create_time": 1755168935.0568993,
+    "access_time": 1755168935.0568993,
+    "expire_time": 1755176135.0568993,
+    "expire_hours": 2
+  },
+  "fund_detail_000158": {
+    "create_time": 1755168935.077656,
+    "access_time": 1755168935.077656,
+    "expire_time": 1755176135.077656,
+    "expire_hours": 2
+  },
+  "fund_detail_001193": {
+    "create_time": 1755168935.0985732,
+    "access_time": 1755168935.0985732,
+    "expire_time": 1755176135.0985732,
+    "expire_hours": 2
+  },
+  "fund_detail_001275": {
+    "create_time": 1755168935.119395,
+    "access_time": 1755168935.119395,
+    "expire_time": 1755176135.119395,
+    "expire_hours": 2
+  },
+  "fund_detail_000031": {
+    "create_time": 1755168935.1404264,
+    "access_time": 1755168935.1404264,
+    "expire_time": 1755176135.1404264,
+    "expire_hours": 2
+  },
+  "fund_detail_000064": {
+    "create_time": 1755168935.1614115,
+    "access_time": 1755168935.1614115,
+    "expire_time": 1755176135.1614115,
+    "expire_hours": 2
+  },
+  "fund_detail_000159": {
+    "create_time": 1755168935.1827645,
+    "access_time": 1755168935.1827645,
+    "expire_time": 1755176135.1827645,
+    "expire_hours": 2
+  },
+  "fund_detail_001194": {
+    "create_time": 1755168935.2038271,
+    "access_time": 1755168935.2038271,
+    "expire_time": 1755176135.2038271,
+    "expire_hours": 2
+  },
+  "fund_detail_001239": {
+    "create_time": 1755168935.2249572,
+    "access_time": 1755168935.2249572,
+    "expire_time": 1755176135.2249572,
+    "expire_hours": 2
+  },
+  "fund_detail_000047": {
+    "create_time": 1755168935.2459838,
+    "access_time": 1755168935.2459838,
+    "expire_time": 1755176135.2459838,
+    "expire_hours": 2
+  },
+  "fund_detail_000077": {
+    "create_time": 1755168935.267208,
+    "access_time": 1755168935.267208,
+    "expire_time": 1755176135.267208,
+    "expire_hours": 2
+  },
+  "fund_detail_000160": {
+    "create_time": 1755168935.2879553,
+    "access_time": 1755168935.2879553,
+    "expire_time": 1755176135.2879553,
+    "expire_hours": 2
+  },
+  "fund_detail_001195": {
+    "create_time": 1755168935.3090222,
+    "access_time": 1755168935.3090222,
+    "expire_time": 1755176135.3090222,
+    "expire_hours": 2
+  },
+  "fund_detail_001328": {
+    "create_time": 1755168935.3305984,
+    "access_time": 1755168935.3305984,
+    "expire_time": 1755176135.3305984,
+    "expire_hours": 2
+  },
+  "fund_detail_000076": {
+    "create_time": 1755168935.352079,
+    "access_time": 1755168935.352079,
+    "expire_time": 1755176135.352079,
+    "expire_hours": 2
+  },
+  "fund_detail_000161": {
+    "create_time": 1755168935.3731806,
+    "access_time": 1755168935.3731806,
+    "expire_time": 1755176135.3731806,
+    "expire_hours": 2
+  },
+  "fund_detail_001197": {
+    "create_time": 1755168935.3941448,
+    "access_time": 1755168935.3941448,
+    "expire_time": 1755176135.3941448,
+    "expire_hours": 2
+  },
+  "fund_detail_000048": {
+    "create_time": 1755168935.415592,
+    "access_time": 1755168935.415592,
+    "expire_time": 1755176135.415592,
+    "expire_hours": 2
+  },
+  "fund_detail_000078": {
+    "create_time": 1755168935.4365985,
+    "access_time": 1755168935.4365985,
+    "expire_time": 1755176135.4365985,
+    "expire_hours": 2
+  },
+  "fund_detail_000162": {
+    "create_time": 1755168935.4577737,
+    "access_time": 1755168935.4577737,
+    "expire_time": 1755176135.4577737,
+    "expire_hours": 2
+  },
+  "fund_detail_001198": {
+    "create_time": 1755168935.4789035,
+    "access_time": 1755168935.4789035,
+    "expire_time": 1755176135.4789035,
+    "expire_hours": 2
+  },
+  "fund_detail_000028": {
+    "create_time": 1755168935.500189,
+    "access_time": 1755168935.500189,
+    "expire_time": 1755176135.500189,
+    "expire_hours": 2
+  },
+  "fund_detail_000065": {
+    "create_time": 1755168935.52145,
+    "access_time": 1755168935.52145,
+    "expire_time": 1755176135.52145,
+    "expire_hours": 2
+  },
+  "fund_detail_000163": {
+    "create_time": 1755168935.5436044,
+    "access_time": 1755168935.5436044,
+    "expire_time": 1755176135.5436044,
+    "expire_hours": 2
+  },
+  "fund_detail_001199": {
+    "create_time": 1755168935.5646777,
+    "access_time": 1755168935.5646777,
+    "expire_time": 1755176135.5646777,
+    "expire_hours": 2
+  },
+  "fund_detail_001276": {
+    "create_time": 1755168935.584956,
+    "access_time": 1755168935.584956,
+    "expire_time": 1755176135.584956,
+    "expire_hours": 2
+  },
+  "fund_detail_000043": {
+    "create_time": 1755168935.6049035,
+    "access_time": 1755168935.6049035,
+    "expire_time": 1755176135.6049035,
+    "expire_hours": 2
+  },
+  "fund_detail_000059": {
+    "create_time": 1755168935.6250446,
+    "access_time": 1755168935.6250446,
+    "expire_time": 1755176135.6250446,
+    "expire_hours": 2
+  },
+  "fund_detail_000164": {
+    "create_time": 1755168935.6453338,
+    "access_time": 1755168935.6453338,
+    "expire_time": 1755176135.6453338,
+    "expire_hours": 2
+  },
+  "fund_detail_001200": {
+    "create_time": 1755168935.665532,
+    "access_time": 1755168935.665532,
+    "expire_time": 1755176135.665532,
+    "expire_hours": 2
+  },
+  "fund_detail_001240": {
+    "create_time": 1755168935.685505,
+    "access_time": 1755168935.685505,
+    "expire_time": 1755176135.685505,
+    "expire_hours": 2
+  },
+  "fund_detail_000053": {
+    "create_time": 1755168935.7058768,
+    "access_time": 1755168935.7058768,
+    "expire_time": 1755176135.7058768,
+    "expire_hours": 2
+  },
+  "fund_detail_000082": {
+    "create_time": 1755168935.7273495,
+    "access_time": 1755168935.7273495,
+    "expire_time": 1755176135.7273495,
+    "expire_hours": 2
+  },
+  "fund_detail_000165": {
+    "create_time": 1755168935.7483182,
+    "access_time": 1755168935.7483182,
+    "expire_time": 1755176135.7483182,
+    "expire_hours": 2
+  },
+  "fund_detail_001202": {
+    "create_time": 1755168935.7696936,
+    "access_time": 1755168935.7696936,
+    "expire_time": 1755176135.7696936,
+    "expire_hours": 2
+  },
+  "fund_detail_001329": {
+    "create_time": 1755168935.7909672,
+    "access_time": 1755168935.7909672,
+    "expire_time": 1755176135.7909672,
+    "expire_hours": 2
+  },
+  "fund_detail_000045": {
+    "create_time": 1755168935.8116455,
+    "access_time": 1755168935.8116455,
+    "expire_time": 1755176135.8116455,
+    "expire_hours": 2
+  },
+  "fund_detail_000070": {
+    "create_time": 1755168935.8327494,
+    "access_time": 1755168935.8327494,
+    "expire_time": 1755176135.8327494,
+    "expire_hours": 2
+  },
+  "fund_detail_000166": {
+    "create_time": 1755168935.8543022,
+    "access_time": 1755168935.8543022,
+    "expire_time": 1755176135.8543022,
+    "expire_hours": 2
+  },
+  "fund_detail_001203": {
+    "create_time": 1755168935.875778,
+    "access_time": 1755168935.875778,
+    "expire_time": 1755176135.875778,
+    "expire_hours": 2
+  },
+  "fund_detail_000075": {
+    "create_time": 1755168935.8975163,
+    "access_time": 1755168935.8975163,
+    "expire_time": 1755176135.8975163,
+    "expire_hours": 2
+  },
+  "fund_detail_000037": {
+    "create_time": 1755168935.919168,
+    "access_time": 1755168935.919168,
+    "expire_time": 1755176135.919168,
+    "expire_hours": 2
+  },
+  "fund_detail_000167": {
+    "create_time": 1755168935.9408827,
+    "access_time": 1755168935.9408827,
+    "expire_time": 1755176135.9408827,
+    "expire_hours": 2
+  },
+  "fund_detail_001204": {
+    "create_time": 1755168935.9614,
+    "access_time": 1755168935.9614,
+    "expire_time": 1755176135.9614,
+    "expire_hours": 2
+  },
+  "fund_detail_000171": {
+    "create_time": 1755168935.9816694,
+    "access_time": 1755168935.9816694,
+    "expire_time": 1755176135.9816694,
+    "expire_hours": 2
+  },
+  "fund_detail_001208": {
+    "create_time": 1755168936.0020533,
+    "access_time": 1755168936.0020533,
+    "expire_time": 1755176136.0020533,
+    "expire_hours": 2
+  },
+  "fund_detail_001277": {
+    "create_time": 1755168936.0226898,
+    "access_time": 1755168936.0226898,
+    "expire_time": 1755176136.0226898,
+    "expire_hours": 2
+  },
+  "fund_detail_000025": {
+    "create_time": 1755168936.0444617,
+    "access_time": 1755168936.0444617,
+    "expire_time": 1755176136.0444617,
+    "expire_hours": 2
+  },
+  "fund_detail_000172": {
+    "create_time": 1755168936.0660877,
+    "access_time": 1755168936.0660877,
+    "expire_time": 1755176136.0660877,
+    "expire_hours": 2
+  },
+  "fund_detail_001209": {
+    "create_time": 1755168936.0877712,
+    "access_time": 1755168936.0877712,
+    "expire_time": 1755176136.0877712,
+    "expire_hours": 2
+  },
+  "fund_detail_001241": {
+    "create_time": 1755168936.1097143,
+    "access_time": 1755168936.1097143,
+    "expire_time": 1755176136.1097143,
+    "expire_hours": 2
+  },
+  "fund_detail_000012": {
+    "create_time": 1755168936.131732,
+    "access_time": 1755168936.131732,
+    "expire_time": 1755176136.131732,
+    "expire_hours": 2
+  },
+  "fund_detail_000173": {
+    "create_time": 1755168936.1537879,
+    "access_time": 1755168936.1537879,
+    "expire_time": 1755176136.1537879,
+    "expire_hours": 2
+  },
+  "fund_detail_001210": {
+    "create_time": 1755168936.1757476,
+    "access_time": 1755168936.1757476,
+    "expire_time": 1755176136.1757476,
+    "expire_hours": 2
+  },
+  "fund_detail_001330": {
+    "create_time": 1755168936.197862,
+    "access_time": 1755168936.197862,
+    "expire_time": 1755176136.197862,
+    "expire_hours": 2
+  },
+  "fund_detail_000005": {
+    "create_time": 1755168936.219345,
+    "access_time": 1755168936.219345,
+    "expire_time": 1755176136.219345,
+    "expire_hours": 2
+  },
+  "fund_detail_000174": {
+    "create_time": 1755168936.2412553,
+    "access_time": 1755168936.2412553,
+    "expire_time": 1755176136.2412553,
+    "expire_hours": 2
+  },
+  "fund_detail_001211": {
+    "create_time": 1755168936.2631059,
+    "access_time": 1755168936.2631059,
+    "expire_time": 1755176136.2631059,
+    "expire_hours": 2
+  },
+  "fund_detail_000021": {
+    "create_time": 1755168936.2849758,
+    "access_time": 1755168936.2849758,
+    "expire_time": 1755176136.2849758,
+    "expire_hours": 2
+  },
+  "fund_detail_000175": {
+    "create_time": 1755168936.3066847,
+    "access_time": 1755168936.3066847,
+    "expire_time": 1755176136.3066847,
+    "expire_hours": 2
+  },
+  "fund_detail_001212": {
+    "create_time": 1755168936.3287697,
+    "access_time": 1755168936.3287697,
+    "expire_time": 1755176136.3287697,
+    "expire_hours": 2
+  },
+  "fund_detail_000002": {
+    "create_time": 1755168936.3504043,
+    "access_time": 1755168936.3504043,
+    "expire_time": 1755176136.3504043,
+    "expire_hours": 2
+  },
+  "fund_detail_000017": {
+    "create_time": 1755168936.372171,
+    "access_time": 1755168936.372171,
+    "expire_time": 1755176136.372171,
+    "expire_hours": 2
+  },
+  "fund_detail_000176": {
+    "create_time": 1755168936.393972,
+    "access_time": 1755168936.393972,
+    "expire_time": 1755176136.393972,
+    "expire_hours": 2
+  },
+  "fund_detail_001213": {
+    "create_time": 1755168936.4156973,
+    "access_time": 1755168936.4156973,
+    "expire_time": 1755176136.4156973,
+    "expire_hours": 2
+  },
+  "fund_detail_001278": {
+    "create_time": 1755168936.4376693,
+    "access_time": 1755168936.4376693,
+    "expire_time": 1755176136.4376693,
+    "expire_hours": 2
+  },
+  "fund_detail_000013": {
+    "create_time": 1755168936.4596677,
+    "access_time": 1755168936.4596677,
+    "expire_time": 1755176136.4596677,
+    "expire_hours": 2
+  },
+  "fund_detail_000179": {
+    "create_time": 1755168936.4815078,
+    "access_time": 1755168936.4815078,
+    "expire_time": 1755176136.4815078,
+    "expire_hours": 2
+  },
+  "fund_detail_001214": {
+    "create_time": 1755168936.5032644,
+    "access_time": 1755168936.5032644,
+    "expire_time": 1755176136.5032644,
+    "expire_hours": 2
+  },
+  "fund_detail_001242": {
+    "create_time": 1755168936.5254252,
+    "access_time": 1755168936.5254252,
+    "expire_time": 1755176136.5254252,
+    "expire_hours": 2
+  },
+  "fund_detail_000042": {
+    "create_time": 1755168936.547473,
+    "access_time": 1755168936.547473,
+    "expire_time": 1755176136.547473,
+    "expire_hours": 2
+  },
+  "fund_detail_000063": {
+    "create_time": 1755168936.5694268,
+    "access_time": 1755168936.5694268,
+    "expire_time": 1755176136.5694268,
+    "expire_hours": 2
+  },
+  "fund_detail_000180": {
+    "create_time": 1755168936.5914114,
+    "access_time": 1755168936.5914114,
+    "expire_time": 1755176136.5914114,
+    "expire_hours": 2
+  },
+  "fund_detail_001215": {
+    "create_time": 1755168936.61335,
+    "access_time": 1755168936.61335,
+    "expire_time": 1755176136.61335,
+    "expire_hours": 2
+  },
+  "fund_detail_001331": {
+    "create_time": 1755168936.635314,
+    "access_time": 1755168936.635314,
+    "expire_time": 1755176136.635314,
+    "expire_hours": 2
+  }
+}
