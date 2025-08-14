@@ -452,16 +452,28 @@ class SentimentAnalyzer:
                     word_freq[item['word']] = item['weight']
 
                 if word_freq:
-                    wordcloud = WordCloud(
-                        font_path='simhei.ttf',  # 中文字体
-                        width=400, height=300,
-                        background_color='white',
-                        max_words=50
-                    ).generate_from_frequencies(word_freq)
-
-                    ax3.imshow(wordcloud, interpolation='bilinear')
-                    ax3.axis('off')
-                    ax3.set_title('关键词')
+                    if HAS_WORDCLOUD and WordCloud:
+                        try:
+                            wordcloud = WordCloud(
+                                width=400, height=300,
+                                background_color='white',
+                                max_words=50
+                            ).generate_from_frequencies(word_freq)
+                            ax3.imshow(wordcloud, interpolation='bilinear')
+                            ax3.axis('off')
+                            ax3.set_title('关键词')
+                        except Exception as e:
+                            # WordCloud生成失败，显示文字列表
+                            ax3.text(0.1, 0.5, '\n'.join([f"{k}: {v:.2f}" for k, v in list(word_freq.items())[:10]]), 
+                                    transform=ax3.transAxes, fontsize=8)
+                            ax3.set_title('关键词(文字模式)')
+                            ax3.axis('off')
+                    else:
+                        # 没有WordCloud，显示文字列表
+                        ax3.text(0.1, 0.5, '\n'.join([f"{k}: {v:.2f}" for k, v in list(word_freq.items())[:10]]), 
+                                transform=ax3.transAxes, fontsize=8)
+                        ax3.set_title('关键词(文字模式)')
+                        ax3.axis('off')
 
             # 4. 情绪强度分布
             ax4 = axes[1, 1]
