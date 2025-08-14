@@ -4,7 +4,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
+# 尝试导入seaborn，如果失败则使用matplotlib
+try:
+    import seaborn as sns
+    HAS_SEABORN = True
+except ImportError:
+    HAS_SEABORN = False
+    sns = None
 import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
@@ -40,7 +46,12 @@ class ReportGenerator:
 
         # 设置样式
         plt.style.use('seaborn-v0_8')
-        sns.set_palette("husl")
+        # 设置图表样式
+        if HAS_SEABORN and sns:
+            sns.set_palette("husl")
+        else:
+            # 使用matplotlib的默认样式
+            plt.style.use("default")
 
         # 报告模板
         self.template_env = Environment(
