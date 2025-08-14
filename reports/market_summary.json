@@ -1,0 +1,35 @@
+{
+  "date": "2025-08-14",
+  "total_funds": 25,
+  "positive_funds": 23,
+  "negative_funds": 2,
+  "average_return": 1.13,
+  "market_sentiment": "乐观",
+  "top_performers": [
+    {
+      "code": "161725",
+      "name": "招商中证白酒指数分级",
+      "return": 2.34
+    },
+    {
+      "code": "110022",
+      "name": "易方达消费行业股票",
+      "return": 2.15
+    },
+    {
+      "code": "000596",
+      "name": "前海开源中证军工指数A",
+      "return": 2.1
+    },
+    {
+      "code": "000011",
+      "name": "华夏大盘精选混合",
+      "return": 1.89
+    },
+    {
+      "code": "008281",
+      "name": "华夏中证5G通信主题ETF联接A",
+      "return": 1.89
+    }
+  ]
+}
