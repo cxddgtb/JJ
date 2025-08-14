@@ -724,8 +724,7 @@ class FundAnalysisSystem:
             # 添加板块分析
             sector_analysis = combined_summary.get('sector_analysis', {})
             for sector, analysis in sector_analysis.items():
-                article += f"- **{sector}**: {analysis.get('performance', '表现平稳')}，{analysis.get('recommendation', '观望')}
-"
+                article += f"- **{sector}**: {analysis.get('performance', '表现平稳')}，{analysis.get('recommendation', '观望')}\n"
             
             article += f"""
 
