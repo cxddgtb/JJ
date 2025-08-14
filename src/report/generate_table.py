@@ -86,46 +86,22 @@ class GenerateTable:
             HTML表格字符串
         """
         # 表头
-        table = "<table border="1">
-"
-        table += "<thead>
-"
-        table += "<tr>
-"
-        table += "<th>基金代码</th>
-"
-        table += "<th>基金名称</th>
-"
-        table += "<th>基金类型</th>
-"
-        table += "<th>最新净值</th>
-"
-        table += "<th>日增长率</th>
-"
-        table += "<th>近一年收益率</th>
-"
-        table += "<th>长期得分</th>
-"
-        table += "<th>中期得分</th>
-"
-        table += "<th>短期得分</th>
-"
-        table += "<th>新闻情感</th>
-"
-        table += "<th>综合得分</th>
-"
-        table += "<th>操作建议</th>
-"
-        table += "<th>AI预测</th>
-"
-        table += "<th>置信度</th>
-"
-        table += "</tr>
-"
-        table += "</thead>
-"
-        table += "<tbody>
-"
+        table = "<table border=\"1\"><thead><tr>"
+        table += "<th>基金代码</th>"
+        table += "<th>基金名称</th>"
+        table += "<th>基金类型</th>"
+        table += "<th>最新净值</th>"
+        table += "<th>日增长率</th>"
+        table += "<th>近一年收益率</th>"
+        table += "<th>长期得分</th>"
+        table += "<th>中期得分</th>"
+        table += "<th>短期得分</th>"
+        table += "<th>新闻情感</th>"
+        table += "<th>综合得分</th>"
+        table += "<th>操作建议</th>"
+        table += "<th>AI预测</th>"
+        table += "<th>置信度</th>"
+        table += "</tr></thead><tbody>"
 
         # 表格内容
         for point in self.buy_sell_points:
@@ -152,43 +128,25 @@ class GenerateTable:
                 ai_confidence = fund_ai_insights.get('confidence', 0.5)
 
             # 添加表格行
-            table += "<tr>
-"
-            table += f"<td>{fund_code}</td>
-"
-            table += f"<td>{fund_name}</td>
-"
-            table += f"<td>{category}</td>
-"
-            table += f"<td>{net_asset_value}</td>
-"
-            table += f"<td>{daily_growth_rate}</td>
-"
-            table += f"<td>{one_year_return}</td>
-"
-            table += f"<td>{long_term_score}</td>
-"
-            table += f"<td>{mid_term_score}</td>
-"
-            table += f"<td>{short_term_score}</td>
-"
-            table += f"<td>{news_sentiment_score}</td>
-"
-            table += f"<td>{combined_score}</td>
-"
-            table += f"<td>{recommendation}</td>
-"
-            table += f"<td>{ai_prediction}</td>
-"
-            table += f"<td>{ai_confidence:.2f}</td>
-"
-            table += "</tr>
-"
+            table += "<tr>"
+            table += f"<td>{fund_code}</td>"
+            table += f"<td>{fund_name}</td>"
+            table += f"<td>{category}</td>"
+            table += f"<td>{net_asset_value}</td>"
+            table += f"<td>{daily_growth_rate}</td>"
+            table += f"<td>{one_year_return}</td>"
+            table += f"<td>{long_term_score}</td>"
+            table += f"<td>{mid_term_score}</td>"
+            table += f"<td>{short_term_score}</td>"
+            table += f"<td>{news_sentiment_score}</td>"
+            table += f"<td>{combined_score}</td>"
+            table += f"<td>{recommendation}</td>"
+            table += f"<td>{ai_prediction}</td>"
+            table += f"<td>{ai_confidence:.2f}</td>"
+            table += "</tr>"
 
         # 表格结尾
-        table += "</tbody>
-"
-        table += "</table>"
+        table += "</tbody></table>"
 
         return table
 
