@@ -18,7 +18,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.utils.logger import log_info, log_warning, log_error, log_debug, create_task_logger
 from src.utils.proxy_manager import proxy_manager
-from src.crawler.fund_crawler import FundCrawler
+from src.crawler.enhanced_fund_crawler import EnhancedFundCrawler
 from src.analyzer.technical_analyzer import TechnicalAnalyzer
 from src.analyzer.fundamental_analyzer import FundamentalAnalyzer
 from src.analyzer.sentiment_analyzer import SentimentAnalyzer
@@ -33,7 +33,7 @@ class FundAnalysisSystem:
     """基金分析系统主类"""
 
     def __init__(self):
-        self.crawler = FundCrawler(max_workers=CRAWLER_CONFIG['max_workers'])
+        self.crawler = EnhancedFundCrawler()
         self.technical_analyzer = TechnicalAnalyzer()
         self.fundamental_analyzer = FundamentalAnalyzer()
         self.sentiment_analyzer = SentimentAnalyzer()
