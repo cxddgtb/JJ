@@ -13,8 +13,11 @@ from datetime import datetime
 from typing import Dict, List, Optional
 from pathlib import Path
 
-from .utils.logger import log_info, log_warning, log_error, log_debug
-from .config import NOTIFICATION_CONFIG
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.utils.logger import log_info, log_warning, log_error, log_debug
+from src.config import NOTIFICATION_CONFIG
 
 class NotificationManager:
     """通知管理器"""
