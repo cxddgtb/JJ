@@ -21,7 +21,7 @@ from src.utils.proxy_manager import proxy_manager
 from src.crawler.enhanced_fund_crawler import EnhancedFundCrawler
 from src.analyzer.technical_analyzer import TechnicalAnalyzer
 from src.analyzer.fundamental_analyzer import FundamentalAnalyzer
-from src.analyzer.sentiment_analyzer import SentimentAnalyzer
+from src.analyzer.enhanced_sentiment_analyzer import EnhancedSentimentAnalyzer
 from src.analyzer.signal_generator import SignalGenerator
 from src.report.report_generator import ReportGenerator
 from src.config import (
@@ -36,7 +36,7 @@ class FundAnalysisSystem:
         self.crawler = EnhancedFundCrawler()
         self.technical_analyzer = TechnicalAnalyzer()
         self.fundamental_analyzer = FundamentalAnalyzer()
-        self.sentiment_analyzer = SentimentAnalyzer()
+        self.sentiment_analyzer = EnhancedSentimentAnalyzer()
         self.signal_generator = SignalGenerator()
         self.report_generator = ReportGenerator()
 
@@ -238,11 +238,20 @@ class FundAnalysisSystem:
                 fund_code, fund_detail, history_data
             )
 
-            # 5. 获取新闻数据进行情绪分析
-            news_data = self.crawler.get_fund_news(
-                keywords=[fund_name, fund_code, '基金'], days=7
-            )
-            sentiment_analysis = self.sentiment_analyzer.analyze_news_sentiment(news_data)
+            # 5. AI智能情感分析（包含新闻生成和分析）
+            try:
+                sentiment_analysis = self.sentiment_analyzer.get_comprehensive_sentiment_analysis(
+                    fund_code, fund_detail
+                )
+                log_info(f"基金 {fund_code} AI情感分析完成，AI建议: {sentiment_analysis.get('final_recommendation', {}).get('recommendation', '未知')}")
+            except Exception as e:
+                log_warning(f"基金 {fund_code} AI情感分析失败，使用传统分析: {e}")
+                # 备用传统情感分析
+                sentiment_analysis = self.sentiment_analyzer.analyze_fund_sentiment(
+                    fund_detail.get('name', ''),
+                    fund_detail.get('company', ''),
+                    f"基金{fund_code}相关分析"
+                )
 
             # 6. 综合分析结果
             analysis_results = {
@@ -251,7 +260,7 @@ class FundAnalysisSystem:
                 'history_data': history_data.to_dict('records') if not history_data.empty else [],
                 'technical_analysis': technical_analysis,
                 'fundamental_analysis': fundamental_analysis,
-                'sentiment_analysis': {'news_sentiment': sentiment_analysis},
+                'sentiment_analysis': sentiment_analysis,
                 'analysis_time': datetime.now().isoformat()
             }
 
