@@ -18,12 +18,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.utils.logger import log_info, log_warning, log_error, log_debug, create_task_logger
 from src.utils.proxy_manager import proxy_manager
-from src.crawler.enhanced_fund_crawler import EnhancedFundCrawler
+from src.crawler.ai_enhanced_crawler import AIEnhancedCrawler
 from src.analyzer.technical_analyzer import TechnicalAnalyzer
 from src.analyzer.fundamental_analyzer import FundamentalAnalyzer
 from src.analyzer.enhanced_sentiment_analyzer import EnhancedSentimentAnalyzer
 from src.analyzer.signal_generator import SignalGenerator
 from src.report.report_generator import ReportGenerator
+from src.ai.market_summary_generator import AIMarketSummaryGenerator
 from src.config import (
     DEFAULT_FUNDS, CRAWLER_CONFIG, ANALYSIS_CONFIG, 
     STORAGE_CONFIG, PERFORMANCE_CONFIG
@@ -33,12 +34,13 @@ class FundAnalysisSystem:
     """基金分析系统主类"""
 
     def __init__(self):
-        self.crawler = EnhancedFundCrawler()
+        self.crawler = AIEnhancedCrawler()
         self.technical_analyzer = TechnicalAnalyzer()
         self.fundamental_analyzer = FundamentalAnalyzer()
         self.sentiment_analyzer = EnhancedSentimentAnalyzer()
         self.signal_generator = SignalGenerator()
         self.report_generator = ReportGenerator()
+        self.ai_market_summary = AIMarketSummaryGenerator()
 
         # 创建必要的目录
         self._create_directories()
@@ -362,16 +364,26 @@ class FundAnalysisSystem:
         summary_logger.start()
 
         try:
-            # 生成市场总结报告
-            market_summary = self._create_market_summary(analysis_results)
+            # 使用AI生成智能市场总结
+            ai_market_summary = self.ai_market_summary.generate_market_summary(analysis_results)
+            
+            # 传统市场总结（备用）
+            traditional_summary = self._create_market_summary(analysis_results)
+            
+            # 合并AI和传统分析结果
+            combined_summary = {
+                **ai_market_summary,
+                'traditional_analysis': traditional_summary,
+                'analysis_method': 'AI-Enhanced'
+            }
 
-            # 生成投资建议文章
-            investment_article = self._create_investment_article(analysis_results, market_summary)
+            # 生成AI驱动的投资建议文章
+            investment_article = self._create_ai_investment_article(combined_summary)
 
             # 保存报告
-            self._save_market_reports(market_summary, investment_article)
+            self._save_market_reports(combined_summary, investment_article)
 
-            summary_logger.success("市场总结报告生成完成")
+            summary_logger.success(f"AI市场总结报告生成完成，AI置信度: {ai_market_summary.get('ai_confidence', 0):.2f}")
 
         except Exception as e:
             summary_logger.error(e, "生成市场总结失败")
@@ -683,6 +695,60 @@ class FundAnalysisSystem:
             log_info(f"成功率: {success_rate:.1%}")
 
         log_info("=" * 60)
+
+    def _create_ai_investment_article(self, combined_summary: Dict) -> str:
+        """生成AI驱动的投资建议文章"""
+        try:
+            ai_insights = combined_summary.get('ai_insights', {})
+            market_overview = combined_summary.get('market_overview', '市场表现平稳')
+            fund_analysis = combined_summary.get('fund_analysis', '基金表现分化')
+            investment_advice = combined_summary.get('investment_advice', '建议均衡配置')
+            
+            article = f"""
+# 基金投资市场分析报告
+
+## 📊 市场概述
+{market_overview}
+
+## 🎯 基金分析
+{fund_analysis}
+
+## 💡 AI智能洞察
+- **市场趋势预测**: {ai_insights.get('market_trend_prediction', '市场趋势有待观察')}
+- **基金选择策略**: {ai_insights.get('fund_selection_strategy', '建议分散投资')}
+- **时机分析**: {ai_insights.get('timing_analysis', '当前时机适中')}
+
+## 🔍 板块分析
+"""
+            
+            # 添加板块分析
+            sector_analysis = combined_summary.get('sector_analysis', {})
+            for sector, analysis in sector_analysis.items():
+                article += f"- **{sector}**: {analysis.get('performance', '表现平稳')}，{analysis.get('recommendation', '观望')}
+"
+            
+            article += f"""
+
+## 📈 投资建议
+{investment_advice}
+
+## ⚠️ 风险提示
+{combined_summary.get('risk_analysis', {}).get('risk_warning', '投资有风险，入市需谨慎')}
+
+## 🤖 AI分析总结
+基于AI智能分析，当前市场{combined_summary.get('fund_statistics', {}).get('market_sentiment', '中性')}情绪主导。
+建议投资者保持理性，根据自身风险承受能力进行配置。
+
+---
+*本报告由AI智能生成，仅供参考，不构成投资建议*
+*生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*
+"""
+            
+            return article
+            
+        except Exception as e:
+            log_error(f"生成AI投资文章失败: {e}")
+            return f"# AI投资分析报告\n\n市场分析正在进行中...\n\n生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
 async def main():
     """主函数"""
