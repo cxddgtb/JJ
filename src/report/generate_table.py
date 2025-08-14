@@ -74,8 +74,7 @@ class GenerateTable:
                 ai_confidence = fund_ai_insights.get('confidence', 0.5)
 
             # 添加表格行
-            table += f"| {fund_code} | {fund_name} | {category} | {net_asset_value} | {daily_growth_rate} | {one_year_return} | {long_term_score} | {mid_term_score} | {short_term_score} | {news_sentiment_score} | {combined_score} | {recommendation} | {ai_prediction} | {ai_confidence:.2f} |
-"
+            table += f"| {fund_code} | {fund_name} | {category} | {net_asset_value} | {daily_growth_rate} | {one_year_return} | {long_term_score} | {mid_term_score} | {short_term_score} | {news_sentiment_score} | {combined_score} | {recommendation} | {ai_prediction} | {ai_confidence:.2f} |\n"
 
         return table
 
