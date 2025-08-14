@@ -21,6 +21,8 @@ import matplotlib.pyplot as plt
 from dataclasses import dataclass
 
 from ..utils.logger import log_info, log_warning, log_error, log_debug
+from ..ai.local_ai_engine import LocalAIEngine
+from ..news.news_generator import NewsGenerator
 
 @dataclass
 class SentimentScore:
@@ -35,6 +37,10 @@ class SentimentAnalyzer:
     """情绪分析器"""
 
     def __init__(self):
+        # 初始化AI引擎和新闻生成器
+        self.ai_engine = LocalAIEngine()
+        self.news_generator = NewsGenerator()
+        
         # 加载情感词典
         self.positive_words = self._load_positive_words()
         self.negative_words = self._load_negative_words()
@@ -574,4 +580,95 @@ if __name__ == "__main__":
 
     analyzer = SentimentAnalyzer()
     result = analyzer.analyze_news_sentiment(test_news)
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+
+# 在SentimentAnalyzer类中添加AI分析方法
+setattr(SentimentAnalyzer, 'analyze_fund_news_with_ai', 
+    lambda self, fund_code: str, fund_name: str = "": self._analyze_fund_news_with_ai_impl(fund_code, fund_name))
+
+def _analyze_fund_news_with_ai_impl(self, fund_code: str, fund_name: str = "") -> Dict:
+        """使用AI分析基金相关新闻"""
+        try:
+            log_info(f"开始AI智能分析基金 {fund_code} 新闻")
+            
+            # 生成基金相关新闻
+            news_data = self.news_generator.generate_market_news(count=8)
+            
+            # 使用AI分析新闻情感
+            news_analysis = []
+            for news in news_data:
+                sentiment = self.ai_engine.analyze_sentiment(news['content'])
+                news_analysis.append({
+                    'title': news['title'],
+                    'sentiment': sentiment,
+                    'publish_time': news['publish_time'],
+                    'source': news['source'],
+                    'category': news['category']
+                })
+            
+            # 分析整体市场情绪
+            market_sentiment = self.ai_engine.analyze_market_sentiment(news_data)
+            
+            # 提取关键主题
+            news_texts = [news['content'] for news in news_data]
+            key_topics = self.ai_engine.extract_key_topics(news_texts)
+            
+            # 生成投资建议
+            fund_info = {'code': fund_code, 'name': fund_name, 'type': '混合型'}
+            investment_advice = self.ai_engine.generate_investment_advice(fund_info, market_sentiment)
+            
+            return {
+                'fund_code': fund_code,
+                'news_count': len(news_data),
+                'news_analysis': news_analysis,
+                'market_sentiment': market_sentiment,
+                'key_topics': key_topics,
+                'investment_advice': investment_advice,
+                'analysis_time': datetime.now().isoformat(),
+                'ai_insights': self._generate_ai_insights(market_sentiment, key_topics, investment_advice)
+            }
+            
+        except Exception as e:
+            log_error(f"AI新闻分析失败: {e}")
+            return self._get_fallback_news_analysis(fund_code)
+    
+    def _generate_ai_insights(self, market_sentiment: Dict, key_topics: List, investment_advice: Dict) -> Dict:
+        """生成AI洞察"""
+        insights = {
+            'market_summary': f"当前市场情绪{market_sentiment.get('market_mood', '中性')}",
+            'topic_summary': f"主要关注{len(key_topics)}个热点话题",
+            'investment_summary': f"建议{investment_advice.get('recommendation', '持有')}，风险等级{investment_advice.get('risk_level', '中等')}",
+            'confidence_level': min(market_sentiment.get('confidence', 0.5), investment_advice.get('confidence', 0.5))
+        }
+        
+        # 生成智能总结
+        if market_sentiment.get('overall_sentiment') == 'positive':
+            insights['ai_recommendation'] = "市场情绪积极，适合关注优质基金投资机会"
+        elif market_sentiment.get('overall_sentiment') == 'negative':
+            insights['ai_recommendation'] = "市场情绪偏谨慎，建议控制风险，择机布局"
+        else:
+            insights['ai_recommendation'] = "市场情绪中性，建议均衡配置，关注结构性机会"
+        
+        return insights
+    
+    def _get_fallback_news_analysis(self, fund_code: str) -> Dict:
+        """获取备用新闻分析"""
+        return {
+            'fund_code': fund_code,
+            'news_count': 5,
+            'market_sentiment': {
+                'overall_sentiment': 'neutral',
+                'sentiment_score': 0.0,
+                'market_mood': '中性观望'
+            },
+            'investment_advice': {
+                'recommendation': '持有',
+                'risk_level': '中等',
+                'confidence': 0.6
+            },
+            'ai_insights': {
+                'market_summary': '市场情绪稳定',
+                'ai_recommendation': '建议均衡配置，关注长期投资价值'
+            }
+        }
     print(json.dumps(result, indent=2, ensure_ascii=False))
