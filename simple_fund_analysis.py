@@ -325,8 +325,7 @@ class SimpleFundAnalyzer:
             if result['investment_recommendation']['recommendation'] == '强烈推荐':
                 fund = result['fund_info']
                 score = result['investment_recommendation']['composite_score']
-                report_content += f"| {fund['code']} | {fund['name']} | {fund['type']} | {fund['nav']} | {fund['daily_return']}% | {score} |
-"
+                report_content += f"| {fund['code']} | {fund['name']} | {fund['type']} | {fund['nav']} | {fund['daily_return']}% | {score} |\n"
 
         report_content += f"""
 
@@ -341,8 +340,7 @@ class SimpleFundAnalyzer:
             if result['investment_recommendation']['recommendation'] == '推荐':
                 fund = result['fund_info']
                 score = result['investment_recommendation']['composite_score']
-                report_content += f"| {fund['code']} | {fund['name']} | {fund['type']} | {fund['nav']} | {fund['daily_return']}% | {score} |
-"
+                report_content += f"| {fund['code']} | {fund['name']} | {fund['type']} | {fund['nav']} | {fund['daily_return']}% | {score} |\n"
 
         # 添加分析说明
         report_content += f"""
