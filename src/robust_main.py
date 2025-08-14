@@ -314,8 +314,7 @@ class RobustFundSystem:
             for fund in sorted_funds:
                 info = fund['fund_info']
                 rec = fund['investment_recommendation']
-                report_content += f"| {info['code']} | {info['name']} | {info['daily_return']:.2f}% | {rec['recommendation']} | {rec['risk_rating']} |
-"
+                report_content += f"| {info['code']} | {info['name']} | {info['daily_return']:.2f}% | {rec['recommendation']} | {rec['risk_rating']} |\n"
 
             report_content += f"""
 
