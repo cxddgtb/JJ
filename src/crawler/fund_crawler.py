@@ -123,7 +123,18 @@ class FundCrawler(BaseCrawler):
 
         try:
             # 获取公募基金列表
-            fund_df = ak.fund_em_fund_name()
+            # 尝试多种akshare基金列表获取方法
+            try:
+                fund_df = ak.fund_name_em()
+            except AttributeError:
+                try:
+                    fund_df = ak.fund_em_fund_name()
+                except AttributeError:
+                    try:
+                        fund_df = ak.fund_basic_info_em()
+                    except AttributeError:
+                        log_warning("akshare基金列表API不可用，使用默认列表")
+                        return []
 
             if not fund_df.empty:
                 for _, row in fund_df.head(top_n).iterrows():
@@ -171,8 +182,18 @@ class FundCrawler(BaseCrawler):
 
             # 方法2: 从akshare获取历史数据
             try:
-                # 获取基金历史净值
-                hist_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="累计净值走势")
+                # 获取基金历史净值 - 尝试多种akshare历史数据获取方法
+                try:
+                    hist_df = ak.fund_open_fund_info_em(fund=fund_code, indicator="累计净值走势")
+                except (AttributeError, Exception):
+                    try:
+                        hist_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="累计净值走势")
+                    except (AttributeError, Exception):
+                        try:
+                            hist_df = ak.fund_etf_hist_em(symbol=fund_code)
+                        except (AttributeError, Exception):
+                            log_warning(f"无法从akshare获取基金{fund_code}历史数据")
+                            return pd.DataFrame()
 
                 if not hist_df.empty:
                     latest = hist_df.iloc[-1]
@@ -184,7 +205,14 @@ class FundCrawler(BaseCrawler):
                     })
 
                 # 获取基金基本信息
-                info_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="基金规模走势")
+                # 尝试获取基金规模信息
+                try:
+                    info_df = ak.fund_open_fund_info_em(fund=fund_code, indicator="基金规模走势")
+                except (AttributeError, Exception):
+                    try:
+                        info_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="基金规模走势")
+                    except (AttributeError, Exception):
+                        info_df = pd.DataFrame()
                 if not info_df.empty:
                     latest_info = info_df.iloc[-1]
                     fund_info.update({
@@ -213,7 +241,14 @@ class FundCrawler(BaseCrawler):
     def _get_fund_manager_info(self, fund_code: str) -> Dict:
         """获取基金经理信息"""
         try:
-            manager_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="基金经理")
+            # 尝试获取基金经理信息
+            try:
+                manager_df = ak.fund_open_fund_info_em(fund=fund_code, indicator="基金经理")
+            except (AttributeError, Exception):
+                try:
+                    manager_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="基金经理")
+                except (AttributeError, Exception):
+                    manager_df = pd.DataFrame()
 
             if not manager_df.empty:
                 managers = []
@@ -235,7 +270,14 @@ class FundCrawler(BaseCrawler):
         """获取基金持仓信息"""
         try:
             # 获取股票持仓
-            stock_holdings = ak.fund_em_open_fund_info(fund=fund_code, indicator="股票持仓")
+            # 尝试获取股票持仓信息
+            try:
+                stock_holdings = ak.fund_open_fund_info_em(fund=fund_code, indicator="股票持仓")
+            except (AttributeError, Exception):
+                try:
+                    stock_holdings = ak.fund_em_open_fund_info(fund=fund_code, indicator="股票持仓")
+                except (AttributeError, Exception):
+                    stock_holdings = pd.DataFrame()
             holdings_info = {}
 
             if not stock_holdings.empty:
