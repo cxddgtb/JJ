@@ -80,14 +80,19 @@ jobs:
       env:
         REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
       run: |
-        echo "=== 🚀 启动超稳定基金分析系统 ==="
-        python src/robust_main.py || {
-          echo "⚠️ 超稳定程序运行失败，尝试AI备用方案"
-          python src/ai_main.py || {
-            echo "⚠️ AI程序失败，尝试传统备用方案"
-            python src/main.py || {
-              echo "❌ 所有程序都失败，但继续执行后续步骤"
-              exit 0
+        echo "=== 🚀 启动简单基金分析系统 ==="
+        python simple_fund_analysis.py || {
+          echo "⚠️ 简单版失败，尝试备用方案1"
+          python src/robust_main.py || {
+            echo "⚠️ 备用方案1失败，尝试备用方案2"
+            python src/ai_main.py || {
+              echo "⚠️ 备用方案2失败，尝试最后方案"
+              python src/main.py || {
+                echo "❌ 所有程序都失败，启动紧急报告生成器"
+                python emergency_report.py
+                echo "🚨 紧急报告生成器已执行"
+                exit 0
+              }
             }
           }
         }
