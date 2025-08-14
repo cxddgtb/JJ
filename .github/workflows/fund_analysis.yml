@@ -47,7 +47,7 @@ jobs:
         pip install beautifulsoup4 lxml || echo "解析包安装失败"
 
         echo "=== 安装图表包 ==="
-        pip install matplotlib plotly || echo "图表包安装失败"
+        pip install matplotlib plotly seaborn || echo "图表包安装失败"
 
         echo "=== 安装金融数据包 ==="
         pip install akshare yfinance || echo "金融包安装失败"
@@ -62,8 +62,14 @@ jobs:
         pip install TA-Lib || echo "TA-Lib安装失败，将使用内置替代方案"
         pip install ta || echo "ta包安装失败"
 
+        echo "=== 安装其他常用包 ==="
+        pip install schedule python-dotenv fake-useragent retrying cachetools || echo "其他包安装失败"
+        
         echo "=== 尝试安装所有剩余依赖 ==="
         pip install -r requirements.txt || echo "完整安装失败，使用已安装的包继续"
+        
+        echo "=== 显示已安装的包 ==="
+        pip list | grep -E "(pandas|numpy|matplotlib|plotly|seaborn|requests|akshare|yfinance|beautifulsoup4|lxml|scikit-learn|jieba|wordcloud|talib)" || echo "包检查完成"
 
     - name: 设置时区
       run: |
