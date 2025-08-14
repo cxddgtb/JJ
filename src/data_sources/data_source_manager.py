@@ -9,9 +9,11 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 
 from .base_source import BaseDataSource
+from .simple_data_source import SimpleDataSource
 from .akshare_source import AkshareDataSource
 from .web_scraper_source import WebScraperDataSource
 from .yfinance_source import YfinanceDataSource
+from .fallback_source import FallbackDataSource
 from ..utils.logger import log_info, log_warning, log_error, log_debug
 
 class DataSourceManager:
@@ -34,9 +36,11 @@ class DataSourceManager:
         try:
             # 按优先级顺序添加数据源
             sources_to_add = [
+                SimpleDataSource(),      # 简化数据源，专为CI/CD环境设计
                 AkshareDataSource(),
                 WebScraperDataSource(),
-                YfinanceDataSource()
+                YfinanceDataSource(),
+                FallbackDataSource()     # 备用数据源，确保始终有数据
             ]
 
             for source in sources_to_add:
@@ -107,16 +111,28 @@ class DataSourceManager:
     def get_available_sources(self) -> List[BaseDataSource]:
         """获取当前可用的数据源"""
         available = []
+        fallback_source = None
+        
         for source in self.sources:
-            if self.source_status.get(source.name, False):
+            if source.name in ["Fallback", "Simple"]:
+                # 备用数据源和简化数据源始终标记为可用
+                self.source_status[source.name] = True
+                if source.name == "Fallback":
+                    fallback_source = source
+                else:
+                    available.append(source)
+            elif self.source_status.get(source.name, False):
                 available.append(source)
-
-        # 如果没有可用的数据源，返回所有数据源（容错处理）
-        if not available:
-            log_warning("没有检测到可用的数据源，返回所有数据源")
-            return self.sources
-
-        return available
+        
+        # 确保备用数据源总是可用
+        if fallback_source:
+            available.append(fallback_source)
+        
+        # 如果除了备用数据源外没有其他可用源，记录警告
+        if len(available) == 1 and fallback_source in available:
+            log_warning("仅备用数据源可用，外部数据源均不可用")
+        
+        return available if available else self.sources
 
     def get_fund_list(self, limit: int = 100) -> List[Dict]:
         """获取基金列表 - 从多个数据源聚合"""
