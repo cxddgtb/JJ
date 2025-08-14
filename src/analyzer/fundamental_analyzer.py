@@ -164,8 +164,14 @@ class FundamentalAnalyzer:
     def _get_fund_basic_info(self, fund_code: str) -> Dict:
         """获取基金基础信息"""
         try:
-            # 使用akshare获取基金信息
-            fund_info_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="基金信息")
+            # 使用akshare获取基金信息 - 尝试获取基金基本信息
+            try:
+                fund_info_df = ak.fund_open_fund_info_em(fund=fund_code, indicator="基金信息")
+            except (AttributeError, Exception):
+                try:
+                    fund_info_df = ak.fund_em_open_fund_info(fund=fund_code, indicator="基金信息")
+                except (AttributeError, Exception):
+                    fund_info_df = pd.DataFrame()
 
             if not fund_info_df.empty:
                 info = fund_info_df.to_dict('records')[0] if len(fund_info_df) > 0 else {}
