@@ -56,7 +56,7 @@ jobs:
         pip install scikit-learn scipy || echo "分析包安装失败"
 
         echo "=== 安装工具包 ==="
-        pip install PyYAML Jinja2 markdown python-dateutil pytz jieba || echo "工具包安装失败"
+        pip install PyYAML Jinja2 markdown python-dateutil pytz jieba wordcloud || echo "工具包安装失败"
         
         echo "=== 尝试安装可选技术分析包 ==="
         pip install TA-Lib || echo "TA-Lib安装失败，将使用内置替代方案"
