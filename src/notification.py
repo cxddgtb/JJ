@@ -5,9 +5,9 @@ import os
 import json
 import requests
 import smtplib
-from email.mime.text import MimeText
-from email.mime.multipart import MimeMultipart
-from email.mime.base import MimeBase
+from email.mime.text import MIMEText as MimeText
+from email.mime.multipart import MIMEMultipart as MimeMultipart
+from email.mime.base import MIMEBase as MimeBase
 from email import encoders
 from datetime import datetime
 from typing import Dict, List, Optional
