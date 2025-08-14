@@ -4,6 +4,7 @@ pandas
 numpy
 matplotlib
 plotly
+seaborn
 yfinance
 akshare
 lxml
