@@ -1090,3 +1090,4 @@
 2025-08-14 19:25:13 - FundAnalysis - ERROR - logger.py:99 - 分析基金 000986 失败: EnhancedFundCrawler.get_fund_news() got an unexpected keyword argument 'days'
 2025-08-14 19:25:13 - FundAnalysis - ERROR - logger.py:99 - 分析基金 001171 失败: EnhancedFundCrawler.get_fund_news() got an unexpected keyword argument 'days'
 2025-08-14 19:25:13 - FundAnalysis - ERROR - logger.py:99 - 分析基金 001335 失败: EnhancedFundCrawler.get_fund_news() got an unexpected keyword argument 'days'
+2025-08-14 19:45:37 - FundAnalysis - ERROR - logger.py:99 - WebScraper 所有请求尝试失败
