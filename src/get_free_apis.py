@@ -88,7 +88,7 @@ def get_free_fund_apis() -> List[Dict[str, str]]:
             try:
                 response = requests.get(url, timeout=10)
                 response.raise_for_status()  # 如果状态码不是2xx，则抛出异常
-                if response.status_code == 200:
+                    if response.status_code == 200:
                     content = response.text
                     for line in content.split('\n'):
                         line = line.strip()
