@@ -94,17 +94,17 @@ def get_free_fund_apis() -> List[Dict[str, str]]:
                         line = line.strip()
                         if line and '|' in line:
                             parts = line.split('|')
-                                if len(parts) >= 2:
-                                    api = {
-                                        'name': parts[0].strip(),
-                                        'url': parts[1].strip(),
-                                        'key': parts[2].strip() if len(parts) > 2 else '',
-                                        'type': parts[3].strip() if len(parts) > 3 else 'json'
-                                    }
-                                    # 检查是否已存在
-                                    if not any(a['url'] == api['url'] for a in free_apis):
-                                        free_apis.append(api)
-                        logger.info(f"从{url}获取到{len([a for a in free_apis if a['url'] == url])}个免费API")
+                            if len(parts) >= 2:
+                                api = {
+                                    'name': parts[0].strip(),
+                                    'url': parts[1].strip(),
+                                    'key': parts[2].strip() if len(parts) > 2 else '',
+                                    'type': parts[3].strip() if len(parts) > 3 else 'json'
+                                }
+                                # 检查是否已存在
+                                if not any(a['url'] == api['url'] for a in free_apis):
+                                    free_apis.append(api)
+                    logger.info(f"从{url}获取到{len([a for a in free_apis if a['url'] == url])}个免费API")
             except Exception as e:
                 logger.warning(f"从{url}获取免费API失败: {e}")
     else:
