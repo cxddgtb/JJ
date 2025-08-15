@@ -11,7 +11,7 @@ fake-useragent>=1.1.1
 tushare>=1.2.89
 akshare>=1.8.0
 baostock>=0.8.8
-jqdata>=1.0.0
+jqdata>=1.0.0; python_version>='3.10'
 
 # 异步与多线程
 aiohttp>=3.8.3
