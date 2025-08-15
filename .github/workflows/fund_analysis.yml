@@ -42,12 +42,13 @@ jobs:
     - name: 设置Python环境
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.10'
 
     - name: 安装依赖
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade 'jqdata>=1.0.0' || echo "jqdata安装失败，将不使用该数据源"
 
     - name: 创建必要目录
       run: |
