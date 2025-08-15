@@ -181,9 +181,9 @@ class DataCrawler:
                         all_funds.append(df)
                         logger.info(f"从{Baostock}获取到{len(df)}只基金")
 
-                elif source == 'jqdata':
+                elif source == 'jqdata' and 'jqdata' in self.clients:
                     # 获取基金基本信息
-                    df = jq.get_fundamentals(jq.all_instruments('Fund'))
+                    df = self.clients['jqdata'].get_fundamentals(self.clients['jqdata'].all_instruments('Fund'))
                     # 过滤基金类型
                     if self.fund_type != 'mixed':
                         df = df[df['type'] == self.fund_type]
