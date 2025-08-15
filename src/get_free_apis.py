@@ -8,10 +8,17 @@
 
 import os
 import json
-import requests
 import logging
 from datetime import datetime
 from typing import List, Dict, Any
+
+# 尝试导入requests模块，如果失败则提供替代方案
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+except ImportError:
+    REQUESTS_AVAILABLE = False
+    print("警告：requests模块未安装，将使用备用方法获取API列表")
 
 from config import LOG_CONFIG
 
@@ -46,25 +53,29 @@ def get_free_fund_apis() -> List[Dict[str, str]]:
 
     # 从GitHub获取免费API列表
     github_url = "https://raw.githubusercontent.com/xxx/fund-free-apis/main/free_apis.txt"
-    try:
-        response = requests.get(github_url, timeout=10)
-        response.raise_for_status()  # 如果状态码不是2xx，则抛出异常
-        if response.status_code == 200:
-            content = response.text
-            for line in content.split('\n'):
-                line = line.strip()
-                if line and '|' in line:
-                    parts = line.split('|')
-                    if len(parts) >= 2:
-                        free_apis.append({
+    
+    if REQUESTS_AVAILABLE:
+        try:
+            response = requests.get(github_url, timeout=10)
+            response.raise_for_status()  # 如果状态码不是2xx，则抛出异常
+            if response.status_code == 200:
+                content = response.text
+                for line in content.split('\n'):
+                    line = line.strip()
+                    if line and '|' in line:
+                        parts = line.split('|')
+                        if len(parts) >= 2:
+                            free_apis.append({
                             'name': parts[0].strip(),
                             'url': parts[1].strip(),
                             'key': parts[2].strip() if len(parts) > 2 else '',
                             'type': parts[3].strip() if len(parts) > 3 else 'json'
                         })
             logger.info(f"从GitHub获取到{len(free_apis)}个免费API")
-    except Exception as e:
-        logger.warning(f"从GitHub获取免费API失败: {e}")
+        except Exception as e:
+            logger.warning(f"从GitHub获取免费API失败: {e}")
+    else:
+        logger.warning("requests模块不可用，无法从GitHub获取API列表")
 
     # 从其他源获取API列表
     other_sources = [
@@ -72,11 +83,12 @@ def get_free_fund_apis() -> List[Dict[str, str]]:
         "https://raw.githubusercontent.com/xxx/xxxxx/main/fund_apis.txt"
     ]
 
-    for url in other_sources:
-        try:
-            response = requests.get(url, timeout=10)
-            response.raise_for_status()  # 如果状态码不是2xx，则抛出异常
-            if response.status_code == 200:
+    if REQUESTS_AVAILABLE:
+        for url in other_sources:
+            try:
+                response = requests.get(url, timeout=10)
+                response.raise_for_status()  # 如果状态码不是2xx，则抛出异常
+                if response.status_code == 200:
                 content = response.text
                 for line in content.split('\n'):
                     line = line.strip()
@@ -93,8 +105,10 @@ def get_free_fund_apis() -> List[Dict[str, str]]:
                             if not any(a['url'] == api['url'] for a in free_apis):
                                 free_apis.append(api)
                 logger.info(f"从{url}获取到{len([a for a in free_apis if a['url'] == url])}个免费API")
-        except Exception as e:
-            logger.warning(f"从{url}获取免费API失败: {e}")
+            except Exception as e:
+                logger.warning(f"从{url}获取免费API失败: {e}")
+    else:
+        logger.warning("requests模块不可用，无法从其他源获取API列表")
 
     return free_apis
 
@@ -132,6 +146,10 @@ def test_api(api: Dict[str, str]) -> bool:
     Returns:
         是否可用
     """
+    if not REQUESTS_AVAILABLE:
+        logger.warning("requests模块不可用，无法测试API")
+        return False
+        
     try:
         # 构建测试URL
         test_url = api['url'].replace('{fund_code}', '000001')
