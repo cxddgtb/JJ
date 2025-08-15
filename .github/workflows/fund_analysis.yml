@@ -1,0 +1,105 @@
+name: 基金数据分析与买卖点生成
+
+on:
+  schedule:
+    # 每天早上9点运行（北京时间）
+    - cron: '1 16 * * *'
+  workflow_dispatch:
+    inputs:
+      fund_type:
+        description: '基金类型'
+        required: true
+        default: 'mixed'
+        type: choice
+        options:
+        - mixed
+        - stock
+        - bond
+        - money_market
+        - qdii
+      analysis_depth:
+        description: '分析深度'
+        required: true
+        default: 'medium'
+        type: choice
+        options:
+        - basic
+        - medium
+        - deep
+
+jobs:
+  fund-analysis:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+    - name: 设置Python环境
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: 安装依赖
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 创建必要目录
+      run: |
+        mkdir -p outputs/raw_data
+        mkdir -p outputs/processed_data
+        mkdir -p outputs/analysis_results
+        mkdir -p outputs/articles
+
+    - name: 获取免费API列表
+      id: get-apis
+      run: |
+        python src/get_free_apis.py
+        echo "api_count=$(cat free_apis.txt | wc -l)" >> $GITHUB_OUTPUT
+        # 将免费API文件复制到工作目录
+        cp free_apis.txt src/ || echo "免费API文件不存在，跳过复制"
+
+    - name: 并行新闻搜索
+      run: python src/news_crawler.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }} --threads 5
+      env:
+        SEARCH_ENGINES: "baidu,google,bing,sogou,360"
+        MAX_NEWS_COUNT: 50
+
+    - name: 并行数据爬取
+      run: python src/data_crawler.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }} --threads 8
+      env:
+        API_PROVIDERS: "tushare,akshare,jqdata,baostock,free_apis"
+
+    - name: 数据处理与分析
+      run: |
+        python src/indicators.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }}
+        python src/ai_analysis.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }} --depth ${{ github.event.inputs.analysis_depth || 'medium' }}
+
+    - name: 生成买卖操作文章
+      run: |
+        python src/article_generator.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }}
+
+    - name: AI润色文章
+      run: |
+        python src/polish_article.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }}
+
+    - name: 上传结果
+      uses: actions/upload-artifact@v3
+      with:
+        name: analysis-results
+        path: outputs/
+
+    - name: 提交文章到仓库
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git config --local --add url."https://github.com/".insteadOf "git@github.com:"
+        git add outputs/articles/*.md
+        git diff --staged --quiet || git commit -m "更新基金分析文章: ${{ github.event.inputs.fund_type || 'mixed' }}基金"
+        git push
+        echo "文章已成功提交到仓库"
