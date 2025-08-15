@@ -35,7 +35,7 @@ jobs:
 
     steps:
     - name: 检出代码
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
@@ -89,7 +89,7 @@ jobs:
         python src/polish_article.py --fund-type ${{ github.event.inputs.fund_type || 'mixed' }}
 
     - name: 上传结果
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: analysis-results
         path: outputs/
