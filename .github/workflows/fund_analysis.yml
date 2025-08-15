@@ -47,8 +47,17 @@ jobs:
     - name: 安装依赖
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "依赖安装失败，尝试使用国内源"
-        pip install --upgrade 'jqdata>=1.0.0' --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "jqdata安装失败，将不使用该数据源"
+        pip install --no-cache-dir -r requirements.txt --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || pip install --no-cache-dir -r requirements.txt --extra-index-url https://pypi.douban.com/simple/ || echo "依赖安装失败，将尝试直接安装核心依赖"
+        pip install --no-cache-dir requests beautifulsoup4 pandas numpy lxml selenium fake-useragent --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "核心依赖安装失败，将尝试使用默认源"
+        pip install --no-cache-dir requests beautifulsoup4 pandas numpy lxml selenium fake-useragent || echo "核心依赖安装失败，将尝试逐个安装"
+        pip install --no-cache-dir requests || pip install requests --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "requests安装失败"
+        pip install --no-cache-dir beautifulsoup4 || pip install beautifulsoup4 --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "beautifulsoup4安装失败"
+        pip install --no-cache-dir pandas || pip install pandas --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "pandas安装失败"
+        pip install --no-cache-dir numpy || pip install numpy --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "numpy安装失败"
+        pip install --no-cache-dir lxml || pip install lxml --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "lxml安装失败"
+        pip install --no-cache-dir selenium || pip install selenium --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "selenium安装失败"
+        pip install --no-cache-dir fake-useragent || pip install fake-useragent --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "fake-useragent安装失败"
+        pip install --no-cache-dir tushare akshare baostock --extra-index-url https://pypi.tuna.tsinghua.edu.cn/simple/ || echo "数据获取库安装失败"
 
     - name: 创建必要目录
       run: |
