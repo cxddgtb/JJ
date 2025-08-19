@@ -1,0 +1,53 @@
+# ================================================================
+#                普罗米修斯计划 - 核心配置文件
+# ================================================================
+
+# 1. 用户画像与投资组合
+user_profile:
+  # 风险偏好: 'conservative' (保守型), 'moderate' (稳健型), 'aggressive' (激进型)
+  risk_profile: 'moderate' 
+  # 您的投资哲学或原则，AI会严格遵守此条。
+  investment_philosophy: "坚持长期主义，以低估值的核心宽基指数为底仓，搭配高景气度的行业卫星策略，不追涨杀跌。"
+  # 定义您的持仓文件路径
+  portfolio_path: 'portfolio/positions.json'
+  # 定义AI决策日志文件路径
+  recommendations_log_path: 'portfolio/recommendations_log.json'
+
+# 2. 基金池配置 (您的“股票池”)
+# type: 'core' (核心/底仓), 'satellite' (卫星/战术)
+index_funds:
+  - { name: '沪深300基石', code: '510300', type: 'core' }
+  - { name: '科技先锋', code: '512000', type: 'satellite' } # 例如，半导体ETF
+  - { name: '消费龙头', code: '510630', type: 'core' }
+  - { name: '医药创新', code: '159929', type: 'satellite' }
+  - { name: '纳指100', code: '513100', type: 'satellite' }
+
+# 3. 数据源配置
+data_sources:
+  historical_data_provider: 'yfinance' # 主数据源
+  news_urls:
+    - { name: '东方财富', url: "http://fund.eastmoney.com/news/" }
+    - { name: '新浪财经', url: "https://finance.sina.com.cn/fund/" }
+
+# 4. 宏观经济数据配置 (FRED API)
+economic_data:
+  enabled: true
+  fred_api_key_env: 'FRED_API_KEY' # 在GitHub Secrets中的变量名
+  indicators:
+    - 'CPIAUCSL' # 美国CPI
+    - 'UNRATE'   # 美国失业率
+    - 'T10Y2Y'   # 美国10年期与2年期国债利差 (经济衰退先行指标)
+
+# 5. 策略回测配置 (此处简化，实际执行由AI进行逻辑回测)
+backtesting:
+  enabled: true
+  lookback_days: 365 # 回测计算周期（天）
+
+# 6. 普罗米修斯模块
+prometheus_module:
+  learning_enabled: true # 是否开启自我学习模块
+  performance_lookback_days: 30 # 评估过去30天建议的绩效
+  monte_carlo: # 蒙特卡洛模拟，预测未来
+    enabled: true
+    simulations: 2000 # 模拟次数
+    projection_days: 90 # 预测未来90天的投资组合表现
