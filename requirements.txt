@@ -10,4 +10,5 @@ PyYAML==6.0.1
 tenacity==8.3.0
 fredapi==0.5.2
 numpy==1.26.4
-markdown==3.6  # <--- 新增这个库
+markdown==3.6
+sparklines==0.1.0 # <--- 新增这个库
