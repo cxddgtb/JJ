@@ -17,6 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 from concurrent.futures import ThreadPoolExecutor
+# --- FIX: Import the specific functions from tenacity ---
 from tenacity import retry, stop_after_attempt, wait_fixed
 import google.generativeai as genai
 import requests
@@ -37,9 +38,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - [%(levelname)s] - 
                     handlers=[logging.FileHandler(os.path.join(LOG_DIR, 'workflow.log'), mode='w'),
                               logging.StreamHandler()])
 
-# --- FIX: Use the font that is actually installed in the GitHub runner ---
 matplotlib.use('Agg')
-matplotlib.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei'] # Use WenQuanYi Zen Hei
+matplotlib.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei']
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
@@ -50,7 +50,8 @@ genai.configure(api_key=GEMINI_API_KEY)
 AI_MODEL = genai.GenerativeModel('gemini-1.5-pro-latest')
 
 # --- Section 2: Data Acquisition Layer (AKShare) ---
-@retry(stop_after_attempt=3, wait=wait_fixed(3))
+# --- FIX: Corrected tenacity decorator syntax ---
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
 def fetch_url_content(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     response = requests.get(url, headers=headers, timeout=20)
@@ -74,7 +75,8 @@ def scrape_news():
             logging.error(f"从 {source['name']} 爬取新闻失败: {e}")
     return list(set(headlines))[:15]
 
-@retry(stop_after_attempt=3, wait=wait_fixed(5))
+# --- FIX: Corrected tenacity decorator syntax ---
+@retry(stop=stop_after_attempt(3), wait=wait_fixed(5))
 def fetch_historical_data_akshare(code, days):
     logging.info(f"正在使用AKShare获取基金 {code} 的历史数据...")
     df = ak.fund_etf_hist_em(symbol=code, period="daily", adjust="qfq")
@@ -158,68 +160,99 @@ def run_monte_carlo_simulation(all_fund_data):
         logging.error(f"蒙特卡洛模拟发生严重错误: {e}")
         return "蒙特卡洛模拟因意外错误未能运行。", None
 
-# --- NEW: Section 5A: Template-Based Fallback Report ---
 def generate_template_report(context):
     logging.warning("AI API配额耗尽，切换到模板化数据报告方案 (B计划)。")
-    
-    # Build the quantitative analysis table
     quant_table = "| 基金名称 | 状态 | RSI(14) | MACD信号 |\n| :--- | :--- | :--- | :--- |\n"
     quant_data = context.get('quant_analysis_data', [])
     for item in quant_data:
         quant_table += f"| {item['name']} ({item['code']}) | {item['status']} | {item.get('rsi', 'N/A')} | {item.get('macd', 'N/A')} |\n"
-
-    # Build the news section
     news_section = "### 市场新闻摘要\n"
     news_list = context.get('news', [])
-    if news_list:
-        news_section += "\n- ".join(news_list)
-    else:
-        news_section += "未能成功获取最新新闻。"
-
-    # Assemble the final report
+    if news_list: news_section += "\n- ".join(news_list)
+    else: news_section += "未能成功获取最新新闻。"
     summary_report = f"""
 # ⚠️ 普罗米修斯数据简报 (AI分析失败)
-
 **报告时间:** {context['current_time']}
-
 **警告:** 由于Gemini AI API的免费配额已用尽，今日未能生成智能分析报告。以下为已成功获取的原始数据摘要，仅供参考。
-
 ---
-
 ### 量化指标一览
-
 {quant_table}
-
 ---
-
 {news_section}
-
 ---
 *提示：要恢复完整的AI智能分析，请为您的Google Cloud项目启用结算功能，升级API配额。*
 """
     detail_report = "由于AI API配额耗尽，未生成深度分析报告。"
     return summary_report.strip(), detail_report
 
-# --- Section 5B: Ultimate AI Council (The A Plan) ---
 def ultimate_ai_council(context):
-    # ... (The prompt remains the same)
     logging.info("正在召开终极AI委员会 (A计划)...")
-    prompt = f"""... (The full Chinese prompt as in the previous version) ..."""
+    prompt = f"""
+    您是“普罗米修斯”AI，一个由顶级金融专家组成的AI委员会。您的使命是根据提供的所有数据，为用户生成一份机构级的、完整的中文投资报告。
+    **核心目标:** 为用户提供一份清晰、可执行、理由充分的午后交易投资策略。
+    **用户画像:**
+    - 风险偏好: {config['user_profile']['risk_profile']}
+    - 投资哲学: "{config['user_profile']['investment_philosophy']}"
+    **当前持仓:**
+    {json.dumps(context['portfolio'], indent=2, ensure_ascii=False)}
+    **--- 输入数据 ---**
+    **1. 自我学习绩效评估 (我过去的建议表现如何？):**
+    {context.get('performance_review', '暂无')}
+    **2. 市场新闻与情绪 (市场情绪如何？):**
+    {context['news'] if context.get('news') else '未能获取到市场新闻。'}
+    **3. 宏观经济数据 (宏观大局是怎样的？):**
+    {context.get('economic_data', '暂无')}
+    **4. 量化分析 (数据和指标说明了什么？):**
+    {context.get('quant_analysis', '未能获取到任何基金的量化数据。')}
+    **5. 未来风险评估 (概率模型预测了什么？):**
+    {context.get('monte_carlo_summary', '暂无')}
+    **--- 输出格式要求 ---**
+    您必须严格按照以下格式生成两部分内容，并用 "---DETAILED_REPORT_CUT---" 这行文字精确地分隔开。
+    **第一部分: 执行摘要 (用于README.md)**
+    # 🔥 普罗米修斯每日投资简报
+    **报告时间:** {context['current_time']}
+    **今日核心观点:** (用一句话高度概括您对今日市场的核心判断)
+    ---
+    ### 投资组合仪表盘
+    | 基金名称 | 类型 | **操作建议** | **信心指数** | 核心理由 |
+    | :--- | :--- | :--- | :--- | :--- |
+    (请为用户的基金池中的**每一只基金**填充此表格，提供明确的'持有', '买入', '减仓', '卖出', '观望'等建议，并给出'高', '中', '低'的信心指数)
+    ---
+    ### 未来90天财富预测 (蒙特卡洛模拟)
+    ![投资组合预测图](charts/monte_carlo_projection.png)
+    **首席风险官(CRO)的最终裁决:** (解读蒙特卡洛模拟结果。给出一个明确的风险等级：低、中、高、或极高，并解释原因。)
+    ---
+    *免责声明: 本AI报告由公开数据自动生成，仅供参考，不构成任何投资建议。所有金融决策均包含风险。*
+    ---DETAILED_REPORT_CUT---
+    **第二部分: 深度分析报告 (用于 reports/report_YYYY-MM-DD.md)**
+    # 普罗米修斯深度分析报告 - {context['current_date']}
+    ## 1. 首席投资官(CIO)开篇陈词
+    (提供一个全面的市场宏观概述，解释“今日核心观点”是如何形成的。)
+    ## 2. 自我学习与策略调整
+    (讨论绩效评估报告。明确说明过去的成功或失败如何影响今天的建议。)
+    ## 3. 逐只基金深度剖析
+    (为每一只基金提供数段分析，涵盖宏观、量化、情绪视角和最终决策逻辑。)
+    ## 4. 风险评估与应急预案
+    (详细阐述CRO的裁决。投资组合面临的主要风险是什么？)
+    """
     try:
         logging.info("正在使用 Gemini 1.5 Pro 生成中文报告...")
         response = AI_MODEL.generate_content(prompt)
-        # ... (response parsing remains the same)
+        report_text = response.text
+        if "---DETAILED_REPORT_CUT---" in report_text:
+            summary, detail = report_text.split("---DETAILED_REPORT_CUT---", 1)
+        else:
+            summary, detail = report_text, "AI未能生成独立的详细报告部分。"
+        return summary, detail
     except google.api_core.exceptions.ResourceExhausted as e:
         logging.error(f"AI报告生成失败，API配额耗尽: {e}")
-        # --- THIS IS THE KEY CHANGE: Call the fallback function ---
         return generate_template_report(context)
     except Exception as e:
         logging.error(f"AI报告生成时发生未知错误: {e}")
-        summary, detail = generate_template_report(context) # Also fallback on other errors
-        summary = f"# 🔥 AI分析遭遇未知错误\n\n{summary}" # Add an extra error header
+        summary, detail = generate_template_report(context)
+        summary = f"# 🔥 AI分析遭遇未知错误\n\n{summary}"
         return summary, detail
 
-# --- Section 6: Main Execution Block ---
 def main():
     start_time = datetime.now(pytz.timezone('Asia/Shanghai'))
     logging.info(f"--- 普罗米修斯引擎启动于 {start_time.strftime('%Y-%m-%d %H:%M:%S')} (AKShare核心) ---")
@@ -236,9 +269,7 @@ def main():
         context['news'] = news_future.result()
         context['economic_data'] = eco_future.result()
         
-        all_fund_data = {}
-        quant_reports_text = [] # For AI prompt
-        quant_data_structured = [] # For template fallback
+        all_fund_data, quant_reports_text, quant_data_structured = {}, [], []
 
         for code in fund_codes:
             future = hist_data_futures[code]
@@ -247,11 +278,9 @@ def main():
             try:
                 data = future.result()
                 all_fund_data[code] = data
-                data.ta.rsi(append=True)
-                data.ta.macd(append=True)
+                data.ta.rsi(append=True); data.ta.macd(append=True)
                 latest = data.iloc[-1]
                 macd_signal = '金叉' if latest['MACD_12_26_9'] > latest['MACDs_12_26_9'] else '死叉'
-                
                 item.update({'status': '数据正常', 'rsi': f"{latest['RSI_14']:.2f}", 'macd': macd_signal})
                 quant_reports_text.append(f"  - **{fund_name} ({code})**: {item['status']}。RSI={item['rsi']}, MACD信号={item['macd']}")
             except Exception as e:
@@ -261,7 +290,7 @@ def main():
             quant_data_structured.append(item)
         
         context['quant_analysis'] = "最新技术指标分析:\n" + "\n".join(quant_reports_text)
-        context['quant_analysis_data'] = quant_data_structured # Store structured data for template
+        context['quant_analysis_data'] = quant_data_structured
 
     try:
         with open(config['user_profile']['portfolio_path'], 'r', encoding='utf-8') as f:
