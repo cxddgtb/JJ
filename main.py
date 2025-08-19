@@ -1,6 +1,6 @@
 # ================================================================
 #                Project Prometheus - Final Perfected Version
-#         (Correct History Order, Robust Install & All Features)
+#         (Correct History Order, Robust Install & All Fixes)
 # ================================================================
 import os
 import sys
@@ -35,7 +35,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - [%(levelname)s] - 
 matplotlib.use('Agg'); matplotlib.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei']; matplotlib.rcParams['axes.unicode_minus'] = False
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 if not GEMINI_API_KEY: logging.error("FATAL: GEMINI_API_KEY environment variable not set."); sys.exit(1)
-genai.configure(api_key=GEMINI_API_KEY); AI_MODEL = genai.GenerModel('gemini-1.5-pro-latest')
+genai.configure(api_key=GEMINI_API_KEY)
+# --- FIX: Corrected the typo from GenerModel to GenerativeModel ---
+AI_MODEL = genai.GenerativeModel('gemini-1.5-pro-latest')
 HISTORICAL_INDICATORS_PATH = 'portfolio/historical_indicators.json'
 
 # --- Section 2: Data Acquisition & History Module ---
@@ -78,8 +80,8 @@ def save_historical_indicators(data):
 def update_and_get_history(fund_code, new_rsi):
     history = load_historical_indicators()
     if fund_code not in history: history[fund_code] = []
-    history[fund_code].insert(0, new_rsi) # 最新的数据插入到最前面
-    history[fund_code] = history[fund_code][:30] # 只保留最近30天
+    history[fund_code].insert(0, new_rsi)
+    history[fund_code] = history[fund_code][:30]
     save_historical_indicators(history)
     return history[fund_code]
 def run_monte_carlo_simulation(all_fund_data):
@@ -117,8 +119,6 @@ def generate_template_report(context):
     for item in context.get('quant_analysis_data', []):
         history_str = 'N/A'
         if 'history' in item and item['history']:
-            # --- FIX: Do NOT reverse the list. The list is already [today, yesterday, ...]. ---
-            # Sparklines reads from left to right, so this will now show the newest data on the left.
             history_for_sparkline = item['history']
             spark_str = "".join(sparklines(history_for_sparkline))
             history_str = f"`{spark_str}`"
