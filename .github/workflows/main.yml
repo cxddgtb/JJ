@@ -43,6 +43,7 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           FORMSUBMIT_URL: ${{ secrets.FORMSUBMIT_URL }} # 确保这行已被添加
           GPT_API_free: ${{ secrets.GPT_API_free }}
+          GPT_BASE_URL_free: ${{ secrets.GPT_BASE_URL_free }}
         run: python main.py
 
       - name: 7. Commit and Push Reports
