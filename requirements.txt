@@ -3,7 +3,7 @@ beautifulsoup4==4.12.3
 pandas==2.2.2
 google-generativeai==0.5.4
 pytz==2024.1
-yfinance==0.2.38
+tushare==1.4.2  # 替换 yfinance
 pandas-ta==0.3.14b0
 matplotlib==3.8.4
 PyYAML==6.0.1
