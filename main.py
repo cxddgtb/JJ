@@ -1,6 +1,6 @@
 # ================================================================
 #                Project Prometheus - Final Production Version
-#              (AKShare Core, Chinese Edition & Template Fallback)
+#              (AKShare Core, Chinese Edition, Template & Encoding Fix)
 # ================================================================
 import os
 import sys
@@ -17,7 +17,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
 from concurrent.futures import ThreadPoolExecutor
-# --- FIX: Import the specific functions from tenacity ---
 from tenacity import retry, stop_after_attempt, wait_fixed
 import google.generativeai as genai
 import requests
@@ -50,21 +49,26 @@ genai.configure(api_key=GEMINI_API_KEY)
 AI_MODEL = genai.GenerativeModel('gemini-1.5-pro-latest')
 
 # --- Section 2: Data Acquisition Layer (AKShare) ---
-# --- FIX: Corrected tenacity decorator syntax ---
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
-def fetch_url_content(url):
+def fetch_url_content_raw(url):
+    """
+    Fetches the raw byte content of a URL. This is crucial for handling encoding correctly.
+    """
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     response = requests.get(url, headers=headers, timeout=20)
     response.raise_for_status()
-    return response.text
+    return response.content
 
 def scrape_news():
     headlines = []
     for source in config['data_sources']['news_urls']:
         try:
             logging.info(f"正在从 {source['name']} 爬取新闻...")
-            html = fetch_url_content(source['url'])
-            soup = BeautifulSoup(html, 'html.parser')
+            # --- FIX: Use raw content and let BeautifulSoup handle decoding ---
+            raw_html = fetch_url_content_raw(source['url'])
+            # BeautifulSoup is excellent at auto-detecting encoding from raw bytes.
+            soup = BeautifulSoup(raw_html, 'html.parser')
+            
             links = soup.find_all('a', href=True)
             for link in links:
                 if len(link.text.strip()) > 20 and '...' not in link.text:
@@ -75,7 +79,6 @@ def scrape_news():
             logging.error(f"从 {source['name']} 爬取新闻失败: {e}")
     return list(set(headlines))[:15]
 
-# --- FIX: Corrected tenacity decorator syntax ---
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))
 def fetch_historical_data_akshare(code, days):
     logging.info(f"正在使用AKShare获取基金 {code} 的历史数据...")
@@ -94,6 +97,8 @@ def fetch_historical_data_akshare(code, days):
     df = df.sort_index()
     df['code'] = code
     return df
+
+# ... (The rest of the code is unchanged as it was already correct) ...
 
 def get_economic_data():
     if not config['economic_data']['enabled']: return "宏观经济数据模块已禁用。"
@@ -168,7 +173,7 @@ def generate_template_report(context):
         quant_table += f"| {item['name']} ({item['code']}) | {item['status']} | {item.get('rsi', 'N/A')} | {item.get('macd', 'N/A')} |\n"
     news_section = "### 市场新闻摘要\n"
     news_list = context.get('news', [])
-    if news_list: news_section += "\n- ".join(news_list)
+    if news_list: news_section += "\n- " + "\n- ".join(news_list)
     else: news_section += "未能成功获取最新新闻。"
     summary_report = f"""
 # ⚠️ 普罗米修斯数据简报 (AI分析失败)
