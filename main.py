@@ -1,6 +1,6 @@
 # ================================================================
 #                Project Prometheus - Final Production Version
-#                     (Tushare Data Core & Chinese Edition)
+#                     (AKShare Data Core & Chinese Edition)
 # ================================================================
 import os
 import sys
@@ -10,7 +10,7 @@ import logging
 from datetime import datetime, timedelta
 import pytz
 import pandas as pd
-import tushare as ts # 引入 Tushare
+import akshare as ak  # 引入 AKShare
 import pandas_ta as ta
 from fredapi import Fred
 import numpy as np
@@ -44,7 +44,6 @@ matplotlib.rcParams['font.sans-serif'] = ['SimHei']
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 # --- API Configuration ---
-# Gemini AI API
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
 if not GEMINI_API_KEY:
     logging.error("FATAL: GEMINI_API_KEY environment variable not set.")
@@ -52,15 +51,7 @@ if not GEMINI_API_KEY:
 genai.configure(api_key=GEMINI_API_KEY)
 AI_MODEL = genai.GenerativeModel('gemini-1.5-pro-latest')
 
-# Tushare Data API
-TUSHARE_TOKEN = os.getenv('TUSHARE_TOKEN')
-if not TUSHARE_TOKEN:
-    logging.error("FATAL: TUSHARE_TOKEN environment variable not set.")
-    sys.exit(1)
-ts.set_token(TUSHARE_TOKEN)
-pro = ts.pro_api()
-
-# --- Section 2: Data Acquisition Layer (Now with Tushare) ---
+# --- Section 2: Data Acquisition Layer (Now with AKShare) ---
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(3))
 def fetch_url_content(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
@@ -69,7 +60,6 @@ def fetch_url_content(url):
     return response.text
 
 def scrape_news():
-    # ... (This function remains the same as it's for news, not market data)
     headlines = []
     for source in config['data_sources']['news_urls']:
         try:
@@ -86,30 +76,36 @@ def scrape_news():
             logging.error(f"从 {source['name']} 爬取新闻失败: {e}")
     return list(set(headlines))[:15]
 
-# --- NEW: fetch_historical_data using Tushare ---
+# --- NEW: fetch_historical_data using AKShare ---
 @retry(stop=stop_after_attempt(3), wait=wait_fixed(5))
-def fetch_historical_data_tushare(code, days):
+def fetch_historical_data_akshare(code, days):
     """
-    Fetches historical fund data using the Tushare API.
-    This is the new, reliable core for market data.
+    使用AKShare API获取基金历史行情数据。
+    这是新的、无需Token、更可靠的数据核心。
     """
-    end_date = datetime.now().strftime('%Y%m%d')
-    start_date = (datetime.now() - timedelta(days=days)).strftime('%Y%m%d')
-    
-    # Tushare uses a different ticker format for funds: CODE.OF
-    # This function fetches ETF data.
-    df = pro.fund_daily(ts_code=f"{code}.SH" if code.startswith('5') else f"{code}.SZ", 
-                        start_date=start_date, 
-                        end_date=end_date)
+    logging.info(f"正在使用AKShare获取基金 {code} 的历史数据...")
+    # AKShare从东方财富获取ETF历史数据，非常稳定
+    df = ak.fund_etf_hist_em(symbol=code, period="daily", adjust="qfq") # qfq = 前复权
     
     if df.empty:
-        raise ValueError(f"Tushare API returned no data for {code}. Check if the code is a valid ETF.")
+        raise ValueError(f"AKShare未能获取到代码 {code} 的数据。请检查代码是否为有效的场内ETF代码。")
 
-    # Data wrangling to match the expected format (like yfinance)
-    df = df.rename(columns={'trade_date': 'Date', 'close': 'Close', 'open': 'Open', 'high': 'High', 'low': 'Low', 'vol': 'Volume'})
+    # 数据清洗和格式统一，以适配后续所有分析模块
+    df = df.rename(columns={'日期': 'Date', '开盘': 'Open', '收盘': 'Close', '最高': 'High', '最低': 'Low', '成交量': 'Volume'})
     df['Date'] = pd.to_datetime(df['Date'])
     df = df.set_index('Date')
-    df = df.sort_index() # Ensure data is in chronological order
+    
+    # 将所有价格和成交量列转换为数值类型，防止后续计算出错
+    cols_to_numeric = ['Open', 'Close', 'High', 'Low', 'Volume']
+    df[cols_to_numeric] = df[cols_to_numeric].apply(pd.to_numeric, errors='coerce')
+    df.dropna(subset=cols_to_numeric, inplace=True) # 删除转换失败的行
+
+    # 按需截取指定天数的数据
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=days)
+    df = df[df.index >= start_date]
+
+    df = df.sort_index() # 确保数据按时间升序排列
     df['code'] = code
     return df
 
@@ -185,7 +181,6 @@ def run_monte_carlo_simulation(all_fund_data):
 
 # --- Section 5: Ultimate AI Council (Chinese Prompt) ---
 def ultimate_ai_council(context):
-    # ... (This function remains the same as its logic is sound)
     logging.info("正在召开终极AI委员会...")
     prompt = f"""
     您是“普罗米修斯”AI，一个由顶级金融专家组成的AI委员会。您的使命是根据提供的所有数据，为用户生成一份机构级的、完整的中文投资报告。
@@ -251,22 +246,21 @@ def ultimate_ai_council(context):
         logging.error(f"AI报告生成时发生未知错误: {e}")
         return ("# 🔥 普罗米修斯简报生成失败\n\n生成AI报告时发生未知错误，请检查日志。", str(e))
 
-# --- Section 6: Main Execution Block (Modified for Tushare) ---
+# --- Section 6: Main Execution Block (Modified for AKShare) ---
 def main():
     start_time = datetime.now(pytz.timezone('Asia/Shanghai'))
-    logging.info(f"--- 普罗米修斯引擎启动于 {start_time.strftime('%Y-%m-%d %H:%M:%S')} (Tushare核心) ---")
+    logging.info(f"--- 普罗米修斯引擎启动于 {start_time.strftime('%Y-%m-%d %H:%M:%S')} (AKShare核心) ---")
     
     context = {'current_time': start_time.strftime('%Y-%m-%d %H:%M:%S %Z'), 'current_date': start_time.strftime('%Y-%m-%d')}
     context['performance_review'] = evaluate_past_recommendations()
 
-    # Data Acquisition (Parallel)
     with ThreadPoolExecutor(max_workers=10) as executor:
         news_future = executor.submit(scrape_news)
         eco_future = executor.submit(get_economic_data)
         
         fund_codes = [f['code'] for f in config['index_funds']]
-        # --- MODIFIED: Use the new Tushare data fetching function ---
-        hist_data_futures = {code: executor.submit(fetch_historical_data_tushare, code, 365) for code in fund_codes}
+        # --- MODIFIED: Use the new AKShare data fetching function ---
+        hist_data_futures = {code: executor.submit(fetch_historical_data_akshare, code, 365) for code in fund_codes}
 
         context['news'] = "\n- ".join(news_future.result())
         context['economic_data'] = eco_future.result()
@@ -286,7 +280,7 @@ def main():
                 quant_reports.append(f"  - **{fund_name} ({code})**: 数据正常。RSI={latest['RSI_14']:.2f}, MACD信号={macd_signal}")
             except Exception as e:
                 logging.error(f"处理基金 {fund_name} ({code}) 的数据失败: {e}")
-                quant_reports.append(f"  - **{fund_name} ({code})**: 数据获取失败。请检查Tushare权限或代码有效性。")
+                quant_reports.append(f"  - **{fund_name} ({code})**: 数据获取失败。请检查基金代码是否正确。")
         
         context['quant_analysis'] = "最新技术指标分析:\n" + "\n".join(quant_reports)
 
@@ -301,8 +295,8 @@ def main():
     
     if not all_fund_data:
         logging.warning("跳过AI委员会：未能获取到任何有效的基金数据。")
-        summary_report, detail_report = (f"# 🔥 普罗米修斯简报生成失败：无有效数据\n\n所有目标基金的数据获取均失败。请检查Tushare Token是否有效以及基金代码是否正确。系统将在下个计划时间自动重试。", 
-                                         "所有数据获取任务均失败。请检查日志中关于Tushare的详细错误信息。")
+        summary_report, detail_report = (f"# 🔥 普罗米修斯简报生成失败：无有效数据\n\n所有目标基金的数据获取均失败。请检查基金代码是否为有效的场内ETF。系统将在下个计划时间自动重试。", 
+                                         "所有数据获取任务均失败。请检查日志中关于AKShare的详细错误信息。")
     else:
         summary_report, detail_report = ultimate_ai_council(context)
 
