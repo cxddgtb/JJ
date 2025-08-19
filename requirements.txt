@@ -3,7 +3,7 @@ beautifulsoup4==4.12.3
 pandas==2.2.2
 google-generativeai==0.5.4
 pytz==2024.1
-tushare==1.4.2  # 替换 yfinance
+akshare==1.13.25  # 终极数据源：AKShare
 pandas-ta==0.3.14b0
 matplotlib==3.8.4
 PyYAML==6.0.1
