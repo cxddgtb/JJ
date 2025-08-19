@@ -12,4 +12,3 @@ tenacity
 fredapi
 markdown
 sparklines
-openai  # <--- 不再锁定版本，使用最新版
