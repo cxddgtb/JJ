@@ -1,3 +1,3 @@
-# 🔥 Prometheus Briefing Failed
+# 🔥 普罗米修斯简报生成失败：无有效数据
 
-AI model failed to generate a report. Please check the logs.
+所有目标基金的数据获取均失败。最常见的原因是`yfinance`数据源不稳定。系统将在下个计划时间自动重试。本次未执行AI分析。
