@@ -1,6 +1,6 @@
 # =_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
-#                Project Prometheus - Final Dual-Core AI Engine
-#         (Gemini -> GPT -> Template Fallback & All Previous Features)
+#                Project Prometheus - Final Dual-Core AI Engine (Corrected)
+#         (Gemini -> Custom GPT -> Template Fallback & All Features)
 # =_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
 import os
 import sys
@@ -19,7 +19,7 @@ import matplotlib
 from concurrent.futures import ThreadPoolExecutor
 from tenacity import retry, stop_after_attempt, wait_fixed
 import google.generativeai as genai
-import openai # <--- 导入OpenAI
+from openai import OpenAI # <--- 导入新版OpenAI的正确方式
 import requests
 from bs4 import BeautifulSoup
 import google.api_core.exceptions
@@ -47,12 +47,23 @@ else:
     logging.warning("GEMINI_API_KEY not found, primary AI is disabled.")
     AI_MODEL_GEMINI = None
 
-# GPT AI (Secondary)
+# GPT AI (Secondary) - With custom base_url
 GPT_API_KEY = os.getenv('GPT_API_free')
-if GPT_API_KEY:
-    openai.api_key = GPT_API_KEY
+GPT_BASE_URL = os.getenv('GPT_BASE_URL_free')
+if GPT_API_KEY and GPT_BASE_URL:
+    try:
+        # --- FIX: Initialize the client EXACTLY as per your screenshot ---
+        client_gpt = OpenAI(
+            api_key=GPT_API_KEY,
+            base_url=GPT_BASE_URL,
+        )
+        logging.info("备用AI (GPT)客户端已成功初始化。")
+    except Exception as e:
+        logging.error(f"初始化备用AI (GPT)客户端失败: {e}")
+        client_gpt = None
 else:
-    logging.warning("GPT_API_free not found, secondary AI is disabled.")
+    logging.warning("GPT_API_free或GPT_BASE_URL_free未设置，备用AI已禁用。")
+    client_gpt = None
 
 # ... (Data acquisition, history, and monte carlo sections remain unchanged) ...
 # Data Acquisition
@@ -159,12 +170,13 @@ def ultimate_ai_council(context):
             logging.warning(f"主AI (Gemini) 调用失败: {gemini_e}")
 
     # Plan B: Try GPT if Gemini failed
-    if GPT_API_KEY:
+    if client_gpt:
         try:
             logging.info("主AI失败，正在尝试使用备用AI (GPT)...")
-            chat_completion = openai.chat.completions.create(
+            # --- FIX: Use the initialized client to make the call ---
+            chat_completion = client_gpt.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
-                model="gpt-3.5-turbo", # A common and powerful model
+                model="gpt-3.5-turbo",
             )
             report_text = chat_completion.choices[0].message.content
             if "---DETAILED_REPORT_CUT---" in report_text: summary, detail = report_text.split("---DETAILED_REPORT_CUT---", 1)
