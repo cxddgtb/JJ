@@ -1,14 +1,14 @@
-requests==2.31.0
-beautifulsoup4==4.12.3
-pandas==2.2.2
-google-generativeai==0.5.4
-pytz==2.4.1
+requests
+beautifulsoup4
+pandas
+google-generativeai
+pytz
 akshare
-pandas-ta==0.3.14b0
-matplotlib==3.8.4
-PyYAML==6.0.1
-tenacity==8.3.0
-fredapi==0.5.2
-numpy==1.26.4
-markdown==3.6
-sparklines # <--- 修正点在这里！移除了错误的版本号 ==0.1.0
+pandas-ta
+matplotlib
+PyYAML
+tenacity
+fredapi
+numpy
+markdown
+sparklines
