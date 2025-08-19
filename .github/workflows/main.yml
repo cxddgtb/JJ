@@ -41,9 +41,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          FORMSUBMIT_URL: ${{ secrets.FORMSUBMIT_URL }} # 确保这行已被添加
-          GPT_API_free: ${{ secrets.GPT_API_free }}
-          GPT_BASE_URL_free: ${{ secrets.GPT_BASE_URL_free }}
+          FORMSUBMIT_URL: ${{ secrets.FORMSUBMIT_URL }} # 如果您不需要邮件，可以删除这行
         run: python main.py
 
       - name: 7. Commit and Push Reports
@@ -51,7 +49,7 @@ jobs:
           git config --global user.name 'Prometheus Engine'
           git config --global user.email 'prometheus@github.action'
           # 添加所有生成或修改的文件
-          git add README.md reports/ logs/ charts/ portfolio/recommendations_log.json
+          git add README.md reports/ logs/ charts/ portfolio/
           
           if git diff --staged --quiet; then
             echo "No new insights to commit. Market state is stable."
