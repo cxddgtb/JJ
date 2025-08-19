@@ -6,10 +6,10 @@ google-generativeai
 pytz
 akshare
 pandas-ta==0.3.14b0
-matplotlib==3.8.4
+matplotlib
 PyYAML
 tenacity
 fredapi
 markdown
-bt==0.2.9      # <--- 强大的回测与策略库
-ffn==0.3.6      # <--- bt的依赖库
+sparklines
+openai==1.3.5 # <--- 新增OpenAI库并锁定稳定版本
