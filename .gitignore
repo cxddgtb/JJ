@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Log files
+*.log
+
+# Sensitive files (though we use secrets, it's good practice)
+*.env
