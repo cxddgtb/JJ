@@ -7,7 +7,6 @@ import traceback
 import google.generativeai as genai
 import requests
 import pandas as pd
-import yfinance as yf
 import akshare as ak
 from bs4 import BeautifulSoup
 from ddgs import DDGS
@@ -31,7 +30,7 @@ def check_time_interval():
 def update_timestamp():
     with open(TIMESTAMP_FILE, "w") as f: f.write(str(time.time()))
 
-# --- 数据获取模块 (宏观+微观 终极修复) ---
+# --- 数据获取模块 (100% AkShare核心) ---
 def get_china_macro_data_from_akshare(indicators):
     print("    AKSHARE: 正在启动中国宏观经济数据核心...")
     macro_data_parts = ["**【中国核心宏观经济指标 (来源: 国家统计局等)】**"]
@@ -48,12 +47,11 @@ def get_china_macro_data_from_akshare(indicators):
                 df = indicator_functions[indicator_id]()
                 latest_data = df.iloc[-1]
                 date_col = '月份' if '月份' in latest_data else '统计时间'
-                value_col_options = ['同比', '涨跌幅', 'PMI', 'M2'] # 尝试多个可能的列名
+                value_col_options = ['同比', '涨跌幅', 'PMI', 'M2']
                 value = "N/A"
                 for col in value_col_options:
                     if col in latest_data:
-                        value = latest_data[col]
-                        break
+                        value = latest_data[col]; break
                 macro_data_parts.append(f"- **{name} ({indicator_id})**: {value} (截至: {latest_data[date_col]})")
         except Exception as e:
             print(f"    AKSHARE: ❌ 获取指标 {name} 失败: {e}")
@@ -61,57 +59,31 @@ def get_china_macro_data_from_akshare(indicators):
     print("    AKSHARE: ✅ 宏观经济数据获取完成。")
     return "\n".join(macro_data_parts)
 
-# ⬇️⬇️⬇️ 核心修复 2: 终极的“双剑合璧”基金数据获取方案 ⬇️⬇️⬇️
-def get_fund_data_from_yfinance(fund_code, history_days):
-    """第一剑：尝试从yfinance获取"""
-    tickers_to_try = [f"{fund_code}.SS", f"{fund_code}.SZ"]
-    for ticker in tickers_to_try:
-        try:
-            hist_df = yf.Ticker(ticker).history(period=f"{history_days}d", auto_adjust=True)
-            if not hist_df.empty:
-                print(f"    YFINANCE: ✅ 成功使用代码 {ticker} 获取到数据。")
-                fund_name = yf.Ticker(ticker).info.get('longName', fund_code)
-                return fund_name, hist_df
-        except Exception: continue
-    return None, None # 如果失败，返回None
-
 def get_fund_data_from_akshare(fund_code):
-    """第二剑：从AkShare获取作为补充"""
-    print(f"    AKSHARE_FUND: yfinance失败, 启动AkShare备用方案获取 {fund_code}...")
-    df = ak.fund_open_fund_info_em(fund_code=fund_code, indicator="单位净值走势")
+    """
+    终极方案: 100% 使用 AkShare 获取基金数据
+    """
+    print(f"    AKSHARE_FUND: 正在为 {fund_code} 启动AkShare数据核心...")
+    # ⬇️⬇️⬇️ 核心修复 2: 使用了正确的、经过验证的AkShare函数名和参数 ⬇️⬇️⬇️
+    hist_df = ak.fund_open_fund_info_em(fund=fund_code, indicator="单位净值走势")
     fund_name_info = ak.fund_fund_name_em()
     fund_name = fund_name_info[fund_name_info['基金代码'] == fund_code]['基金简称'].values[0]
-    return fund_name, df
-
-def get_fund_data_robust(fund_code, history_days):
-    """“双剑合璧”调度器"""
-    fund_name, hist_df = get_fund_data_from_yfinance(fund_code, history_days)
-    if hist_df is not None:
-        # yfinance的数据列需要重命名
-        hist_df.rename(columns={'Close': '收盘'}, inplace=True)
-        return fund_name, hist_df
-    
-    # 如果yfinance失败，则启动AkShare
-    fund_name, hist_df_ak = get_fund_data_from_akshare(fund_code)
-    # AkShare的数据列需要重命名并转换格式
-    hist_df_ak.rename(columns={'净值日期': 'Date', '单位净值': '收盘', '日增长率': '日增长率_str'}, inplace=True)
-    hist_df_ak['Date'] = pd.to_datetime(hist_df_ak['Date'])
-    hist_df_ak.set_index('Date', inplace=True)
-    hist_df_ak['收盘'] = pd.to_numeric(hist_df_ak['收盘'])
-    return fund_name, hist_df_ak
+    return fund_name, hist_df
 
 # --- 数据处理与报告生成 (已修复) ---
 def process_fund_data(fund_name, hist_df, fund_code, ma_days, days_to_display):
     try:
         print(f"正在处理基金 {fund_code} 的数据...")
-        # ⬇️⬇️⬇️ 核心修复 3: 强制将数据列转为数字，防止格式错误 ⬇️⬇️⬇️
+        # 重命名和格式转换
+        hist_df.rename(columns={'净值日期': 'Date', '单位净值': '收盘', '日增长率': '日增长率_str'}, inplace=True)
+        hist_df['Date'] = pd.to_datetime(hist_df['Date'])
+        hist_df.set_index('Date', inplace=True)
+        
+        # ⬇️⬇️⬇️ 核心修复 3: 提供了更健壮的数据清洗和格式化 ⬇️⬇️⬇️
         hist_df['收盘'] = pd.to_numeric(hist_df['收盘'], errors='coerce')
-        hist_df.dropna(subset=['收盘'], inplace=True) # 删除无法转换的行
-
-        if '日增长率' not in hist_df.columns:
-            hist_df['日增长率'] = hist_df['收盘'].pct_change() * 100
-        else:
-             hist_df['日增长率'] = pd.to_numeric(hist_df['日增长率'], errors='coerce').fillna(0)
+        hist_df['日增长率'] = pd.to_numeric(hist_df['日增长率_str'], errors='coerce').fillna(0)
+        hist_df.dropna(subset=['收盘'], inplace=True)
+        hist_df = hist_df.sort_index()
 
         hist_df[f'MA{ma_days}'] = hist_df['收盘'].rolling(window=ma_days).mean()
         latest_data = hist_df.iloc[-1]
@@ -141,7 +113,7 @@ def get_sector_data():
     except Exception as e: return f"行业板块数据爬取失败: {e}"
 def generate_rule_based_report(fund_datas, macro_data, beijing_time):
     report_parts = [f"# 基金量化规则分析报告 ({beijing_time.strftime('%Y-%m-%d')})\n", macro_data + "\n"]
-    if not fund_datas: report_parts.append("### **注意：所有数据源均未能获取任何基金数据。**")
+    if not fund_datas: report_parts.append("### **注意：未能从AkShare获取任何基金数据。**")
     else:
         for data in fund_datas:
             score, reasons = 0, []
@@ -164,7 +136,7 @@ def call_gemini_ai(prompt):
     except Exception as e: return f"AI模型调用失败: {e}"
 def generate_ai_based_report(news, sectors, funds_string, macro_data):
     if not funds_string.strip(): return "由于未能获取任何基金的详细数据，AI策略大脑无法进行分析。"
-    analysis_prompt = f"""作为一名顶级的中国市场对冲基金经理，请结合以下所有信息，撰写一份包含宏观、中观、微观三个层次的深度投研报告...\n**第一部分：中国宏观经济背景 (来源: AkShare)**\n{macro_data}\n**第二部分：市场新闻与情绪**\n{news}\n**第三部分：中观行业与板块轮动**\n{sectors}\n**第四部分：微观持仓基金技术状态 (来源: yfinance/AkShare)**\n{funds_string}"""
+    analysis_prompt = f"""作为一名顶级的中国市场对冲基金经理，请结合以下所有信息，撰写一份包含宏观、中观、微观三个层次的深度投研报告...\n**第一部分：中国宏观经济背景 (来源: AkShare)**\n{macro_data}\n**第二部分：市场新闻与情绪**\n{news}\n**第三部分：中观行业与板块轮动**\n{sectors}\n**第四部分：微观持仓基金技术状态 (来源: AkShare)**\n{funds_string}"""
     draft = call_gemini_ai(analysis_prompt)
     if "AI模型调用失败" in draft: return draft
     polish_prompt = f"作为一名善于用数据讲故事的投资KOL，请将以下这份专业的投研报告，转化为一篇普通投资者都能看懂的精彩文章...\n**【原始报告】**\n{draft}"
@@ -176,7 +148,7 @@ def main():
     structured_fund_datas, formatted_fund_strings, macro_data, news_text, sector_text = [], [], "", "", ""
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
-        future_funds = {executor.submit(get_fund_data_robust, c, config['historical_days_to_fetch']): c for c in config['fund_codes']}
+        future_funds = {executor.submit(get_fund_data_from_akshare, c): c for c in config['fund_codes']}
         future_macro = executor.submit(get_china_macro_data_from_akshare, config['china_macro_indicators'])
         future_news = {executor.submit(search_news, kw): kw for kw in config['news_keywords']}
         future_sector = executor.submit(get_sector_data)
