@@ -1,109 +1,58 @@
-name: AI基金分析与文章生成工作流
+name: 每日基金分析与报告生成
 
 on:
-  # 1. 北京时间每个工作日下午2点 (UTC时间早上6点) 自动执行
+  # 1. 定时触发：北京时间周一至周五下午2点 (UTC时间早上6点)
   schedule:
     - cron: '0 6 * * 1-5'
   
-  # 2. 允许手动触发 (用于突发事件)
+  # 2. 手动或事件触发：可以由外部事件调用，用于处理突发情况
+  repository_dispatch:
+    types: [run-analysis]
+  
+  # 3. 允许在 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
 
+# 并发控制：确保同一时间只有一个工作流在运行，防止数据错乱
+# cancel-in-progress: false 表示不会取消正在运行的旧任务
+concurrency: 
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
-  # 任务一：数据搜集
-  collect_data:
-    runs-on: ubuntu-latest
-    outputs:
-      data_file: ${{ steps.save_data.outputs.file_path }}
+  build-and-analyze:
+    runs-on: ubuntu-latest # 使用最新的Ubuntu虚拟机环境
+
     steps:
-      - name: 检出代码
+      # 第一步：检出（下载）你的代码到虚拟机
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: 设置Python环境
+      # 第二步：设置Python环境
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.10' # 使用Python 3.10版本
 
-      - name: 安装依赖库 (包括浏览器驱动)
+      # 第三步：安装Python依赖库
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 selenium pandas aiohttp
-          sudo apt-get update
-          # 【重要修改】将 'firefox-geckodriver' 替换为 'firefox'
-          sudo apt-get install -y firefox
+          pip install -r requirements.txt
 
-      - name: 运行多线程爬虫脚本
-        id: scrape
-        run: python scripts/collect_data.py
-      
-      - name: 保存爬取的数据为Artifact
-        id: save_data
-        uses: actions/upload-artifact@v4
-        with:
-          name: collected-data
-          path: collected_data.json
-          retention-days: 1
-  
-  # 任务二：AI分析与决策
-  analyze_data:
-    runs-on: ubuntu-latest
-    needs: collect_data # 依赖于数据搜集任务
-    outputs:
-      analysis_file: ${{ steps.save_analysis.outputs.file_path }}
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
-
-      - name: 设置Python环境
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      
-      - name: 安装依赖库
-        run: pip install pandas google-generativeai
-
-      - name: 下载搜集到的数据
-        uses: actions/download-artifact@v4
-        with:
-          name: collected-data
-
-      - name: 运行AI分析脚本
-        id: analyze
-        run: python scripts/analyze_data.py
+      # 第四步：运行主分析脚本
+      # 将我们设置的密钥作为环境变量传递给Python脚本
+      - name: Run analysis script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }} # 将事件类型传给脚本，用于判断是否更新时间戳
+        run: python main.py
 
-      - name: 保存分析结果为Artifact
-        id: save_analysis
-        uses: actions/upload-artifact@v4
+      # 第五步：将生成的报告自动提交回GitHub仓库
+      - name: Commit and push report
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          name: analysis-result
-          path: analysis_result.txt
-          retention-days: 1
-
-  # 任务三：文章生成与发布
-  generate_article:
-    runs-on: ubuntu-latest
-    needs: analyze_data # 依赖于AI分析任务
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
-
-      - name: 设置Python环境
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      
-      - name: 安装依赖库
-        run: pip install google-generativeai PyGithub pytz
-
-      - name: 下载分析结果
-        uses: actions/download-artifact@v4
-        with:
-          name: analysis-result
-
-      - name: 运行文章生成和润色脚本
-        run: python scripts/generate_article.py
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
+          commit_message: "自动生成基金分析报告"
+          file_pattern: "reports/*.md last_run_timestamp.txt" # 指定要提交的文件模式
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
+          commit_author: "GitHub Actions Bot <actions@github.com>"
