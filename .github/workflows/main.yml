@@ -1,63 +1,48 @@
 name: 每日基金分析与报告生成
 
 on:
-  # 1. 定时触发：北京时间周一至周五下午2点 (UTC时间早上6点)
   schedule:
     - cron: '0 6 * * 1-5'
-  
-  # 2. 手动或事件触发：可以由外部事件调用，用于处理突发情况
   repository_dispatch:
     types: [run-analysis]
-  
-  # 3. 允许在 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
 
-# 并发控制：确保同一时间只有一个工作流在运行，防止数据错乱
 concurrency: 
   group: ${{ github.workflow }}
   cancel-in-progress: false
 
 jobs:
   build-and-analyze:
-    runs-on: ubuntu-latest # 使用最新的Ubuntu虚拟机环境
-
-    # ⬇️⬇️⬇️ 就是在这里添加了权限设置 ⬇️⬇️⬇️
-    # 授予工作流向仓库写入内容的权限
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    # ⬆️⬆️⬆️ 添加结束 ⬆️⬆️⬆️
 
     steps:
-      # 第一步：检出（下载）你的代码到虚拟机
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 第二步：设置Python环境
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10' # 使用Python 3.10版本
+          python-version: '3.10'
 
-      # 第三步：安装Python依赖库
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 第四步：运行主分析脚本
-      # 将我们设置的密钥作为环境变量传递给Python脚本
       - name: Run analysis script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GITHUB_EVENT_NAME: ${{ github.event_name }} # 将事件类型传给脚本，用于判断是否更新时间戳
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: python main.py
 
-      # 第五步：将生成的报告自动提交回GitHub仓库
-      - name: Commit and push report
+      # 关键改动在这里！ file_pattern现在可以匹配两种报告
+      - name: Commit and push reports
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "自动生成基金分析报告"
-          file_pattern: "reports/*.md last_run_timestamp.txt" # 指定要提交的文件模式
+          commit_message: "自动生成双核分析报告"
+          file_pattern: "reports/*.md last_run_timestamp.txt" # 使用通配符*.md来匹配所有报告
           commit_user_name: "GitHub Actions Bot"
           commit_user_email: "actions@github.com"
           commit_author: "GitHub Actions Bot <actions@github.com>"
