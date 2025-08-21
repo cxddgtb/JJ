@@ -33,57 +33,39 @@ def update_timestamp():
 
 # --- 数据获取模块 (宏观+微观) ---
 def get_china_macro_data_from_akshare(indicators):
-    """
-    终极宏观方案: 从AkShare获取中国的核心经济数据。
-    """
     print("    AKSHARE: 正在启动中国宏观经济数据核心...")
     macro_data_parts = ["**【中国核心宏观经济指标 (来源: 国家统计局等)】**"]
-    
-    # 建立指标ID到AkShare函数的映射
     indicator_functions = {
-        "CPI": ak.mac_cn_cpi_monthly,
-        "PPI": ak.mac_cn_ppi_monthly,
-        "M2": ak.mac_cn_m2_yearly,
-        "PMI": ak.mac_cn_pmi_yearly
+        "CPI": ak.mac_cn_cpi_monthly, "PPI": ak.mac_cn_ppi_monthly,
+        "M2": ak.mac_cn_m2_yearly, "PMI": ak.mac_cn_pmi_yearly
     }
-    
     for indicator_id, name in indicators.items():
         try:
             if indicator_id in indicator_functions:
-                # 调用对应的AkShare函数
                 df = indicator_functions[indicator_id]()
-                # 获取最新的一行数据
                 latest_data = df.iloc[-1]
-                
-                # 提取数据 (不同指标的列名不同)
                 date = latest_data.get('月份', latest_data.get('统计时间', 'N/A'))
                 value = latest_data.get('当月同比', latest_data.get('制造业PMI', 'N/A'))
-                
                 macro_data_parts.append(f"- **{name} ({indicator_id})**: {value} (截至: {date})")
         except Exception as e:
             print(f"    AKSHARE: ❌ 获取指标 {name} 失败: {e}")
             macro_data_parts.append(f"- **{name} ({indicator_id})**: 获取失败")
-            
     print("    AKSHARE: ✅ 宏观经济数据获取完成。")
     return "\n".join(macro_data_parts)
 
 def get_fund_data_from_yfinance(fund_code, history_days, ma_days):
     print(f"    YFINANCE: 正在为 {fund_code} 启动雅虎财经数据核心...")
     tickers_to_try = [f"{fund_code}.SS", f"{fund_code}.SZ"]
-    hist_df = None
-    ticker_used = ""
+    hist_df, ticker_used = None, ""
     for ticker in tickers_to_try:
         try:
             fund = yf.Ticker(ticker)
-            hist_df = fund.history(period=f"{history_days + ma_days}d")
+            hist_df = fund.history(period=f"{history_days + ma_days}d", auto_adjust=True)
             if not hist_df.empty:
                 print(f"    YFINANCE: ✅ 成功使用代码 {ticker} 获取到数据。")
-                ticker_used = ticker
-                break
+                ticker_used = ticker; break
         except Exception: continue
-            
-    if hist_df is None or hist_df.empty:
-        raise ValueError(f"无法在雅虎财经找到代码为 {fund_code} 的基金数据。")
+    if hist_df is None or hist_df.empty: raise ValueError(f"无法在雅虎财经找到 {fund_code} 的数据。")
     
     hist_df.rename(columns={'Close': '收盘'}, inplace=True)
     hist_df['日增长率'] = hist_df['收盘'].pct_change() * 100
@@ -106,7 +88,6 @@ def process_fund_data(fund_name, hist_df, fund_code, ma_days, days_to_display):
         print(f"❌ 处理基金 {fund_code} 数据时出错: {e}"); traceback.print_exc()
         return None, None
 
-# ... [search_news, get_sector_data, generate_rule_based_report, AI report, call_gemini_ai 等函数保持和之前版本一致] ...
 def search_news(keyword):
     print(f"正在搜索新闻: {keyword}...")
     with DDGS() as ddgs: return "\n".join([f"- [标题] {r['title']}\n  [摘要] {r.get('body', '无')}\n" for r in ddgs.news(keyword, region='cn-zh', max_results=5)])
@@ -150,37 +131,16 @@ def call_gemini_ai(prompt):
 
 def generate_ai_based_report(news, sectors, funds_string, macro_data):
     if not funds_string.strip(): return "由于未能获取任何基金的详细数据，AI策略大脑无法进行分析。"
-    analysis_prompt = f"""
-作为一名顶级的中国市场对冲基金经理，请结合以下所有信息，撰写一份包含宏观、中观、微观三个层次的深度投研报告。
-
-**第一部分：中国宏观经济背景 (来源: AkShare)**
-{macro_data}
-
-**第二部分：市场新闻与情绪**
-{news}
-
-**第三部分：中观行业与板块轮动**
-{sectors}
-
-**第四部分：微观持仓基金技术状态 (来源: Yahoo Finance)**
-{funds_string}
-
-**【报告撰写指令】**
-1.  **顶层分析 (Top-Down)**: 你的分析必须从中国的宏观数据出发。例如，解释当前的CPI和M2数据如何影响A股市场情绪(新闻)，并最终体现在板块轮动上。
-2.  **关联与归因**: 将每一支基金的表现，与中国的宏观背景和板块热点进行强关联。例如：“由于中国PMI数据显示制造业景气度回升，利好顺周期板块，这解释了XX基金(重仓材料)为何表现强势。”
-3.  **制定策略**: 基于以上所有信息的综合判断，给出明确的操作建议，并说明你的决策逻辑是如何被宏观、中观、微观信息共同支撑的。
-"""
+    analysis_prompt = f"""作为一名顶级的中国市场对冲基金经理，请结合以下所有信息，撰写一份包含宏观、中观、微观三个层次的深度投研报告...\n**第一部分：中国宏观经济背景 (来源: AkShare)**\n{macro_data}\n**第二部分：市场新闻与情绪**\n{news}\n**第三部分：中观行业与板块轮动**\n{sectors}\n**第四部分：微观持仓基金技术状态 (来源: Yahoo Finance)**\n{funds_string}"""
     draft = call_gemini_ai(analysis_prompt)
     if "AI模型调用失败" in draft: return draft
-    polish_prompt = f"作为一名善于用数据讲故事的投资KOL，请将以下这份专业的投研报告，转化为一篇普通投资者都能看懂的精彩文章...[省略详细指令]...\n**【原始报告】**\n{draft}"
+    polish_prompt = f"作为一名善于用数据讲故事的投资KOL，请将以下这份专业的投研报告，转化为一篇普通投资者都能看懂的精彩文章...\n**【原始报告】**\n{draft}"
     return call_gemini_ai(polish_prompt)
     
 def main():
     if not check_time_interval(): return
     config, beijing_time = load_config(), datetime.datetime.utcnow() + datetime.timedelta(hours=8)
-    
-    structured_fund_datas, formatted_fund_strings = [], []
-    macro_data, news_text, sector_text = "", "", ""
+    structured_fund_datas, formatted_fund_strings, macro_data, news_text, sector_text = [], [], "", "", ""
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
         future_funds = {executor.submit(get_fund_data_from_yfinance, c, config['historical_days_to_fetch'], config['moving_average_days']): c for c in config['fund_codes']}
