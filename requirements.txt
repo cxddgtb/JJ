@@ -1,15 +1,22 @@
+# Web & Data Acquisition
 requests
 beautifulsoup4
-pandas==1.5.3
-numpy==1.24.4
-google-generativeai
-pytz
 akshare
-pandas-ta==0.3.14b0
+
+# AI & Machine Learning
+google-generativeai
+replicate
+
+# Data Analysis & Technical Indicators
+pandas # <-- No longer locked to an old version
+numpy
+pandas-ta
+
+# Utilities
+pytz
 matplotlib
 PyYAML
 tenacity
 fredapi
 markdown
 sparklines
-replicate # <--- 把这个被遗漏的库加回来
