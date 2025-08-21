@@ -12,3 +12,4 @@ tenacity
 fredapi
 markdown
 sparklines
+replicate # <--- 把这个被遗漏的库加回来
