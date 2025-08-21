@@ -5,3 +5,5 @@ duckduckgo-search
 lxml
 pandas
 numpy
+selenium
+webdriver-manager
