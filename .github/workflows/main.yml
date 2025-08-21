@@ -13,7 +13,6 @@ on:
   workflow_dispatch:
 
 # 并发控制：确保同一时间只有一个工作流在运行，防止数据错乱
-# cancel-in-progress: false 表示不会取消正在运行的旧任务
 concurrency: 
   group: ${{ github.workflow }}
   cancel-in-progress: false
@@ -21,6 +20,12 @@ concurrency:
 jobs:
   build-and-analyze:
     runs-on: ubuntu-latest # 使用最新的Ubuntu虚拟机环境
+
+    # ⬇️⬇️⬇️ 就是在这里添加了权限设置 ⬇️⬇️⬇️
+    # 授予工作流向仓库写入内容的权限
+    permissions:
+      contents: write
+    # ⬆️⬆️⬆️ 添加结束 ⬆️⬆️⬆️
 
     steps:
       # 第一步：检出（下载）你的代码到虚拟机
