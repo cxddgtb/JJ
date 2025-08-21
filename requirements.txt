@@ -1,7 +1,7 @@
 google-generativeai
 requests
 beautifulsoup4
-duckduckgo-search
+ddgs
 lxml
 pandas
 numpy
