@@ -20,27 +20,23 @@ MIN_INTERVAL_HOURS = 6
 TIMESTAMP_FILE = "last_run_timestamp.txt"
 MAX_NEWS_RESULTS = 5 # 每个关键词搜索的新闻数量
 REQUESTS_TIMEOUT = 15 # 请求超时时间（秒）
+SECTOR_COUNT = 10 # 抓取涨跌幅前10的板块
 # 模拟浏览器请求头，防止被网站屏蔽
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    'User-Agent': 'Mozilla.5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 }
 
 def check_time_interval():
     """检查距离上次突发事件执行是否超过指定间隔"""
-    # 这个函数只在事件触发时检查，定时任务不受影响
     github_event_name = os.getenv('GITHUB_EVENT_NAME')
     if github_event_name != 'repository_dispatch':
         return True
-
     if not os.path.exists(TIMESTAMP_FILE):
         return True
-    
     with open(TIMESTAMP_FILE, "r") as f:
         last_run_timestamp = float(f.read())
-    
     current_timestamp = time.time()
     hours_diff = (current_timestamp - last_run_timestamp) / 3600
-    
     if hours_diff < MIN_INTERVAL_HOURS:
         print(f"距离上次执行（{hours_diff:.2f}小时）未超过{MIN_INTERVAL_HOURS}小时，本次跳过。")
         return False
@@ -57,7 +53,6 @@ def search_news(keyword):
     results = []
     try:
         with DDGS() as ddgs:
-            # 使用DDGS的news方法
             ddgs_results = ddgs.news(keyword, region='cn-zh', safesearch='off', max_results=MAX_NEWS_RESULTS)
             if ddgs_results:
                 for r in ddgs_results:
@@ -67,27 +62,19 @@ def search_news(keyword):
     return "\n".join(results)
 
 def get_fund_data(fund_code):
-    """
-    爬取基金数据。
-    注意：这里以天天基金网为例，网站结构可能变化导致爬虫失效，这是最需要维护的部分。
-    """
+    """爬取单支基金的数据"""
     print(f"正在爬取基金数据: {fund_code}...")
     url = f"http://fund.eastmoney.com/{fund_code}.html"
     try:
         response = requests.get(url, headers=HEADERS, timeout=REQUESTS_TIMEOUT)
-        response.raise_for_status() # 如果请求失败则抛出异常
+        response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
-        
         fund_name = soup.select_one('div.fundDetail-tit > div').get_text(strip=True).replace('(前端)', '')
-        # 获取净值、日增长率等信息
         data_item = soup.select_one('dl.dataItem02')
         net_value = data_item.select_one('dd.dataNums > span.ui-font-large').text
         daily_growth = data_item.select_one('dd.dataNums > span:nth-of-type(2)').text
-        
-        # 获取各类指标
         data_info = soup.select_one('div.dataOfFund')
         fund_scale = data_info.select_one('td:nth-of-type(2)').text.split('：')[-1].strip()
-        
         return f"""
 ### 基金: {fund_name} ({fund_code})
 - **最新净值**: {net_value}
@@ -96,7 +83,56 @@ def get_fund_data(fund_code):
 """
     except Exception as e:
         print(f"爬取基金 {fund_code} 数据失败: {e}")
-        return f"\n### 基金: {fund_code}\n- 数据爬取失败，请检查网站结构或网络连接。\n"
+        return f"\n### 基金: {fund_code}\n- 数据爬取失败。\n"
+
+def get_sector_data():
+    """爬取行业板块数据，包括涨幅前10和跌幅前10"""
+    print("正在爬取行业板块数据...")
+    url = "http://quote.eastmoney.com/center/boardlist.html#industry_board"
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=REQUESTS_TIMEOUT)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        table = soup.find('table', {'id': 'table_wrapper-table'})
+        if not table:
+            return "未能找到板块数据表格，网站结构可能已更新。"
+        
+        rows = table.select('tbody tr')
+        
+        sectors = []
+        for row in rows:
+            cols = row.find_all('td')
+            if len(cols) > 5:
+                try:
+                    name = cols[1].find('a').text.strip()
+                    change = float(cols[4].text.strip().replace('%', ''))
+                    leading_stock = cols[8].find('a').text.strip()
+                    sectors.append({'name': name, 'change': change, 'stock': leading_stock})
+                except (ValueError, AttributeError):
+                    continue
+
+        # 按涨跌幅排序
+        sectors.sort(key=lambda x: x['change'], reverse=True)
+        
+        # 提取涨幅前10和跌幅前10
+        top_rising = sectors[:SECTOR_COUNT]
+        top_falling = sectors[-SECTOR_COUNT:]
+        top_falling.reverse() # 让跌幅最大的在最前面
+
+        result = ["**【今日热门上涨板块】**"]
+        for i, s in enumerate(top_rising):
+            result.append(f"{i+1}. **{s['name']}**: {s['change']:.2f}% (领涨股: {s['stock']})")
+        
+        result.append("\n**【今日热门下跌板块】**")
+        for i, s in enumerate(top_falling):
+            result.append(f"{i+1}. **{s['name']}**: {s['change']:.2f}% (领跌股: {s['stock']})")
+            
+        return "\n".join(result)
+
+    except Exception as e:
+        print(f"爬取行业板块数据失败: {e}")
+        return "行业板块数据爬取失败，请检查网站结构或网络连接。"
 
 def call_gemini_ai(prompt, model_name="gemini-1.5-flash"):
     """调用Gemini AI"""
@@ -117,38 +153,47 @@ def main():
         
     print("开始执行基金分析工作流...")
     
-    # 使用多线程并行处理数据获取
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        # 并行搜索新闻
+    all_news_text = ""
+    all_fund_data = ""
+    sector_data_text = ""
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
         news_futures = {executor.submit(search_news, kw): kw for kw in NEWS_KEYWORDS}
-        # 并行爬取基金数据
         fund_futures = {executor.submit(get_fund_data, code): code for code in FUND_CODES}
+        sector_future = executor.submit(get_sector_data)
         
-        # 等待所有任务完成并收集结果
-        all_news_text = "\n".join([future.result() for future in concurrent.futures.as_completed(news_futures)])
-        all_fund_data = "\n".join([future.result() for future in concurrent.futures.as_completed(fund_futures)])
+        # 收集结果
+        all_news_text = "\n".join([f.result() for f in concurrent.futures.as_completed(news_futures)])
+        all_fund_data = "\n".join([f.result() for f in concurrent.futures.as_completed(fund_futures)])
+        sector_data_text = sector_future.result()
 
     print("\n--- 新闻数据汇总 ---")
     print(all_news_text)
     print("\n--- 基金数据汇总 ---")
     print(all_fund_data)
+    print("\n--- 行业板块数据 ---")
+    print(sector_data_text)
     
     # --- 第一步：AI分析并生成初稿 ---
     analysis_prompt = f"""
-作为一名专业的基金投资分析师，请根据以下最新的市场新闻和基金数据，为我提供一份详细的投资操作分析报告。
+作为一名顶级的基金投资策略师，请根据以下所有信息，为我撰写一份深入的投资操作分析报告。
 
-**【市场新闻摘要】**
+**【宏观市场新闻摘要】**
 {all_news_text}
 
-**【我关注的基金数据】**
+**【今日行业板块数据概览】**
+{sector_data_text}
+
+**【我关注的基金核心数据】**
 {all_fund_data}
 
-**【报告要求】**
-1.  **市场情绪判断**: 结合新闻，判断当前市场的宏观情绪是乐观、悲观还是中性。
-2.  **具体基金分析**: 逐一分析我关注的每支基金，并结合新闻判断它们可能受到的影响。
-3.  **操作建议**: 给出明确的总体操作建议（如：加仓、减仓、持仓观望或调仓），并说明核心理由，理由必须结合给出的新闻和数据。
-4.  **风险提示**: 指出当前操作可能面临的主要风险。
-5.  语言风格要求专业、客观、逻辑清晰。
+**【报告撰写要求】**
+1.  **市场大势研判**: 结合【宏观新闻】和【行业板块数据】，分析当前市场的整体情绪（乐观/悲观/中性）和主要特征（例如，是普涨普跌，还是结构性行情）。
+2.  **板块轮动分析**: 根据板块的涨跌情况，分析当前市场的热点在哪里，资金可能正在从哪些板块流出，又流向了哪些板块。
+3.  **持仓基金诊断**: 逐一分析我关注的每一支基金。请务必将基金的表现与【行业板块数据】关联起来。例如，如果基金重仓了某个热门板块，要指出其受益情况；如果重仓了下跌板块，要分析其受挫原因。
+4.  **综合操作建议**: 基于以上所有信息的综合分析，给出明确、可执行的总体操作建议（例如：建议加仓XX基金，减仓YY基金，或整体持仓观望）。操作理由必须充分，要同时引用新闻、板块和基金数据作为论据。
+5.  **风险揭示**: 明确指出当前市场和操作建议中潜在的主要风险点。
+6.  要求逻辑严密，分析深入，语言专业。
 """
     
     draft_article = call_gemini_ai(analysis_prompt)
@@ -163,11 +208,11 @@ def main():
 {draft_article}
 
 **【润色要求】**
-1.  **标题**: 起一个吸引人但不过于夸张的标题。
-2.  **引言**: 写一段引人入胜的开场白，概括一下当前的市场情况和本文的核心看点。
-3.  **正文**: 保持原文的核心观点和数据逻辑不变，但用更通俗易懂、更有感染力的语言来表达。可以适当使用emoji来增加文章的活力。
-4.  **结尾**: 进行总结，并加上一些鼓励读者交流讨论的话语。
-5.  **免责声明**: 在文章末尾必须加上免责声明，提示“本文仅为个人观点分享，不构成任何投资建议”。
+1.  **标题**: 起一个吸引人但不过于夸张的标题，最好能体现出市场的核心动态。
+2.  **引言**: 写一段引人入胜的开场白，用通俗的话概括一下今天的市场（比如“今天又是喝酒吃药行情”，或者“科技股上演大撤退”），并点出本文的看点。
+3.  **正文**: 保持原文的核心逻辑和数据不变。将专业的术语转化为普通投资者能懂的大白话。可以适当使用emoji来增加文章的生动性。例如，📈表示上涨，📉表示下跌。
+4.  **结尾**: 进行要点总结，并加上一些鼓励读者互动、讨论的话语。
+5.  **免责声明**: 在文章末尾必须加上免责声明，提示“本文仅为个人观点分享，不构成任何投资建议，市场有风险，投资需谨慎”。
 """
     
     final_article = call_gemini_ai(polish_prompt)
@@ -175,19 +220,14 @@ def main():
     print(final_article)
     
     # --- 保存文章到文件 ---
-    # 创建reports目录（如果不存在）
     if not os.path.exists('reports'):
         os.makedirs('reports')
-        
     beijing_time = datetime.datetime.utcnow() + datetime.timedelta(hours=8)
     file_name = f"reports/基金分析报告_{beijing_time.strftime('%Y-%m-%d_%H-%M')}.md"
     with open(file_name, 'w', encoding='utf-8') as f:
         f.write(final_article)
-        
     print(f"\n报告已成功保存为: {file_name}")
 
-    # 总是更新时间戳，确保文件存在以便于git提交。
-    # 脚本开头的间隔检查逻辑不受影响，因为它只在 'repository_dispatch' 事件中生效。
     update_timestamp()
 
 if __name__ == "__main__":
