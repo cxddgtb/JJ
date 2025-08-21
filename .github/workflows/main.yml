@@ -2,7 +2,7 @@ name: 每日基金分析与报告生成
 
 on:
   schedule:
-    - cron: '0 6 * * 1-5'
+    - cron: '0 8 * * 1-5' # 北京时间下午4点 (UTC时间早上8点)，避开A股收盘高峰
   repository_dispatch:
     types: [run-analysis]
   workflow_dispatch:
@@ -29,20 +29,21 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # 安装所有必要的库，包括akshare和yfinance
           pip install -r requirements.txt
 
       - name: Run analysis script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          # FRED API 密钥 (虽然当前版本未使用，但保留以备将来扩展)
+          # FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python main.py
 
-      # 关键改动在这里！ file_pattern现在可以匹配两种报告
       - name: Commit and push reports
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "自动生成双核分析报告"
-          file_pattern: "reports/*.md last_run_timestamp.txt" # 使用通配符*.md来匹配所有报告
+          commit_message: "自动生成每日基金分析报告"
+          file_pattern: "reports/*.md last_run_timestamp.txt"
           commit_user_name: "GitHub Actions Bot"
           commit_user_email: "actions@github.com"
           commit_author: "GitHub Actions Bot <actions@github.com>"
