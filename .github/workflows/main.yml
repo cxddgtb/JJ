@@ -1,63 +1,108 @@
-name: 'Project Prometheus: The Evolving Investment Engine'
+name: AI基金分析与文章生成工作流
 
 on:
-  workflow_dispatch: # 允许手动触发
+  # 1. 北京时间每个工作日下午2点 (UTC时间早上6点) 自动执行
   schedule:
-    - cron: '0 4 * * 1-5' # 北京时间中午12点 (UTC 4:00), 周一至周五
+    - cron: '0 6 * * 1-5'
+  
+  # 2. 允许手动触发 (用于突发事件)
+  workflow_dispatch:
 
 jobs:
-  run-prometheus-engine:
+  # 任务一：数据搜集
+  collect_data:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # 给予workflow写权限
-
+    outputs:
+      data_file: ${{ steps.save_data.outputs.file_path }}
     steps:
-      - name: 1. Checkout Repository
+      - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 2. Set up Python 3.10
+      - name: 设置Python环境
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 3. Cache Python Dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: 4. Install System & Python Dependencies
+      - name: 安装依赖库 (包括浏览器驱动)
         run: |
-          sudo apt-get update && sudo apt-get install -y fonts-wqy-zenhei
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 selenium pandas aiohttp
+          sudo apt-get update
+          sudo apt-get install -y firefox-geckodriver
 
-      - name: 5. Create Necessary Directories
-        # 确保所有需要的文件夹都存在
-        run: mkdir -p logs reports portfolio charts
+      - name: 运行多线程爬虫脚本
+        id: scrape
+        run: python scripts/collect_data.py
+      
+      - name: 保存爬取的数据为Artifact
+        id: save_data
+        uses: actions/upload-artifact@v4
+        with:
+          name: collected-data
+          path: collected_data.json
+          retention-days: 1
+  
+  # 任务二：AI分析与决策
+  analyze_data:
+    runs-on: ubuntu-latest
+    needs: collect_data # 依赖于数据搜集任务
+    outputs:
+      analysis_file: ${{ steps.save_analysis.outputs.file_path }}
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
 
-      - name: 6. Run the Prometheus Engine
+      - name: 设置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: 安装依赖库
+        run: pip install pandas google-generativeai
+
+      - name: 下载搜集到的数据
+        uses: actions/download-artifact@v4
+        with:
+          name: collected-data
+
+      - name: 运行AI分析脚本
+        id: analyze
+        run: python scripts/analyze_data.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          FORMSUBMIT_URL: ${{ secrets.FORMSUBMIT_URL }} # 如果您不需要邮件，可以删除这行
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }} # <--- 核心修正点在这里！我们把备用AI的钥匙也加到了传送带上
-        run: python main.py
 
-      - name: 7. Commit and Push Reports
-        run: |
-          git config --global user.name 'Prometheus Engine'
-          git config --global user.email 'prometheus@github.action'
-          # 添加所有生成或修改的文件
-          git add README.md reports/ logs/ charts/ portfolio/
-          
-          if git diff --staged --quiet; then
-            echo "No new insights to commit. Market state is stable."
-          else
-            git commit -m "🔥 Prometheus Daily Briefing: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-            git push
-          fi
+      - name: 保存分析结果为Artifact
+        id: save_analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-result
+          path: analysis_result.txt
+          retention-days: 1
+
+  # 任务三：文章生成与发布
+  generate_article:
+    runs-on: ubuntu-latest
+    needs: analyze_data # 依赖于AI分析任务
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 设置Python环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: 安装依赖库
+        run: pip install google-generativeai PyGithub
+
+      - name: 下载分析结果
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-result
+
+      - name: 运行文章生成和润色脚本
+        run: python scripts/generate_article.py
         env:
-          # 使用 PAT token 来确保有推送权限
-          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
