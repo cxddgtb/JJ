@@ -42,6 +42,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           FORMSUBMIT_URL: ${{ secrets.FORMSUBMIT_URL }} # 如果您不需要邮件，可以删除这行
+          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }} # <--- 核心修正点在这里！我们把备用AI的钥匙也加到了传送带上
         run: python main.py
 
       - name: 7. Commit and Push Reports
