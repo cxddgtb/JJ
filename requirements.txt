@@ -5,5 +5,4 @@ ddgs
 lxml
 pandas
 numpy
-selenium
-webdriver-manager
+yfinance
