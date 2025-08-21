@@ -10,8 +10,8 @@ import requests
 import numpy as np
 import pandas as pd
 from bs4 import BeautifulSoup
-from duckduckgo_search import DDGS
-# ⬇️⬇️⬇️ 核心升级 1: 引入新的浏览器自动化工具 ⬇️⬇️⬇️
+# ⬇️⬇️⬇️ 核心升级 1: 更新了库的引用 ⬇️⬇️⬇️
+from ddgs import DDGS
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -41,69 +41,57 @@ def check_time_interval():
         print(f"距离上次执行（{hours_diff:.2f}小时）未超过{MIN_INTERVAL_HOURS}小时，本次跳过。")
         return False
     return True
-    
+
 def update_timestamp():
     with open(TIMESTAMP_FILE, "w") as f: f.write(str(time.time()))
 
 # --- 数据获取模块 (完全重构) ---
 
-# ⬇️⬇️⬇️ 核心升级 2: 终极武器——使用真实浏览器模拟获取数据 ⬇️⬇️⬇️
-def get_fund_raw_data_with_selenium(fund_code, history_days):
-    """主方案：使用Selenium模拟浏览器，访问网页版历史数据"""
-    print(f"    SELENIUM: 正在启动浏览器核心获取 {fund_code}...")
-    
-    # 设置Chrome浏览器选项 (无头模式，在服务器运行)
+# ⬇️⬇️⬇️ 核心升级 2: 全新的主攻方案 - 浏览器模拟“新浪财经” ⬇️⬇️⬇️
+def get_fund_raw_data_from_sina_web(fund_code, history_days):
+    """主方案：使用Selenium模拟浏览器，访问新浪财经网页"""
+    print(f"    SINA_WEB: 正在启动浏览器核心获取 {fund_code}...")
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("user-agent=" + HEADERS['User-Agent'])
     
-    # 自动安装和管理ChromeDriver
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     
     try:
-        # 目标网页
-        url = f"http://fundf10.eastmoney.com/jshz_{fund_code}.html"
+        url = f"http://money.finance.sina.com.cn/fund/hgsz/{fund_code}.html"
         driver.get(url)
         
-        # 智能等待，直到数据表格出现，最长等待20秒
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "jshz_table")))
-        
-        # 获取网页渲染后的HTML
+        # 等待数据表格出现
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "fund_history_table")))
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
         
-        # 解析表格数据
-        table = soup.find('table', id='jshz_table')
+        table = soup.find('table', id='fund_history_table')
         rows = table.find('tbody').find_all('tr')
         
         lsjz_list = []
-        for row in rows[:history_days]: # 只取需要的天数
+        for row in rows[:history_days]:
             cols = row.find_all('td')
-            # 提取并清洗数据
             fsrq = cols[0].text.strip()
             dwjz = cols[1].text.strip()
+            # 新浪的日增长率在第四列
             jzzzl_text = cols[3].text.strip().replace('%', '')
             jzzzl = float(jzzzl_text) if jzzzl_text != '' else 0.0
-            
             lsjz_list.append({'FSRQ': fsrq, 'DWJZ': dwjz, 'JZZZL': str(jzzzl)})
         
-        # 从网页标题中获取基金名称
-        fund_name = driver.title.split('(')[0].strip()
-        
-        print(f"    SELENIUM: ✅ 成功从网页获取 {fund_code} 数据。")
-        # 倒序，让最新的数据在最后
+        fund_name = soup.find('h1', id='fund_name').text.split('(')[0].strip()
+        print(f"    SINA_WEB: ✅ 成功从网页获取 {fund_code} 数据。")
         lsjz_list.reverse()
         return {'FundBaseInfo': {'JJJC': fund_name}, 'LSJZList': lsjz_list}
 
     finally:
-        # 确保浏览器被关闭
         driver.quit()
 
 def get_fund_raw_data_from_eastmoney_api(fund_code, history_days):
-    """备用方案1: 尝试天天基金API"""
+    """备用方案: 尝试天天基金API (成功率较低)"""
     print(f"    EASTMONEY_API: 正在尝试获取 {fund_code}...")
     url = f"http://api.fund.eastmoney.com/f10/lsjz?fundCode={fund_code}&pageIndex=1&pageSize={history_days}"
     response = requests.get(url, headers=HEADERS, timeout=REQUESTS_TIMEOUT)
@@ -113,27 +101,29 @@ def get_fund_raw_data_from_eastmoney_api(fund_code, history_days):
         raise ValueError("天天基金API返回数据格式无效或为空")
     return data['Data']
 
-# ⬇️⬇️⬇️ 核心升级 3: 调整主备策略，将浏览器模拟作为首选 ⬇️⬇️⬇️
 def get_fund_raw_data_final_robust(fund_code, history_days):
-    """终极健壮的数据获取函数，优先浏览器，API为备用"""
+    """终极健壮的数据获取函数，主攻新浪网页，API为备用"""
     print(f"\n开始获取基金 {fund_code} 的数据...")
-    
-    # 首选方案：浏览器模拟
     try:
-        return get_fund_raw_data_with_selenium(fund_code, history_days)
+        return get_fund_raw_data_from_sina_web(fund_code, history_days)
     except Exception as e_selenium:
-        print(f"    SELENIUM: ❌ 浏览器模拟获取失败: {e_selenium}")
+        print(f"    SINA_WEB: ❌ 主攻方案(新浪网页)获取失败: {e_selenium}")
         print("    --> 自动切换至API备用方案...")
-        # 备用方案：API
         try:
             return get_fund_raw_data_from_eastmoney_api(fund_code, history_days)
         except Exception as e_api:
-            print(f"    EASTMONEY_API: ❌ API获取也失败了: {e_api}")
+            print(f"    EASTMONEY_API: ❌ 所有备用方案均失败: {e_api}")
             return None
 
-# --- 其他所有函数 (process_fund_data, report generation, main, etc.) ---
-# 这一部分和上一版完全一样，因为它们只负责处理数据，不关心数据是怎么来的。
-# 为了简洁，此处省略，请确保您使用的是上一版完整的代码中的这些函数。
+# --- 其他所有函数 (process_fund_data, report generation, etc.) ---
+# 这一部分和上一版完全一样，只需确保 search_news 的引用已更新
+def search_news(keyword):
+    print(f"正在搜索新闻: {keyword}...")
+    try:
+        # 核心升级 3: 使用新的 ddgs 库
+        with DDGS() as ddgs:
+            return "\n".join([f"- [标题] {r['title']}\n  [摘要] {r.get('body', '无')}\n" for r in ddgs.news(keyword, region='cn-zh', safesearch='off', max_results=5)])
+    except Exception as e: return f"搜索关键词 '{keyword}' 失败: {e}"
 
 def process_fund_data(raw_data, fund_code, ma_days, days_to_display):
     try:
@@ -155,13 +145,6 @@ def process_fund_data(raw_data, fund_code, ma_days, days_to_display):
         print(f"❌ 处理基金 {fund_code} 数据时出错: {e}"); traceback.print_exc()
         return None, None
 
-def search_news(keyword):
-    print(f"正在搜索新闻: {keyword}...")
-    try:
-        with DDGS() as ddgs:
-            return "\n".join([f"- [标题] {r['title']}\n  [摘要] {r.get('body', '无')}\n" for r in ddgs.news(keyword, region='cn-zh', safesearch='off', max_results=5)])
-    except Exception as e: return f"搜索关键词 '{keyword}' 失败: {e}"
-
 def get_sector_data():
     print("正在爬取行业板块数据...")
     try:
@@ -177,6 +160,7 @@ def get_sector_data():
         print(f"❌ 行业板块数据爬取失败: {e}"); return "行业板块数据爬取失败。"
 
 def generate_rule_based_report(fund_datas, beijing_time):
+    # ... (代码不变) ...
     print("正在生成“规则大脑”分析报告...")
     report_parts = [f"# 基金量化规则分析报告 ({beijing_time.strftime('%Y-%m-%d')})\n", "本报告由预设量化规则生成，仅供参考。\n"]
     if not fund_datas:
@@ -198,6 +182,7 @@ def generate_rule_based_report(fund_datas, beijing_time):
     return "\n".join(report_parts)
 
 def call_gemini_ai(prompt):
+    # ... (代码不变) ...
     try:
         genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
         model = genai.GenerativeModel("gemini-1.5-flash")
@@ -208,6 +193,7 @@ def call_gemini_ai(prompt):
         return "AI模型调用失败，请检查API密钥或网络连接。"
 
 def generate_ai_based_report(news, sectors, funds_string):
+    # ... (代码不变) ...
     print("正在请求“AI策略大脑”生成分析报告...")
     if not funds_string.strip():
         return "由于所有数据源均未能获取任何基金的详细数据，AI策略大脑无法进行分析。"
