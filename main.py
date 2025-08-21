@@ -186,9 +186,9 @@ def main():
         
     print(f"\n报告已成功保存为: {file_name}")
 
-    # 如果是事件触发的，更新时间戳
-    if os.getenv('GITHUB_EVENT_NAME') == 'repository_dispatch':
-        update_timestamp()
+    # 总是更新时间戳，确保文件存在以便于git提交。
+    # 脚本开头的间隔检查逻辑不受影响，因为它只在 'repository_dispatch' 事件中生效。
+    update_timestamp()
 
 if __name__ == "__main__":
     main()
