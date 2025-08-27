@@ -1,0 +1,53 @@
+name: Analyze Index Funds for Buy/Sell Signals
+
+on:
+  workflow_dispatch: # 允许手动触发工作流
+  schedule:
+    # 每天世界协调时 (UTC) 00:00 运行。
+    # 这大约是北京时间上午 8 点。你可以根据需要调整此 cron 表达式。
+    # 例如：如果想在每天A股收盘后运行（例如北京时间16:00，即UTC 08:00），可以设置为 '0 8 * * *'。
+    - cron: '0 0 * * *'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 授予工作流写入仓库内容的权限，以便提交分析结果
+
+    steps:
+    - name: Checkout repository # 检出仓库代码
+      uses: actions/checkout@v4
+
+    - name: Set up Python # 设置 Python 环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # 使用最新的 Python 3 版本
+
+    - name: Install dependencies # 安装 Python 依赖库
+      run: |
+        pip install pandas numpy akshare
+        # 注意：TA-Lib 库在 CI 环境中安装可能较复杂，因此我们使用纯 Python 实现。
+
+    - name: Run index analysis script # 运行指数分析脚本
+      # GITHUB_WORKSPACE 环境变量指向你的仓库根目录
+      run: |
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        # 脚本将自动创建或更新这些文件夹
+        mkdir -p indices_to_monitor
+        mkdir -p analysis_results
+        mkdir -p buy_signals
+        
+        # 运行 Python 脚本
+        python main_analyzer.py
+
+    - name: Commit and push changes # 提交并推送分析结果到仓库
+      run: |
+        git config user.name "GitHub Actions Bot" # 配置 Git 用户名
+        git config user.email "actions@github.com" # 配置 Git 用户邮箱
+        git add . # 添加所有修改和新增的文件
+        timestamp=$(date -u +%Y-%m-%dT%H:%M:%SZ) # 获取当前 UTC 时间戳
+        # 尝试提交，如果没有任何改动则不报错
+        git commit -m "Automated index analysis results for ${timestamp}" || echo "No changes to commit."
+        git push # 推送更改
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }} # 使用你提供的 token 进行身份验证
