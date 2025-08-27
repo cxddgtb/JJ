@@ -1,8 +1,0 @@
-google-generativeai
-requests
-beautifulsoup4
-ddgs
-lxml
-pandas
-numpy
-yfinance
