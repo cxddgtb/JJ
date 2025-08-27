@@ -1,0 +1,4 @@
+pandas
+numpy
+requests
+xalpha  # 可选，如果你决定使用它来获取数据:cite[8]
