@@ -1,443 +1,330 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import requests
+from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
-import json
-import os
 import re
-from datetime import datetime, timedelta
+import json
 import time
 import random
+from datetime import datetime, timedelta
+import pytz
 
-# 基金代码列表 - 这里是一些常见基金代码示例
+# 定义基金列表
 FUND_CODES = [
-    '161725',  # 招商中证白酒
-    '110022',  # 易方达消费行业
-    '001102',  # 前海开源国家比较优势
-    '519674',  # 银河创新成长
-    '003096',  # 中欧医疗健康C
-    '005827',  # 易方达蓝筹精选
-    '260108',  # 景顺长城新兴成长
-    '161005',  # 富国天惠成长
-    '110011',  # 易方达中小盘
-    '000404'   # 易方达新常态
+    '000001', '000002', '000003', '000004', '000005', '000006', '000007', '000008', '000009', '000010',
+    '000011', '000012', '000013', '000014', '000015', '000016', '000017', '000018', '000019', '000020',
+    '000021', '000022', '000023', '000024', '000025', '000026', '000027', '000028', '000029', '000030'
 ]
 
-class FundAnalyzer:
-    def __init__(self):
-        self.fund_data = []
-        self.historical_data = self.load_historical_data()
-        self.user_agents = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15',
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0'
-        ]
-    
-    def load_historical_data(self):
-        """加载历史数据"""
-        historical_file = 'fund_history.json'
-        if os.path.exists(historical_file):
-            try:
-                with open(historical_file, 'r', encoding='utf-8') as f:
-                    return json.load(f)
-            except:
-                return {}
-        return {}
-    
-    def save_historical_data(self):
-        """保存历史数据"""
-        with open('fund_history.json', 'w', encoding='utf-8') as f:
-            json.dump(self.historical_data, f, ensure_ascii=False, indent=2)
-    
-    def fetch_from_eastmoney(self, fund_code):
-        """从东方财富获取基金数据"""
-        try:
-            url = f"http://fund.eastmoney.com/{fund_code}.html"
-            headers = {
-                'User-Agent': random.choice(self.user_agents),
-                'Referer': f'http://fund.eastmoney.com/{fund_code}.html'
-            }
-            response = requests.get(url, headers=headers, timeout=15)
-            response.encoding = 'utf-8'
-            
-            # 从HTML中提取基金数据
-            html_content = response.text
-            
-            # 提取基金名称
-            name_pattern = r'<div class="fundDetail-tit">\s*<div>\s*([^<]+)\s*</div>'
-            name_match = re.search(name_pattern, html_content)
-            fund_name = name_match.group(1).strip() if name_match else f"基金{fund_code}"
-            
-            # 提取净值信息
-           净值_pattern = r'<dl class="dataItem02"><dt>净值\((\d+-\d+-\d+)\)</dt><dd><span class="ui-font-large ui-color-(red|green) ui-num">([\d.]+)</span>'
-            净值_match = re.search(净值_pattern, html_content)
-            
-            if 净值_match:
-                净值日期 = 净值_match.group(1)
-                净值 = float(净值_match.group(3))
-                return {
-                    'name': fund_name,
-                    'price': 净值,
-                    'date': 净值日期,
-                    'source': 'eastmoney'
-                }
-            
-            # 尝试另一种模式
-            alternative_pattern = r'<span class="ui-font-large ui-color-(red|green) ui-num" id="gz_gsz">([\d.]+)</span>'
-            alt_match = re.search(alternative_pattern, html_content)
-            
-            if alt_match:
-                return {
-                    'name': fund_name,
-                    'price': float(alt_match.group(2)),
-                    'date': datetime.now().strftime('%Y-%m-%d'),
-                    'source': 'eastmoney'
-                }
-                
-        except Exception as e:
-            print(f"从东方财富获取基金 {fund_code} 数据失败: {e}")
-        
-        return None
-    
-    def fetch_from_ Sina(self, fund_code):
-        """从新浪财经获取基金数据"""
-        try:
-            url = f"http://finance.sina.com.cn/fund/quotes/{fund_code}/bc.shtml"
-            headers = {'User-Agent': random.choice(self.user_agents)}
-            response = requests.get(url, headers=headers, timeout=15)
-            response.encoding = 'gbk'
-            
-            html_content = response.text
-            
-            # 尝试提取基金数据
-            pattern = r'<div class="ct04">.*?<strong>([\d.]+)</strong>'
-            match = re.search(pattern, html_content, re.DOTALL)
-            
-            if match:
-                # 提取基金名称
-                name_pattern = r'<h1>(.*?)</h1>'
-                name_match = re.search(name_pattern, html_content)
-                fund_name = name_match.group(1).strip() if name_match else f"基金{fund_code}"
-                
-                return {
-                    'name': fund_name,
-                    'price': float(match.group(1)),
-                    'date': datetime.now().strftime('%Y-%m-%d'),
-                    'source': 'sina'
-                }
-                
-        except Exception as e:
-            print(f"从新浪获取基金 {fund_code} 数据失败: {e}")
-        
-        return None
-    
-    def fetch_from_天天基金(self, fund_code):
-        """从天天基金获取基金数据"""
-        try:
-            url = f"http://fund.eastmoney.com/{fund_code}.html"
-            headers = {
-                'User-Agent': random.choice(self.user_agents),
-                'Referer': f'http://fund.eastmoney.com/{fund_code}.html'
-            }
-            response = requests.get(url, headers=headers, timeout=15)
-            response.encoding = 'utf-8'
-            
-            html_content = response.text
-            
-            # 提取估值信息
-            pattern = r'<div id="gz_gsz" class="ui-font-large ui-color-(red|green) ui-num">([\d.]+)</div>'
-            match = re.search(pattern, html_content)
-            
-            if match:
-                # 提取基金名称
-                name_pattern = r'<div class="fundDetail-tit">.*?<div>(.*?)</div>'
-                name_match = re.search(name_pattern, html_content, re.DOTALL)
-                fund_name = name_match.group(1).strip() if name_match else f"基金{fund_code}"
-                
-                return {
-                    'name': fund_name,
-                    'price': float(match.group(2)),
-                    'date': datetime.now().strftime('%Y-%m-%d'),
-                    'source': 'tiantian'
-                }
-                
-        except Exception as e:
-            print(f"从天天基金获取基金 {fund_code} 数据失败: {e}")
-        
-        return None
-    
-    def fetch_fund_data(self, fund_code):
-        """从多个数据源获取基金数据"""
-        # 尝试多个数据源
-        sources = [
-            self.fetch_from_eastmoney,
-            self.fetch_from_ Sina,
-            self.fetch_from_天天基金
-        ]
-        
-        results = []
-        
-        for source in sources:
-            try:
-                data = source(fund_code)
-                if data and data.get('price', 0) > 0:
-                    results.append(data)
-                    print(f"从 {data['source']} 成功获取基金 {fund_code} 数据: {data['price']}")
-            except Exception as e:
-                print(f"从 {source.__name__} 获取数据失败: {e}")
-            
-            # 添加随机延迟避免被封
-            time.sleep(random.uniform(0.5, 1.5))
-        
-        # 如果有多个结果，计算平均价格
-        if results:
-            avg_price = sum(item['price'] for item in results) / len(results)
-            fund_name = results[0]['name']  # 使用第一个结果的名称
-            
-            return {
-                'name': fund_name,
-                'price': avg_price,
-                'date': datetime.now().strftime('%Y-%m-%d')
-            }
-        
-        return None
-    
-    def calculate_indicator_1(self, prices):
-        """计算压力支撑主图指标"""
-        if len(prices) < 32:
-            return None, None, None
-        
-        # 简化计算，实际应根据提供的公式实现
-        n = 20
-        m = 32
-        p1 = 80
-        p2 = 100
-        
-        var1 = sum(prices[-4:]) / 4 if len(prices) >= 4 else prices[-1]
-        sell_line = np.mean(prices[-n:]) * (1 + p1/1000)
-        buy_line = np.mean(prices[-m:]) * (1 - p2/1000)
-        amplitude = 100 * (sell_line - buy_line) / buy_line if buy_line != 0 else 0
-        
-        return sell_line, buy_line, amplitude
-    
-    def calculate_indicator_2(self, prices):
-        """计算筹码意愿与买卖点指标"""
-        if len(prices) < 25:
-            return None, None, None
-        
-        # 简化计算，实际应根据提供的公式实现
-        v1 = min(prices[-10:])
-        v2 = max(prices[-25:])
-        price_line = np.mean([(p - v1)/(v2 - v1)*4 for p in prices[-4:]])
-        
-        buy_signal = price_line > 0.3
-        sell_signal = price_line < 3.5
-        
-        return buy_signal, sell_signal, price_line
-    
-    def calculate_indicator_3(self, prices):
-        """计算主力进出指标"""
-        if len(prices) < 33:
-            return None, None, None, None
-        
-        # 简化计算，实际应根据提供的公式实现
-        var1 = np.mean([prices[-1], prices[-2], prices[-3], prices[-4]]) if len(prices) >= 4 else prices[-1]
-        main_in = np.mean(prices[-3:]) > np.mean(prices[-6:-3]) if len(prices) >= 6 else False
-        main_out = np.mean(prices[-3:]) < np.mean(prices[-6:-3]) if len(prices) >= 6 else False
-        
-        return main_in, main_out
-    
-    def determine_signal(self, fund_code, current_price):
-        """根据多个指标确定买卖信号"""
-        if fund_code not in self.historical_data:
-            self.historical_data[fund_code] = []
-        
-        # 获取最近30个交易日的价格数据
-        price_history = self.historical_data[fund_code][-30:] if fund_code in self.historical_data else []
-        prices = [item['price'] for item in price_history]
-        
-        if len(prices) < 10:  # 数据不足，返回观望
-            return "观望"
-        
-        prices.append(current_price)  # 添加当前价格
-        
-        # 计算各个指标
-        sell_line, buy_line, amplitude = self.calculate_indicator_1(prices)
-        buy_signal2, sell_signal2, price_line = self.calculate_indicator_2(prices)
-        main_in, main_out = self.calculate_indicator_3(prices)
-        
-        # 综合判断买卖信号
-        signal_score = 0
-        
-        # 指标1逻辑
-        if buy_line and current_price <= buy_line * 1.02:  # 当前价格接近买入线
-            signal_score += 2
-        elif sell_line and current_price >= sell_line * 0.98:  # 当前价格接近卖出线
-            signal_score -= 2
-        
-        # 指标2逻辑
-        if buy_signal2:
-            signal_score += 1
-        if sell_signal2:
-            signal_score -= 1
-        
-        # 指标3逻辑
-        if main_in:
-            signal_score += 1
-        if main_out:
-            signal_score -= 1
-        
-        # 确定最终信号
-        if signal_score >= 3:
-            return "买"
-        elif signal_score <= -3:
-            return "卖"
-        else:
-            return "观望"
-    
-    def analyze_all_funds(self):
-        """分析所有基金"""
-        results = []
-        
-        for fund_code in FUND_CODES:
-            try:
-                print(f"开始分析基金 {fund_code}...")
-                
-                # 获取基金数据
-                fund_info = self.fetch_fund_data(fund_code)
-                if fund_info is None:
-                    print(f"无法获取基金 {fund_code} 的数据")
-                    continue
-                
-                current_price = fund_info['price']
-                fund_name = fund_info['name']
-                
-                # 确定买卖信号
-                signal = self.determine_signal(fund_code, current_price)
-                
-                # 更新历史数据
-                if fund_code not in self.historical_data:
-                    self.historical_data[fund_code] = []
-                
-                self.historical_data[fund_code].append({
-                    'date': datetime.now().isoformat(),
-                    'price': current_price,
-                    'signal': signal
-                })
-                
-                # 只保留最近30个交易日的数据
-                if len(self.historical_data[fund_code]) > 30:
-                    self.historical_data[fund_code] = self.historical_data[fund_code][-30:]
-                
-                results.append({
-                    '基金代码': fund_code,
-                    '基金名称': fund_name,
-                    '当前价格': current_price,
-                    '操作信号': signal
-                })
-                
-                print(f"基金 {fund_name}({fund_code}): 价格={current_price}, 信号={signal}")
-                
-                # 添加延迟避免请求过于频繁
-                time.sleep(random.uniform(1, 3))
-                
-            except Exception as e:
-                print(f"分析基金 {fund_code} 时出错: {e}")
-                continue
-        
-        # 保存历史数据
-        self.save_historical_data()
-        
-        return results
+# 定义通指标参数
+def calculate_indicators(df):
+    """计算通达信指标"""
+    # 计算压力支撑指标
+    N = 20
+    M = 32
+    P1 = 80
+    P2 = 100
 
-def generate_markdown_table(fund_results):
-    """生成Markdown表格"""
-    if not fund_results:
-        return "## 基金买卖点分析报表\n\n暂无数据，请检查数据源或稍后重试。"
-    
-    # 按信号优先级排序（买 > 卖 > 观望）
-    signal_order = {"买": 0, "卖": 1, "观望": 2}
-    sorted_results = sorted(fund_results, key=lambda x: signal_order[x['操作信号']])
-    
-    # 创建表格内容
-    table = "## 基金买卖点分析报表\n\n"
-    table += "| 基金代码 | 基金名称 | 当前价格 | 操作信号 |\n"
-    table += "|----------|----------|----------|----------|\n"
-    
-    for fund in sorted_results:
-        # 为不同信号添加颜色
-        signal_color = ""
-        if fund['操作信号'] == "买":
-            signal_color = "🟢"  # 绿色
-        elif fund['操作信号'] == "卖":
-            signal_color = "🔴"  # 红色
-        else:
-            signal_color = "🟡"  # 黄色
-            
-        table += f"| {fund['基金代码']} | {fund['基金名称']} | {fund['当前价格']:.4f} | {signal_color} {fund['操作信号']} |\n"
-    
-    table += f"\n*最后更新: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n"
-    table += "\n### 说明\n"
-    table += "- 🟢 买: 多个指标显示买入信号\n"
-    table += "- 🔴 卖: 多个指标显示卖出信号\n"
-    table += "- 🟡 观望: 指标不一致或无明显信号\n"
-    table += "- 数据来源: 多个金融数据网站综合\n"
-    table += "- 更新频率: 每个交易日北京时间下午2点自动更新\n"
-    
-    return table
+    # VAR1: (C+H+O+L)/4
+    df['VAR1'] = (df['close'] + df['high'] + df['open'] + df['low']) / 4
 
-def update_readme(table_content):
-    """更新README.md文件"""
-    # 读取现有的README内容
-    try:
-        with open('README.md', 'r', encoding='utf-8') as f:
-            content = f.read()
-    except FileNotFoundError:
-        content = "# 基金分析项目\n\n"
-    
-    # 查找现有的表格区域
-    start_marker = '## 基金买卖点分析报表'
-    end_marker = '### 说明'
-    
-    if start_marker in content:
-        # 替换现有的表格
-        start_index = content.find(start_marker)
-        end_index = content.find(end_marker, start_index)
-        
-        if end_index != -1:
-            # 找到说明部分之后的内容
-            after_table = content[end_index:]
-            new_content = content[:start_index] + table_content + after_table
-        else:
-            # 没有找到说明部分，直接在文件末尾添加
-            new_content = content + '\n\n' + table_content
+    # 计算XMA（指数移动平均）
+    def xma(series, n):
+        return series.ewm(span=n, adjust=False).mean()
+
+    # 卖出线
+    df['卖出'] = xma(df['VAR1'], N) * (1 + P1/1000)
+    # 买入线
+    df['买入'] = xma(df['VAR1'], M) * (1 - P2/1000)
+
+    # 计算筹码意愿指标
+    # VAR2Q: REF(LOW,1)
+    df['VAR2Q'] = df['low'].shift(1)
+    # VAR3Q: SMA(ABS(LOW-VAR2Q),3,1)/SMA(MAX(LOW-VAR2Q,0),3,1)*100
+    df['VAR3Q'] = (abs(df['low'] - df['VAR2Q']).ewm(span=3, adjust=False).mean()) / (np.maximum(df['low'] - df['VAR2Q'], 0).ewm(span=3, adjust=False).mean()) * 100
+    # VAR4Q: EMA(IF(CLOSE*1.3,VAR3Q*10,VAR3Q/10),3)
+    df['VAR4Q'] = np.where(df['close']*1.3, df['VAR3Q']*10, df['VAR3Q']/10).ewm(span=3, adjust=False).mean()
+    # VAR5Q: LLV(LOW,30)
+    df['VAR5Q'] = df['low'].rolling(window=30).min()
+    # VAR6Q: HHV(VAR4Q,30)
+    df['VAR6Q'] = df['VAR4Q'].rolling(window=30).max()
+    # VAR7Q: IF(MA(CLOSE,58),1,0)
+    df['VAR7Q'] = np.where(df['close'].rolling(window=58).mean(), 1, 0)
+    # VAR8Q: EMA(IF(LOW<=VAR5Q,(VAR4Q+VAR6Q*2)/2,0),3)/618*VAR7Q
+    df['VAR8Q'] = np.where(df['low'] <= df['VAR5Q'], (df['VAR4Q'] + df['VAR6Q']*2)/2, 0).ewm(span=3, adjust=False).mean() / 618 * df['VAR7Q']
+    # VAR9Q: IF(VAR8Q>100,100,VAR8Q)
+    df['VAR9Q'] = np.where(df['VAR8Q'] > 100, 100, df['VAR8Q'])
+
+    # 计算主力进出指标
+    # VAR1: REF((LOW+OPEN+CLOSE+HIGH)/4,1)
+    df['VAR1'] = ((df['low'] + df['open'] + df['close'] + df['high']) / 4).shift(1)
+    # VAR2: SMA(ABS(LOW-VAR1),13,1)/SMA(MAX(LOW-VAR1,0),10,1)
+    df['VAR2'] = (abs(df['low'] - df['VAR1']).ewm(span=13, adjust=False).mean()) / (np.maximum(df['low'] - df['VAR1'], 0).ewm(span=10, adjust=False).mean())
+    # VAR3: EMA(VAR2,10)
+    df['VAR3'] = df['VAR2'].ewm(span=10, adjust=False).mean()
+    # VAR4: LLV(LOW,33)
+    df['VAR4'] = df['low'].rolling(window=33).min()
+    # VAR5: EMA(IF(LOW<=VAR4,VAR3,0),3)
+    df['VAR5'] = np.where(df['low'] <= df['VAR4'], df['VAR3'], 0).ewm(span=3, adjust=False).mean()
+
+    # VAR12: SMA(ABS(HIGH-VAR1),13,1)/SMA(MAX(HIGH-VAR1,0),10,1)
+    df['VAR12'] = (abs(df['high'] - df['VAR1']).ewm(span=13, adjust=False).mean()) / (np.maximum(df['high'] - df['VAR1'], 0).ewm(span=10, adjust=False).mean())
+    # VAR13: EMA(VAR12,10)
+    df['VAR13'] = df['VAR12'].ewm(span=10, adjust=False).mean()
+    # VAR14: HHV(HIGH,33)
+    df['VAR14'] = df['high'].rolling(window=33).max()
+    # VAR15: EMA(IF(HIGH>=VAR14,VAR13,0),3)
+    df['VAR15'] = np.where(df['high'] >= df['VAR14'], df['VAR13'], 0).ewm(span=3, adjust=False).mean()
+
+    # A1: REF(CLOSE,2)
+    df['A1'] = df['close'].shift(2)
+    # A2: SMA(MAX(CLOSE-A1,0),7,1)/SMA(ABS(CLOSE-A1),7,1)*100
+    df['A2'] = (np.maximum(df['close'] - df['A1'], 0).ewm(span=7, adjust=False).mean()) / (abs(df['close'] - df['A1']).ewm(span=7, adjust=False).mean()) * 100
+    # VARC: SMA(ABS(L-REF(L,1)),3,1)/SMA(MAX(L-REF(L,1),0),3,1)
+    df['VARC'] = (abs(df['low'] - df['low'].shift(1)).ewm(span=3, adjust=False).mean()) / (np.maximum(df['low'] - df['low'].shift(1), 0).ewm(span=3, adjust=False).mean())
+    # 金山: EMA(IF(L<= LLV(L,30),VARC,0),3)
+    df['金山'] = np.where(df['low'] <= df['low'].rolling(window=30).min(), df['VARC'], 0).ewm(span=3, adjust=False).mean()
+
+    return df
+
+def get_signal(row):
+    """根据指标计算买卖信号"""
+    # 买入信号条件
+    buy_signal = (
+        (row['close'] > row['买入']) and  # 价格上穿买入线
+        (row['VAR9Q'] > 0) and  # 有吸筹迹象
+        (row['VAR5'] > row['VAR5'].shift(1)) and  # 主力进场
+        (row['A2'] < 19)  # 波段介入点
+    )
+
+    # 卖出信号条件
+    sell_signal = (
+        (row['close'] < row['卖出']) and  # 价格下穿卖出线
+        (row['VAR15'] < row['VAR15'].shift(1)) and  # 主力出场
+        (row['金山'] > 0)  # 金山指标
+    )
+
+    if buy_signal:
+        return "买"
+    elif sell_signal:
+        return "卖"
     else:
-        # 没有找到表格，直接在文件末尾添加
-        new_content = content + '\n\n' + table_content
-    
-    # 写回README文件
+        return "观望"
+
+def get_fund_data_from_tiantian(fund_code):
+    """从天天基金网获取基金数据"""
+    url = f"http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code={fund_code}&page=1&per=100"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # 解析数据
+        content = soup.find('div', class_='box')
+        if content:
+            # 查找表格
+            table = content.find('table')
+            if table:
+                rows = table.find_all('tr')[1:]  # 跳过表头
+                data = []
+                for row in rows:
+                    cols = row.find_all('td')
+                    if len(cols) >= 7:
+                        date = cols[0].text.strip()
+                        net_asset_value = float(cols[1].text.strip())
+                        cumulative_net_asset_value = float(cols[2].text.strip())
+                        daily_growth_rate = cols[3].text.strip()
+                        subscription_status = cols[4].text.strip()
+                        redemption_status = cols[5].text.strip()
+                        dividend_distribution = cols[6].text.strip()
+
+                        # 转换日增长率
+                        daily_growth_rate = daily_growth_rate.replace('%', '')
+                        try:
+                            daily_growth_rate = float(daily_growth_rate) / 100
+                        except:
+                            daily_growth_rate = 0
+
+                        data.append({
+                            'date': date,
+                            'open': net_asset_value,
+                            'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
+                            'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+                            'close': net_asset_value,
+                            'volume': 1000000,  # 基金没有成交量，设一个固定值
+                            'fund_code': fund_code,
+                            'fund_name': get_fund_name(fund_code)
+                        })
+
+                return pd.DataFrame(data)
+    except Exception as e:
+        print(f"获取基金 {fund_code} 数据失败: {e}")
+
+    return None
+
+def get_fund_name(fund_code):
+    """获取基金名称"""
+    url = f"http://fund.eastmoney.com/{fund_code}.html"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # 获取基金名称
+        fund_name_tag = soup.find('h1', class_='fundDetail-tit')
+        if fund_name_tag:
+            return fund_name_tag.text.strip()
+    except Exception as e:
+        print(f"获取基金 {fund_code} 名称失败: {e}")
+
+    return f"基金{fund_code}"
+
+def get_fund_data_from_sina(fund_code):
+    """从新浪财经获取基金数据作为备用数据源"""
+    url = f"https://finance.sina.com.cn/fund/quotes/{fund_code}/bc.shtml"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    }
+
+    try:
+        response = requests.get(url, headers=headers)
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # 解析数据
+        # 这里需要根据新浪财经的实际HTML结构进行解析
+        # 由于网站结构可能变化，这里只提供示例代码
+        data = []
+        # 示例解析代码，实际需要根据网站结构调整
+        # table = soup.find('table', {'id': 'fund_hold_table'})
+        # if table:
+        #     rows = table.find_all('tr')[1:]  # 跳过表头
+        #     for row in rows:
+        #         cols = row.find_all('td')
+        #         if len(cols) >= 5:
+        #             date = cols[0].text.strip()
+        #             net_asset_value = float(cols[1].text.strip())
+        #             daily_growth_rate = cols[2].text.strip().replace('%', '')
+        #             try:
+        #                 daily_growth_rate = float(daily_growth_rate) / 100
+        #             except:
+        #                 daily_growth_rate = 0
+        #             
+        #             data.append({
+        #                 'date': date,
+        #                 'open': net_asset_value,
+        #                 'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
+        #                 'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+        #                 'close': net_asset_value,
+        #                 'volume': 1000000,
+        #                 'fund_code': fund_code,
+        #                 'fund_name': get_fund_name(fund_code)
+        #             })
+        # 
+        # if data:
+        #     return pd.DataFrame(data)
+    except Exception as e:
+        print(f"从新浪财经获取基金 {fund_code} 数据失败: {e}")
+
+    return None
+
+def get_fund_data(fund_code):
+    """获取基金数据，尝试多个数据源"""
+    # 首先尝试从天天基金网获取
+    df = get_fund_data_from_tiantian(fund_code)
+
+    # 如果天天基金网获取失败，尝试从新浪财经获取
+    if df is None or len(df) == 0:
+        df = get_fund_data_from_sina(fund_code)
+
+    return df
+
+def update_readme(fund_signals):
+    """更新README.md文件"""
+    # 读取README.md文件
+    with open('README.md', 'r', encoding='utf-8') as f:
+        readme_content = f.read()
+
+    # 分割README内容
+    parts = readme_content.split('<!-- 数据将通过GitHub Actions自动更新 -->')
+
+    # 生成表格内容
+    table_header = "| 基金名称 | 当前价格 | 买卖信号 | 分析日期 |
+|---------|---------|---------|---------|
+"
+    table_rows = []
+
+    # 按照买卖信号排序（买 > 卖 > 观望）
+    sorted_signals = sorted(fund_signals, key=lambda x: (
+        0 if x['signal'] == '买' else (1 if x['signal'] == '卖' else 2)
+    ))
+
+    for signal in sorted_signals:
+        table_rows.append(f"| {signal['fund_name']} | {signal['price']:.4f} | {signal['signal']} | {signal['date']} |
+")
+
+    # 组合新的README内容
+    new_readme_content = parts[0] + '<!-- 数据将通过GitHub Actions自动更新 -->
+' + table_header + ''.join(table_rows)
+
+    # 写入README.md文件
     with open('README.md', 'w', encoding='utf-8') as f:
-        f.write(new_content)
+        f.write(new_readme_content)
+
+def main():
+    """主函数"""
+    # 获取当前日期（北京时间）
+    tz = pytz.timezone('Asia/Shanghai')
+    now = datetime.now(tz)
+    current_date = now.strftime('%Y-%m-%d')
+
+    fund_signals = []
+
+    # 遍历基金代码列表
+    for fund_code in FUND_CODES:
+        print(f"正在分析基金 {fund_code}...")
+
+        # 获取基金数据
+        df = get_fund_data(fund_code)
+
+        if df is not None and len(df) > 0:
+            # 计算指标
+            df = calculate_indicators(df)
+
+            # 获取最新数据
+            latest_data = df.iloc[-1]
+
+            # 计算买卖信号
+            signal = get_signal(latest_data)
+
+            # 添加到信号列表
+            fund_signals.append({
+                'fund_code': fund_code,
+                'fund_name': latest_data['fund_name'],
+                'price': latest_data['close'],
+                'signal': signal,
+                'date': current_date
+            })
+
+            # 随机延迟，避免请求过于频繁
+            time.sleep(random.uniform(0.5, 1.5))
+        else:
+            print(f"无法获取基金 {fund_code} 的数据")
+
+    # 更新README.md文件
+    if fund_signals:
+        update_readme(fund_signals)
+        print("README.md文件已更新")
+    else:
+        print("没有获取到任何基金数据，不更新README.md文件")
 
 if __name__ == "__main__":
-    print("开始分析基金数据...")
-    
-    # 创建分析器实例
-    analyzer = FundAnalyzer()
-    
-    # 分析所有基金
-    results = analyzer.analyze_all_funds()
-    
-    if results:
-        # 生成Markdown表格
-        markdown_table = generate_markdown_table(results)
-        
-        # 更新README.md
-        update_readme(markdown_table)
-        
-        print("基金分析完成，README.md已更新")
-        print(f"成功分析 {len(results)} 只基金")
-    else:
-        print("未能获取到任何基金数据")
-        # 创建空的表格
-        markdown_table = generate_markdown_table([])
-        update_readme(markdown_table)
+    main()
