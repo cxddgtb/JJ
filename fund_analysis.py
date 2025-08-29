@@ -70,7 +70,8 @@ def calculate_indicators(df):
     # VAR4: LLV(LOW,33)
     df['VAR4'] = df['low'].rolling(window=33).min()
     # VAR5: EMA(IF(LOW<=VAR4,VAR3,0),3)
-    df['VAR5'] = np.where(df['low'] <= df['VAR4'], df['VAR3'], 0).ewm(span=3, adjust=False).mean()
+    var5_temp = np.where(df['low'] <= df['VAR4'], df['VAR3'], 0)
+    df['VAR5'] = pd.Series(var5_temp).ewm(span=3, adjust=False).mean()
 
     # VAR12: SMA(ABS(HIGH-VAR1),13,1)/SMA(MAX(HIGH-VAR1,0),10,1)
     df['VAR12'] = (abs(df['high'] - df['VAR1']).ewm(span=13, adjust=False).mean()) / (np.maximum(df['high'] - df['VAR1'], 0).ewm(span=10, adjust=False).mean())
@@ -79,7 +80,8 @@ def calculate_indicators(df):
     # VAR14: HHV(HIGH,33)
     df['VAR14'] = df['high'].rolling(window=33).max()
     # VAR15: EMA(IF(HIGH>=VAR14,VAR13,0),3)
-    df['VAR15'] = np.where(df['high'] >= df['VAR14'], df['VAR13'], 0).ewm(span=3, adjust=False).mean()
+    var15_temp = np.where(df['high'] >= df['VAR14'], df['VAR13'], 0)
+    df['VAR15'] = pd.Series(var15_temp).ewm(span=3, adjust=False).mean()
 
     # A1: REF(CLOSE,2)
     df['A1'] = df['close'].shift(2)
@@ -88,7 +90,8 @@ def calculate_indicators(df):
     # VARC: SMA(ABS(L-REF(L,1)),3,1)/SMA(MAX(L-REF(L,1),0),3,1)
     df['VARC'] = (abs(df['low'] - df['low'].shift(1)).ewm(span=3, adjust=False).mean()) / (np.maximum(df['low'] - df['low'].shift(1), 0).ewm(span=3, adjust=False).mean())
     # 金山: EMA(IF(L<= LLV(L,30),VARC,0),3)
-    df['金山'] = np.where(df['low'] <= df['low'].rolling(window=30).min(), df['VARC'], 0).ewm(span=3, adjust=False).mean()
+    var_jinshan_temp = np.where(df['low'] <= df['low'].rolling(window=30).min(), df['VARC'], 0)
+    df['金山'] = pd.Series(var_jinshan_temp).ewm(span=3, adjust=False).mean()
 
     return df
 
@@ -364,6 +367,10 @@ def get_fund_data_from_sina(fund_code):
                 print(f"请求失败，状态码: {response.status_code}")
                 continue
 
+            # 确保正确处理编码
+            if response.encoding != 'UTF-8' and response.encoding != 'utf-8':
+                response.encoding = 'UTF-8'
+
             print(f"响应内容长度: {len(response.text)}")
             soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -512,7 +519,9 @@ def update_readme(fund_signals):
     parts = readme_content.split('<!-- 数据将通过GitHub Actions自动更新 -->')
 
     # 生成表格内容
-    table_header = "| 基金名称 | 当前价格 | 买卖信号 | 分析日期 |\n|---------|---------|---------|---------|\n"
+    table_header = "| 基金名称 | 当前价格 | 买卖信号 | 分析日期 |
+|---------|---------|---------|---------|
+"
     table_rows = []
 
     # 按照买卖信号排序（买 > 卖 > 观望）
@@ -521,10 +530,12 @@ def update_readme(fund_signals):
     ))
 
     for signal in sorted_signals:
-        table_rows.append(f"| {signal['fund_name']} | {signal['price']:.4f} | {signal['signal']} | {signal['date']} |\n")
+        table_rows.append(f"| {signal['fund_name']} | {signal['price']:.4f} | {signal['signal']} | {signal['date']} |
+")
 
     # 组合新的README内容
-    new_readme_content = parts[0] + '<!-- 数据将通过GitHub Actions自动更新 -->\n' + table_header + ''.join(table_rows)
+    new_readme_content = parts[0] + '<!-- 数据将通过GitHub Actions自动更新 -->
+' + table_header + ''.join(table_rows)
 
     # 写入README.md文件
     with open('README.md', 'w', encoding='utf-8') as f:
