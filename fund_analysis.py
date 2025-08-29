@@ -46,7 +46,8 @@ def calculate_indicators(df):
     # VAR3Q: SMA(ABS(LOW-VAR2Q),3,1)/SMA(MAX(LOW-VAR2Q,0),3,1)*100
     df['VAR3Q'] = (abs(df['low'] - df['VAR2Q']).ewm(span=3, adjust=False).mean()) / (np.maximum(df['low'] - df['VAR2Q'], 0).ewm(span=3, adjust=False).mean()) * 100
     # VAR4Q: EMA(IF(CLOSE*1.3,VAR3Q*10,VAR3Q/10),3)
-    df['VAR4Q'] = np.where(df['close']*1.3, df['VAR3Q']*10, df['VAR3Q']/10).ewm(span=3, adjust=False).mean()
+    var4q_temp = np.where(df['close']*1.3, df['VAR3Q']*10, df['VAR3Q']/10)
+    df['VAR4Q'] = pd.Series(var4q_temp).ewm(span=3, adjust=False).mean()
     # VAR5Q: LLV(LOW,30)
     df['VAR5Q'] = df['low'].rolling(window=30).min()
     # VAR6Q: HHV(VAR4Q,30)
@@ -140,6 +141,10 @@ def get_fund_data_from_tiantian(fund_code):
             if response.status_code != 200:
                 print(f"请求失败，状态码: {response.status_code}")
                 continue
+
+            # 确保正确处理编码
+            if response.encoding != 'UTF-8' and response.encoding != 'utf-8':
+                response.encoding = 'UTF-8'
 
             print(f"响应内容长度: {len(response.text)}")
 
@@ -268,6 +273,10 @@ def get_fund_name(fund_code):
                 print(f"请求失败，状态码: {response.status_code}")
                 continue
 
+            # 确保正确处理编码
+            if response.encoding != 'UTF-8' and response.encoding != 'utf-8':
+                response.encoding = 'UTF-8'
+
             soup = BeautifulSoup(response.text, 'html.parser')
 
             # 尝试多种方式获取基金名称
@@ -275,6 +284,11 @@ def get_fund_name(fund_code):
             fund_name_tag = soup.find('h1', class_='fundDetail-tit')
             if fund_name_tag:
                 fund_name = fund_name_tag.text.strip()
+                # 确保名称是可读的中文
+                try:
+                    fund_name = fund_name.encode('ISO-8859-1').decode('UTF-8')
+                except:
+                    pass
                 print(f"通过h1标签获取到基金名称: {fund_name}")
                 return fund_name
 
@@ -282,6 +296,12 @@ def get_fund_name(fund_code):
             title_tag = soup.find('title')
             if title_tag:
                 title_text = title_tag.text.strip()
+                # 确保标题是可读的中文
+                try:
+                    title_text = title_text.encode('ISO-8859-1').decode('UTF-8')
+                except:
+                    pass
+
                 # 尝试从标题中提取基金名称
                 if '(' in title_text and ')' in title_text:
                     fund_name = title_text.split('(')[0].strip()
@@ -298,6 +318,12 @@ def get_fund_name(fund_code):
             for candidate in name_candidates:
                 if candidate:
                     fund_name = candidate.text.strip()
+                    # 确保名称是可读的中文
+                    try:
+                        fund_name = fund_name.encode('ISO-8859-1').decode('UTF-8')
+                    except:
+                        pass
+
                     if fund_name and fund_code in fund_name:
                         print(f"通过其他标签获取到基金名称: {fund_name}")
                         return fund_name
