@@ -211,8 +211,11 @@ def get_index_fund_data():
                 previous = sorted_data.iloc[-2]
 
                 # 计算涨跌幅
-                if float(previous['收盘']) != 0:
-                    change_pct = (float(latest['收盘']) - float(previous['收盘'])) / float(previous['收盘']) * 100
+                previous_close = previous['收盘'].item() if hasattr(previous['收盘'], 'item') else previous['收盘']
+                latest_close = latest['收盘'].item() if hasattr(latest['收盘'], 'item') else latest['收盘']
+
+                if float(previous_close) != 0:
+                    change_pct = (float(latest_close) - float(previous_close)) / float(previous_close) * 100
                     summary_data.loc[summary_data['代码'] == code, '涨跌幅'] = round(change_pct, 2)
                 else:
                     summary_data.loc[summary_data['代码'] == code, '涨跌幅'] = 0
