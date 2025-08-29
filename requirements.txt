@@ -1,6 +1,0 @@
-# requirements.txt
-pandas
-numpy
-ta
-akshare
-tenacity # <-- 新增
