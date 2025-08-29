@@ -1,0 +1,44 @@
+# .github/workflows/fund_analysis.yml
+name: Update Fund Analysis
+
+on:
+  workflow_dispatch: # Allows manual triggering from GitHub UI
+  schedule:
+    # Run every trading day at 14:00 Beijing time.
+    # Beijing Time (CST) is UTC+8. So 14:00 CST is 6:00 UTC.
+    # '0 6 * * 1-5' means at 0 minutes past 6 AM UTC, Monday through Friday.
+    - cron: '0 6 * * 1-5'
+
+jobs:
+  analyze-funds:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run fund analysis
+      # This script will fetch data, calculate indicators, and update README.md
+      run: python analyze_funds.py
+      env:
+        TZ: Asia/Shanghai # Set timezone for `datetime.date.today()` to align with Beijing time
+
+    - name: Commit and push changes
+      # Only commit if there are actual changes to README.md
+      run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
+        git add README.md
+        git commit -m "自动更新基金分析表格" || echo "No changes to commit"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }} # GITHUB_TOKEN is automatically provided by GitHub Actions
