@@ -55,7 +55,8 @@ def calculate_indicators(df):
     # VAR7Q: IF(MA(CLOSE,58),1,0)
     df['VAR7Q'] = np.where(df['close'].rolling(window=58).mean(), 1, 0)
     # VAR8Q: EMA(IF(LOW<=VAR5Q,(VAR4Q+VAR6Q*2)/2,0),3)/618*VAR7Q
-    df['VAR8Q'] = np.where(df['low'] <= df['VAR5Q'], (df['VAR4Q'] + df['VAR6Q']*2)/2, 0).ewm(span=3, adjust=False).mean() / 618 * df['VAR7Q']
+    var8q_temp = np.where(df['low'] <= df['VAR5Q'], (df['VAR4Q'] + df['VAR6Q']*2)/2, 0)
+    df['VAR8Q'] = pd.Series(var8q_temp).ewm(span=3, adjust=False).mean() / 618 * df['VAR7Q']
     # VAR9Q: IF(VAR8Q>100,100,VAR8Q)
     df['VAR9Q'] = np.where(df['VAR8Q'] > 100, 100, df['VAR8Q'])
 
@@ -91,20 +92,20 @@ def calculate_indicators(df):
 
     return df
 
-def get_signal(row):
+def get_signal(row, prev_row=None):
     """根据指标计算买卖信号"""
     # 买入信号条件
     buy_signal = (
         (row['close'] > row['买入']) and  # 价格上穿买入线
         (row['VAR9Q'] > 0) and  # 有吸筹迹象
-        (row['VAR5'] > row['VAR5'].shift(1)) and  # 主力进场
+        (prev_row is None or row['VAR5'] > prev_row['VAR5']) and  # 主力进场
         (row['A2'] < 19)  # 波段介入点
     )
 
     # 卖出信号条件
     sell_signal = (
         (row['close'] < row['卖出']) and  # 价格下穿卖出线
-        (row['VAR15'] < row['VAR15'].shift(1)) and  # 主力出场
+        (prev_row is None or row['VAR15'] < prev_row['VAR15']) and  # 主力出场
         (row['金山'] > 0)  # 金山指标
     )
 
@@ -549,11 +550,12 @@ def main():
             # 计算指标
             df = calculate_indicators(df)
 
-            # 获取最新数据
+            # 获取最新数据和前一行数据
             latest_data = df.iloc[-1]
+            prev_data = df.iloc[-2] if len(df) > 1 else None
 
             # 计算买卖信号
-            signal = get_signal(latest_data)
+            signal = get_signal(latest_data, prev_data)
 
             # 添加到信号列表
             fund_signals.append({
