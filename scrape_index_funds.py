@@ -109,8 +109,8 @@ def get_index_fund_data():
                         # 添加基金代码和名称
                         df['代码'] = code
                         df['名称'] = name
-                        # 设置日期为索引
-                        df.set_index('日期', inplace=True)
+                        # 重置索引，使日期成为列而不是索引
+                        df.reset_index(inplace=True)
                         # 添加到总数据
                         all_data = pd.concat([all_data, df])
                         print(f"成功获取 {name} ({code}) 的数据，共 {len(df)} 条记录")
@@ -121,10 +121,13 @@ def get_index_fund_data():
                     # 尝试使用yfinance
                     try:
                         yf_code = code.split('.')[0] + '.SS' if code.endswith('.SH') else code.split('.')[0] + '.SZ'
-                        data = yf.download(yf_code, start=start_date, end=end_date)
+                        data = yf.download(yf_code, start=start_date, end=end_date, auto_adjust=False)
                         if not data.empty:
                             data['代码'] = code
                             data['名称'] = name
+                            # 重置索引，使日期成为列而不是索引
+                            data.reset_index(inplace=True)
+                            # 添加到总数据
                             all_data = pd.concat([all_data, data])
                             print(f"使用yfinance成功获取 {name} ({code}) 的数据，共 {len(data)} 条记录")
                         else:
@@ -134,10 +137,13 @@ def get_index_fund_data():
             else:
                 # 海外ETF，使用yfinance获取数据
                 try:
-                    data = yf.download(code, start=start_date, end=end_date)
+                    data = yf.download(code, start=start_date, end=end_date, auto_adjust=False)
                     if not data.empty:
                         data['代码'] = code
                         data['名称'] = name
+                        # 重置索引，使日期成为列而不是索引
+                        data.reset_index(inplace=True)
+                        # 添加到总数据
                         all_data = pd.concat([all_data, data])
                         print(f"成功获取 {name} ({code}) 的数据，共 {len(data)} 条记录")
                     else:
@@ -153,10 +159,14 @@ def get_index_fund_data():
 
     # 保存数据到CSV文件
     if not all_data.empty:
+        # 确定日期列的名称
+        date_column = 'Date' if 'Date' in all_data.columns else '日期'
+        code_column = '代码' if '代码' in all_data.columns else 'Code'
+
         # 按日期和代码排序
-        all_data.sort_values(by=['Date', '代码'] if 'Date' in all_data.columns else ['日期', '代码'], inplace=True)
+        all_data.sort_values(by=[date_column, code_column], inplace=True)
         # 保存到CSV文件
-        all_data.to_csv('index_fund_data.csv', encoding='utf-8-sig')
+        all_data.to_csv('index_fund_data.csv', encoding='utf-8-sig', index=False)
         print(f"数据已保存到 index_fund_data.csv，共 {len(all_data)} 条记录")
     else:
         print("未获取到任何数据")
