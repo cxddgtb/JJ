@@ -519,9 +519,7 @@ def update_readme(fund_signals):
     parts = readme_content.split('<!-- 数据将通过GitHub Actions自动更新 -->')
 
     # 生成表格内容
-    table_header = "| 基金名称 | 当前价格 | 买卖信号 | 分析日期 |
-|---------|---------|---------|---------|
-"
+    table_header = "| 基金名称 | 当前价格 | 买卖信号 | 分析日期 |\n|---------|---------|---------|---------|\n"
     table_rows = []
 
     # 按照买卖信号排序（买 > 卖 > 观望）
@@ -530,12 +528,10 @@ def update_readme(fund_signals):
     ))
 
     for signal in sorted_signals:
-        table_rows.append(f"| {signal['fund_name']} | {signal['price']:.4f} | {signal['signal']} | {signal['date']} |
-")
+        table_rows.append(f"| {signal['fund_name']} | {signal['price']:.4f} | {signal['signal']} | {signal['date']} |\n")
 
     # 组合新的README内容
-    new_readme_content = parts[0] + '<!-- 数据将通过GitHub Actions自动更新 -->
-' + table_header + ''.join(table_rows)
+    new_readme_content = parts[0] + '<!-- 数据将通过GitHub Actions自动更新 -->\n' + table_header + ''.join(table_rows)
 
     # 写入README.md文件
     with open('README.md', 'w', encoding='utf-8') as f:
