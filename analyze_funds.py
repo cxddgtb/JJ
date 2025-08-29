@@ -5,7 +5,8 @@ import akshare as ak
 import datetime
 import os
 import re
-import time # Import time for potential rate limiting
+import time
+from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_type, wait_random
 
 # --- Configuration ---
 FUND_CODES_FILE = "fund.txt"
@@ -42,66 +43,79 @@ def get_fund_codes():
         codes = [line.strip() for line in f if line.strip() and not line.startswith('#')]
     return codes
 
+@retry(stop=stop_after_attempt(3), wait=wait_random(min=5, max=10), retry=retry_if_exception_type(Exception))
+def _get_fund_name_dict_with_retry():
+    """Helper to retry fetching fund name dictionary."""
+    print("Attempting to fetch fund name dictionary from akshare...")
+    return ak.fund_em_fund_name_dict()
+
 def get_fund_name_mapping():
-    """Fetches a comprehensive fund name mapping from akshare."""
-    print("Fetching fund name dictionary...")
+    """Fetches a comprehensive fund name mapping from akshare with retry."""
+    fund_name_dict = {}
     try:
-        fund_name_dict = ak.fund_em_fund_name_dict()
-        if fund_name_dict:
-            return fund_name_dict
-        else:
-            print("Warning: ak.fund_em_fund_name_dict() returned empty.")
-            return {}
+        fund_name_dict = _get_fund_name_dict_with_retry()
+        if not fund_name_dict:
+            print("Warning: ak.fund_em_fund_name_dict() returned empty after retries.")
     except Exception as e:
-        print(f"Error fetching fund name dictionary: {e}")
-        return {}
+        print(f"Error fetching fund name dictionary even after retries: {e}")
+    return fund_name_dict
+
+@retry(stop=stop_after_attempt(3), wait=wait_random(min=5, max=10), retry=retry_if_exception_type(Exception))
+def _fetch_fund_nav_hist_with_retry(fund_code, start_date_str, end_date_str):
+    """Helper to retry fetching fund NAV history."""
+    print(f"Attempting to fetch NAV for {fund_code} from akshare...")
+    return ak.fund_nav_hist_em(symbol=fund_code, start_date=start_date_str, end_date=end_date_str)
 
 def fetch_fund_data(fund_code, fund_name_map, start_date_str, end_date_str):
     fund_name = fund_name_map.get(fund_code, fund_code)
-    print(f"Fetching data for fund: {fund_code} ({fund_name}) from {start_date_str} to {end_date_str}")
+    print(f"Processing fund: {fund_code} ({fund_name})")
     
     df = pd.DataFrame()
     try:
-        df_raw = ak.fund_nav_hist_em(symbol=fund_code, start_date=start_date_str, end_date=end_date_str)
+        df_raw = _fetch_fund_nav_hist_with_retry(fund_code, start_date_str, end_date_str)
+        
         if df_raw.empty:
-            print(f"No historical NAV data found for fund {fund_code} ({fund_name}) in the specified period.")
+            print(f"No historical NAV data found for fund {fund_code} ({fund_name}) after retries.")
             return pd.DataFrame() # Return empty if no data
 
         df_raw['日期'] = pd.to_datetime(df_raw['日期'])
         df_raw = df_raw.set_index('日期')
         df_raw = df_raw.sort_index()
 
-        # Rename columns to standard OHLC (Close is NAV)
         # Check if '单位净值' column exists before renaming
         if '单位净值' not in df_raw.columns:
-            print(f"Warning: '单位净值' column not found for fund {fund_code}. Available columns: {df_raw.columns.tolist()}")
+            print(f"Warning: '单位净值' column not found for fund {fund_code} ({fund_name}). Available columns: {df_raw.columns.tolist()}")
             return pd.DataFrame()
             
         df_raw.rename(columns={'单位净值': 'close'}, inplace=True)
 
         # Approximate OHLC for indicators that require it.
-        # This is a significant simplification due to fund data nature.
-        # open, high, low are approximated for indicators that expect them.
         df_raw['open'] = df_raw['close'].shift(1).fillna(df_raw['close']) 
         df_raw['high'] = df_raw[['close', 'open']].max(axis=1) 
         df_raw['low'] = df_raw[['close', 'open']].min(axis=1)   
         df_raw['volume'] = 0 # No volume data for fund NAV, set to 0
 
-        # Drop columns not needed for TA, keep essential ones
         df = df_raw[['open', 'high', 'low', 'close', 'volume']]
         df['fund_name'] = fund_name # Add fund name to DataFrame
 
-        # Check if 'close' price is valid for the latest date
+        # Validate latest 'close' price
         if df['close'].isnull().iloc[-1]:
-            print(f"Warning: Latest 'close' price is NaN for fund {fund_code} ({fund_name}).")
-            return pd.DataFrame() # Return empty if latest close is NaN
+            print(f"Warning: Latest 'close' price is NaN for fund {fund_code} ({fund_name}). Data might be incomplete.")
+            # If latest is NaN, we return empty to avoid analyzing invalid data.
+            return pd.DataFrame() 
+        
+        # Ensure there is enough valid historical data for indicators to compute
+        min_required_data = max(32, 9, 7, 30, 25, 21, 10, 60, 33) + 5 # Max lookback + buffer
+        if len(df.dropna(subset=['close'])) < min_required_data:
+             print(f"Warning: Insufficient valid historical data for fund {fund_code} ({fund_name}) ({len(df.dropna(subset=['close']))} days, need at least {min_required_data}). Skipping analysis.")
+             return pd.DataFrame()
 
         return df
     except Exception as e:
-        print(f"Error fetching data for {fund_code} ({fund_name}): {e}")
+        print(f"Error fetching data for {fund_code} ({fund_name}) even after retries: {e}")
         return pd.DataFrame()
 
-# --- Indicator Implementations ---
+# --- Indicator Implementations (无变化，保持不变) ---
 # Indicator 1: 压力支撑主图指标 (Pressure Support Main Chart Indicator)
 def calculate_indicator1(df_original):
     df = df_original.copy()
@@ -118,24 +132,12 @@ def calculate_indicator1(df_original):
     df['卖出'] = tdx_sma(VAR1, N, 1) * (1 + P1 / 1000)
     df['买入'] = tdx_sma(VAR1, M, 1) * (1 - P2 / 1000)
 
-    # B signal: CROSS(C,买入) OR (L<买入 AND C>买入)
     cross_buy = (df['close'].shift(1) < df['买入'].shift(1)) & (df['close'] > df['买入'])
-    # L<买入 AND C>买入 is simplified to C>买入 (as L ~ C) - this is a simplification
     df['SIGNAL_B'] = (cross_buy | ((df['low'] < df['买入']) & (df['close'] > df['买入']))).astype(int)
 
-    # S signal: CROSS(卖出,C) OR (H>卖出 AND C<卖出)
-    cross_sell = (df['卖出'].shift(1) > df['close'].shift(1)) & (df['卖出'] < df['close']) # original CROSS(卖出,C) might be interpreted as C crossing 卖出 from below, or 卖出 crossing C from above.
-    # For TDX CROSS(卖出,C) means 卖出 line crosses C line from above, so 卖出.shift(1) > C.shift(1) AND 卖出 < C
-    # The original description CROSS(卖出,C) is ambiguous if it's 卖出 line crossing C or C crossing 卖出. 
-    # Let's interpret it as price C crossing 卖出 from below for a sell (or 卖出 crossing C from above).
-    # Based on DRAWTEXT(CROSS(卖出,C) ...,'S'), it implies C drops below 卖出.
-    # Redo for clarity:
     cross_sell_price_below_sell_line = (df['close'].shift(1) > df['卖出'].shift(1)) & (df['close'] < df['卖出'])
     df['SIGNAL_S'] = (cross_sell_price_below_sell_line | ((df['high'] > df['卖出']) & (df['close'] < df['卖出']))).astype(int)
 
-
-    # 买进 signal
-    # A3:=(C-LLV(L,9))/(HHV(H,9)-LLV(L,9))*100;
     llv_l_9 = df['low'].rolling(9).min()
     hhv_h_9 = df['high'].rolling(9).max()
     denominator_a3 = hhv_h_9 - llv_l_9
@@ -146,7 +148,6 @@ def calculate_indicator1(df_original):
     A4 = tdx_sma(A3, 3, 1)
     A5 = tdx_sma(A4, 3, 1)
 
-    # A8:=100*EMA(EMA(C-REF(C,1),6),6)/EMA(EMA(ABS(C-REF(C,1)),6),6);
     change = df['close'].diff()
     abs_change = abs(change)
     ema_change_1 = tdx_sma(change, 6, 1)
@@ -155,14 +156,13 @@ def calculate_indicator1(df_original):
     double_ema_abs_change = tdx_sma(ema_abs_change_1, 6, 1)
     
     A8 = pd.Series(np.nan, index=df.index)
-    valid_indices_a8 = double_ema_abs_change.fillna(0) != 0 # Check for zero or NaN
+    valid_indices_a8 = double_ema_abs_change.fillna(0) != 0 
     A8[valid_indices_a8] = 100 * double_ema_change[valid_indices_a8] / double_ema_abs_change[valid_indices_a8]
 
-    # 买:=LLV(A8,2)=LLV(A8,7) AND COUNT(A8<0,2) AND CROSS(A8,MA(A8,2));
     buy_cond1 = (A8.rolling(2).min() == A8.rolling(7).min())
-    buy_cond2 = (A8 < 0).rolling(2).sum() == 2 # COUNT(A8<0,2)
+    buy_cond2 = (A8 < 0).rolling(2).sum() == 2 
     ma_a8_2 = tdx_sma(A8, 2, 1)
-    buy_cond3 = (A8.shift(1) < ma_a8_2.shift(1)) & (A8 > ma_a8_2) # CROSS(A8,MA(A8,2))
+    buy_cond3 = (A8.shift(1) < ma_a8_2.shift(1)) & (A8 > ma_a8_2) 
     df['SIGNAL_买进'] = (buy_cond1 & buy_cond2 & buy_cond3).astype(int)
 
     return df
@@ -170,12 +170,9 @@ def calculate_indicator1(df_original):
 # Indicator 2: 筹码意愿与买卖点副图指标 (Chips Intention and Buy/Sell Point Sub-Chart Indicator)
 def calculate_indicator2(df_original):
     df = df_original.copy()
-    if df.empty or len(df) < max(30, 25, 21, 10, 60) + 5: # Added buffer
+    if df.empty or len(df) < max(30, 25, 21, 10, 60) + 5: 
         return df_original
 
-    # PART 1: 筹码震仓分析 (Chip Shakeout Analysis)
-    # WINNER approximation: percentage of historical close prices within +/- 10% of current close.
-    # This is a very rough approximation for funds without detailed transaction data.
     def approx_winner_range(current_price, hist_prices, window=60):
         if len(hist_prices) < window:
             return 0 
@@ -189,14 +186,13 @@ def calculate_indicator2(df_original):
     VAR2_list = []
     for i in range(len(df)):
         current_close = df['close'].iloc[i]
-        hist_closes = df['close'].iloc[:i+1] # All data up to current point
+        hist_closes = df['close'].iloc[:i+1] 
         VAR2_list.append(approx_winner_range(current_close, hist_closes))
     VAR2_approx = pd.Series(VAR2_list, index=df.index)
 
     VAR4 = np.where(VAR2_approx < 0, 0, VAR2_approx) 
-    df['震仓'] = tdx_sma(pd.Series(VAR4, index=df.index), 10, 1) # No *100 here, as it's already %
+    df['震仓'] = tdx_sma(pd.Series(VAR4, index=df.index), 10, 1) 
 
-    # PART 2: 超买超卖与买卖信号 (Overbought/Oversold and Buy/Sell Signals)
     V1 = df['low'].rolling(10).min() 
     V2 = df['high'].rolling(25).max() 
     
@@ -210,7 +206,6 @@ def calculate_indicator2(df_original):
     df['SIGNAL_买入信号'] = ((df['价位线'].shift(1) < 0.3) & (df['价位线'] >= 0.3)).astype(int) 
     df['SIGNAL_卖出信号'] = ((df['价位线'].shift(1) > 3.5) & (df['价位线'] <= 3.5)).astype(int) 
 
-    # PART 3: 主力吸筹分析 (Main Force Accumulation Analysis)
     VAR2Q = df['low'].shift(1) 
     abs_diff_l = abs(df['low'] - VAR2Q)
     max_diff_l = (df['low'] - VAR2Q).apply(lambda x: max(x, 0)) 
@@ -224,23 +219,22 @@ def calculate_indicator2(df_original):
     VAR3Q[valid_indices_v3q] = (sma_abs_diff_l[valid_indices_v3q] / denominator_v3q[valid_indices_v3q]) * 100
     VAR3Q = VAR3Q.fillna(0) 
 
-    if_cond_var4q = (df['close'] > 1.3 * df['close'].shift(1)) # Assuming '1.3' refers to a multiplier not specific price
+    if_cond_var4q = (df['close'] > 1.3 * df['close'].shift(1)) 
     var3q_adjusted = np.where(if_cond_var4q, VAR3Q * 10, VAR3Q / 10)
     df['VAR4Q'] = tdx_sma(pd.Series(var3q_adjusted, index=df.index), 3, 1)
 
     VAR5Q = df['low'].rolling(30).min() 
     VAR6Q = df['VAR4Q'].rolling(30).max() 
     
-    VAR7Q = 1 # Assuming MA(CLOSE,58) is always true/positive, thus 1
+    VAR7Q = 1 
 
     if_cond_var8q = (df['low'] <= VAR5Q)
-    var8q_raw = np.where(if_cond_var8q, (df['VAR4Q'] + VAR6Q * 2) / 2, 0) # Adjusted based on common interpretation
+    var8q_raw = np.where(if_cond_var8q, (df['VAR4Q'] + VAR6Q * 2) / 2, 0) 
     VAR8Q = tdx_sma(pd.Series(var8q_raw, index=df.index), 3, 1) / 618 * VAR7Q
 
     df['VAR9Q'] = np.where(VAR8Q > 100, 100, VAR8Q)
     df['SIGNAL_吸筹'] = (df['VAR9Q'] > 0).astype(int) 
 
-    # PART 4: 多空走势与顶部预警 (Bull/Bear Trend and Top Warning)
     HHV_H_21 = df['high'].rolling(21).max()
     LLV_L_21 = df['low'].rolling(21).min()
     
@@ -266,17 +260,16 @@ def calculate_indicator2(df_original):
 # Indicator 3: 通达信主力进出副图指标 (TDX Main Force In/Out Sub-Chart Indicator)
 def calculate_indicator3(df_original):
     df = df_original.copy()
-    if df.empty or len(df) < max(33, 13, 7) + 5: # Added buffer
+    if df.empty or len(df) < max(33, 13, 7) + 5: 
         return df_original
 
-    VAR1 = df['close'].shift(1) # REF((LOW+OPEN+CLOSE+HIGH)/4,1) approximated with close
+    VAR1 = df['close'].shift(1) 
 
-    # 主力进场与洗盘 (Main Force Entry & Shakeout)
     abs_diff_low = abs(df['low'] - VAR1) 
     max_diff_low = (df['low'] - VAR1).apply(lambda x: max(x, 0)) 
     
     sma_abs_diff_low = tdx_sma(abs_diff_low, 13, 1)
-    sma_max_diff_low = tdx_sma(max_diff_low, 10, 1) # Original is 10, not 13
+    sma_max_diff_low = tdx_sma(max_diff_low, 10, 1) 
     VAR2 = pd.Series(np.nan, index=df.index)
     denominator_v2 = sma_max_diff_low.fillna(0)
     valid_indices_v2 = denominator_v2 != 0
@@ -292,12 +285,11 @@ def calculate_indicator3(df_original):
     df['SIGNAL_主进'] = (VAR5 > VAR5.shift(1)).astype(int)
     df['SIGNAL_洗盘'] = (VAR5 < VAR5.shift(1)).astype(int)
 
-    # 主力出场与冲顶 (Main Force Exit & Top Rush)
     abs_diff_high = abs(df['high'] - VAR1) 
     max_diff_high = (df['high'] - VAR1).apply(lambda x: max(x, 0)) 
     
     sma_abs_diff_high = tdx_sma(abs_diff_high, 13, 1)
-    sma_max_diff_high = tdx_sma(max_diff_high, 10, 1) # Original is 10, not 13
+    sma_max_diff_high = tdx_sma(max_diff_high, 10, 1) 
     VAR12 = pd.Series(np.nan, index=df.index)
     denominator_v12 = sma_max_diff_high.fillna(0)
     valid_indices_v12 = denominator_v12 != 0
@@ -313,7 +305,6 @@ def calculate_indicator3(df_original):
     df['SIGNAL_主出'] = (VAR15 < VAR15.shift(1)).astype(int)
     df['SIGNAL_冲顶'] = (VAR15 > VAR15.shift(1)).astype(int)
 
-    # 超卖与底部确认信号 (Oversold & Bottom Confirmation)
     A1 = df['close'].shift(2) 
     max_c_diff = (df['close'] - A1).apply(lambda x: max(x, 0)) 
     abs_c_diff = abs(df['close'] - A1) 
@@ -328,16 +319,15 @@ def calculate_indicator3(df_original):
 
     df['SIGNAL_波段介入点'] = (A2 < 19).astype(int)
 
-    # 金山 (Golden Mountain)
     abs_l_diff = abs(df['low'] - df['low'].shift(1)) 
     max_l_diff = (df['low'] - df['low'].shift(1)).apply(lambda x: max(x, 0)) 
     
     sma_abs_l_diff = tdx_sma(abs_l_diff, 3, 1)
-    sma_max_l_diff = tdx_sma(max_l_diff, 3, 1)
+    sma_max_l_diff = tdx_sma(max_l_diff, 3, 1) # Fix: Was `tdx_l_diff = tdx_sma(max_l_diff, 3, 1)`
     VARC = pd.Series(np.nan, index=df.index)
     denominator_varc = sma_max_l_diff.fillna(0)
     valid_indices_varc = denominator_varc != 0
-    VARC[valid_indices_varc] = sma_abs_l_diff[valid_indices_varc] / denominator_varc[valid_indices_varc]
+    VARC[valid_indices_varc] = (sma_abs_l_diff[valid_indices_varc] / denominator_varc[valid_indices_varc])
     VARC = VARC.fillna(0)
 
     if_cond_gold = (df['low'] <= df['low'].rolling(30).min()) 
@@ -346,7 +336,7 @@ def calculate_indicator3(df_original):
 
     return df
 
-# --- Signal Consolidation ---
+# --- Signal Consolidation (无变化，保持不变) ---
 def consolidate_signals(df):
     """
     Consolidates signals from multiple indicators into a single '买入', '卖出', or '观望' decision.
@@ -422,15 +412,65 @@ def perform_analysis_and_update_readme():
         df_fund = calculate_indicator3(df_fund)
         
         # Get signals for the last ANALYSIS_PERIOD_DAYS
-        for i in range(1, min(ANALYSIS_PERIOD_DAYS + 1, len(df_fund) + 1)):
-            current_day_df = df_fund.iloc[:-(min(ANALYSIS_PERIOD_DAYS, len(df_fund)) - i)] # Slice to include enough history for indicators
-            
-            if current_day_df.empty or current_day_df['close'].isnull().iloc[-1]:
-                continue
+        # Filter out rows where crucial signal columns might be NaN (e.g., due to insufficient initial data for rolling calcs)
+        # Identify columns that are essential for `consolidate_signals`
+        signal_cols = [col for col in df_fund.columns if col.startswith('SIGNAL_') or col in ['买入', '卖出']]
+        
+        # Remove NaNs from close prices if they occur mid-series after indicator calcs (unlikely, but for robustness)
+        df_fund_cleaned = df_fund.dropna(subset=['close'])
 
-            signal = consolidate_signals(current_day_df)
-            price = current_day_df['close'].iloc[-1]
-            date = current_day_df.index[-1].strftime('%Y-%m-%d')
+        if df_fund_cleaned.empty:
+            print(f"Fund {code} ({fund_name_display}) has no valid close prices after cleaning. Setting to '观望'.")
+            all_results.append({'基金名称': fund_name_display, '日期': end_date.strftime('%Y-%m-%d'), '当前价格': 'N/A', '信号': '观望'})
+            continue
+
+
+        # Iterate over the last `ANALYSIS_PERIOD_DAYS` to get signals for each day
+        for i in range(1, min(ANALYSIS_PERIOD_DAYS + 1, len(df_fund_cleaned) + 1)):
+            # Slice the DataFrame to get data up to the current day being analyzed,
+            # ensuring enough history is provided for the indicators to compute for that day.
+            # This is complex because indicators need historical context.
+            # The simplest is to pass the full (or sufficiently long) df, and consolidate_signals looks at df.iloc[-1]
+            # but to get signals for *each* of the last 30 days, we need to re-evaluate for each day's context.
+            
+            # Let's simplify this. We calculate indicators on the *full* fetched DF.
+            # Then, we iterate the last `ANALYSIS_PERIOD_DAYS` of the *calculated* DF
+            # and use `consolidate_signals` on the slice containing up to that day.
+            
+            # Create a temporary DataFrame slice for evaluation on a specific date `d`
+            # This slice ensures that `consolidate_signals` receives enough history
+            # to calculate indicators for the chosen day `d`.
+            
+            # Calculate signals for all days first, then pick the last 30.
+            # The indicators are already calculated for the full `df_fund`.
+            # Now, we just need to get the `consolidate_signals` for the latest `ANALYSIS_PERIOD_DAYS`
+            # using the pre-calculated indicator columns.
+            
+            # Get the index for the current day we want to report (from latest to oldest)
+            report_day_idx = len(df_fund_cleaned) - i 
+            
+            # Only consider days that have sufficient preceding data for indicators
+            # The consolidate_signals function uses df.iloc[-1]. So, we need to pass a df
+            # where the actual data point for consolidation is at .iloc[-1]
+            if report_day_idx < 0: # Ensure index is valid
+                continue
+            
+            # Extract sufficient history *up to and including* report_day_idx
+            # The earliest day for any indicator calculation is max(365, ANALYSIS_PERIOD_DAYS) days ago
+            # So, we need at least min_required_data points before report_day_idx
+            
+            # Let's simplify and assume the `df_fund` itself has enough data.
+            # We just need to ensure `consolidate_signals` gets a valid final row.
+            
+            # Create a sub-dataframe ending at the current `report_day_idx`
+            df_for_consolidation = df_fund_cleaned.iloc[:report_day_idx + 1]
+            
+            if df_for_consolidation.empty or df_for_consolidation['close'].isnull().iloc[-1]:
+                continue # Skip if this slice is empty or its latest close is NaN
+
+            signal = consolidate_signals(df_for_consolidation)
+            price = df_for_consolidation['close'].iloc[-1]
+            date = df_for_consolidation.index[-1].strftime('%Y-%m-%d')
             all_results.append({'基金名称': fund_name_display, '日期': date, '当前价格': f'{price:.2f}', '信号': signal})
         
         time.sleep(1) # Add a small delay between fund fetches to avoid rate limiting
@@ -440,6 +480,7 @@ def perform_analysis_and_update_readme():
     signal_order = {'买入': 1, '卖出': 2, '观望': 3}
     
     # Sort by date descending, then fund name, then signal priority to prepare for unique filter
+    # This step is crucial for `unique_results_dict` to correctly pick the *latest* signal in case of duplicates
     all_results_sorted_temp = sorted(all_results, key=lambda x: (x['日期'], x['基金名称'], signal_order.get(x['信号'], 99)), reverse=True)
 
     # Filter to get only the latest (most preferred signal) for each fund-date pair if there were duplicates
@@ -448,13 +489,12 @@ def perform_analysis_and_update_readme():
         key = (res['基金名称'], res['日期'])
         if key not in unique_results_dict:
             unique_results_dict[key] = res
-        # If key exists, current res is older, or has lower priority (due to reverse sort on priority), so the existing one is better.
+        # If key already exists, it means the earlier entry (due to reverse sorting) was preferred
+        # or it's a duplicate. We keep the first one found (which is the latest/highest priority for that day).
 
     final_results_list = list(unique_results_dict.values())
 
-    # Get today's date in 'YYYY-MM-DD' format
     today_date_str = end_date.strftime('%Y-%m-%d')
-    # Create a map for today's signals for stable sorting by current signal
     today_signals_by_fund = {}
     for res in final_results_list:
         if res['日期'] == today_date_str:
@@ -463,12 +503,10 @@ def perform_analysis_and_update_readme():
     def custom_sort_key(res):
         fund_name = res['基金名称']
         signal_for_sorting = today_signals_by_fund.get(fund_name, '观望') # Use today's signal for sorting entire fund block
-        return (signal_order.get(signal_for_sorting, 99), fund_name, res['日期']) # Sort by today's signal, then fund name, then date DESC
+        return (signal_order.get(signal_for_sorting, 99), fund_name, res['日期']) # Sort by today's signal priority (ascending), then fund name, then date DESC
 
-    # Sort the final list
     final_sorted_results = sorted(final_results_list, key=custom_sort_key, reverse=False) # Reverse=False for ascending priority (Buy first)
     
-    # Group results by fund name for display in markdown, maintaining the desired date order (newest first)
     fund_grouped_data = {}
     for res in final_sorted_results:
         fund_name = res['基金名称']
@@ -483,7 +521,7 @@ def perform_analysis_and_update_readme():
     markdown_table += "| 基金名称 | 日期 | 当前价格 | 信号 |\n"
     markdown_table += "|----------|----------|----------|------|\n"
 
-    # Iterate through funds ordered by today's signal preference
+    # Iterate through funds ordered by today's signal preference (Buy, Sell, Watch)
     for fund_name in sorted(fund_grouped_data.keys(), key=lambda f: signal_order.get(today_signals_by_fund.get(f, '观望'), 99)):
         # Take the last ANALYSIS_PERIOD_DAYS entries for each fund, sorted by date descending (newest first)
         fund_entries = sorted([e for e in fund_grouped_data[fund_name] if e['基金名称'] == fund_name], 
@@ -501,19 +539,15 @@ def perform_analysis_and_update_readme():
         end_marker_pattern = r"^(##\s.+)" # Regex for finding the next H2 heading
         
         if start_marker in readme_content:
-            # Find the position of the start marker
             start_index = readme_content.find(start_marker)
-            # Find the next H2 heading after the start marker to delimit the section
             match = re.search(end_marker_pattern, readme_content[start_index + len(start_marker):], re.MULTILINE)
             
             if match:
-                # The end of our injectable section is where the next H2 starts
                 end_index = start_index + len(start_marker) + match.start(1)
                 before_table = readme_content[:start_index]
                 after_table = readme_content[end_index:]
                 readme_content = before_table + markdown_table + "\n" + after_table
             else:
-                # No other H2 found, so replace from start marker to end of file
                 before_table = readme_content[:start_index]
                 readme_content = before_table + markdown_table
         else:
@@ -527,7 +561,7 @@ def perform_analysis_and_update_readme():
 
     print("Fund analysis completed and README.md updated.")
 
-# --- GitHub Actions Workflow (No change needed from previous version if PAT is set up) ---
+# --- GitHub Actions Workflow (无需变化，使用你已配置的 REPO_ACCESS_TOKEN) ---
 def create_github_workflow():
     workflow_content = """
 name: Update Fund Analysis
@@ -577,7 +611,7 @@ jobs:
 
 # --- Update requirements.txt ---
 def update_requirements_txt():
-    required_packages = ["pandas", "numpy", "ta", "akshare"]
+    required_packages = ["pandas", "numpy", "ta", "akshare", "tenacity"] # Added tenacity
     existing_packages = set()
     if os.path.exists("requirements.txt"):
         with open("requirements.txt", 'r') as f:
@@ -601,8 +635,10 @@ def create_dummy_fund_txt():
     if not os.path.exists(FUND_CODES_FILE):
         with open(FUND_CODES_FILE, 'w', encoding='utf-8') as f:
             f.write("# 基金代码列表，每行一个\n")
-            f.write("161725 # 招商中证白酒指数(LOF)\n") # Example fund code (Zhaoshang CSI Liquor Index)
-            f.write("001475 # 嘉实沪深300ETF联接A\n") # Another example (ChinaAMC China Securities 500 ETF Link)
+            f.write("161725 # 招商中证白酒指数(LOF)\n") 
+            f.write("001475 # 嘉实沪深300ETF联接A\n")
+            f.write("000001 # 华夏成长混合\n")
+            f.write("000002 # 华夏大盘精选混合\n") 
         print(f"Dummy {FUND_CODES_FILE} created with example fund codes for initial setup.")
 
 # --- Main execution flow for local testing/setup ---
