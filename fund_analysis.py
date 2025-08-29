@@ -14,9 +14,8 @@ import pytz
 
 # 定义基金列表
 FUND_CODES = [
-    '000001', '000002', '000003', '000004', '000005', '000016', '000300', '000688', '000852', '000905',
-    '000906', '000907', '000908', '000909', '000910', '000911', '000912', '000913', '000915', '399001',
-    '399006', '399005', '399303', '399673', '399106', '399317', '399550', '399986', '399395', '399437'
+    '000001', '000002', '000003', '000004', '000005', '000006', '000007', '000008', '000009', '000010'
+    
 ]
 
 # 定义通指标参数
@@ -95,26 +94,64 @@ def calculate_indicators(df):
 
     return df
 
-def get_signal(row, prev_row=None):
+def get_signal(row, prev_row=None, prev_prev_row=None):
     """根据指标计算买卖信号"""
-    # 买入信号条件
-    buy_signal = (
-        (row['close'] > row['买入']) and  # 价格上穿买入线
-        (row['VAR9Q'] > 0) and  # 有吸筹迹象
-        (prev_row is None or row['VAR5'] > prev_row['VAR5']) and  # 主力进场
-        (row['A2'] < 19)  # 波段介入点
-    )
+    # 买入信号条件 - 放宽条件，更容易触发买入信号
+    buy_conditions = 0
 
-    # 卖出信号条件
-    sell_signal = (
-        (row['close'] < row['卖出']) and  # 价格下穿卖出线
-        (prev_row is None or row['VAR15'] < prev_row['VAR15']) and  # 主力出场
-        (row['金山'] > 0)  # 金山指标
-    )
+    # 条件1: 价格上穿买入线
+    if row['close'] > row['买入']:
+        buy_conditions += 1
 
-    if buy_signal:
+    # 条件2: 有吸筹迹象 (VAR9Q > 0)
+    if row['VAR9Q'] > 0:
+        buy_conditions += 1
+
+    # 条件3: 主力进场 (VAR5上升)
+    if prev_row is not None and row['VAR5'] > prev_row['VAR5']:
+        buy_conditions += 1
+    elif prev_row is None and row['VAR5'] > 0:
+        buy_conditions += 1
+
+    # 条件4: 波段介入点 (A2 < 25，放宽条件)
+    if row['A2'] < 25:
+        buy_conditions += 1
+
+    # 条件5: 最近几天有下跌 (寻找低点)
+    if prev_row is not None and prev_prev_row is not None:
+        if (prev_row['close'] < prev_prev_row['close'] and 
+            row['close'] > prev_row['close']):  # 形成小底部
+            buy_conditions += 1
+
+    # 卖出信号条件 - 放宽条件，更容易触发卖出信号
+    sell_conditions = 0
+
+    # 条件1: 价格下穿卖出线
+    if row['close'] < row['卖出']:
+        sell_conditions += 1
+
+    # 条件2: 主力出场 (VAR15下降)
+    if prev_row is not None and row['VAR15'] < prev_row['VAR15']:
+        sell_conditions += 1
+
+    # 条件3: 金山指标
+    if row['金山'] > 0:
+        sell_conditions += 1
+
+    # 条件4: 连续上涨后回调
+    if prev_row is not None and prev_prev_row is not None:
+        if (prev_row['close'] > prev_prev_row['close'] and 
+            row['close'] < prev_row['close']):  # 形成小顶部
+            sell_conditions += 1
+
+    # 条件5: A2指标过高 (超过80)
+    if row['A2'] > 80:
+        sell_conditions += 1
+
+    # 综合判断
+    if buy_conditions >= 3:  # 满足至少3个买入条件
         return "买"
-    elif sell_signal:
+    elif sell_conditions >= 3:  # 满足至少3个卖出条件
         return "卖"
     else:
         return "观望"
@@ -169,11 +206,27 @@ def get_fund_data_from_tiantian(fund_code):
                         except:
                             daily_growth_rate = 0
 
+                        # 确保日期格式正确
+                        try:
+                            # 尝试解析日期
+                            date_obj = datetime.strptime(date, '%Y-%m-%d')
+                            formatted_date = date_obj.strftime('%Y-%m-%d')
+                        except:
+                            formatted_date = date
+
+                        # 更精确地计算高低点
+                        if daily_growth_rate > 0:
+                            high = net_asset_value * (1 + daily_growth_rate)
+                            low = net_asset_value
+                        else:
+                            high = net_asset_value
+                            low = net_asset_value * (1 + daily_growth_rate)
+
                         data.append({
-                            'date': date,
+                            'date': formatted_date,
                             'open': net_asset_value,
-                            'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
-                            'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+                            'high': high,
+                            'low': low,
                             'close': net_asset_value,
                             'volume': 1000000,
                             'fund_code': fund_code,
@@ -227,11 +280,27 @@ def get_fund_data_from_tiantian(fund_code):
                                 except:
                                     daily_growth_rate = 0
 
+                                # 确保日期格式正确
+                                try:
+                                    # 尝试解析日期
+                                    date_obj = datetime.strptime(date, '%Y-%m-%d')
+                                    formatted_date = date_obj.strftime('%Y-%m-%d')
+                                except:
+                                    formatted_date = date
+
+                                # 更精确地计算高低点
+                                if daily_growth_rate > 0:
+                                    high = net_asset_value * (1 + daily_growth_rate)
+                                    low = net_asset_value
+                                else:
+                                    high = net_asset_value
+                                    low = net_asset_value * (1 + daily_growth_rate)
+
                                 data.append({
-                                    'date': date,
+                                    'date': formatted_date,
                                     'open': net_asset_value,
-                                    'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
-                                    'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+                                    'high': high,
+                                    'low': low,
                                     'close': net_asset_value,
                                     'volume': 1000000,
                                     'fund_code': fund_code,
@@ -557,12 +626,13 @@ def main():
             # 计算指标
             df = calculate_indicators(df)
 
-            # 获取最新数据和前一行数据
+            # 获取最新数据和前两行数据
             latest_data = df.iloc[-1]
             prev_data = df.iloc[-2] if len(df) > 1 else None
+            prev_prev_data = df.iloc[-3] if len(df) > 2 else None
 
             # 计算买卖信号
-            signal = get_signal(latest_data, prev_data)
+            signal = get_signal(latest_data, prev_data, prev_prev_data)
 
             # 添加到信号列表
             fund_signals.append({
