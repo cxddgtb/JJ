@@ -116,36 +116,45 @@ def get_signal(row):
 
 def get_fund_data_from_tiantian(fund_code):
     """从天天基金网获取基金数据"""
-    url = f"http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code={fund_code}&page=1&per=100"
+    # 尝试不同的URL格式
+    urls = [
+        f"http://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code={fund_code}&page=1&per=100",
+        f"https://fund.eastmoney.com/f10/F10DataApi.aspx?type=lsjz&code={fund_code}&page=1&per=100"
+    ]
+
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': f'http://fund.eastmoney.com/{fund_code}.html',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
     }
 
-    try:
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.text, 'html.parser')
+    for url in urls:
+        try:
+            print(f"尝试从URL获取基金 {fund_code} 数据: {url}")
+            response = requests.get(url, headers=headers, timeout=10)
 
-        # 解析数据
-        content = soup.find('div', class_='box')
-        if content:
-            # 查找表格
-            table = content.find('table')
-            if table:
-                rows = table.find_all('tr')[1:]  # 跳过表头
-                data = []
-                for row in rows:
-                    cols = row.find_all('td')
-                    if len(cols) >= 7:
-                        date = cols[0].text.strip()
-                        net_asset_value = float(cols[1].text.strip())
-                        cumulative_net_asset_value = float(cols[2].text.strip())
-                        daily_growth_rate = cols[3].text.strip()
-                        subscription_status = cols[4].text.strip()
-                        redemption_status = cols[5].text.strip()
-                        dividend_distribution = cols[6].text.strip()
+            if response.status_code != 200:
+                print(f"请求失败，状态码: {response.status_code}")
+                continue
 
-                        # 转换日增长率
-                        daily_growth_rate = daily_growth_rate.replace('%', '')
+            print(f"响应内容长度: {len(response.text)}")
+
+            # 尝试解析JSON格式数据
+            try:
+                json_data = json.loads(response.text)
+                if 'content' in json_data and 'lsjzlist' in json_data['content']:
+                    # 解析JSON格式的基金数据
+                    data = []
+                    for item in json_data['content']['lsjzlist']:
+                        date = item.get('fsrq', '')
+                        net_asset_value = float(item.get('dwjz', 0))
+                        cumulative_net_asset_value = float(item.get('ljjz', 0))
+                        daily_growth_rate = item.get('jzzzl', '0').replace('%', '')
+
                         try:
                             daily_growth_rate = float(daily_growth_rate) / 100
                         except:
@@ -157,83 +166,302 @@ def get_fund_data_from_tiantian(fund_code):
                             'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
                             'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
                             'close': net_asset_value,
-                            'volume': 1000000,  # 基金没有成交量，设一个固定值
+                            'volume': 1000000,
                             'fund_code': fund_code,
                             'fund_name': get_fund_name(fund_code)
                         })
 
-                return pd.DataFrame(data)
-    except Exception as e:
-        print(f"获取基金 {fund_code} 数据失败: {e}")
+                    if data:
+                        print(f"成功从JSON获取基金 {fund_code} 数据，共 {len(data)} 条记录")
+                        return pd.DataFrame(data)
+            except json.JSONDecodeError:
+                # 如果不是JSON格式，尝试HTML解析
+                soup = BeautifulSoup(response.text, 'html.parser')
 
+                # 尝试不同的查找方式
+                tables = soup.find_all('table')
+                print(f"找到 {len(tables)} 个表格")
+
+                for table in tables:
+                    rows = table.find_all('tr')
+                    if len(rows) < 2:  # 至少需要表头和一行数据
+                        continue
+
+                    print(f"表格有 {len(rows)} 行")
+                    data = []
+                    header_found = False
+
+                    for row in rows:
+                        cols = row.find_all('td')
+                        if not cols:
+                            cols = row.find_all('th')
+
+                        if len(cols) >= 4:  # 至少需要日期、净值等基本信息
+                            if not header_found:
+                                # 检查是否是表头
+                                header_text = ' '.join([col.text.strip() for col in cols[:4]])
+                                if '净值' in header_text or '日期' in header_text:
+                                    header_found = True
+                                    print(f"找到表头: {header_text}")
+                                continue
+
+                            try:
+                                date = cols[0].text.strip()
+                                net_asset_value = float(cols[1].text.strip())
+
+                                daily_growth_rate = '0'
+                                if len(cols) > 3:
+                                    daily_growth_rate = cols[3].text.strip().replace('%', '')
+
+                                try:
+                                    daily_growth_rate = float(daily_growth_rate) / 100
+                                except:
+                                    daily_growth_rate = 0
+
+                                data.append({
+                                    'date': date,
+                                    'open': net_asset_value,
+                                    'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
+                                    'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+                                    'close': net_asset_value,
+                                    'volume': 1000000,
+                                    'fund_code': fund_code,
+                                    'fund_name': get_fund_name(fund_code)
+                                })
+                            except Exception as e:
+                                print(f"解析行数据失败: {e}")
+                                continue
+
+                    if data:
+                        print(f"成功从HTML获取基金 {fund_code} 数据，共 {len(data)} 条记录")
+                        return pd.DataFrame(data)
+        except Exception as e:
+            print(f"从URL {url} 获取基金 {fund_code} 数据失败: {e}")
+            continue
+
+    print(f"所有尝试都失败，无法获取基金 {fund_code} 的数据")
     return None
 
 def get_fund_name(fund_code):
     """获取基金名称"""
-    url = f"http://fund.eastmoney.com/{fund_code}.html"
+    # 尝试不同的URL格式
+    urls = [
+        f"http://fund.eastmoney.com/{fund_code}.html",
+        f"https://fund.eastmoney.com/{fund_code}.html"
+    ]
+
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
     }
 
-    try:
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.text, 'html.parser')
+    for url in urls:
+        try:
+            print(f"尝试从URL获取基金 {fund_code} 名称: {url}")
+            response = requests.get(url, headers=headers, timeout=10)
 
-        # 获取基金名称
-        fund_name_tag = soup.find('h1', class_='fundDetail-tit')
-        if fund_name_tag:
-            return fund_name_tag.text.strip()
-    except Exception as e:
-        print(f"获取基金 {fund_code} 名称失败: {e}")
+            if response.status_code != 200:
+                print(f"请求失败，状态码: {response.status_code}")
+                continue
 
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # 尝试多种方式获取基金名称
+            # 方式1: 查找h1标签
+            fund_name_tag = soup.find('h1', class_='fundDetail-tit')
+            if fund_name_tag:
+                fund_name = fund_name_tag.text.strip()
+                print(f"通过h1标签获取到基金名称: {fund_name}")
+                return fund_name
+
+            # 方式2: 查找title标签
+            title_tag = soup.find('title')
+            if title_tag:
+                title_text = title_tag.text.strip()
+                # 尝试从标题中提取基金名称
+                if '(' in title_text and ')' in title_text:
+                    fund_name = title_text.split('(')[0].strip()
+                    print(f"通过title标签获取到基金名称: {fund_name}")
+                    return fund_name
+
+            # 方式3: 查找其他可能包含基金名称的元素
+            name_candidates = [
+                soup.find('div', class_='fundName'),
+                soup.find('div', class_='fname'),
+                soup.find('div', class_='title')
+            ]
+
+            for candidate in name_candidates:
+                if candidate:
+                    fund_name = candidate.text.strip()
+                    if fund_name and fund_code in fund_name:
+                        print(f"通过其他标签获取到基金名称: {fund_name}")
+                        return fund_name
+
+        except Exception as e:
+            print(f"从URL {url} 获取基金 {fund_code} 名称失败: {e}")
+            continue
+
+    print(f"所有尝试都失败，使用默认名称")
     return f"基金{fund_code}"
 
 def get_fund_data_from_sina(fund_code):
     """从新浪财经获取基金数据作为备用数据源"""
-    url = f"https://finance.sina.com.cn/fund/quotes/{fund_code}/bc.shtml"
+    # 尝试不同的URL格式
+    urls = [
+        f"https://finance.sina.com.cn/fund/quotes/{fund_code}/bc.shtml",
+        f"http://finance.sina.com.cn/fund/quotes/{fund_code}/bc.shtml",
+        f"https://money.finance.sina.com.cn/fund/go.php/{fund_code}.html",
+        f"http://money.finance.sina.com.cn/fund/go.php/{fund_code}.html"
+    ]
+
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1'
     }
 
-    try:
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.text, 'html.parser')
+    for url in urls:
+        try:
+            print(f"尝试从新浪财经URL获取基金 {fund_code} 数据: {url}")
+            response = requests.get(url, headers=headers, timeout=10)
 
-        # 解析数据
-        # 这里需要根据新浪财经的实际HTML结构进行解析
-        # 由于网站结构可能变化，这里只提供示例代码
-        data = []
-        # 示例解析代码，实际需要根据网站结构调整
-        # table = soup.find('table', {'id': 'fund_hold_table'})
-        # if table:
-        #     rows = table.find_all('tr')[1:]  # 跳过表头
-        #     for row in rows:
-        #         cols = row.find_all('td')
-        #         if len(cols) >= 5:
-        #             date = cols[0].text.strip()
-        #             net_asset_value = float(cols[1].text.strip())
-        #             daily_growth_rate = cols[2].text.strip().replace('%', '')
-        #             try:
-        #                 daily_growth_rate = float(daily_growth_rate) / 100
-        #             except:
-        #                 daily_growth_rate = 0
-        #             
-        #             data.append({
-        #                 'date': date,
-        #                 'open': net_asset_value,
-        #                 'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
-        #                 'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
-        #                 'close': net_asset_value,
-        #                 'volume': 1000000,
-        #                 'fund_code': fund_code,
-        #                 'fund_name': get_fund_name(fund_code)
-        #             })
-        # 
-        # if data:
-        #     return pd.DataFrame(data)
-    except Exception as e:
-        print(f"从新浪财经获取基金 {fund_code} 数据失败: {e}")
+            if response.status_code != 200:
+                print(f"请求失败，状态码: {response.status_code}")
+                continue
 
+            print(f"响应内容长度: {len(response.text)}")
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # 尝试多种方式解析数据
+            # 方式1: 查找表格
+            tables = soup.find_all('table')
+            print(f"找到 {len(tables)} 个表格")
+
+            for table in tables:
+                rows = table.find_all('tr')
+                if len(rows) < 2:  # 至少需要表头和一行数据
+                    continue
+
+                print(f"表格有 {len(rows)} 行")
+                data = []
+                header_found = False
+
+                for row in rows:
+                    cols = row.find_all('td')
+                    if not cols:
+                        cols = row.find_all('th')
+
+                    if len(cols) >= 3:  # 至少需要日期、净值等基本信息
+                        if not header_found:
+                            # 检查是否是表头
+                            header_text = ' '.join([col.text.strip() for col in cols[:3]])
+                            if '净值' in header_text or '日期' in header_text or '单位净值' in header_text:
+                                header_found = True
+                                print(f"找到表头: {header_text}")
+                            continue
+
+                        try:
+                            date = cols[0].text.strip()
+                            net_asset_value = float(cols[1].text.strip())
+
+                            daily_growth_rate = '0'
+                            if len(cols) > 2:
+                                growth_text = cols[2].text.strip()
+                                if '%' in growth_text:
+                                    daily_growth_rate = growth_text.replace('%', '')
+                                else:
+                                    # 尝试从其他列获取增长率
+                                    for i in range(2, min(5, len(cols))):
+                                        if '%' in cols[i].text.strip():
+                                            daily_growth_rate = cols[i].text.strip().replace('%', '')
+                                            break
+
+                            try:
+                                daily_growth_rate = float(daily_growth_rate) / 100
+                            except:
+                                daily_growth_rate = 0
+
+                            data.append({
+                                'date': date,
+                                'open': net_asset_value,
+                                'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
+                                'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+                                'close': net_asset_value,
+                                'volume': 1000000,
+                                'fund_code': fund_code,
+                                'fund_name': get_fund_name(fund_code)
+                            })
+                        except Exception as e:
+                            print(f"解析行数据失败: {e}")
+                            continue
+
+                if data:
+                    print(f"成功从表格获取基金 {fund_code} 数据，共 {len(data)} 条记录")
+                    return pd.DataFrame(data)
+
+            # 方式2: 尝试从脚本或JSON数据中获取
+            scripts = soup.find_all('script')
+            for script in scripts:
+                script_text = script.string
+                if not script_text:
+                    continue
+
+                # 查找可能包含基金数据的JSON
+                if 'netValue' in script_text or 'nav' in script_text or 'fundData' in script_text:
+                    try:
+                        # 尝试提取JSON数据
+                        json_start = script_text.find('{')
+                        json_end = script_text.rfind('}') + 1
+
+                        if json_start >= 0 and json_end > json_start:
+                            json_str = script_text[json_start:json_end]
+                            json_data = json.loads(json_str)
+
+                            # 尝试从JSON中提取基金数据
+                            data = []
+                            if 'data' in json_data and isinstance(json_data['data'], list):
+                                for item in json_data['data']:
+                                    if 'date' in item and 'nav' in item:
+                                        date = item.get('date', '')
+                                        net_asset_value = float(item.get('nav', 0))
+                                        daily_growth_rate = item.get('growth_rate', '0').replace('%', '')
+
+                                        try:
+                                            daily_growth_rate = float(daily_growth_rate) / 100
+                                        except:
+                                            daily_growth_rate = 0
+
+                                        data.append({
+                                            'date': date,
+                                            'open': net_asset_value,
+                                            'high': net_asset_value * (1 + abs(daily_growth_rate) * 0.5),
+                                            'low': net_asset_value * (1 - abs(daily_growth_rate) * 0.5),
+                                            'close': net_asset_value,
+                                            'volume': 1000000,
+                                            'fund_code': fund_code,
+                                            'fund_name': get_fund_name(fund_code)
+                                        })
+
+                            if data:
+                                print(f"成功从JSON获取基金 {fund_code} 数据，共 {len(data)} 条记录")
+                                return pd.DataFrame(data)
+                    except Exception as e:
+                        print(f"解析JSON数据失败: {e}")
+                        continue
+
+        except Exception as e:
+            print(f"从新浪财经URL {url} 获取基金 {fund_code} 数据失败: {e}")
+            continue
+
+    print(f"所有新浪财经尝试都失败，无法获取基金 {fund_code} 的数据")
     return None
 
 def get_fund_data(fund_code):
