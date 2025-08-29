@@ -2,11 +2,8 @@
 name: Update Fund Analysis
 
 on:
-  workflow_dispatch: # Allows manual triggering from GitHub UI
+  workflow_dispatch:
   schedule:
-    # Run every trading day at 14:00 Beijing time.
-    # Beijing Time (CST) is UTC+8. So 14:00 CST is 6:00 UTC.
-    # '0 6 * * 1-5' means at 0 minutes past 6 AM UTC, Monday through Friday.
     - cron: '0 6 * * 1-5'
 
 jobs:
@@ -15,6 +12,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      # Important: For pushing with a PAT, you need to checkout with it.
+      # Add a 'token' parameter to the checkout action.
+      with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }} # 使用你的 PAT
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -27,18 +28,18 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run fund analysis
-      # This script will fetch data, calculate indicators, and update README.md
       run: python analyze_funds.py
       env:
-        TZ: Asia/Shanghai # Set timezone for `datetime.date.today()` to align with Beijing time
+        TZ: Asia/Shanghai
 
     - name: Commit and push changes
-      # Only commit if there are actual changes to README.md
       run: |
         git config user.name 'github-actions[bot]'
         git config user.email 'github-actions[bot]@users.noreply.github.com'
         git add README.md
         git commit -m "自动更新基金分析表格" || echo "No changes to commit"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }} # GITHUB_TOKEN is automatically provided by GitHub Actions
+        # Push using the PAT directly in the URL
+        git push https://github-actions[bot]:${{ secrets.REPO_ACCESS_TOKEN }}@github.com/${{ github.repository }}.git
+      # Note: The GITHUB_TOKEN env variable is no longer needed here if pushing this way
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # REMOVE or comment out this line
