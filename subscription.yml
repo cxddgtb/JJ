@@ -1,0 +1,48 @@
+mixed-port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: 127.0.0.1:9090
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 8.8.8.8
+    - 8.8.4.4
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  use-hosts: true
+proxies: []
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - DIRECT
+  - name: Final
+    type: select
+    proxies:
+      - PROXY
+      - DIRECT
+rules:
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT
+  - DOMAIN-SUFFIX,cn,DIRECT
+  - DOMAIN-KEYWORD,github,PROXY
+  - DOMAIN-KEYWORD,google,PROXY
+  - DOMAIN-KEYWORD,youtube,PROXY
+  - DOMAIN-KEYWORD,twitter,PROXY
+  - DOMAIN-KEYWORD,facebook,PROXY
+  - DOMAIN-KEYWORD,instagram,PROXY
+  - DOMAIN-KEYWORD,telegram,PROXY
+  - DOMAIN-KEYWORD,netflix,PROXY
+  - DOMAIN-KEYWORD,amazon,PROXY
+  - DOMAIN-KEYWORD,disney,PROXY
+  - DOMAIN-SUFFIX,ad.com,REJECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Final
+meta:
+  generated-at: 2023-01-01T00:00:00
+  proxy-count: 0
+  description: 初始Clash订阅配置，将由工作流自动更新
